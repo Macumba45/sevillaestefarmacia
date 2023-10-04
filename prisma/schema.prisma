@@ -7,19 +7,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model UsersDashboard {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  password  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
 model User {
   id        String   @id @default(cuid())
   email     String   @unique
   name      String?
   password  String
+  role      String   @default("user")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

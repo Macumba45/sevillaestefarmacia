@@ -1,5 +1,9 @@
-export type usersDashboard = {
+export type User = {
+    id: string
     email: string
+    password?: string
+    name?: string
+    role?: string
 }
 
 export type LoginRequestBody = {
@@ -9,5 +13,6 @@ export type LoginRequestBody = {
 
 export type SuccessResponse = {
     message: string
-    userAdmin: usersDashboard
+    user: User
+    token: string
 }

@@ -1,5 +1,5 @@
 'use client'
-import * as React from 'react'
+import { FC, useEffect, useState } from 'react'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import CssBaseline from '@mui/material/CssBaseline'
@@ -16,6 +16,9 @@ import MailIcon from '@mui/icons-material/Mail'
 import MenuIcon from '@mui/icons-material/Menu'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
+import logo from '../../assets/logo/logo.png'
+import { useLogicDashboard } from './logic'
+import { useRouter } from 'next/navigation'
 
 const drawerWidth = 240
 
@@ -27,35 +30,50 @@ interface Props {
     window?: () => Window
 }
 
-export default function ResponsiveDrawer(props: Props) {
+const ResponsiveDrawer: FC<Props> = props => {
+    const router = useRouter()
+    const { currentUser, getUserInfo } = useLogicDashboard()
     const { window } = props
-    const [mobileOpen, setMobileOpen] = React.useState(false)
+    const [mobileOpen, setMobileOpen] = useState(false)
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen)
     }
 
+    useEffect(() => {
+        getUserInfo()
+    }, [getUserInfo])
+
+    useEffect(() => {
+        if (currentUser && currentUser?.role !== 'admin') {
+            router.push('/')
+        }
+    }, [currentUser, router])
+
     const drawer = (
         <div>
-            <Toolbar />
+            <div
+                style={{
+                    backgroundColor: 'black',
+                    display: 'flex',
+                    justifyContent: 'center',
+                }}
+            >
+                <img src={logo.src} alt="" style={{ width: '200px' }} />
+            </div>
+
             <Divider />
             <List>
-                {['Inbox', 'Starred', 'Send email', 'Drafts'].map(
-                    (text, index) => (
-                        <ListItem key={text} disablePadding>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    {index % 2 === 0 ? (
-                                        <InboxIcon />
-                                    ) : (
-                                        <MailIcon />
-                                    )}
-                                </ListItemIcon>
-                                <ListItemText primary={text} />
-                            </ListItemButton>
-                        </ListItem>
-                    )
-                )}
+                {['Dashboard', 'Servicios', 'Clientes'].map((text, index) => (
+                    <ListItem key={text} disablePadding>
+                        <ListItemButton>
+                            <ListItemIcon>
+                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                            </ListItemIcon>
+                            <ListItemText primary={text} />
+                        </ListItemButton>
+                    </ListItem>
+                ))}
             </List>
             <Divider />
             <List>
@@ -185,3 +203,5 @@ export default function ResponsiveDrawer(props: Props) {
         </Box>
     )
 }
+
+export default ResponsiveDrawer

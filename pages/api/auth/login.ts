@@ -1,6 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { findDashboardUser } from '../controllers/authDashboard'
-import { LoginRequestBody, SuccessResponse } from '../types/types'
+import { findUserEmail } from '../controllers/user'
+import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
+import { LoginRequestBody, SuccessResponse } from '../../../types/types'
 
 export default async function handler(
     req: NextApiRequest,
@@ -15,15 +17,30 @@ export default async function handler(
                 .json({ message: 'Email and password are required' })
         }
 
-        const userAdmin = await findDashboardUser(email)
+        const user = await findUserEmail(email)
 
-        if (!userAdmin) {
+        if (!user) {
             return res.status(404).json({ message: 'User not found' })
         }
 
+        const match = await bcrypt.compareSync(
+            password,
+            user.password as string
+        )
+
+        if (!match) {
+            res.status(401).json({ message: 'Email o Password inválido 3' })
+            return
+        }
+
+        // Autenticación exitosa
+        const token = jwt.sign({ email: user.email, userId: user.id }, 'token')
+        delete user.password
+
         const response: SuccessResponse = {
             message: 'Inicio de sesión exitoso',
-            userAdmin,
+            user,
+            token,
         }
         res.status(200).json(response)
     } catch (error) {

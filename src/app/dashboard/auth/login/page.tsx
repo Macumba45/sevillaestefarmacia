@@ -1,46 +1,20 @@
 'use client'
 
-import React, { FC, memo, useState, ChangeEvent, FormEvent } from 'react'
-import { useRouter } from 'next/navigation'
+import React, { FC, memo, use, useEffect } from 'react'
+import { useLogicLogin } from './logic'
 import { MainContainer } from './styles'
 import { Box, Button, TextField } from '@mui/material'
 import logo from '../../../../assets/logo/logo.png'
+import { get } from 'http'
 
 const DashboardLogin: FC = () => {
-    const router = useRouter()
-    const [email, setEmail] = useState<string>('')
-    const [password, setPassword] = useState<string>('')
-
-    const handleLogin = async () => {
-        try {
-            const response = await fetch('/api/auth/loginDashboard', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email: email, password: password }),
-            })
-            const data = await response.json()
-            return data
-        } catch (error) {
-            console.log(error)
-        } finally {
-            router.push('/dashboard')
-        }
-    }
-
-    const handleChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
-        setEmail(e.target.value)
-    }
-
-    const handleChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
-        setPassword(e.target.value)
-    }
-
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        handleLogin()
-    }
+    const {
+        handleLogin,
+        handleChangeEmail,
+        handleChangePassword,
+        email,
+        password,
+    } = useLogicLogin()
 
     return (
         <MainContainer>
