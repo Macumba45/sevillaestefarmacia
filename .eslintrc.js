@@ -30,8 +30,6 @@ module.exports = {
         },
     },
     rules: {
-        '@typescript-eslint/no-var-requires': 'off',
-        '@typescript-eslint/no-explicit-any': 'off',
         '@next/next/no-img-element': 'off',
         'jsx-a11y/alt-text': 'off',
         '@typescript-eslint/no-non-null-assertion': 'off',
