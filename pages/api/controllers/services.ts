@@ -28,13 +28,14 @@ export const createService = async (
 }
 
 export const updateService = async (
-    service: Services
+    id: string,
+    updatedServiceData: Partial<Services>
 ): Promise<Services | null> => {
     const updatedService = await prisma.services.update({
         where: {
-            id: service.id,
+            id: id,
         },
-        data: service,
+        data: updatedServiceData,
     })
     return updatedService
 }
