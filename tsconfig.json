@@ -37,7 +37,10 @@
         "webpack.config.js",
         "pages/api/markers/autoDeleteMarkers.ts",
         "i18n.js",
-        "src/components/Carousel/page.jsx"
+        "src/components/Carousel/page.jsx",
+        "src/middleware.js",
+        "src/app/dashboard/auth/callback/route.js",
+        "next.config.js"
     ],
     "exclude": ["node_modules"]
 }
