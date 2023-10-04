@@ -16,3 +16,13 @@ export type SuccessResponse = {
     user: User
     token: string
 }
+
+export type Services = {
+    id: string
+    urlPicture: string
+    title: string
+    descripcion: string
+    price: number
+    createdAt: Date
+    updatedAt: Date
+}

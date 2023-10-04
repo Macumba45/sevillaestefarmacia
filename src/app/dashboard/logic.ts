@@ -6,6 +6,21 @@ import { User } from '../../../types/types'
 export const useLogicDashboard = () => {
     const [currentUser, setCurrentUser] = useState<User | null>(null)
     const router = useRouter()
+    const [mobileOpen, setMobileOpen] = useState(false)
+    const [route, setRoute] = useState('dashboard')
+
+    const handleDrawerToggle = () => {
+        setMobileOpen(!mobileOpen)
+    }
+
+    const changeRoute = (newRoute: string) => {
+        setRoute(newRoute)
+    }
+
+    const logOut = () => {
+        localStorage.removeItem('token')
+        router.push('/dashboard/auth/login')
+    }
 
     const getUserInfo = useCallback(async () => {
         try {
@@ -36,5 +51,11 @@ export const useLogicDashboard = () => {
     return {
         currentUser,
         getUserInfo,
+        router,
+        mobileOpen,
+        handleDrawerToggle,
+        route,
+        changeRoute,
+        logOut,
     }
 }

@@ -1,44 +1,45 @@
 'use client'
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect } from 'react'
+import logo from '../../assets/logo/logo.png'
+import { useLogicDashboard } from './logic'
+import { Props } from './types'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import CssBaseline from '@mui/material/CssBaseline'
 import Divider from '@mui/material/Divider'
 import Drawer from '@mui/material/Drawer'
 import IconButton from '@mui/material/IconButton'
-import InboxIcon from '@mui/icons-material/MoveToInbox'
+import DashboardIcon from '@mui/icons-material/Dashboard'
+import MedicalServicesIcon from '@mui/icons-material/MedicalServices'
+import RssFeedIcon from '@mui/icons-material/RssFeed'
+import LogoutIcon from '@mui/icons-material/Logout'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
-import MailIcon from '@mui/icons-material/Mail'
 import MenuIcon from '@mui/icons-material/Menu'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
-import logo from '../../assets/logo/logo.png'
-import { useLogicDashboard } from './logic'
-import { useRouter } from 'next/navigation'
+import FloatAddServices from '@/components/FloatButtonServices'
+import CardDashboardServices from '@/components/CardDashboardServices'
 
 const drawerWidth = 240
 
-interface Props {
-    /**
-     * Injected by the documentation to work in an iframe.
-     * You won't need it on your project.
-     */
-    window?: () => Window
-}
-
 const ResponsiveDrawer: FC<Props> = props => {
-    const router = useRouter()
-    const { currentUser, getUserInfo } = useLogicDashboard()
+    const {
+        currentUser,
+        getUserInfo,
+        router,
+        mobileOpen,
+        handleDrawerToggle,
+        route,
+        changeRoute,
+        logOut,
+    } = useLogicDashboard()
     const { window } = props
-    const [mobileOpen, setMobileOpen] = useState(false)
-
-    const handleDrawerToggle = () => {
-        setMobileOpen(!mobileOpen)
-    }
+    const container =
+        window !== undefined ? () => window().document.body : undefined
 
     useEffect(() => {
         getUserInfo()
@@ -50,6 +51,12 @@ const ResponsiveDrawer: FC<Props> = props => {
         }
     }, [currentUser, router])
 
+    const itemsTop = [
+        { text: 'Dashboard', icon: <DashboardIcon />, route: 'dashboard' },
+        { text: 'Servicios', icon: <MedicalServicesIcon />, route: 'services' },
+        { text: 'Blog', icon: <RssFeedIcon />, route: 'blog' }, // Cambia el ícono según lo necesites
+    ]
+
     const drawer = (
         <div>
             <div
@@ -59,40 +66,41 @@ const ResponsiveDrawer: FC<Props> = props => {
                     justifyContent: 'center',
                 }}
             >
-                <img src={logo.src} alt="" style={{ width: '200px' }} />
+                <img
+                    src={logo.src}
+                    alt=""
+                    style={{
+                        width: 187,
+                        objectFit: 'cover',
+                        backgroundSize: 'cover',
+                    }}
+                />
             </div>
 
             <Divider />
             <List>
-                {['Dashboard', 'Servicios', 'Clientes'].map((text, index) => (
-                    <ListItem key={text} disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
+                {itemsTop.map((item, index) => (
+                    <ListItem key={item.text} disablePadding>
+                        <ListItemButton onClick={() => changeRoute(item.route)}>
+                            <ListItemIcon>{item.icon}</ListItemIcon>
+                            <ListItemText primary={item.text} />
                         </ListItemButton>
                     </ListItem>
                 ))}
             </List>
             <Divider />
             <List>
-                {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                    <ListItem key={text} disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItemButton>
-                    </ListItem>
-                ))}
+                <ListItem disablePadding>
+                    <ListItemButton onClick={logOut}>
+                        <ListItemIcon>
+                            <LogoutIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Cerrar sesión" />
+                    </ListItemButton>
+                </ListItem>
             </List>
         </div>
     )
-
-    const container =
-        window !== undefined ? () => window().document.body : undefined
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -102,20 +110,20 @@ const ResponsiveDrawer: FC<Props> = props => {
                 sx={{
                     width: { sm: `calc(100% - ${drawerWidth}px)` },
                     ml: { sm: `${drawerWidth}px` },
+                    backgroundColor: 'black',
                 }}
             >
                 <Toolbar>
                     <IconButton
-                        color="inherit"
                         aria-label="open drawer"
                         edge="start"
                         onClick={handleDrawerToggle}
                         sx={{ mr: 2, display: { sm: 'none' } }}
                     >
-                        <MenuIcon />
+                        <MenuIcon sx={{ color: 'white' }} />
                     </IconButton>
                     <Typography variant="h6" noWrap component="div">
-                        Responsive drawer
+                        Dashboard - Farmacia Santa Bárbara
                     </Typography>
                 </Toolbar>
             </AppBar>
@@ -157,6 +165,7 @@ const ResponsiveDrawer: FC<Props> = props => {
                     {drawer}
                 </Drawer>
             </Box>
+
             <Box
                 component="main"
                 sx={{
@@ -166,39 +175,24 @@ const ResponsiveDrawer: FC<Props> = props => {
                 }}
             >
                 <Toolbar />
-                <Typography paragraph>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Rhoncus dolor purus non enim praesent elementum
-                    facilisis leo vel. Risus at ultrices mi tempus imperdiet.
-                    Semper risus in hendrerit gravida rutrum quisque non tellus.
-                    Convallis convallis tellus id interdum velit laoreet id
-                    donec ultrices. Odio morbi quis commodo odio aenean sed
-                    adipiscing. Amet nisl suscipit adipiscing bibendum est
-                    ultricies integer quis. Cursus euismod quis viverra nibh
-                    cras. Metus vulputate eu scelerisque felis imperdiet proin
-                    fermentum leo. Mauris commodo quis imperdiet massa
-                    tincidunt. Cras tincidunt lobortis feugiat vivamus at augue.
-                    At augue eget arcu dictum varius duis at consectetur lorem.
-                    Velit sed ullamcorper morbi tincidunt. Lorem donec massa
-                    sapien faucibus et molestie ac.
-                </Typography>
-                <Typography paragraph>
-                    Consequat mauris nunc congue nisi vitae suscipit. Fringilla
-                    est ullamcorper eget nulla facilisi etiam dignissim diam.
-                    Pulvinar elementum integer enim neque volutpat ac tincidunt.
-                    Ornare suspendisse sed nisi lacus sed viverra tellus. Purus
-                    sit amet volutpat consequat mauris. Elementum eu facilisis
-                    sed odio morbi. Euismod lacinia at quis risus sed vulputate
-                    odio. Morbi tincidunt ornare massa eget egestas purus
-                    viverra accumsan in. In hendrerit gravida rutrum quisque non
-                    tellus orci ac. Pellentesque nec nam aliquam sem et tortor.
-                    Habitant morbi tristique senectus et. Adipiscing elit duis
-                    tristique sollicitudin nibh sit. Ornare aenean euismod
-                    elementum nisi quis eleifend. Commodo viverra maecenas
-                    accumsan lacus vel facilisis. Nulla posuere sollicitudin
-                    aliquam ultrices sagittis orci a.
-                </Typography>
+                {route === 'dashboard' && (
+                    // Aquí renderiza el contenido del dashboard
+                    <Typography paragraph>Contenido del Dashboard</Typography>
+                )}
+                {route === 'services' && (
+                    // Aquí renderiza el contenido de servicios
+                    <>
+                        <FloatAddServices />
+                        <CardDashboardServices />
+                        <Typography paragraph>
+                            Contenido de Servicios
+                        </Typography>
+                    </>
+                )}
+                {route === 'blog' && (
+                    // Aquí renderiza el contenido del blog
+                    <Typography paragraph>Contenido del Blog</Typography>
+                )}
             </Box>
         </Box>
     )
