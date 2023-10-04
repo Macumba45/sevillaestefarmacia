@@ -1,5 +1,6 @@
 'use client'
-import React, { FC, memo, useState } from 'react'
+
+import React, { FC, memo, useState, ChangeEvent, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { MainContainer } from './styles'
 import { Box, Button, TextField } from '@mui/material'
@@ -7,8 +8,8 @@ import logo from '../../../../assets/logo/logo.png'
 
 const DashboardLogin: FC = () => {
     const router = useRouter()
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [email, setEmail] = useState<string>('')
+    const [password, setPassword] = useState<string>('')
 
     const handleLogin = async () => {
         try {
@@ -28,15 +29,23 @@ const DashboardLogin: FC = () => {
         }
     }
 
+    const handleChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
+        setEmail(e.target.value)
+    }
+
+    const handleChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
+        setPassword(e.target.value)
+    }
+
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        handleLogin()
+    }
+
     return (
         <MainContainer>
             <img style={{ width: '300px' }} src={logo.src} />
-            <Box
-                component="form"
-                onSubmit={handleLogin}
-                noValidate
-                sx={{ mt: 1 }}
-            >
+            <Box sx={{ mt: 1 }}>
                 <TextField
                     autoComplete="off"
                     margin="normal"
@@ -46,7 +55,7 @@ const DashboardLogin: FC = () => {
                     label="Email"
                     name="email"
                     value={email}
-                    onChange={e => setEmail(e.target.value)}
+                    onChange={handleChangeEmail}
                     sx={{
                         '& label.Mui-focused': { color: 'white' },
                         '& label.Mui': { color: 'white' },
@@ -82,7 +91,7 @@ const DashboardLogin: FC = () => {
                     type="password"
                     id="password"
                     value={password}
-                    onChange={e => setPassword(e.target.value)}
+                    onChange={handleChangePassword}
                     sx={{
                         '& label.Mui-focused': { color: 'white' },
                         '& .MuiInput-underline:after': {
@@ -120,6 +129,7 @@ const DashboardLogin: FC = () => {
                 }}
                 variant="contained"
                 onClick={handleLogin}
+                type="submit"
             >
                 Iniciar sesión
             </Button>

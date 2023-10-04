@@ -15,18 +15,16 @@ export default async function handler(
                 .json({ message: 'Email and password are required' })
         }
 
-        const user = await findDashboardUser(email)
-        console.log(user)
+        const userAdmin = await findDashboardUser(email)
 
-        if (!user) {
+        if (!userAdmin) {
             return res.status(404).json({ message: 'User not found' })
         }
 
         const response: SuccessResponse = {
             message: 'Inicio de sesión exitoso',
-            user,
+            userAdmin,
         }
-        console.log(response)
         res.status(200).json(response)
     } catch (error) {
         console.log(error)

@@ -9,5 +9,5 @@ export type LoginRequestBody = {
 
 export type SuccessResponse = {
     message: string
-    user: usersDashboard
+    userAdmin: usersDashboard
 }
