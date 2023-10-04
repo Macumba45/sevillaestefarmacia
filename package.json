@@ -10,6 +10,7 @@
         "prettier": "prettier --write ."
     },
     "dependencies": {
+        "@ant-design/cssinjs": "^1.17.0",
         "@emotion/react": "11.11.1",
         "@emotion/styled": "11.11.0",
         "@mui/icons-material": "5.11.16",
@@ -24,6 +25,7 @@
         "@types/styled-components": "5.1.26",
         "@typescript-eslint/eslint-plugin": "5.60.1",
         "@typescript-eslint/parser": "6.7.4",
+        "antd": "^5.9.4",
         "autoprefixer": "10.4.15",
         "bcrypt": "5.1.1",
         "dotenv": "16.3.1",

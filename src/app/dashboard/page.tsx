@@ -1,7 +1,8 @@
 'use client'
-import { FC, useEffect } from 'react'
+import { FC, use, useEffect } from 'react'
 import logo from '../../assets/logo/logo.png'
 import { useLogicDashboard } from './logic'
+import { CardServicesContainer } from './styles'
 import { Props } from './types'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
@@ -23,6 +24,7 @@ import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import FloatAddServices from '@/components/FloatButtonServices'
 import CardDashboardServices from '@/components/CardDashboardServices'
+import DateRangeIcon from '@mui/icons-material/DateRange'
 
 const drawerWidth = 240
 
@@ -36,6 +38,8 @@ const ResponsiveDrawer: FC<Props> = props => {
         route,
         changeRoute,
         logOut,
+        titlePage,
+        titleDrawer,
     } = useLogicDashboard()
     const { window } = props
     const container =
@@ -51,10 +55,19 @@ const ResponsiveDrawer: FC<Props> = props => {
         }
     }, [currentUser, router])
 
+    useEffect(() => {
+        document.title = titlePage
+    }, [titlePage])
+
     const itemsTop = [
         { text: 'Dashboard', icon: <DashboardIcon />, route: 'dashboard' },
-        { text: 'Servicios', icon: <MedicalServicesIcon />, route: 'services' },
-        { text: 'Blog', icon: <RssFeedIcon />, route: 'blog' }, // Cambia el ícono según lo necesites
+        {
+            text: 'Servicios',
+            icon: <MedicalServicesIcon />,
+            route: 'servicios',
+        },
+        { text: 'Próximas citas', icon: <DateRangeIcon />, route: 'citas' },
+        { text: 'Blog', icon: <RssFeedIcon />, route: 'blog' },
     ]
 
     const drawer = (
@@ -64,13 +77,15 @@ const ResponsiveDrawer: FC<Props> = props => {
                     backgroundColor: 'black',
                     display: 'flex',
                     justifyContent: 'center',
+                    boxShadow:
+                        '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)',
                 }}
             >
                 <img
                     src={logo.src}
                     alt=""
                     style={{
-                        width: 187,
+                        width: 185,
                         objectFit: 'cover',
                         backgroundSize: 'cover',
                     }}
@@ -123,7 +138,8 @@ const ResponsiveDrawer: FC<Props> = props => {
                         <MenuIcon sx={{ color: 'white' }} />
                     </IconButton>
                     <Typography variant="h6" noWrap component="div">
-                        Dashboard - Farmacia Santa Bárbara
+                        {titleDrawer.toLocaleUpperCase()} - Farmacia Santa
+                        Bárbara
                     </Typography>
                 </Toolbar>
             </AppBar>
@@ -179,15 +195,21 @@ const ResponsiveDrawer: FC<Props> = props => {
                     // Aquí renderiza el contenido del dashboard
                     <Typography paragraph>Contenido del Dashboard</Typography>
                 )}
-                {route === 'services' && (
+                {route === 'servicios' && (
                     // Aquí renderiza el contenido de servicios
-                    <>
+                    <CardServicesContainer>
                         <FloatAddServices />
                         <CardDashboardServices />
-                        <Typography paragraph>
-                            Contenido de Servicios
-                        </Typography>
-                    </>
+                        <CardDashboardServices />
+                        <CardDashboardServices />
+                        <CardDashboardServices />
+                        <CardDashboardServices />
+                        <CardDashboardServices />
+                    </CardServicesContainer>
+                )}
+                {route === 'citas' && (
+                    // Aquí renderiza el contenido de usuarios
+                    <Typography paragraph>Próximas citas</Typography>
                 )}
                 {route === 'blog' && (
                     // Aquí renderiza el contenido del blog

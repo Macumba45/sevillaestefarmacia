@@ -5,9 +5,11 @@ import { User } from '../../../types/types'
 
 export const useLogicDashboard = () => {
     const [currentUser, setCurrentUser] = useState<User | null>(null)
+    const [titleDrawer, setTitleDrawer] = useState<string>('Dashboard')
     const router = useRouter()
     const [mobileOpen, setMobileOpen] = useState(false)
     const [route, setRoute] = useState('dashboard')
+    const titlePage = 'Dashboard'
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen)
@@ -15,6 +17,7 @@ export const useLogicDashboard = () => {
 
     const changeRoute = (newRoute: string) => {
         setRoute(newRoute)
+        setTitleDrawer(newRoute)
     }
 
     const logOut = () => {
@@ -57,5 +60,7 @@ export const useLogicDashboard = () => {
         route,
         changeRoute,
         logOut,
+        titlePage,
+        titleDrawer,
     }
 }

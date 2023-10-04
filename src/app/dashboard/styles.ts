@@ -9,3 +9,10 @@ export const MainContainer = styled.div`
     width: 100%;
     background-color: #2a2a2a;
 `
+
+export const CardServicesContainer = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+`
