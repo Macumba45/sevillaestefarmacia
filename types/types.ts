@@ -20,6 +20,7 @@ export type SuccessResponse = {
 export type Services = {
     id: string
     urlPicture: string
+    urlVideo: string
     title: string
     descripcion: string
     price: number

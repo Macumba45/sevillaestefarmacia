@@ -1,8 +1,8 @@
 'use client'
-import { FC, use, useEffect } from 'react'
+import { FC, useEffect, useState } from 'react'
 import logo from '../../assets/logo/logo.png'
 import { useLogicDashboard } from './logic'
-import { CardServicesContainer } from './styles'
+import { CardServicesContainer, CitasContainer } from './styles'
 import { Props } from './types'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
@@ -25,6 +25,10 @@ import Typography from '@mui/material/Typography'
 import FloatAddServices from '@/components/FloatButtonServices'
 import CardDashboardServices from '@/components/CardDashboardServices'
 import DateRangeIcon from '@mui/icons-material/DateRange'
+import AlignItemsList from '@/components/ListDateAvatar'
+import DatePickerComp from '@/components/DatePicker'
+import SearchInputComp from '@/components/SearchInput'
+import ServiceFormModal from '@/components/ModalServices'
 
 const drawerWidth = 240
 
@@ -44,6 +48,10 @@ const ResponsiveDrawer: FC<Props> = props => {
     const { window } = props
     const container =
         window !== undefined ? () => window().document.body : undefined
+
+    const [open, setOpen] = useState(false)
+
+    const handleOpen = () => setOpen(true)
 
     useEffect(() => {
         getUserInfo()
@@ -198,18 +206,88 @@ const ResponsiveDrawer: FC<Props> = props => {
                 {route === 'servicios' && (
                     // Aquí renderiza el contenido de servicios
                     <CardServicesContainer>
-                        <FloatAddServices />
-                        <CardDashboardServices />
-                        <CardDashboardServices />
-                        <CardDashboardServices />
-                        <CardDashboardServices />
-                        <CardDashboardServices />
-                        <CardDashboardServices />
+                        <FloatAddServices onClick={handleOpen} />
+                        {open && (
+                            <ServiceFormModal
+                                open={open}
+                                onClose={() => setOpen(false)}
+                            />
+                        )}
+                        <CardDashboardServices title="Pendientes" price={100} />
+                        <CardDashboardServices title="Pastillero" price={100} />
+                        <CardDashboardServices
+                            title="Servicio a domicilio"
+                            price={100}
+                        />
+                        <CardDashboardServices
+                            title="Formulas magistrales"
+                            price={100}
+                        />
+                        <CardDashboardServices
+                            title="Nutricionista"
+                            price={100}
+                        />
                     </CardServicesContainer>
                 )}
                 {route === 'citas' && (
-                    // Aquí renderiza el contenido de usuarios
-                    <Typography paragraph>Próximas citas</Typography>
+                    <CitasContainer>
+                        <div
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                alignItems: 'center',
+                                width: '100%',
+                                height: 80,
+                                marginLeft: 40,
+                            }}
+                        >
+                            <DatePickerComp />
+                            <SearchInputComp />
+                        </div>
+
+                        <AlignItemsList
+                            serviceType="Pendientes"
+                            user="Juan Rodriguez"
+                            date="12/12/2021 a las 12:00"
+                            phone="123456789"
+                        />
+                        <AlignItemsList
+                            serviceType="Pendientes"
+                            user="Pedro Rodriguez"
+                            date="12/12/2021 a las 12:00"
+                            phone="123456789"
+                        />
+                        <AlignItemsList
+                            serviceType="Pendientes"
+                            user="Juan Rodriguez"
+                            date="12/12/2021 a las 12:00"
+                            phone="123456789"
+                        />
+                        <AlignItemsList
+                            serviceType="Pendientes"
+                            user="Ana Rodriguez"
+                            date="12/12/2021 a las 12:00"
+                            phone="123456789"
+                        />
+                        <AlignItemsList
+                            serviceType="Pendientes"
+                            user="Ramon Rodriguez"
+                            date="12/12/2021 a las 12:00"
+                            phone="123456789"
+                        />
+                        <AlignItemsList
+                            serviceType="Pendientes"
+                            user="Pepe Rodriguez"
+                            date="12/12/2021 a las 12:00"
+                            phone="123456789"
+                        />
+                        <AlignItemsList
+                            serviceType="Pendientes"
+                            user="Gonzalo Rodriguez"
+                            date="12/12/2021 a las 12:00"
+                            phone="123456789"
+                        />
+                    </CitasContainer>
                 )}
                 {route === 'blog' && (
                     // Aquí renderiza el contenido del blog

@@ -14,19 +14,41 @@ model User {
   name      String?
   password  String
   role      String     @default("user")
+  phone     String?
+  services  Services[]
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
-  services  Services[]
 }
 
 model Services {
   id          String   @id @default(cuid())
   urlPicture  String   @map("url_picture")
+  urlVideo    String   @map("url_video")
   title       String
   descripcion String
   price       Int
   adminId     String   @map("admin_id")
   admin       User     @relation(fields: [adminId], references: [id])
+  dates       Dates[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+model Dates {
+  id           String         @id @default(cuid())
+  serviceId    String
+  dateTime     DateTime
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  service      Services       @relation(fields: [serviceId], references: [id])
+  Availability Availability[]
+}
+
+model Availability {
+  id          String   @id @default(cuid())
+  dateId      String
+  isAvailable Boolean
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  date        Dates    @relation(fields: [dateId], references: [id])
 }

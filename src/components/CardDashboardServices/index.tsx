@@ -1,11 +1,6 @@
 import { FC, memo } from 'react'
-import {
-    EditOutlined,
-    EllipsisOutlined,
-    SettingOutlined,
-    DeleteOutlined,
-} from '@ant-design/icons'
-import { Avatar, Card } from 'antd'
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
+import { Card } from 'antd'
 import { Props } from './types'
 
 const { Meta } = Card
@@ -15,7 +10,13 @@ const styleIconButtons = {
     marginRight: '10px',
 }
 
-const CardDashboardServices: FC<Props> = ({ onClick, onUpdate }) => (
+const CardDashboardServices: FC<Props> = ({
+    onClick,
+    onUpdate,
+    urlPicture,
+    title,
+    price,
+}) => (
     <Card
         style={{ width: 300, margin: 10 }}
         cover={
@@ -43,7 +44,7 @@ const CardDashboardServices: FC<Props> = ({ onClick, onUpdate }) => (
                 display: 'flex',
                 justifyContent: 'center',
             }}
-            title="Pendientes"
+            title={title}
             description={
                 <span
                     style={{
@@ -52,7 +53,7 @@ const CardDashboardServices: FC<Props> = ({ onClick, onUpdate }) => (
                         fontWeight: 600,
                     }}
                 >
-                    100€
+                    {price}€
                 </span>
             }
         />
