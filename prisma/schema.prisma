@@ -48,7 +48,7 @@ model Availability {
   id          String   @id @default(cuid())
   dateId      String
   isAvailable Boolean
+  date        Dates    @relation(fields: [dateId], references: [id])
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  date        Dates    @relation(fields: [dateId], references: [id])
 }

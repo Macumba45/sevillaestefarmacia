@@ -7,8 +7,7 @@ import ListItemText from '@mui/material/ListItemText'
 import ListItemAvatar from '@mui/material/ListItemAvatar'
 import Avatar from '@mui/material/Avatar'
 import Typography from '@mui/material/Typography'
-import CallIcon from '@mui/icons-material/Call'
-import { Button, IconButton } from '@mui/material'
+import { Button } from '@mui/material'
 
 interface Props {
     user: string
@@ -22,7 +21,7 @@ const AlignItemsList: FC<Props> = ({ user, serviceType, date, phone }) => {
         <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
             <ListItem alignItems="flex-start">
                 <ListItemAvatar>
-                    <Avatar alt={user} src="/static/images/avatar/1.jpg" />
+                    <Avatar alt={user} />
                 </ListItemAvatar>
                 <ListItemText
                     primary={'Motivo de la cita: ' + serviceType}
@@ -62,24 +61,38 @@ const AlignItemsList: FC<Props> = ({ user, serviceType, date, phone }) => {
                                     {date}
                                 </span>
                             </Typography>
-
-                            <Typography component="span">
-                                <Button
-                                    variant="contained"
-                                    {...(phone && {
-                                        onClick: () => {
-                                            window.open(`tel:${phone}`)
-                                        },
-                                    })}
-                                    sx={{
-                                        p: 0.5,
-                                        mt: 2,
-                                        backgroundColor: 'green',
-                                    }}
-                                >
-                                    Llamar al cliente
-                                </Button>
-                            </Typography>
+                            <div style={{ display: 'flex' }}>
+                                <Typography component="span">
+                                    <Button
+                                        variant="contained"
+                                        {...(phone && {
+                                            onClick: () => {
+                                                window.open(`tel:${phone}`)
+                                            },
+                                        })}
+                                        sx={{
+                                            p: 0.5,
+                                            mt: 2,
+                                            backgroundColor: 'green',
+                                        }}
+                                    >
+                                        Llamar al cliente
+                                    </Button>
+                                </Typography>
+                                <Typography component="span">
+                                    <Button
+                                        variant="contained"
+                                        sx={{
+                                            p: 0.5,
+                                            mt: 2,
+                                            ml: 2,
+                                            backgroundColor: 'blue',
+                                        }}
+                                    >
+                                        Editar cita
+                                    </Button>
+                                </Typography>
+                            </div>
                         </React.Fragment>
                     }
                 />

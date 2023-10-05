@@ -136,7 +136,13 @@ const ResponsiveDrawer: FC<Props> = props => {
                     backgroundColor: 'black',
                 }}
             >
-                <Toolbar>
+                <Toolbar
+                    sx={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                    }}
+                >
                     <IconButton
                         aria-label="open drawer"
                         edge="start"
@@ -148,6 +154,15 @@ const ResponsiveDrawer: FC<Props> = props => {
                     <Typography variant="h6" noWrap component="div">
                         {titleDrawer.toLocaleUpperCase()} - Farmacia Santa
                         Bárbara
+                    </Typography>
+                    <Typography
+                        fontSize={15}
+                        fontWeight={400}
+                        variant="h6"
+                        noWrap
+                        component="div"
+                    >
+                        {currentUser?.email}
                     </Typography>
                 </Toolbar>
             </AppBar>
@@ -290,8 +305,15 @@ const ResponsiveDrawer: FC<Props> = props => {
                     </CitasContainer>
                 )}
                 {route === 'blog' && (
-                    // Aquí renderiza el contenido del blog
-                    <Typography paragraph>Contenido del Blog</Typography>
+                    <>
+                        <FloatAddServices onClick={handleOpen} />
+                        {open && (
+                            <ServiceFormModal
+                                open={open}
+                                onClose={() => setOpen(false)}
+                            />
+                        )}
+                    </>
                 )}
             </Box>
         </Box>
