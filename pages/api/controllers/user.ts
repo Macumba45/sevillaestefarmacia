@@ -33,6 +33,9 @@ export const findUserById = async (id: string): Promise<User | null> => {
     }
     const user: User = {
         id: prismaUser.id,
+        email: prismaUser.email,
+        name: prismaUser.name as string,
+        role: prismaUser.role,
     }
     return user
 }

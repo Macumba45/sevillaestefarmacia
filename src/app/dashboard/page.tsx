@@ -1,5 +1,5 @@
 'use client'
-import { FC, useEffect, useState } from 'react'
+import { FC, use, useEffect, useState } from 'react'
 import logo from '../../assets/logo/logo.png'
 import { useLogicDashboard } from './logic'
 import { CardServicesContainer, CitasContainer } from './styles'
@@ -45,24 +45,33 @@ const ResponsiveDrawer: FC<Props> = props => {
         logOut,
         titlePage,
         titleDrawer,
+        open,
+        setOpen,
+        handleOpen,
+        userLoaded,
+        setUserLoaded,
     } = useLogicDashboard()
     const { window } = props
     const container =
         window !== undefined ? () => window().document.body : undefined
-
-    const [open, setOpen] = useState(false)
-
-    const handleOpen = () => setOpen(true)
 
     useEffect(() => {
         getUserInfo()
     }, [getUserInfo])
 
     useEffect(() => {
-        if (currentUser && currentUser?.role !== 'admin') {
-            router.push('/')
+        if (currentUser && userLoaded) {
+            if (currentUser.role !== 'admin') {
+                router.push('/')
+            }
         }
-    }, [currentUser, router])
+    }, [currentUser, userLoaded, router])
+
+    useEffect(() => {
+        if (currentUser) {
+            setUserLoaded(true)
+        }
+    }, [currentUser, setUserLoaded])
 
     useEffect(() => {
         document.title = titlePage

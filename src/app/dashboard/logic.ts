@@ -4,12 +4,16 @@ import { useRouter } from 'next/navigation'
 import { User } from '../../../types/types'
 
 export const useLogicDashboard = () => {
-    const [currentUser, setCurrentUser] = useState<User | null>(null)
+    const [currentUser, setCurrentUser] = useState<User>()
     const [titleDrawer, setTitleDrawer] = useState<string>('Dashboard')
     const router = useRouter()
     const [mobileOpen, setMobileOpen] = useState(false)
     const [route, setRoute] = useState('dashboard')
     const titlePage = 'Dashboard'
+    const [userLoaded, setUserLoaded] = useState(false)
+    const [open, setOpen] = useState(false)
+
+    const handleOpen = () => setOpen(true)
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen)
@@ -31,9 +35,6 @@ export const useLogicDashboard = () => {
             const headers = {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${token}`,
-            }
-            if (!token) {
-                return setCurrentUser(null)
             }
             const response = await fetch('/api/user/getUserInfo', {
                 method: 'GET',
@@ -62,5 +63,10 @@ export const useLogicDashboard = () => {
         logOut,
         titlePage,
         titleDrawer,
+        open,
+        setOpen,
+        handleOpen,
+        userLoaded,
+        setUserLoaded,
     }
 }
