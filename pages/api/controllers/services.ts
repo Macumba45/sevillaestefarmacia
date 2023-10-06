@@ -1,7 +1,5 @@
-import { PrismaClient } from '@prisma/client'
 import { Services } from '../../../types/types'
-
-const prisma = new PrismaClient()
+import prisma from '@/lib/client'
 
 export const getServices = async (): Promise<Services[]> => {
     const prismaServices = await prisma.services.findMany()

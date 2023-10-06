@@ -40,7 +40,8 @@
         "src/components/Carousel/page.jsx",
         "src/middleware.js",
         "src/app/dashboard/auth/callback/route.js",
-        "next.config.js"
+        "next.config.js",
+        "jest.config.js"
     ],
     "exclude": ["node_modules"]
 }

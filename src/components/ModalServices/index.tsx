@@ -1,4 +1,8 @@
-import React, { FC, useState } from 'react'
+'use client'
+
+import React, { FC, useMemo, useState } from 'react'
+import dynamic from 'next/dynamic'
+import 'react-quill/dist/quill.snow.css' // Importa los estilos CSS de Quill
 import {
     Button,
     Dialog,
@@ -8,8 +12,6 @@ import {
     DialogTitle,
     TextField,
 } from '@mui/material'
-import ReactQuill from 'react-quill'
-import 'react-quill/dist/quill.snow.css' // Importa los estilos CSS de Quill
 
 interface Props {
     open: boolean
@@ -17,6 +19,11 @@ interface Props {
 }
 
 const ServiceFormModal: FC<Props> = ({ open, onClose }) => {
+    const ReactQuill = useMemo(
+        () => dynamic(() => import('react-quill'), { ssr: false }),
+        []
+    )
+
     const [formData, setFormData] = useState({
         urlPicture: '',
         urlVideo: '',

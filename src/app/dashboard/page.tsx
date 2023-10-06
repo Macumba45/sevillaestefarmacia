@@ -29,6 +29,7 @@ import AlignItemsList from '@/components/ListDateAvatar'
 import DatePickerComp from '@/components/DatePicker'
 import SearchInputComp from '@/components/SearchInput'
 import ServiceFormModal from '@/components/ModalServices'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 
 const drawerWidth = 240
 
@@ -74,8 +75,9 @@ const ResponsiveDrawer: FC<Props> = props => {
             icon: <MedicalServicesIcon />,
             route: 'servicios',
         },
-        { text: 'Próximas citas', icon: <DateRangeIcon />, route: 'citas' },
         { text: 'Blog', icon: <RssFeedIcon />, route: 'blog' },
+        { text: 'Próximas citas', icon: <DateRangeIcon />, route: 'citas' },
+        { text: 'Clientes', icon: <AccountCircleIcon />, route: 'clientes' },
     ]
 
     const drawer = (
@@ -305,6 +307,17 @@ const ResponsiveDrawer: FC<Props> = props => {
                     </CitasContainer>
                 )}
                 {route === 'blog' && (
+                    <>
+                        <FloatAddServices onClick={handleOpen} />
+                        {open && (
+                            <ServiceFormModal
+                                open={open}
+                                onClose={() => setOpen(false)}
+                            />
+                        )}
+                    </>
+                )}
+                {route === 'clientes' && (
                     <>
                         <FloatAddServices onClick={handleOpen} />
                         {open && (

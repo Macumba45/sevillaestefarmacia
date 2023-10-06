@@ -10,12 +10,12 @@ export default async function handler(
 ) {
     if (req.method === 'POST') {
         try {
-            const token = req.headers.authorization?.split(' ')[1] // Obtener el token del encabezado de autorización
+            const token = req.headers.authorization?.split(' ')[1]
             const decodedToken = jwt.verify(
                 token as string,
                 'token'
-            ) as JwtPayload // Decodificar el token y especificar el tipo como JwtPayload
-            const userId = decodedToken.userId // Obtener el ID del usuario desde el token decodificado
+            ) as JwtPayload
+            const userId = decodedToken.userId
             const user = await findUserById(userId)
 
             if (!token && user?.role === 'user') {
