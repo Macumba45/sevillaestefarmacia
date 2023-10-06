@@ -1,20 +1,30 @@
-// // user.test.ts
-// import { NextApiRequest, NextApiResponse } from 'next';
-// import handler from '../../../pages/api/user/getUserInfo';
+import { MockContext, Context, createMockContext } from '../../../context'
+import { findUserEmail } from '../../../pages/api/controllers/user'
 
-// test('should return user data', async () => {
-//     const req = {} as NextApiRequest
-//     const res = {} as NextApiResponse
-//     res.status = jest.fn().mockReturnValue(res);
-//     res.json = jest.fn();
+let mockCtx: MockContext
+let ctx: Context
 
-//     await handler(req, res);
+beforeEach(() => {
+    mockCtx = createMockContext()
+    ctx = mockCtx as unknown as Context
+})
 
-//     // Realiza aserciones en la respuesta
-//     expect(res.status).toHaveBeenCalledWith(200);
-//     expect(res.json).toHaveBeenCalledWith({
-//         id: 1,
-//         name: 'John Doe',
-//         email: 'john@example.com',
-//     });
-// });
+test('should find an email', async () => {
+    const email = 'admin@admin.com'
+
+    // Configura el mock para que devuelva un objeto de usuario válido
+    mockCtx.prisma.user.findUnique.mockResolvedValue({
+        id: '1',
+        email: email,
+        name: 'admin',
+        password: 'hashedPassword',
+        role: 'admin',
+        phone: '123456789',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+    })
+
+    // Verifica que la respuesta de findUserEmail tenga el campo "email" igual al correo electrónico esperado
+    const user = await findUserEmail(email)
+    expect(user?.email).toEqual(email)
+})
