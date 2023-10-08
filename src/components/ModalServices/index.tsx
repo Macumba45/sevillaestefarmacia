@@ -1,8 +1,10 @@
 'use client'
 
 import React, { FC, useMemo, useState } from 'react'
+import { useLogicDashboard } from '@/app/dashboard/logic'
 import dynamic from 'next/dynamic'
 import 'react-quill/dist/quill.snow.css' // Importa los estilos CSS de Quill
+import DateSelection from '../DaysSelect'
 import {
     Button,
     Dialog,
@@ -12,6 +14,9 @@ import {
     DialogTitle,
     TextField,
 } from '@mui/material'
+import { DateObject } from 'react-multi-date-picker'
+import DatePickerComponent from '../DaysSelect'
+import { Services } from '../../../types/types'
 
 interface Props {
     open: boolean
@@ -19,38 +24,67 @@ interface Props {
 }
 
 const ServiceFormModal: FC<Props> = ({ open, onClose }) => {
+    const { createService } = useLogicDashboard()
+    const [urlPicture, setUrlPicture] = useState(
+        'https://picsum.photos/200/300.jpg'
+    )
+    const [urlVideo, setUrlVideo] = useState(
+        'https://picsum.photos/200/300.jpg'
+    )
+    const [descripcion, setDescripcion] = useState(
+        'Esto es una prueba de descripción'
+    )
+    const [title, setTitle] = useState('Titulo de prueba')
+    const [price, setPrice] = useState('100')
+    const [selectedDays, setSelectedDays] = useState<DateObject[]>([])
+    const dates = selectedDays.map(day => day.format('DD/MM/YYYY'))
+    console.log(dates)
+
     const ReactQuill = useMemo(
         () => dynamic(() => import('react-quill'), { ssr: false }),
         []
     )
 
-    const [formData, setFormData] = useState({
-        urlPicture: '',
-        urlVideo: '',
-        title: '',
-        descripcion: '',
-        price: '',
-        dates: [],
-    })
-
-    const handleChange = (event: any) => {
-        const { name, value } = event.target
-        setFormData({
-            ...formData,
-            [name]: value,
-        })
+    const handleUrlPictureChange = (event: any) => {
+        setUrlPicture(event.target.value)
+    }
+    const handleUrlVideoChange = (event: any) => {
+        setUrlVideo(event.target.value)
+    }
+    const handleTitleChange = (event: any) => {
+        setTitle(event.target.value)
+    }
+    const handlePriceChange = (event: any) => {
+        setPrice(event.target.value)
+    }
+    const handleDescripcionChange = (html: any) => {
+        setDescripcion(html)
     }
 
-    const handleQuillChange = (html: string) => {
-        setFormData({
-            ...formData,
-            descripcion: html,
-        })
+    const handleDayChange = (dates: DateObject[] | DateObject | null) => {
+        if (Array.isArray(dates)) {
+            setSelectedDays(dates)
+        } else {
+            setSelectedDays([dates as DateObject])
+        }
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         // Realiza aquí la lógica para enviar el formulario o realizar alguna acción con los datos.
-        console.log(formData)
+
+        const serviceData: Services = {
+            urlPicture,
+            urlVideo,
+            title,
+            price,
+            descripcion,
+            dates,
+        }
+
+        console.log(serviceData.dates)
+
+        // Llama a createService con la estructura correcta
+        await createService(serviceData)
         // Cierra el modal después de enviar el formulario.
         onClose()
     }
@@ -69,8 +103,8 @@ const ServiceFormModal: FC<Props> = ({ open, onClose }) => {
                     label="URL de la Imagen"
                     type="text"
                     fullWidth
-                    value={formData.urlPicture}
-                    onChange={handleChange}
+                    value={urlPicture}
+                    onChange={handleUrlPictureChange}
                 />
                 <TextField
                     margin="dense"
@@ -78,8 +112,8 @@ const ServiceFormModal: FC<Props> = ({ open, onClose }) => {
                     label="URL del Video"
                     type="text"
                     fullWidth
-                    value={formData.urlVideo}
-                    onChange={handleChange}
+                    value={urlVideo}
+                    onChange={handleUrlVideoChange}
                 />
                 <TextField
                     margin="dense"
@@ -87,8 +121,8 @@ const ServiceFormModal: FC<Props> = ({ open, onClose }) => {
                     label="Título"
                     type="text"
                     fullWidth
-                    value={formData.title}
-                    onChange={handleChange}
+                    value={title}
+                    onChange={handleTitleChange}
                 />
                 <TextField
                     margin="dense"
@@ -96,13 +130,14 @@ const ServiceFormModal: FC<Props> = ({ open, onClose }) => {
                     label="Precio"
                     type="number"
                     fullWidth
-                    value={formData.price}
-                    onChange={handleChange}
+                    value={price}
+                    onChange={handlePriceChange}
                 />
+                <DatePickerComponent onDateSelectionChange={handleDayChange} />
                 <ReactQuill
                     theme="snow"
-                    value={formData.descripcion}
-                    onChange={handleQuillChange}
+                    value={descripcion}
+                    onChange={handleDescripcionChange}
                     placeholder="Descripción"
                     style={{ height: '300px', marginTop: '0.6rem' }}
                     modules={{

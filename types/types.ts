@@ -18,12 +18,21 @@ export type SuccessResponse = {
 }
 
 export type Services = {
-    id: string
+    id?: string
     urlPicture: string
     urlVideo: string
     title: string
     descripcion: string
-    price: number
-    createdAt: Date
-    updatedAt: Date
+    dates?: string[]
+    price: string
+    createdAt?: Date
+    updatedAt?: Date
+}
+
+export type Dates = {
+    id?: string
+    dates: string[]
+    serviceId: string
+    createdAt?: Date
+    updatedAt?: Date
 }

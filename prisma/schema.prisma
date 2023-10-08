@@ -26,7 +26,7 @@ model Services {
   urlVideo    String   @map("url_video")
   title       String
   descripcion String
-  price       Int
+  price       String
   adminId     String   @map("admin_id")
   admin       User     @relation(fields: [adminId], references: [id])
   dates       Dates[]
@@ -35,20 +35,10 @@ model Services {
 }
 
 model Dates {
-  id           String         @id @default(cuid())
-  serviceId    String
-  dateTime     DateTime
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime       @updatedAt
-  service      Services       @relation(fields: [serviceId], references: [id])
-  Availability Availability[]
-}
-
-model Availability {
-  id          String   @id @default(cuid())
-  dateId      String
-  isAvailable Boolean
-  date        Dates    @relation(fields: [dateId], references: [id])
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id        String   @id @default(cuid())
+  serviceId String
+  dates     String
+  service   Services @relation(fields: [serviceId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

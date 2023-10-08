@@ -12,31 +12,47 @@ export const getServices = async (): Promise<Services[]> => {
 }
 
 export const createService = async (
-    service: Services,
+    urlVideo: string,
+    urlPicture: string,
+    title: string,
+    descripcion: string,
+    dates: Array<string>,
+    price: string,
     adminId: string
 ): Promise<Services | null> => {
     const newService = await prisma.services.create({
         data: {
-            ...service,
+            urlVideo: urlVideo,
+            urlPicture: urlPicture,
+            title: title,
+            descripcion: descripcion,
+            price: price,
             adminId: adminId,
+            dates: {
+                create: dates.map(dates => {
+                    return {
+                        dates: dates,
+                    }
+                }),
+            },
         },
     })
-
+    console.log(dates)
     return newService
 }
 
-export const updateService = async (
-    id: string,
-    updatedServiceData: Partial<Services>
-): Promise<Services | null> => {
-    const updatedService = await prisma.services.update({
-        where: {
-            id: id,
-        },
-        data: updatedServiceData,
-    })
-    return updatedService
-}
+// export const updateService = async (
+//     id: string,
+//     updatedServiceData: Partial<Services>
+// ): Promise<Services | null> => {
+//     const updatedService = await prisma.services.update({
+//         where: {
+//             id: id,
+//         },
+//         data: updatedServiceData,
+//     })
+//     return updatedService
+// }
 
 export const deleteService = async (id: string): Promise<Services | null> => {
     const deletedService = await prisma.services.delete({

@@ -24,8 +24,25 @@ export default async function handler(
                 })
                 return
             }
-            const service: Services = req.body
-            const newService = await createService(service, user?.id as string)
+            const {
+                urlPicture,
+                urlVideo,
+                title,
+                descripcion,
+                price,
+            }: Services = req.body
+            const dates: string[] = req.body.dates
+            console.log(dates)
+            const newService = await createService(
+                urlPicture,
+                urlVideo,
+                title,
+                descripcion,
+                dates,
+                price,
+                user?.id as string
+            )
+            console.log(newService)
             res.status(200).json(newService)
         } catch (error: any) {
             res.status(400).json({ message: error.message })

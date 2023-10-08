@@ -1,14 +1,14 @@
 import { useCallback, useState } from 'react'
 import { getAuthenticatedToken } from '../../../storage/storage'
 import { useRouter } from 'next/navigation'
-import { User } from '../../../types/types'
+import { Services, User } from '../../../types/types'
 
 export const useLogicDashboard = () => {
     const [currentUser, setCurrentUser] = useState<User>()
     const [titleDrawer, setTitleDrawer] = useState<string>('Dashboard')
     const router = useRouter()
     const [mobileOpen, setMobileOpen] = useState(false)
-    const [route, setRoute] = useState('dashboard')
+    const [route, setRoute] = useState('servicios')
     const titlePage = 'Dashboard'
     const [userLoaded, setUserLoaded] = useState(false)
     const [open, setOpen] = useState(false)
@@ -52,6 +52,30 @@ export const useLogicDashboard = () => {
         }
     }, [router])
 
+    const createService = useCallback(async (service: Services) => {
+        try {
+            const token = getAuthenticatedToken()
+            const headers = {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            }
+            const response = await fetch('/api/services/postService', {
+                method: 'POST',
+                headers,
+                body: JSON.stringify(service),
+            })
+            if (response.ok) {
+                const data: Services = await response.json()
+                console.log(data)
+                return data
+            } else {
+                console.error('Error al crear el servicio')
+            }
+        } catch (error) {
+            console.error('Error al enviar el objeto:', error)
+        }
+    }, [])
+
     return {
         currentUser,
         getUserInfo,
@@ -68,5 +92,6 @@ export const useLogicDashboard = () => {
         handleOpen,
         userLoaded,
         setUserLoaded,
+        createService,
     }
 }
