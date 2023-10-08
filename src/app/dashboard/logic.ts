@@ -66,7 +66,6 @@ export const useLogicDashboard = () => {
             })
             if (response.ok) {
                 const data: Services = await response.json()
-                console.log(data)
                 return data
             } else {
                 console.error('Error al crear el servicio')

@@ -32,7 +32,6 @@ export default async function handler(
                 price,
             }: Services = req.body
             const dates: string[] = req.body.dates
-            console.log(dates)
             const newService = await createService(
                 urlPicture,
                 urlVideo,
@@ -42,7 +41,6 @@ export default async function handler(
                 price,
                 user?.id as string
             )
-            console.log(newService)
             res.status(200).json(newService)
         } catch (error: any) {
             res.status(400).json({ message: error.message })

@@ -37,22 +37,30 @@ export const createService = async (
             },
         },
     })
-    console.log(dates)
     return newService
 }
 
-// export const updateService = async (
-//     id: string,
-//     updatedServiceData: Partial<Services>
-// ): Promise<Services | null> => {
-//     const updatedService = await prisma.services.update({
-//         where: {
-//             id: id,
-//         },
-//         data: updatedServiceData,
-//     })
-//     return updatedService
-// }
+export const updateService = async (
+    id: string,
+    updatedServiceData: Partial<Services>
+): Promise<Services | null> => {
+    const updatedService = await prisma.services.update({
+        where: {
+            id: id,
+        },
+        data: {
+            ...updatedServiceData,
+            dates: {
+                create: updatedServiceData.dates?.map(dates => {
+                    return {
+                        dates: dates,
+                    }
+                }),
+            },
+        },
+    })
+    return updatedService
+}
 
 export const deleteService = async (id: string): Promise<Services | null> => {
     const deletedService = await prisma.services.delete({

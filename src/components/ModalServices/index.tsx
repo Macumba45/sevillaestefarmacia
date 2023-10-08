@@ -38,7 +38,6 @@ const ServiceFormModal: FC<Props> = ({ open, onClose }) => {
     const [price, setPrice] = useState('100')
     const [selectedDays, setSelectedDays] = useState<DateObject[]>([])
     const dates = selectedDays.map(day => day.format('DD/MM/YYYY'))
-    console.log(dates)
 
     const ReactQuill = useMemo(
         () => dynamic(() => import('react-quill'), { ssr: false }),
@@ -80,8 +79,6 @@ const ServiceFormModal: FC<Props> = ({ open, onClose }) => {
             descripcion,
             dates,
         }
-
-        console.log(serviceData.dates)
 
         // Llama a createService con la estructura correcta
         await createService(serviceData)
