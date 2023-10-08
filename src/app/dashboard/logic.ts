@@ -75,6 +75,29 @@ export const useLogicDashboard = () => {
         }
     }, [])
 
+    const getServices = useCallback(async () => {
+        try {
+            const token = getAuthenticatedToken()
+            const headers = {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            }
+            const response = await fetch('/api/services/getService', {
+                method: 'GET',
+                headers,
+            })
+            if (response.ok) {
+                const data: Services[] = await response.json()
+                console.log(data)
+                return data
+            } else {
+                console.error('Error al obtener los servicios')
+            }
+        } catch (error) {
+            console.error('Error al enviar el objeto:', error)
+        }
+    }, [])
+
     return {
         currentUser,
         getUserInfo,
@@ -92,5 +115,6 @@ export const useLogicDashboard = () => {
         userLoaded,
         setUserLoaded,
         createService,
+        getServices,
     }
 }

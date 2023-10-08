@@ -50,6 +50,7 @@ const ResponsiveDrawer: FC<Props> = props => {
         handleOpen,
         userLoaded,
         setUserLoaded,
+        getServices,
     } = useLogicDashboard()
     const { window } = props
     const container =
@@ -57,6 +58,7 @@ const ResponsiveDrawer: FC<Props> = props => {
 
     useEffect(() => {
         getUserInfo()
+        getServices()
     }, [getUserInfo])
 
     useEffect(() => {

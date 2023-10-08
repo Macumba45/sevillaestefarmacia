@@ -1,14 +1,36 @@
 import { Services } from '../../../types/types'
 import prisma from '@/lib/client'
 
-export const getServices = async (): Promise<Services[]> => {
-    const prismaServices = await prisma.services.findMany()
+export const getServices = async (): Promise<any[]> => {
+    const prismaServices = await prisma.services.findMany({
+        include: {
+            dates: true,
+        },
+    })
 
     if (!prismaServices) {
         return []
     }
 
-    return prismaServices
+    // Mapear los datos para estructurarlos como desees
+    const servicesData = prismaServices.map(service => ({
+        id: service.id,
+        urlPicture: service.urlPicture,
+        urlVideo: service.urlVideo,
+        title: service.title,
+        descripcion: service.descripcion,
+        price: service.price,
+        adminId: service.adminId,
+        createdAt: service.createdAt,
+        updatedAt: service.updatedAt,
+        dates: service.dates.map(date => ({
+            id: date.id,
+            date: date.dates,
+            // Otras propiedades de Date que desees incluir
+        })),
+    }))
+
+    return servicesData
 }
 
 export const createService = async (
