@@ -11,7 +11,7 @@ import { Button } from '@mui/material'
 
 interface Props {
     user: string
-    serviceType: string
+    serviceType?: string
     date: string
     phone?: string
 }

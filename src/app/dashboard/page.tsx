@@ -51,6 +51,7 @@ const ResponsiveDrawer: FC<Props> = props => {
         userLoaded,
         setUserLoaded,
         getServices,
+        services
     } = useLogicDashboard()
     const { window } = props
     const container =
@@ -241,20 +242,13 @@ const ResponsiveDrawer: FC<Props> = props => {
                                 onClose={() => setOpen(false)}
                             />
                         )}
-                        <CardDashboardServices title="Pendientes" price={100} />
-                        <CardDashboardServices title="Pastillero" price={100} />
-                        <CardDashboardServices
-                            title="Servicio a domicilio"
-                            price={100}
-                        />
-                        <CardDashboardServices
-                            title="Formulas magistrales"
-                            price={100}
-                        />
-                        <CardDashboardServices
-                            title="Nutricionista"
-                            price={100}
-                        />
+                        {services?.map(item => (
+                            <CardDashboardServices
+                                key={item.id}
+                                title={item.title}
+                                price={item.price}
+                            />
+                        ))}
                     </CardServicesContainer>
                 )}
                 {route === 'citas' && (

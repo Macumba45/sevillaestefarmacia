@@ -12,6 +12,7 @@ export const useLogicDashboard = () => {
     const titlePage = 'Dashboard'
     const [userLoaded, setUserLoaded] = useState(false)
     const [open, setOpen] = useState(false)
+    const [services, setServices] = useState<Services[]>()
 
     const handleOpen = () => setOpen(true)
 
@@ -88,7 +89,7 @@ export const useLogicDashboard = () => {
             })
             if (response.ok) {
                 const data: Services[] = await response.json()
-                console.log(data)
+                setServices(data)
                 return data
             } else {
                 console.error('Error al obtener los servicios')
@@ -116,5 +117,6 @@ export const useLogicDashboard = () => {
         setUserLoaded,
         createService,
         getServices,
+        services
     }
 }
