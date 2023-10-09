@@ -13,8 +13,16 @@ export const useLogicDashboard = () => {
     const [userLoaded, setUserLoaded] = useState(false)
     const [open, setOpen] = useState(false)
     const [services, setServices] = useState<Services[]>()
+    const [openEditModal, setOpenEditModal] = useState(false)
+    const [serviceData, setServiceData] = useState<Services>()
 
     const handleOpen = () => setOpen(true)
+
+    const openEditModalFunction = async (service: Services) => {
+        setServiceData(service) // Almacena los datos en el estado
+        setOpenEditModal(true) // Abre el modal
+    }
+    const closeEditModalFunction = () => setOpenEditModal(false)
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen)
@@ -94,6 +102,7 @@ export const useLogicDashboard = () => {
             })
             if (response.ok) {
                 const data: Services[] = await response.json()
+                console.log(data)
                 setServices(data)
                 return data
             } else {
@@ -124,5 +133,9 @@ export const useLogicDashboard = () => {
         getServices,
         services,
         setServices,
+        openEditModal,
+        openEditModalFunction,
+        closeEditModalFunction,
+        serviceData,
     }
 }

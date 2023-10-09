@@ -1,9 +1,7 @@
-import { FC, memo, useState } from 'react'
+import { FC, memo } from 'react'
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import { Card } from 'antd'
 import { Props } from './types'
-import DatePickerComponent from '../DaysSelect'
-import { DateObject } from 'react-multi-date-picker'
 
 const { Meta } = Card
 
@@ -12,13 +10,7 @@ const styleIconButtons = {
     marginRight: '10px',
 }
 
-const CardDashboardServices: FC<Props> = ({
-    onClick,
-    onUpdate,
-    urlPicture,
-    title,
-    price,
-}) => {
+const CardDashboardServices: FC<Props> = ({ onClick, service }) => {
     return (
         <Card
             style={{ width: 300, margin: 10 }}
@@ -35,7 +27,7 @@ const CardDashboardServices: FC<Props> = ({
                     key="delete"
                 />,
                 <EditOutlined
-                    onClick={onUpdate}
+                    onClick={onClick}
                     style={styleIconButtons}
                     key="edit"
                 />,
@@ -47,7 +39,7 @@ const CardDashboardServices: FC<Props> = ({
                     display: 'flex',
                     justifyContent: 'center',
                 }}
-                title={title}
+                title={service.title}
                 description={
                     <span
                         style={{
@@ -56,7 +48,7 @@ const CardDashboardServices: FC<Props> = ({
                             fontWeight: 600,
                         }}
                     >
-                        {price}€
+                        {service.price}€
                     </span>
                 }
             />

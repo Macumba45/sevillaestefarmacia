@@ -41,7 +41,6 @@ const ServiceFormModal: FC<Props> = ({ open, onClose }) => {
     const [selectedDays, setSelectedDays] = useState<
         { date: DateObject; hours: string[] }[]
     >([]) // Arreglo de objetos para almacenar fechas y horas
-    const dates = selectedDays.map(day => day.date.format('DD/MM/YYYY')) // Arreglo de fechas
     console.log(
         selectedDays.map(day => day.date.format('DD/MM/YYYY')),
         selectedDays.map(day => day.hours)

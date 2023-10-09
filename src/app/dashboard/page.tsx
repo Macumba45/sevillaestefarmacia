@@ -1,9 +1,9 @@
 'use client'
-import { FC, use, useEffect, useState } from 'react'
-import logo from '../../assets/logo/logo.png'
+import { FC, useEffect } from 'react'
 import { useLogicDashboard } from './logic'
 import { CardServicesContainer, CitasContainer } from './styles'
 import { Props } from './types'
+import logo from '../../assets/logo/logo.png'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import CssBaseline from '@mui/material/CssBaseline'
@@ -30,7 +30,7 @@ import DatePickerComp from '@/components/DatePicker'
 import SearchInputComp from '@/components/SearchInput'
 import ServiceFormModal from '@/components/ModalServices'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
-import { get } from 'http'
+import ModalServicesEdit from '@/components/ModalServicesEdit'
 
 const drawerWidth = 240
 
@@ -53,7 +53,10 @@ const ResponsiveDrawer: FC<Props> = props => {
         setUserLoaded,
         getServices,
         services,
-        createService,
+        openEditModal,
+        openEditModalFunction,
+        closeEditModalFunction,
+        serviceData,
     } = useLogicDashboard()
     const { window } = props
     const container =
@@ -258,11 +261,22 @@ const ResponsiveDrawer: FC<Props> = props => {
                         ) : (
                             services?.map(item => (
                                 <CardDashboardServices
+                                    service={item}
                                     key={item.id}
-                                    title={item.title}
-                                    price={item.price}
+                                    onClick={() => openEditModalFunction(item)}
                                 />
                             ))
+                        )}
+                        {openEditModal && (
+                            <ModalServicesEdit
+                                open={openEditModal}
+                                onClose={() => closeEditModalFunction()}
+                                title={serviceData?.title as string}
+                                urlPicture={serviceData?.urlPicture as string}
+                                urlVideo={serviceData?.urlVideo as string}
+                                price={serviceData?.price as string}
+                                description={serviceData?.descripcion as string}
+                            />
                         )}
                     </CardServicesContainer>
                 )}
@@ -343,7 +357,7 @@ const ResponsiveDrawer: FC<Props> = props => {
                         {open && (
                             <ServiceFormModal
                                 open={open}
-                                onClose={() => setOpen(false)}
+                                onClose={() => closeEditModalFunction()}
                             />
                         )}
                     </>

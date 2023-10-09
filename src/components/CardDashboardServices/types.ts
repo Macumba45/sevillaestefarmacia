@@ -1,7 +1,6 @@
+import { Services } from '../../../types/types'
+
 export type Props = {
     onClick?: () => void
-    onUpdate?: () => void
-    urlPicture?: string
-    title: string
-    price: string
+    service: Services
 }
