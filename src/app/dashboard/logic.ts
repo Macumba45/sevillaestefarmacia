@@ -15,12 +15,18 @@ export const useLogicDashboard = () => {
     const [services, setServices] = useState<Services[]>()
     const [openEditModal, setOpenEditModal] = useState(false)
     const [serviceData, setServiceData] = useState<Services>()
+    const [isEditing, setIsEditing] = useState(false)
 
-    const handleOpen = () => setOpen(true)
+    const handleOpen = () => {
+        setOpen(true)
+        setIsEditing(false)
+        setServiceData(undefined)
+    }
 
     const openEditModalFunction = async (service: Services) => {
         setServiceData(service) // Almacena los datos en el estado
-        setOpenEditModal(true) // Abre el modal
+        setOpen(true)
+        setIsEditing(true) // Abre el modal
     }
     const closeEditModalFunction = () => setOpenEditModal(false)
 
@@ -102,7 +108,6 @@ export const useLogicDashboard = () => {
             })
             if (response.ok) {
                 const data: Services[] = await response.json()
-                console.log(data)
                 setServices(data)
                 return data
             } else {
@@ -112,6 +117,34 @@ export const useLogicDashboard = () => {
             console.error('Error al enviar el objeto:', error)
         }
     }, [])
+
+    const updateService = useCallback(
+        async (service: Services) => {
+            try {
+                const token = getAuthenticatedToken()
+                const headers = {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                }
+                const response = await fetch('/api/services/updateService', {
+                    method: 'PUT',
+                    headers,
+                    body: JSON.stringify(service),
+                })
+                if (response.ok) {
+                    const data: Services = await response.json()
+                    return data
+                } else {
+                    console.error('Error al actualizar el servicio')
+                }
+            } catch (error) {
+                console.error('Error al enviar el objeto:', error)
+            } finally {
+                router.push('/dashboard')
+            }
+        },
+        [router]
+    )
 
     return {
         currentUser,
@@ -137,5 +170,7 @@ export const useLogicDashboard = () => {
         openEditModalFunction,
         closeEditModalFunction,
         serviceData,
+        updateService,
+        isEditing,
     }
 }

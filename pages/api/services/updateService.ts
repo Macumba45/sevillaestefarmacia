@@ -8,7 +8,28 @@ export default async function handler(
     if (req.method === 'PUT') {
         try {
             const { id } = req.query
-            const service = await updateService(id as string, req.body)
+            const {
+                urlVideo,
+                urlPicture,
+                title,
+                descripcion,
+                dates,
+                hours,
+                price,
+                adminId,
+            } = req.body
+            console.log(req.body)
+            const service = await updateService(
+                id as string,
+                urlVideo,
+                urlPicture,
+                title,
+                descripcion,
+                dates,
+                hours,
+                price,
+                adminId
+            )
             res.status(200).json(service)
         } catch (error: any) {
             res.status(400).json({ message: error.message })

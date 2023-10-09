@@ -1,6 +1,4 @@
-'use client'
-
-import React, { FC, useMemo, useState } from 'react'
+import React, { FC, useMemo, useState, useEffect } from 'react'
 import { useLogicDashboard } from '@/app/dashboard/logic'
 import dynamic from 'next/dynamic'
 import { DateObject } from 'react-multi-date-picker'
@@ -23,10 +21,17 @@ import {
 interface Props {
     open: boolean
     onClose: () => void
+    isEditing: boolean // Nueva prop para determinar si estamos en modo edición o creación
+    serviceData?: Services // Datos del servicio para editar (solo cuando isEditing sea true)
 }
 
-const ServiceFormModal: FC<Props> = ({ open, onClose }) => {
-    const { createService } = useLogicDashboard()
+const ServiceFormModal: FC<Props> = ({
+    open,
+    onClose,
+    isEditing,
+    serviceData,
+}) => {
+    const { createService, updateService } = useLogicDashboard()
     const [urlPicture, setUrlPicture] = useState(
         'https://picsum.photos/200/300.jpg'
     )
@@ -40,11 +45,18 @@ const ServiceFormModal: FC<Props> = ({ open, onClose }) => {
     const [price, setPrice] = useState('100')
     const [selectedDays, setSelectedDays] = useState<
         { date: DateObject; hours: string[] }[]
-    >([]) // Arreglo de objetos para almacenar fechas y horas
-    console.log(
-        selectedDays.map(day => day.date.format('DD/MM/YYYY')),
-        selectedDays.map(day => day.hours)
-    )
+    >([])
+    // Cuando se inicia el modo de edición, establecer los datos existentes del servicio
+    useEffect(() => {
+        if (isEditing && serviceData) {
+            setUrlPicture(serviceData.urlPicture)
+            setUrlVideo(serviceData.urlVideo)
+            setDescripcion(serviceData.descripcion)
+            setTitle(serviceData.title)
+            setPrice(serviceData.price)
+            // También puedes manejar la carga de las fechas y horas aquí
+        }
+    }, [isEditing, serviceData])
 
     const ReactQuill = useMemo(
         () => dynamic(() => import('react-quill'), { ssr: false }),
@@ -79,7 +91,6 @@ const ServiceFormModal: FC<Props> = ({ open, onClose }) => {
         }
     }
 
-    // Función para generar horas disponibles en intervalos de 30 minutos
     const generateAvailableHours = () => {
         const hours = []
         for (let hour = 9; hour < 21; hour++) {
@@ -101,10 +112,8 @@ const ServiceFormModal: FC<Props> = ({ open, onClose }) => {
             const { hours } = updatedSelectedDays[dateIndex]
             const hourIndex = hours.indexOf(hour)
             if (hourIndex === -1) {
-                // Agregar hora si no está presente
                 updatedSelectedDays[dateIndex].hours.push(hour)
             } else {
-                // Quitar hora si ya está presente
                 updatedSelectedDays[dateIndex].hours.splice(hourIndex, 1)
             }
             setSelectedDays(updatedSelectedDays)
@@ -112,9 +121,7 @@ const ServiceFormModal: FC<Props> = ({ open, onClose }) => {
     }
 
     const handleSubmit = async () => {
-        // Realiza aquí la lógica para enviar el formulario o realizar alguna acción con los datos.
-
-        const serviceData: Services = {
+        const serviceDataToSubmit: Services = {
             urlPicture,
             urlVideo,
             title,
@@ -126,18 +133,27 @@ const ServiceFormModal: FC<Props> = ({ open, onClose }) => {
             })),
         }
 
-        // Llama a createService con la estructura correcta
-        await createService(serviceData)
-        // Cierra el modal después de enviar el formulario.
+        if (isEditing && serviceData) {
+            // Si estamos en modo edición, llamamos a la función de actualización
+            serviceDataToSubmit.id = serviceData.id
+            await updateService(serviceDataToSubmit)
+        } else {
+            // Si estamos en modo creación, llamamos a la función de creación
+            await createService(serviceDataToSubmit)
+        }
+
         onClose()
     }
 
     return (
         <Dialog open={open} onClose={onClose}>
-            <DialogTitle> Crear Nuevo Servicio</DialogTitle>
+            <DialogTitle>
+                {isEditing ? 'Editar Servicio' : 'Crear Nuevo Servicio'}
+            </DialogTitle>
             <DialogContent>
                 <DialogContentText marginBottom={2}>
-                    Por favor, complete los campos para crear un nuevo servicio.
+                    Por favor, complete los campos para{' '}
+                    {isEditing ? 'editar' : 'crear'} un nuevo servicio.
                 </DialogContentText>
                 <TextField
                     autoFocus
@@ -272,7 +288,7 @@ const ServiceFormModal: FC<Props> = ({ open, onClose }) => {
                     color="success"
                     onClick={handleSubmit}
                 >
-                    Crear Servicio
+                    {isEditing ? 'Editar Servicio' : 'Crear Servicio'}
                 </Button>
                 <Button onClick={onClose} color="error">
                     Cancelar

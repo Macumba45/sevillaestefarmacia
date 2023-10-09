@@ -30,7 +30,6 @@ import DatePickerComp from '@/components/InputDayPicker'
 import SearchInputComp from '@/components/InpuntSearch'
 import ServiceFormModal from '@/components/ModalServices'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
-import ModalServicesEdit from '@/components/ModalServicesEdit'
 
 const drawerWidth = 240
 
@@ -53,10 +52,9 @@ const ResponsiveDrawer: FC<Props> = props => {
         setUserLoaded,
         getServices,
         services,
-        openEditModal,
         openEditModalFunction,
-        closeEditModalFunction,
         serviceData,
+        isEditing,
     } = useLogicDashboard()
     const { window } = props
     const container =
@@ -121,7 +119,7 @@ const ResponsiveDrawer: FC<Props> = props => {
 
             <Divider />
             <List>
-                {itemsTop.map((item, index) => (
+                {itemsTop.map(item => (
                     <ListItem key={item.text} disablePadding>
                         <ListItemButton onClick={() => changeRoute(item.route)}>
                             <ListItemIcon>{item.icon}</ListItemIcon>
@@ -245,6 +243,8 @@ const ResponsiveDrawer: FC<Props> = props => {
                             <ServiceFormModal
                                 open={open}
                                 onClose={() => setOpen(false)}
+                                isEditing={isEditing}
+                                serviceData={serviceData}
                             />
                         )}
                         {services?.length === 0 ? (
@@ -263,20 +263,9 @@ const ResponsiveDrawer: FC<Props> = props => {
                                 <CardDashboardServices
                                     service={item}
                                     key={item.id}
-                                    onClick={() => openEditModalFunction(item)}
+                                    onEdit={() => openEditModalFunction(item)}
                                 />
                             ))
-                        )}
-                        {openEditModal && (
-                            <ModalServicesEdit
-                                open={openEditModal}
-                                onClose={() => closeEditModalFunction()}
-                                title={serviceData?.title as string}
-                                urlPicture={serviceData?.urlPicture as string}
-                                urlVideo={serviceData?.urlVideo as string}
-                                price={serviceData?.price as string}
-                                description={serviceData?.descripcion as string}
-                            />
                         )}
                     </CardServicesContainer>
                 )}
@@ -343,23 +332,23 @@ const ResponsiveDrawer: FC<Props> = props => {
                 {route === 'blog' && (
                     <>
                         <FloatAddServices onClick={handleOpen} />
-                        {open && (
+                        {/* {open && (
                             <ServiceFormModal
                                 open={open}
                                 onClose={() => setOpen(false)}
                             />
-                        )}
+                        )} */}
                     </>
                 )}
                 {route === 'clientes' && (
                     <>
                         <FloatAddServices onClick={handleOpen} />
-                        {open && (
+                        {/* {open && (
                             <ServiceFormModal
                                 open={open}
                                 onClose={() => closeEditModalFunction()}
                             />
-                        )}
+                        )} */}
                     </>
                 )}
             </Box>

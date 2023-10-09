@@ -1,11 +1,10 @@
 'use client'
 
-import React, { FC, memo, use, useEffect } from 'react'
+import React, { FC, memo } from 'react'
 import { useLogicLogin } from './logic'
 import { MainContainer } from './styles'
 import { Box, Button, TextField } from '@mui/material'
 import logo from '../../../../assets/logo/logo.png'
-import { get } from 'http'
 
 const DashboardLogin: FC = () => {
     const {

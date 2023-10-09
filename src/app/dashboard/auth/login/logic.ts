@@ -1,8 +1,5 @@
-import { ChangeEvent, useCallback, useState } from 'react'
-import {
-    getAuthenticatedToken,
-    setAuthenticatedToken,
-} from '../../../../../storage/storage'
+import { ChangeEvent, useState } from 'react'
+import { setAuthenticatedToken } from '../../../../../storage/storage'
 import { useRouter } from 'next/navigation'
 
 export const useLogicLogin = () => {

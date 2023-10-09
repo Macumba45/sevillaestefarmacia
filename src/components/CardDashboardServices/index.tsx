@@ -10,7 +10,7 @@ const styleIconButtons = {
     marginRight: '10px',
 }
 
-const CardDashboardServices: FC<Props> = ({ onClick, service }) => {
+const CardDashboardServices: FC<Props> = ({ onClick, service, onEdit }) => {
     return (
         <Card
             style={{ width: 300, margin: 10 }}
@@ -27,7 +27,7 @@ const CardDashboardServices: FC<Props> = ({ onClick, service }) => {
                     key="delete"
                 />,
                 <EditOutlined
-                    onClick={onClick}
+                    onClick={onEdit}
                     style={styleIconButtons}
                     key="edit"
                 />,

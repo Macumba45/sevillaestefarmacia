@@ -31,6 +31,8 @@ module.exports = {
     },
     rules: {
         '@next/next/no-img-element': 'off',
+        'react/prop-types': 'off',
+        '@typescript-eslint/no-unused-vars': 'warn',
         'jsx-a11y/alt-text': 'off',
         '@typescript-eslint/no-non-null-assertion': 'off',
         'react/react-in-jsx-scope': 'off',

@@ -8,7 +8,6 @@ interface SearchProps {
     allowClear?: boolean
     enterButton?: boolean
     size?: 'large' | 'middle' | 'small'
-    suffix?: React.ReactNode
 }
 
 const { Search } = Input

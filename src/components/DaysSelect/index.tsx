@@ -1,9 +1,5 @@
 import React, { FC, useState } from 'react'
-import DatePicker, { Calendar, DateObject } from 'react-multi-date-picker'
-import DatePanel from 'react-multi-date-picker/plugins/date_panel'
-import DatePickerHeader from 'react-multi-date-picker/plugins/date_picker_header'
-import Settings from 'react-multi-date-picker/plugins/settings'
-import Toolbar from 'react-multi-date-picker/plugins/toolbar'
+import { Calendar, DateObject } from 'react-multi-date-picker'
 
 interface Props {
     onDateSelectionChange: (
