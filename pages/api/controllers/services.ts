@@ -1,4 +1,4 @@
-import { Services } from '../../../types/types'
+import { Services, Dates, Hours } from '../../../types/types'
 import prisma from '@/lib/client'
 
 export const getServices = async (): Promise<any[]> => {
@@ -38,7 +38,8 @@ export const createService = async (
     urlPicture: string,
     title: string,
     descripcion: string,
-    dates: Array<string>,
+    dates: Array<string>, // Fechas en formato DD/MM/YYYY
+    hours: Array<Array<string>>, // Horas correspondientes a cada fecha
     price: string,
     adminId: string
 ): Promise<Services | null> => {
@@ -51,9 +52,16 @@ export const createService = async (
             price: price,
             adminId: adminId,
             dates: {
-                create: dates.map(dates => {
+                create: dates.map((date, index) => {
                     return {
-                        dates: dates,
+                        dates: date,
+                        hours: {
+                            create: hours[index].map(hour => {
+                                return {
+                                    hour: hour,
+                                }
+                            }),
+                        },
                     }
                 }),
             },
@@ -62,27 +70,27 @@ export const createService = async (
     return newService
 }
 
-export const updateService = async (
-    id: string,
-    updatedServiceData: Partial<Services>
-): Promise<Services | null> => {
-    const updatedService = await prisma.services.update({
-        where: {
-            id: id,
-        },
-        data: {
-            ...updatedServiceData,
-            dates: {
-                create: updatedServiceData.dates?.map(dates => {
-                    return {
-                        dates: dates,
-                    }
-                }),
-            },
-        },
-    })
-    return updatedService
-}
+// export const updateService = async (
+//     id: string,
+//     updatedServiceData: Partial<Services>
+// ): Promise<Services | null> => {
+//     const updatedService = await prisma.services.update({
+//         where: {
+//             id: id,
+//         },
+//         data: {
+//             ...updatedServiceData,
+//             dates: {
+//                 create: updatedServiceData.dates?.map(dates => {
+//                     return {
+//                         dates: dates,
+//                     }
+//                 }),
+//             },
+//         },
+//     })
+//     return updatedService
+// }
 
 export const deleteService = async (id: string): Promise<Services | null> => {
     const deletedService = await prisma.services.delete({

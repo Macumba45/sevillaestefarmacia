@@ -13,8 +13,6 @@ interface Props {
 
 const DatePickerComponent: FC<Props> = ({ onDateSelectionChange }) => {
     const [selectedDays, setSelectedDays] = useState<DateObject[]>([])
-    console.log(selectedDays)
-    console.log(selectedDays.map(day => day.format('DD/MM/YYYY')))
     const selectedDates = selectedDays.map(day => day.format('DD/MM/YYYY'))
     // Función para manejar el cambio del día seleccionado
     const handleDayChange = (dates: DateObject[] | DateObject | null) => {
@@ -37,7 +35,7 @@ const DatePickerComponent: FC<Props> = ({ onDateSelectionChange }) => {
                 minDate={new Date()}
                 sort
                 showOtherDays
-                plugins={[<DatePanel key="datePanelKey" />]}
+                // plugins={[<DatePanel key="datePanelKey" />]}
             />
         </div>
     )

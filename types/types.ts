@@ -23,7 +23,7 @@ export type Services = {
     urlVideo: string
     title: string
     descripcion: string
-    dates?: string[]
+    serviceDates?: { date: string; hours: string[] }[] // Cambia el nombre de la propiedad
     price: string
     createdAt?: Date
     updatedAt?: Date
@@ -33,6 +33,15 @@ export type Dates = {
     id?: string
     dates: string[]
     serviceId: string
+    createdAt?: Date
+    updatedAt?: Date
+}
+
+export type Hours = {
+    id?: string
+    hours: string[]
+    isBooked: boolean
+    dateId: string
     createdAt?: Date
     updatedAt?: Date
 }

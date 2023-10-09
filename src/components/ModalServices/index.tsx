@@ -3,8 +3,10 @@
 import React, { FC, useMemo, useState } from 'react'
 import { useLogicDashboard } from '@/app/dashboard/logic'
 import dynamic from 'next/dynamic'
+import { DateObject } from 'react-multi-date-picker'
+import DatePickerComponent from '../DaysSelect'
+import { Services } from '../../../types/types'
 import 'react-quill/dist/quill.snow.css' // Importa los estilos CSS de Quill
-import DateSelection from '../DaysSelect'
 import {
     Button,
     Dialog,
@@ -12,11 +14,11 @@ import {
     DialogContent,
     DialogContentText,
     DialogTitle,
+    FormControlLabel,
     TextField,
+    Checkbox,
+    Typography,
 } from '@mui/material'
-import { DateObject } from 'react-multi-date-picker'
-import DatePickerComponent from '../DaysSelect'
-import { Services } from '../../../types/types'
 
 interface Props {
     open: boolean
@@ -36,8 +38,14 @@ const ServiceFormModal: FC<Props> = ({ open, onClose }) => {
     )
     const [title, setTitle] = useState('Titulo de prueba')
     const [price, setPrice] = useState('100')
-    const [selectedDays, setSelectedDays] = useState<DateObject[]>([])
-    const dates = selectedDays.map(day => day.format('DD/MM/YYYY'))
+    const [selectedDays, setSelectedDays] = useState<
+        { date: DateObject; hours: string[] }[]
+    >([]) // Arreglo de objetos para almacenar fechas y horas
+    const dates = selectedDays.map(day => day.date.format('DD/MM/YYYY')) // Arreglo de fechas
+    console.log(
+        selectedDays.map(day => day.date.format('DD/MM/YYYY')),
+        selectedDays.map(day => day.hours)
+    )
 
     const ReactQuill = useMemo(
         () => dynamic(() => import('react-quill'), { ssr: false }),
@@ -62,9 +70,45 @@ const ServiceFormModal: FC<Props> = ({ open, onClose }) => {
 
     const handleDayChange = (dates: DateObject[] | DateObject | null) => {
         if (Array.isArray(dates)) {
-            setSelectedDays(dates)
+            const updatedSelectedDays = dates.map(date => ({
+                date,
+                hours: [],
+            }))
+            setSelectedDays(updatedSelectedDays)
         } else {
-            setSelectedDays([dates as DateObject])
+            setSelectedDays([{ date: dates as DateObject, hours: [] }])
+        }
+    }
+
+    // Función para generar horas disponibles en intervalos de 30 minutos
+    const generateAvailableHours = () => {
+        const hours = []
+        for (let hour = 9; hour < 21; hour++) {
+            for (let minute = 0; minute < 60; minute += 30) {
+                hours.push(
+                    `${String(hour).padStart(2, '0')}:${String(minute).padStart(
+                        2,
+                        '0'
+                    )}`
+                )
+            }
+        }
+        return hours
+    }
+
+    const handleHourChange = (dateIndex: number, hour: string) => {
+        const updatedSelectedDays = [...selectedDays]
+        if (updatedSelectedDays[dateIndex]) {
+            const { hours } = updatedSelectedDays[dateIndex]
+            const hourIndex = hours.indexOf(hour)
+            if (hourIndex === -1) {
+                // Agregar hora si no está presente
+                updatedSelectedDays[dateIndex].hours.push(hour)
+            } else {
+                // Quitar hora si ya está presente
+                updatedSelectedDays[dateIndex].hours.splice(hourIndex, 1)
+            }
+            setSelectedDays(updatedSelectedDays)
         }
     }
 
@@ -77,7 +121,10 @@ const ServiceFormModal: FC<Props> = ({ open, onClose }) => {
             title,
             price,
             descripcion,
-            dates,
+            serviceDates: selectedDays.map(day => ({
+                date: day.date.format('DD/MM/YYYY'),
+                hours: day.hours,
+            })),
         }
 
         // Llama a createService con la estructura correcta
@@ -130,7 +177,72 @@ const ServiceFormModal: FC<Props> = ({ open, onClose }) => {
                     value={price}
                     onChange={handlePriceChange}
                 />
-                <DatePickerComponent onDateSelectionChange={handleDayChange} />
+                <div
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        flexDirection: 'column',
+                        marginBottom: '2rem',
+                        marginTop: '2rem',
+                    }}
+                >
+                    <DatePickerComponent
+                        onDateSelectionChange={handleDayChange}
+                    />
+                    {selectedDays.length > 0 && (
+                        <div>
+                            <Typography variant="h6" sx={{ mt: 4, mb: 2 }}>
+                                Fechas seleccionadas:
+                            </Typography>
+                            {selectedDays.map((selectedDay, index) => (
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                    }}
+                                    key={index}
+                                >
+                                    <Typography
+                                        sx={{ mt: 2, mb: 2, fontWeight: 700 }}
+                                    >
+                                        {selectedDay.date.format('DD/MM/YYYY')}
+                                    </Typography>
+                                    <ul
+                                        style={{
+                                            display: 'flex',
+                                            flexWrap: 'wrap',
+                                            justifyContent: 'center',
+                                        }}
+                                    >
+                                        {generateAvailableHours().map(
+                                            (hour, hourIndex) => (
+                                                <li key={hourIndex}>
+                                                    <FormControlLabel
+                                                        control={
+                                                            <Checkbox
+                                                                checked={selectedDay.hours.includes(
+                                                                    hour
+                                                                )}
+                                                                onChange={() =>
+                                                                    handleHourChange(
+                                                                        index,
+                                                                        hour
+                                                                    )
+                                                                }
+                                                            />
+                                                        }
+                                                        label={hour}
+                                                    />
+                                                </li>
+                                            )
+                                        )}
+                                    </ul>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
                 <ReactQuill
                     theme="snow"
                     value={descripcion}
