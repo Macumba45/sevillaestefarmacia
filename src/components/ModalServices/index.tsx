@@ -90,7 +90,7 @@ const ServiceFormModal: FC<Props> = ({ open, onClose }) => {
         <Dialog open={open} onClose={onClose}>
             <DialogTitle> Crear Nuevo Servicio</DialogTitle>
             <DialogContent>
-                <DialogContentText>
+                <DialogContentText marginBottom={2}>
                     Por favor, complete los campos para crear un nuevo servicio.
                 </DialogContentText>
                 <TextField

@@ -30,6 +30,7 @@ import DatePickerComp from '@/components/DatePicker'
 import SearchInputComp from '@/components/SearchInput'
 import ServiceFormModal from '@/components/ModalServices'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
+import { get } from 'http'
 
 const drawerWidth = 240
 
@@ -51,7 +52,8 @@ const ResponsiveDrawer: FC<Props> = props => {
         userLoaded,
         setUserLoaded,
         getServices,
-        services
+        services,
+        createService,
     } = useLogicDashboard()
     const { window } = props
     const container =
@@ -60,7 +62,7 @@ const ResponsiveDrawer: FC<Props> = props => {
     useEffect(() => {
         getUserInfo()
         getServices()
-    }, [getUserInfo])
+    }, [getUserInfo, getServices])
 
     useEffect(() => {
         if (currentUser && userLoaded) {
@@ -242,13 +244,26 @@ const ResponsiveDrawer: FC<Props> = props => {
                                 onClose={() => setOpen(false)}
                             />
                         )}
-                        {services?.map(item => (
-                            <CardDashboardServices
-                                key={item.id}
-                                title={item.title}
-                                price={item.price}
-                            />
-                        ))}
+                        {services?.length === 0 ? (
+                            <Typography
+                                sx={{
+                                    textAlign: 'center',
+                                    fontSize: '1.2rem',
+                                    fontWeight: 600,
+                                    marginTop: '1rem',
+                                }}
+                            >
+                                No hay servicios disponibles
+                            </Typography>
+                        ) : (
+                            services?.map(item => (
+                                <CardDashboardServices
+                                    key={item.id}
+                                    title={item.title}
+                                    price={item.price}
+                                />
+                            ))
+                        )}
                     </CardServicesContainer>
                 )}
                 {route === 'citas' && (

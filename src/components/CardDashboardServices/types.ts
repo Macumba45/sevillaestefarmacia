@@ -2,6 +2,6 @@ export type Props = {
     onClick?: () => void
     onUpdate?: () => void
     urlPicture?: string
-    title: string 
+    title: string
     price: string
 }

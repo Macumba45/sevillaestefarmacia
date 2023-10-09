@@ -12,7 +12,6 @@ const styleIconButtons = {
     marginRight: '10px',
 }
 
-
 const CardDashboardServices: FC<Props> = ({
     onClick,
     onUpdate,
@@ -20,11 +19,7 @@ const CardDashboardServices: FC<Props> = ({
     title,
     price,
 }) => {
-
-
-
     return (
-
         <Card
             style={{ width: 300, margin: 10 }}
             cover={

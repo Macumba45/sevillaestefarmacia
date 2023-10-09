@@ -38,7 +38,9 @@ model Dates {
   id        String   @id @default(cuid())
   serviceId String
   dates     String
-  service   Services @relation(fields: [serviceId], references: [id])
+  hour      String
+  isBooked  Boolean  @default(false)
+  service   Services @relation(fields: [serviceId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

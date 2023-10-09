@@ -53,28 +53,33 @@ export const useLogicDashboard = () => {
         }
     }, [router])
 
-    const createService = useCallback(async (service: Services) => {
-        try {
-            const token = getAuthenticatedToken()
-            const headers = {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
+    const createService = useCallback(
+        async (service: Services) => {
+            try {
+                const token = getAuthenticatedToken()
+                const headers = {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                }
+                const response = await fetch('/api/services/postService', {
+                    method: 'POST',
+                    headers,
+                    body: JSON.stringify(service),
+                })
+                if (response.ok) {
+                    const data: Services = await response.json()
+                    return data
+                } else {
+                    console.error('Error al crear el servicio')
+                }
+            } catch (error) {
+                console.error('Error al enviar el objeto:', error)
+            } finally {
+                router.push('/dashboard')
             }
-            const response = await fetch('/api/services/postService', {
-                method: 'POST',
-                headers,
-                body: JSON.stringify(service),
-            })
-            if (response.ok) {
-                const data: Services = await response.json()
-                return data
-            } else {
-                console.error('Error al crear el servicio')
-            }
-        } catch (error) {
-            console.error('Error al enviar el objeto:', error)
-        }
-    }, [])
+        },
+        [router]
+    )
 
     const getServices = useCallback(async () => {
         try {
@@ -117,6 +122,7 @@ export const useLogicDashboard = () => {
         setUserLoaded,
         createService,
         getServices,
-        services
+        services,
+        setServices,
     }
 }
