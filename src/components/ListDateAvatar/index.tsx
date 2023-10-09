@@ -61,41 +61,38 @@ const AlignItemsList: FC<Props> = ({ user, serviceType, date, phone }) => {
                                     {date}
                                 </span>
                             </Typography>
-                            <div style={{ display: 'flex' }}>
-                                <Typography component="span">
-                                    <Button
-                                        variant="contained"
-                                        {...(phone && {
-                                            onClick: () => {
-                                                window.open(`tel:${phone}`)
-                                            },
-                                        })}
-                                        sx={{
-                                            p: 0.5,
-                                            mt: 2,
-                                            backgroundColor: 'green',
-                                        }}
-                                    >
-                                        Llamar al cliente
-                                    </Button>
-                                </Typography>
-                                <Typography component="span">
-                                    <Button
-                                        variant="contained"
-                                        sx={{
-                                            p: 0.5,
-                                            mt: 2,
-                                            ml: 2,
-                                            backgroundColor: 'blue',
-                                        }}
-                                    >
-                                        Editar cita
-                                    </Button>
-                                </Typography>
-                            </div>
                         </React.Fragment>
                     }
                 />
+                <div style={{ display: 'flex' }}>
+                    <Button
+                        variant="contained"
+                        {...(phone && {
+                            onClick: () => {
+                                window.open(`tel:${phone}`)
+                            },
+                        })}
+                        sx={{
+                            p: 0.5,
+                            mt: 2,
+                            backgroundColor: 'green',
+                        }}
+                    >
+                        Llamar al cliente
+                    </Button>
+
+                    <Button
+                        variant="contained"
+                        sx={{
+                            p: 0.5,
+                            mt: 2,
+                            ml: 2,
+                            backgroundColor: 'blue',
+                        }}
+                    >
+                        Editar cita
+                    </Button>
+                </div>
             </ListItem>
             <Divider variant="inset" component="li" />
         </List>

@@ -9,7 +9,9 @@ interface Props {
 
 const DatePickerComponent: FC<Props> = ({ onDateSelectionChange }) => {
     const [selectedDays, setSelectedDays] = useState<DateObject[]>([])
+    console.log(selectedDays)
     const selectedDates = selectedDays.map(day => day.format('DD/MM/YYYY'))
+    console.log(selectedDates)
     // Función para manejar el cambio del día seleccionado
     const handleDayChange = (dates: DateObject[] | DateObject | null) => {
         if (Array.isArray(dates)) {
