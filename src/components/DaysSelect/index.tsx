@@ -5,7 +5,7 @@ interface Props {
     onDateSelectionChange: (
         selectedDates: DateObject[] | DateObject | null
     ) => void
-    initialDates: DateObject[] // Agrega esta prop para las fechas iniciales
+    initialDates: DateObject[]
 }
 
 const DatePickerComponent: FC<Props> = ({
@@ -25,6 +25,7 @@ const DatePickerComponent: FC<Props> = ({
         // Llama a la función proporcionada desde las propiedades para pasar los datos seleccionados
         onDateSelectionChange(dates)
     }
+
     useEffect(() => {
         setSelectedDays(initialDates) // Actualiza las fechas seleccionadas cuando cambian las fechas iniciales
     }, [initialDates])
@@ -39,6 +40,7 @@ const DatePickerComponent: FC<Props> = ({
                 minDate={new Date()}
                 sort
                 showOtherDays
+                disabled={new Date() < new Date()}
                 // plugins={[<DatePanel key="datePanelKey" />]}
             />
         </div>

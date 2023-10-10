@@ -47,6 +47,8 @@ const ServiceFormModal: FC<Props> = ({
         { date: DateObject; hours: string[] }[]
     >([])
     console.log(selectedDays)
+    const [hoursFromDatabase, sethoursFromDatabase] = useState<string[][]>([])
+    console.log(hoursFromDatabase)
 
     function parseDateString(dateString: string): Date {
         const [day, month, year] = dateString.split('/')
@@ -77,9 +79,11 @@ const ServiceFormModal: FC<Props> = ({
             })
 
             console.log(formattedDates)
-
+            console.log(formattedDates.map(date => date.hours))
+            const hours = formattedDates.map(date => date.hours)
             // Luego, establece formattedDates directamente en setSelectedDays
             setSelectedDays(formattedDates)
+            sethoursFromDatabase(hours)
         }
 
         // También puedes manejar la carga de las fechas y horas aquí
@@ -144,6 +148,12 @@ const ServiceFormModal: FC<Props> = ({
                 updatedSelectedDays[dateIndex].hours.splice(hourIndex, 1)
             }
             setSelectedDays(updatedSelectedDays)
+
+            // Actualiza hoursFromDatabase con los cambios
+            const updatedHoursFromDatabase = [...hoursFromDatabase]
+            updatedHoursFromDatabase[dateIndex] =
+                updatedSelectedDays[dateIndex].hours
+            sethoursFromDatabase(updatedHoursFromDatabase)
         }
     }
 
@@ -163,7 +173,7 @@ const ServiceFormModal: FC<Props> = ({
         if (isEditing && serviceData) {
             // Si estamos en modo edición, llamamos a la función de actualización
             serviceDataToSubmit.id = serviceData.id
-            // await updateService(serviceDataToSubmit)
+            await updateService(serviceDataToSubmit)
         } else {
             // Si estamos en modo creación, llamamos a la función de creación
             await createService(serviceDataToSubmit)
@@ -266,13 +276,43 @@ const ServiceFormModal: FC<Props> = ({
                                                     <FormControlLabel
                                                         control={
                                                             <Checkbox
-                                                                checked={selectedDay.hours.includes(
-                                                                    hour
-                                                                )}
+                                                                checked={
+                                                                    !isEditing
+                                                                        ? selectedDay.hours.includes(
+                                                                              hour
+                                                                          )
+                                                                        : selectedDay.hours.includes(
+                                                                              hour
+                                                                          ) ||
+                                                                          (hoursFromDatabase[
+                                                                              index
+                                                                          ] &&
+                                                                              hoursFromDatabase[
+                                                                                  index
+                                                                              ].some(
+                                                                                  (
+                                                                                      item: any
+                                                                                  ) =>
+                                                                                      item.hour ===
+                                                                                      hour
+                                                                              ))
+                                                                }
                                                                 onChange={() =>
                                                                     handleHourChange(
                                                                         index,
                                                                         hour
+                                                                    )
+                                                                }
+                                                                disabled={
+                                                                    isEditing &&
+                                                                    hoursFromDatabase[
+                                                                        index
+                                                                    ]?.some(
+                                                                        (
+                                                                            item: any
+                                                                        ) =>
+                                                                            item.hour ===
+                                                                            hour
                                                                     )
                                                                 }
                                                             />

@@ -6,29 +6,26 @@ export default async function handler(
     res: NextApiResponse
 ) {
     if (req.method === 'PUT') {
+        const transformedDates = req.body.dates.map((dateObj: any) => ({
+            date: dateObj.date,
+            hours: dateObj.hours.map((hourItem: any) => {
+                // Si hourItem es un objeto, extraer la propiedad 'hour', de lo contrario, mantenerlo como está
+                return typeof hourItem === 'object' ? hourItem.hour : hourItem
+            }),
+        }))
+        // Dentro de tu función handler antes de llamar a updateService
+
         try {
-            const { id } = req.query
-            const {
-                urlVideo,
-                urlPicture,
-                title,
-                descripcion,
-                dates,
-                hours,
-                price,
-                adminId,
-            } = req.body
-            console.log(req.body)
+            const { id, urlVideo, urlPicture, title, descripcion, price } =
+                req.body
             const service = await updateService(
                 id as string,
                 urlVideo,
                 urlPicture,
                 title,
                 descripcion,
-                dates,
-                hours,
-                price,
-                adminId
+                transformedDates,
+                price
             )
             res.status(200).json(service)
         } catch (error: any) {

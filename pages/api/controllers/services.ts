@@ -79,11 +79,92 @@ export const updateService = async (
     urlPicture: string,
     title: string,
     descripcion: string,
-    dates: Array<string>, // Fechas en formato DD/MM/YYYY
-    hours: Array<Array<string>>, // Horas correspondientes a cada fecha
-    price: string,
-    adminId: string
+    dates: Array<{ date: string; hours: string[] }>, // Fechas en formato DD/MM/YYYY
+    price: string
 ): Promise<Services | null> => {
+    // Obtén el servicio existente
+    const existingService = await prisma.services.findUnique({
+        where: {
+            id: id,
+        },
+        include: {
+            dates: {
+                include: {
+                    hours: true,
+                },
+            },
+        },
+    })
+
+    if (!existingService) {
+        // Manejar el caso en el que el servicio no existe
+        return null
+    }
+
+    // Obtén las fechas existentes
+    const existingDates = existingService.dates.map(date => date.dates)
+
+    // Filtra las fechas que ya existen y las que son nuevas
+    const existingDateStrings = existingDates.map(date => date.toString())
+    const newDateStrings = dates.map(newDate => newDate.date)
+
+    // Identifica las fechas nuevas
+    const datesToAdd = dates.filter(
+        newDate => !existingDateStrings.includes(newDate.date)
+    )
+
+    // Identifica las fechas existentes que requieren nuevas horas
+    const datesToUpdate = dates.filter(newDate =>
+        existingDateStrings.includes(newDate.date)
+    )
+
+    // Actualiza las fechas existentes con nuevas horas
+    for (const newDate of datesToUpdate) {
+        const existingDate = existingService.dates.find(
+            date => date.dates.toString() === newDate.date
+        )
+
+        if (existingDate) {
+            const newHoursToAdd = newDate.hours
+                .filter(
+                    newHour =>
+                        !existingDate.hours.some(hour => hour.hour === newHour)
+                )
+                .map(newHour => ({
+                    hour: newHour, // Asegúrate de que newHour sea una cadena (string)
+                }))
+
+            await prisma.dates.update({
+                where: { id: existingDate.id },
+                data: {
+                    hours: {
+                        create: newHoursToAdd, // Utiliza las horas como cadenas
+                    },
+                },
+            })
+        }
+    }
+
+    // Crea las fechas nuevas con sus horas
+    for (const newDate of datesToAdd) {
+        await prisma.dates.create({
+            data: {
+                dates: newDate.date,
+                hours: {
+                    create: newDate.hours.map(newHour => ({
+                        hour: newHour,
+                    })),
+                },
+                service: {
+                    connect: {
+                        id: existingService.id,
+                    },
+                },
+            },
+        })
+    }
+
+    // Actualiza otros campos en el servicio si es necesario
     const updatedService = await prisma.services.update({
         where: {
             id: id,
@@ -94,23 +175,9 @@ export const updateService = async (
             title: title,
             descripcion: descripcion,
             price: price,
-            adminId: adminId,
-            dates: {
-                create: dates.map((date, index) => {
-                    return {
-                        dates: date,
-                        hours: {
-                            create: hours[index].map(hour => {
-                                return {
-                                    hour: hour,
-                                }
-                            }),
-                        },
-                    }
-                }),
-            },
         },
     })
+
     return updatedService
 }
 
