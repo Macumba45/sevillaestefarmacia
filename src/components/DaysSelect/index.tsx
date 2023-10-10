@@ -1,17 +1,20 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { Calendar, DateObject } from 'react-multi-date-picker'
 
 interface Props {
     onDateSelectionChange: (
         selectedDates: DateObject[] | DateObject | null
     ) => void
+    initialDates: DateObject[] // Agrega esta prop para las fechas iniciales
 }
 
-const DatePickerComponent: FC<Props> = ({ onDateSelectionChange }) => {
+const DatePickerComponent: FC<Props> = ({
+    onDateSelectionChange,
+    initialDates,
+}) => {
     const [selectedDays, setSelectedDays] = useState<DateObject[]>([])
-    console.log(selectedDays)
     const selectedDates = selectedDays.map(day => day.format('DD/MM/YYYY'))
-    console.log(selectedDates)
+
     // Función para manejar el cambio del día seleccionado
     const handleDayChange = (dates: DateObject[] | DateObject | null) => {
         if (Array.isArray(dates)) {
@@ -22,6 +25,9 @@ const DatePickerComponent: FC<Props> = ({ onDateSelectionChange }) => {
         // Llama a la función proporcionada desde las propiedades para pasar los datos seleccionados
         onDateSelectionChange(dates)
     }
+    useEffect(() => {
+        setSelectedDays(initialDates) // Actualiza las fechas seleccionadas cuando cambian las fechas iniciales
+    }, [initialDates])
 
     return (
         <div>

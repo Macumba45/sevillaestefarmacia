@@ -122,35 +122,3 @@ export const deleteService = async (id: string): Promise<Services | null> => {
     })
     return deletedService
 }
-
-export const findServiceById = async (id: string): Promise<Services | null> => {
-    const service = await prisma.services.findUnique({
-        where: {
-            id: id,
-        },
-        select: {
-            id: true,
-            urlVideo: true,
-            urlPicture: true,
-            title: true,
-            descripcion: true,
-            price: true,
-            adminId: false,
-            createdAt: true,
-            updatedAt: true,
-            dates: {
-                select: {
-                    id: true,
-                    dates: true,
-                    hours: {
-                        select: {
-                            id: true,
-                            hour: true,
-                        },
-                    },
-                },
-            },
-        },
-    })
-    return service
-}

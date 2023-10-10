@@ -23,7 +23,7 @@ export type Services = {
     urlVideo: string
     title: string
     descripcion: string
-    serviceDates?: { date: string; hours: string[] }[] // Cambia el nombre de la propiedad
+    dates?: { date: string; hours: string[] }[] // Cambia el nombre de la propiedad
     price: string
     createdAt?: Date
     updatedAt?: Date

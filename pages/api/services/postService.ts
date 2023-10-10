@@ -32,29 +32,25 @@ export default async function handler(
             title,
             descripcion,
             price,
-            serviceDates,
+            dates,
         }: Services = req.body
 
-        if (!Array.isArray(serviceDates)) {
+        if (!Array.isArray(dates)) {
             res.status(400).json({
                 message: 'Datos de fechas y horas incorrectos',
             })
             return
         }
 
-        const dates: string[] = serviceDates.map(
-            serviceDate => serviceDate.date
-        )
-        const hours: string[][] = serviceDates.map(
-            serviceDate => serviceDate.hours
-        )
+        const allDates: string[] = dates.map(serviceDate => serviceDate.date)
+        const hours: string[][] = dates.map(serviceDate => serviceDate.hours)
 
         const newService = await createService(
             urlPicture,
             urlVideo,
             title,
             descripcion,
-            dates,
+            allDates,
             hours,
             price,
             user?.id as string

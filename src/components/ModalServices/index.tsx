@@ -46,6 +46,13 @@ const ServiceFormModal: FC<Props> = ({
     const [selectedDays, setSelectedDays] = useState<
         { date: DateObject; hours: string[] }[]
     >([])
+    console.log(selectedDays)
+
+    function parseDateString(dateString: string): Date {
+        const [day, month, year] = dateString.split('/')
+        return new Date(Number(year), Number(month) - 1, Number(day))
+    }
+
     // Cuando se inicia el modo de edición, establecer los datos existentes del servicio
     useEffect(() => {
         if (isEditing && serviceData) {
@@ -54,8 +61,28 @@ const ServiceFormModal: FC<Props> = ({
             setDescripcion(serviceData.descripcion)
             setTitle(serviceData.title)
             setPrice(serviceData.price)
-            // También puedes manejar la carga de las fechas y horas aquí
+
+            // Manejar la carga de las fechas y horas aquí
+            const serviceDates = isEditing ? serviceData?.dates || [] : []
+            console.log(serviceDates)
+
+            // Convierte las fechas en objetos DateObject
+            const formattedDates = serviceDates.map(dateObj => {
+                const { date, hours } = dateObj
+                const parsedDate = parseDateString(date) // Convierte la fecha al formato correcto
+                return {
+                    date: new DateObject(parsedDate), // Convierte la fecha a DateObject
+                    hours: hours || [],
+                }
+            })
+
+            console.log(formattedDates)
+
+            // Luego, establece formattedDates directamente en setSelectedDays
+            setSelectedDays(formattedDates)
         }
+
+        // También puedes manejar la carga de las fechas y horas aquí
     }, [isEditing, serviceData])
 
     const ReactQuill = useMemo(
@@ -127,16 +154,16 @@ const ServiceFormModal: FC<Props> = ({
             title,
             price,
             descripcion,
-            serviceDates: selectedDays.map(day => ({
+            dates: selectedDays.map(day => ({
                 date: day.date.format('DD/MM/YYYY'),
                 hours: day.hours,
             })),
         }
-
+        console.log(serviceDataToSubmit)
         if (isEditing && serviceData) {
             // Si estamos en modo edición, llamamos a la función de actualización
             serviceDataToSubmit.id = serviceData.id
-            await updateService(serviceDataToSubmit)
+            // await updateService(serviceDataToSubmit)
         } else {
             // Si estamos en modo creación, llamamos a la función de creación
             await createService(serviceDataToSubmit)
@@ -204,6 +231,9 @@ const ServiceFormModal: FC<Props> = ({
                 >
                     <DatePickerComponent
                         onDateSelectionChange={handleDayChange}
+                        initialDates={selectedDays.map(
+                            selectedDay => selectedDay.date
+                        )}
                     />
                     {selectedDays.length > 0 && (
                         <div>
