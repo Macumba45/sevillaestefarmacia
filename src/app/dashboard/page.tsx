@@ -30,6 +30,7 @@ import DatePickerComp from '@/components/InputDayPicker'
 import SearchInputComp from '@/components/InpuntSearch'
 import ServiceFormModal from '@/components/ModalServices'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
+import DeleteConfirmationModal from '@/components/ModalConfirmationDelete'
 
 const drawerWidth = 240
 
@@ -55,7 +56,12 @@ const ResponsiveDrawer: FC<Props> = props => {
         openEditModalFunction,
         serviceData,
         isEditing,
+        openDeleteModal,
+        handleConfirmDelete,
+        handleDeleteClick,
+        closeModalDelete,
     } = useLogicDashboard()
+
     const { window } = props
     const container =
         window !== undefined ? () => window().document.body : undefined
@@ -236,38 +242,51 @@ const ResponsiveDrawer: FC<Props> = props => {
                     <Typography paragraph>Contenido del Dashboard</Typography>
                 )}
                 {route === 'servicios' && (
-                    // Aquí renderiza el contenido de servicios
-                    <CardServicesContainer>
-                        <FloatAddServices onClick={handleOpen} />
-                        {open && (
-                            <ServiceFormModal
-                                open={open}
-                                onClose={() => setOpen(false)}
-                                isEditing={isEditing}
-                                serviceData={serviceData}
-                            />
-                        )}
-                        {services?.length === 0 ? (
-                            <Typography
-                                sx={{
-                                    textAlign: 'center',
-                                    fontSize: '1.2rem',
-                                    fontWeight: 600,
-                                    marginTop: '1rem',
-                                }}
-                            >
-                                No hay servicios disponibles
-                            </Typography>
-                        ) : (
-                            services?.map(item => (
-                                <CardDashboardServices
-                                    service={item}
-                                    key={item.id}
-                                    onEdit={() => openEditModalFunction(item)}
+                    <>
+                        <CardServicesContainer>
+                            <FloatAddServices onClick={handleOpen} />
+                            {open && (
+                                <ServiceFormModal
+                                    open={open}
+                                    onClose={() => setOpen(false)}
+                                    isEditing={isEditing}
+                                    serviceData={serviceData}
                                 />
-                            ))
-                        )}
-                    </CardServicesContainer>
+                            )}
+                            {services?.length === 0 ? (
+                                <Typography
+                                    sx={{
+                                        textAlign: 'center',
+                                        fontSize: '1.2rem',
+                                        fontWeight: 600,
+                                        marginTop: '1rem',
+                                    }}
+                                >
+                                    No hay servicios disponibles
+                                </Typography>
+                            ) : (
+                                services?.map(item => (
+                                    <CardDashboardServices
+                                        service={item}
+                                        key={item.id}
+                                        onEdit={() =>
+                                            openEditModalFunction(item)
+                                        }
+                                        onDelete={() =>
+                                            handleDeleteClick(item.id as string)
+                                        }
+                                    />
+                                ))
+                            )}
+                            {openDeleteModal && (
+                                <DeleteConfirmationModal
+                                    open={openDeleteModal}
+                                    onClose={closeModalDelete}
+                                    onDelete={handleConfirmDelete}
+                                />
+                            )}
+                        </CardServicesContainer>
+                    </>
                 )}
                 {route === 'citas' && (
                     <CitasContainer>

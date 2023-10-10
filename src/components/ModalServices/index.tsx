@@ -46,9 +46,7 @@ const ServiceFormModal: FC<Props> = ({
     const [selectedDays, setSelectedDays] = useState<
         { date: DateObject; hours: string[] }[]
     >([])
-    console.log(selectedDays)
     const [hoursFromDatabase, sethoursFromDatabase] = useState<string[][]>([])
-    console.log(hoursFromDatabase)
 
     function parseDateString(dateString: string): Date {
         const [day, month, year] = dateString.split('/')
@@ -66,7 +64,6 @@ const ServiceFormModal: FC<Props> = ({
 
             // Manejar la carga de las fechas y horas aquí
             const serviceDates = isEditing ? serviceData?.dates || [] : []
-            console.log(serviceDates)
 
             // Convierte las fechas en objetos DateObject
             const formattedDates = serviceDates.map(dateObj => {
@@ -78,8 +75,6 @@ const ServiceFormModal: FC<Props> = ({
                 }
             })
 
-            console.log(formattedDates)
-            console.log(formattedDates.map(date => date.hours))
             const hours = formattedDates.map(date => date.hours)
             // Luego, establece formattedDates directamente en setSelectedDays
             setSelectedDays(formattedDates)
@@ -169,7 +164,6 @@ const ServiceFormModal: FC<Props> = ({
                 hours: day.hours,
             })),
         }
-        console.log(serviceDataToSubmit)
         if (isEditing && serviceData) {
             // Si estamos en modo edición, llamamos a la función de actualización
             serviceDataToSubmit.id = serviceData.id

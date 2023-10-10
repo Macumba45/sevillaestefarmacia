@@ -6,13 +6,13 @@ export default async function handler(
     res: NextApiResponse
 ) {
     if (req.method === 'DELETE') {
-        try {
-            const { id } = req.query
-            const service = await deleteService(id as string)
-            res.status(200).json(service)
-        } catch (error: any) {
-            res.status(400).json({ message: error.message })
+        const query = req.query as { id: string }
+        const { id } = query
+        if (typeof id !== 'string') {
+            throw new Error('ID no válido')
         }
+        const service = await deleteService(id as string)
+        res.status(200).json(service)
     } else {
         res.status(405).json({ message: 'Método no permitido' })
     }

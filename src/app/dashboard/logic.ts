@@ -16,6 +16,8 @@ export const useLogicDashboard = () => {
     const [openEditModal, setOpenEditModal] = useState(false)
     const [serviceData, setServiceData] = useState<Services>()
     const [isEditing, setIsEditing] = useState(false)
+    const [openDeleteModal, setOpenDeleteModal] = useState(false)
+    const [serviceToDelete, setServiceToDelete] = useState('') // Almacena el id del servicio a eliminar
 
     const handleOpen = () => {
         setOpen(true)
@@ -42,6 +44,27 @@ export const useLogicDashboard = () => {
     const logOut = () => {
         localStorage.removeItem('token')
         router.push('/dashboard/auth/login')
+    }
+
+    const handleDeleteClick = (id: string) => {
+        // Abre el modal de confirmación y establece el id del servicio a eliminar
+        setServiceToDelete(id)
+        setOpenDeleteModal(true)
+    }
+
+    const closeModalDelete = () => {
+        // Cierra el modal sin realizar la eliminación
+        setOpenDeleteModal(false)
+    }
+    const handleConfirmDelete = () => {
+        // Realiza la eliminación del servicio con el id almacenado en serviceToDelete
+        deleteService(serviceToDelete)
+        // Después de la eliminación, cierra el modal
+        const updatedServices = services!.filter(
+            service => service.id !== serviceToDelete
+        )
+        setServices(updatedServices)
+        setOpenDeleteModal(false)
     }
 
     const getUserInfo = useCallback(async () => {
@@ -146,6 +169,35 @@ export const useLogicDashboard = () => {
         [router]
     )
 
+    const deleteService = useCallback(
+        async (serviceId: string) => {
+            try {
+                const token = getAuthenticatedToken()
+                const headers = {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                }
+                const response = await fetch(
+                    `/api/services/deleteService?id=${serviceId}`,
+                    {
+                        method: 'DELETE',
+                        headers,
+                    }
+                )
+                if (response.ok) {
+                    const data: Services = await response.json()
+                    console.log(data)
+                    return data
+                } else {
+                    console.error('Error al eliminar el servicio')
+                }
+            } catch (error) {
+                console.error('Error al enviar el objeto:', error)
+            }
+        },
+        [router]
+    )
+
     return {
         currentUser,
         getUserInfo,
@@ -172,5 +224,10 @@ export const useLogicDashboard = () => {
         serviceData,
         updateService,
         isEditing,
+        deleteService,
+        openDeleteModal,
+        closeModalDelete,
+        handleConfirmDelete,
+        handleDeleteClick,
     }
 }
