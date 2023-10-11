@@ -41,7 +41,7 @@ const handleSubmitSignUp = async (
         // Reemplaza la contraseña en el objeto userData
         userData.password = hashedPassword
         // Guarda el usuario en la base de datos con la contraseña cifrada
-        const user = createUser(email, password, name)
+        const user = createUser(email, hashedPassword, name)
         const token = jwt.sign({ userData }, 'token')
         res.status(200).json({
             message: 'User created successfully',
