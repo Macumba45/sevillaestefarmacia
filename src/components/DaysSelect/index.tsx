@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useState } from 'react'
 import { Calendar, DateObject } from 'react-multi-date-picker'
+import DatePanel from 'react-multi-date-picker/plugins/date_panel'
 
 interface Props {
     onDateSelectionChange: (
@@ -41,7 +42,7 @@ const DatePickerComponent: FC<Props> = ({
                 sort
                 showOtherDays
                 disabled={new Date() < new Date()}
-                // plugins={[<DatePanel key="datePanelKey" />]}
+                plugins={[<DatePanel key="datePanelKey" />]}
             />
         </div>
     )

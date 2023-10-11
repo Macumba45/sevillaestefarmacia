@@ -10,6 +10,13 @@ export const metadata = {
 
 const RootLayout = ({ children }: React.PropsWithChildren) => (
     <html lang="en">
+        <head>
+            <link
+                rel="stylesheet"
+                href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
+            />
+        </head>
+
         <body>
             <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
         </body>

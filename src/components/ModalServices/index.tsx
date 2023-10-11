@@ -101,8 +101,8 @@ const ServiceFormModal: FC<Props> = ({
     const handlePriceChange = (event: any) => {
         setPrice(event.target.value)
     }
-    const handleDescripcionChange = (html: any) => {
-        setDescripcion(html)
+    const handleDescripcionChange = (event: any) => {
+        setDescripcion(event.target.value)
     }
 
     const handleDayChange = (dates: DateObject[] | DateObject | null) => {
@@ -224,28 +224,18 @@ const ServiceFormModal: FC<Props> = ({
                         value={price}
                         onChange={handlePriceChange}
                     />
+                    <TextField
+                        margin="dense"
+                        name="descripcion"
+                        label="Descripción"
+                        type="text"
+                        multiline
+                        rows={4}
+                        fullWidth
+                        value={descripcion}
+                        onChange={handleDescripcionChange}
+                    />
                 </div>
-                <ReactQuill
-                    theme="snow"
-                    value={descripcion}
-                    onChange={handleDescripcionChange}
-                    placeholder="Descripción"
-                    style={{ marginTop: '0.6rem' }}
-                    modules={{
-                        toolbar: [
-                            [{ header: '1' }, { header: '2' }, , { font: [] }],
-                            [{ align: [] }],
-                            [{ list: 'ordered' }, { list: 'bullet' }],
-                            ['bold', 'italic', 'underline', 'strike'], // Agrega 'strike' para tachado
-                            ,
-                            ['link', 'image'],
-                            ['blockquote'],
-                            ['link'],
-                            ['code-block'],
-                            [{ color: [] }], // Agrega 'color' aquí para habilitar la opción de color de texto
-                        ],
-                    }}
-                />
                 <div
                     style={{
                         display: 'flex',

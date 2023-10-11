@@ -3,19 +3,15 @@ import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
 import IconButton from '@mui/material/IconButton'
-import Typography from '@mui/material/Typography'
-import Menu from '@mui/material/Menu'
 import MenuIcon from '@mui/icons-material/Menu'
 import Container from '@mui/material/Container'
-import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
-import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
-import AdbIcon from '@mui/icons-material/Adb'
 import logo from '../../assets/logo/logo.png'
-import Image from 'next/image'
-import { ButtonLoginContainer, LogoContainer, LogoImg } from '@/app/styles'
 import InstagramIcon from '@mui/icons-material/Instagram'
+import { ButtonLoginContainer, LogoImg } from './styles'
+import { Drawer } from '@mui/material'
+import { Divider } from 'antd'
 
 const pages = [
     'Servicios',
@@ -34,25 +30,23 @@ const pagesMobile = [
     'Tarjeta CLUB',
     {
         name: 'Síguenos',
-        icon: <InstagramIcon sx={{ mr: 1, ml: 1 }} />,
+        icon: (
+            <>
+                <InstagramIcon sx={{ mr: 1, ml: 1 }} />
+            </>
+        ),
     },
 ]
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
 
 function ResponsiveAppBar() {
-    const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-        null
-    )
-    const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
-        null
-    )
+    const [isDrawerOpen, setIsDrawerOpen] = React.useState(false)
 
-    const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorElNav(event.currentTarget)
+    const handleOpenNavMenu = () => {
+        setIsDrawerOpen(true)
     }
 
     const handleCloseNavMenu = () => {
-        setAnchorElNav(null)
+        setIsDrawerOpen(false)
     }
 
     const stylesNavBar = {
@@ -85,55 +79,48 @@ function ResponsiveAppBar() {
                                 md: 'none',
                                 justifyContent: 'flex-end',
                             },
+                            padding: 0,
                         }}
                     >
                         <IconButton
                             size="large"
                             aria-label="account of current user"
-                            aria-controls="menu-appbar"
-                            aria-haspopup="true"
-                            onClick={handleOpenNavMenu}
+                            onClick={handleOpenNavMenu} // Aquí
                             color="inherit"
                         >
                             <MenuIcon />
                         </IconButton>
-                        <Menu
-                            id="menu-appbar"
-                            anchorEl={anchorElNav}
-                            anchorOrigin={{
-                                vertical: 'bottom',
-                                horizontal: 'left',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'left',
-                            }}
-                            open={Boolean(anchorElNav)}
+                        <Drawer
+                            anchor="right"
+                            open={isDrawerOpen}
                             onClose={handleCloseNavMenu}
-                            sx={{
-                                display: { xs: 'block', md: 'none' },
-                            }}
                         >
-                            {pagesMobile.map((page, index) => (
-                                <MenuItem key={index}>
-                                    {typeof page === 'object' ? (
-                                        <div
-                                            style={{
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                            }}
-                                        >
-                                            {' '}
-                                            {page.name}
-                                            {page.icon}
-                                        </div>
-                                    ) : (
-                                        <div>{page}</div>
-                                    )}
-                                </MenuItem>
-                            ))}
-                        </Menu>
+                            <div
+                                style={{
+                                    width: '250px', // Establece el ancho que desees para el panel lateral
+                                    padding: '20px',
+                                }}
+                            >
+                                {/* Aquí puedes colocar los elementos que quieras en el panel lateral */}
+                                {pagesMobile.map((page, index) => (
+                                    <MenuItem key={index}>
+                                        {typeof page === 'object' ? (
+                                            <div
+                                                style={{
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                }}
+                                            >
+                                                {page.name}
+                                                {page.icon}
+                                            </div>
+                                        ) : (
+                                            <div>{page}</div>
+                                        )}
+                                    </MenuItem>
+                                ))}
+                            </div>
+                        </Drawer>
                     </Box>
                     <Box
                         sx={{
@@ -153,7 +140,7 @@ function ResponsiveAppBar() {
                                     display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'center',
-                                    fontWeight: 400,
+                                    fontWeight: 300,
                                 }}
                                 key={page.toString()}
                             >
