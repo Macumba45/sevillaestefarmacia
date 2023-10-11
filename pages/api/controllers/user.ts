@@ -39,3 +39,28 @@ export const findUserById = async (id: string): Promise<User | null> => {
     }
     return user
 }
+
+export const createUser = async (
+    email: string,
+    password: string,
+    name: string
+): Promise<User | null> => {
+    const newUser = await prisma.user.create({
+        data: {
+            email: email,
+            password: password,
+            name: name,
+        },
+    })
+
+    if (!newUser) {
+        return null
+    }
+    const user: User = {
+        id: newUser.id,
+        email: newUser.email,
+        name: newUser.name as string,
+        role: newUser.role,
+    }
+    return user
+}
