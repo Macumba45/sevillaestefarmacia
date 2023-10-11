@@ -1,6 +1,7 @@
 import React from 'react'
 import './reset.css'
 import StyledComponentsRegistry from '@/lib/AntdRegistry'
+require('dotenv').config()
 
 export const metadata = {
     title: 'Create Next App',

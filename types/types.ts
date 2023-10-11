@@ -31,7 +31,7 @@ export type Services = {
 
 export type Dates = {
     id?: string
-    dates: string[]
+    dates: string
     serviceId: string
     createdAt?: Date
     updatedAt?: Date

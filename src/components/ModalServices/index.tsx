@@ -186,42 +186,65 @@ const ServiceFormModal: FC<Props> = ({
                     Por favor, complete los campos para{' '}
                     {isEditing ? 'editar' : 'crear'} un nuevo servicio.
                 </DialogContentText>
-                <TextField
-                    autoFocus
-                    margin="dense"
-                    name="urlPicture"
-                    label="URL de la Imagen"
-                    type="text"
-                    fullWidth
-                    value={urlPicture}
-                    onChange={handleUrlPictureChange}
-                />
-                <TextField
-                    margin="dense"
-                    name="urlVideo"
-                    label="URL del Video"
-                    type="text"
-                    fullWidth
-                    value={urlVideo}
-                    onChange={handleUrlVideoChange}
-                />
-                <TextField
-                    margin="dense"
-                    name="title"
-                    label="Título"
-                    type="text"
-                    fullWidth
-                    value={title}
-                    onChange={handleTitleChange}
-                />
-                <TextField
-                    margin="dense"
-                    name="price"
-                    label="Precio"
-                    type="number"
-                    fullWidth
-                    value={price}
-                    onChange={handlePriceChange}
+                <div>
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        name="urlPicture"
+                        label="URL de la Imagen"
+                        type="text"
+                        fullWidth
+                        value={urlPicture}
+                        onChange={handleUrlPictureChange}
+                    />
+                    <TextField
+                        margin="dense"
+                        name="urlVideo"
+                        label="URL del Video"
+                        type="text"
+                        fullWidth
+                        value={urlVideo}
+                        onChange={handleUrlVideoChange}
+                    />
+                    <TextField
+                        margin="dense"
+                        name="title"
+                        label="Título"
+                        type="text"
+                        fullWidth
+                        value={title}
+                        onChange={handleTitleChange}
+                    />
+                    <TextField
+                        margin="dense"
+                        name="price"
+                        label="Precio"
+                        type="number"
+                        fullWidth
+                        value={price}
+                        onChange={handlePriceChange}
+                    />
+                </div>
+                <ReactQuill
+                    theme="snow"
+                    value={descripcion}
+                    onChange={handleDescripcionChange}
+                    placeholder="Descripción"
+                    style={{ marginTop: '0.6rem' }}
+                    modules={{
+                        toolbar: [
+                            [{ header: '1' }, { header: '2' }, , { font: [] }],
+                            [{ align: [] }],
+                            [{ list: 'ordered' }, { list: 'bullet' }],
+                            ['bold', 'italic', 'underline', 'strike'], // Agrega 'strike' para tachado
+                            ,
+                            ['link', 'image'],
+                            ['blockquote'],
+                            ['link'],
+                            ['code-block'],
+                            [{ color: [] }], // Agrega 'color' aquí para habilitar la opción de color de texto
+                        ],
+                    }}
                 />
                 <div
                     style={{
@@ -322,27 +345,6 @@ const ServiceFormModal: FC<Props> = ({
                         </div>
                     )}
                 </div>
-                <ReactQuill
-                    theme="snow"
-                    value={descripcion}
-                    onChange={handleDescripcionChange}
-                    placeholder="Descripción"
-                    style={{ height: '300px', marginTop: '0.6rem' }}
-                    modules={{
-                        toolbar: [
-                            [{ header: '1' }, { header: '2' }, , { font: [] }],
-                            [{ align: [] }],
-                            [{ list: 'ordered' }, { list: 'bullet' }],
-                            ['bold', 'italic', 'underline', 'strike'], // Agrega 'strike' para tachado
-                            ,
-                            ['link', 'image'],
-                            ['blockquote'],
-                            ['link'],
-                            ['code-block'],
-                            [{ color: [] }], // Agrega 'color' aquí para habilitar la opción de color de texto
-                        ],
-                    }}
-                />
             </DialogContent>
             <DialogActions
                 sx={{ display: 'flex', justifyContent: 'center', mb: 2, mt: 2 }}

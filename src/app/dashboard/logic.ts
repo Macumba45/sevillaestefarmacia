@@ -2,6 +2,7 @@ import { useCallback, useState } from 'react'
 import { getAuthenticatedToken } from '../../../storage/storage'
 import { useRouter } from 'next/navigation'
 import { Services, User } from '../../../types/types'
+import { notification } from 'antd'
 
 export const useLogicDashboard = () => {
     const [currentUser, setCurrentUser] = useState<User>()
@@ -112,7 +113,15 @@ export const useLogicDashboard = () => {
             } catch (error) {
                 console.error('Error al enviar el objeto:', error)
             } finally {
-                router.push('/dashboard')
+                // En el lugar apropiado de tu componente después de crear o editar un servicio con éxito:
+                notification.success({
+                    message: `El servicio ${service.title} se ha creado/actualizado con éxito`,
+                    description: 'El servicio se ha creado con éxito.',
+                    style: {
+                        marginLeft: 335 - 600,
+                        marginTop: 50,
+                    },
+                })
             }
         },
         [router]
@@ -163,7 +172,14 @@ export const useLogicDashboard = () => {
             } catch (error) {
                 console.error('Error al enviar el objeto:', error)
             } finally {
-                router.push('/dashboard')
+                notification.success({
+                    message: `El servicio ${service.title} se ha actualizado con éxito`,
+                    description: 'El servicio se ha actualizado con éxito.',
+                    style: {
+                        marginLeft: 335 - 600,
+                        marginTop: 50,
+                    },
+                })
             }
         },
         [router]
@@ -186,13 +202,20 @@ export const useLogicDashboard = () => {
                 )
                 if (response.ok) {
                     const data: Services = await response.json()
-                    console.log(data)
                     return data
                 } else {
                     console.error('Error al eliminar el servicio')
                 }
             } catch (error) {
                 console.error('Error al enviar el objeto:', error)
+            } finally {
+                notification.success({
+                    message: 'El servicio se ha eliminado con éxito',
+                    style: {
+                        marginLeft: 335 - 600,
+                        marginTop: 50,
+                    },
+                })
             }
         },
         [router]

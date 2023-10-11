@@ -1,4 +1,4 @@
-import { Services } from '../../../types/types'
+import { Dates, Hours, Services } from '../../../types/types'
 import { prisma } from '../../../src/lib/client'
 
 export const getServices = async (): Promise<any[]> => {
@@ -188,4 +188,45 @@ export const deleteService = async (id: string): Promise<Services | null> => {
         },
     })
     return deletedService
+}
+
+export const editDateFromService = async (
+    dateId: string,
+    newDate: string,
+    hours: string
+): Promise<Dates | null> => {
+    const existingDate = await prisma.dates.findUnique({
+        where: {
+            id: dateId,
+        },
+        include: {
+            hours: true,
+        },
+    })
+
+    if (!existingDate) {
+        return null
+    }
+
+    // Actualiza la fecha y la hora
+    const updatedDate = await prisma.dates.update({
+        where: {
+            id: dateId,
+        },
+        data: {
+            dates: newDate,
+            hours: {
+                update: {
+                    where: {
+                        id: existingDate.hours[0].id,
+                    },
+                    data: {
+                        hour: hours,
+                    },
+                },
+            },
+        },
+    })
+
+    return updatedDate
 }

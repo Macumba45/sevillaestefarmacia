@@ -65,7 +65,6 @@ const ResponsiveDrawer: FC<Props> = props => {
     const { window } = props
     const container =
         window !== undefined ? () => window().document.body : undefined
-
     useEffect(() => {
         getUserInfo()
         getServices()
@@ -96,9 +95,9 @@ const ResponsiveDrawer: FC<Props> = props => {
             icon: <MedicalServicesIcon />,
             route: 'servicios',
         },
-        { text: 'Blog', icon: <RssFeedIcon />, route: 'blog' },
-        { text: 'Próximas citas', icon: <DateRangeIcon />, route: 'citas' },
         { text: 'Clientes', icon: <AccountCircleIcon />, route: 'clientes' },
+        { text: 'Próximas citas', icon: <DateRangeIcon />, route: 'citas' },
+        { text: 'Blog', icon: <RssFeedIcon />, route: 'blog' },
     ]
 
     const drawer = (
