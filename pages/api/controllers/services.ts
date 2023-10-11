@@ -1,4 +1,4 @@
-import { Dates, Hours, Services } from '../../../types/types'
+import { Dates, Services } from '../../../types/types'
 import { prisma } from '../../../src/lib/client'
 
 export const getServices = async (): Promise<any[]> => {
@@ -106,7 +106,7 @@ export const updateService = async (
 
     // Filtra las fechas que ya existen y las que son nuevas
     const existingDateStrings = existingDates.map(date => date.toString())
-    const newDateStrings = dates.map(newDate => newDate.date)
+    // const newDateStrings = dates.map(newDate => newDate.date)
 
     // Identifica las fechas nuevas
     const datesToAdd = dates.filter(

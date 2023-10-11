@@ -11,7 +11,6 @@ import logo from '../../assets/logo/logo.png'
 import InstagramIcon from '@mui/icons-material/Instagram'
 import { ButtonLoginContainer, LogoImg } from './styles'
 import { Drawer } from '@mui/material'
-import { Divider } from 'antd'
 
 const pages = [
     'Servicios',
@@ -94,6 +93,7 @@ function ResponsiveAppBar() {
                             anchor="right"
                             open={isDrawerOpen}
                             onClose={handleCloseNavMenu}
+                            sx={{ zIndex: 9999999 }}
                         >
                             <div
                                 style={{

@@ -48,42 +48,6 @@ const ServiceFormModal: FC<Props> = ({
     >([])
     const [hoursFromDatabase, sethoursFromDatabase] = useState<string[][]>([])
 
-    function parseDateString(dateString: string): Date {
-        const [day, month, year] = dateString.split('/')
-        return new Date(Number(year), Number(month) - 1, Number(day))
-    }
-
-    // Cuando se inicia el modo de edición, establecer los datos existentes del servicio
-    useEffect(() => {
-        if (isEditing && serviceData) {
-            setUrlPicture(serviceData.urlPicture)
-            setUrlVideo(serviceData.urlVideo)
-            setDescripcion(serviceData.descripcion)
-            setTitle(serviceData.title)
-            setPrice(serviceData.price)
-
-            // Manejar la carga de las fechas y horas aquí
-            const serviceDates = isEditing ? serviceData?.dates || [] : []
-
-            // Convierte las fechas en objetos DateObject
-            const formattedDates = serviceDates.map(dateObj => {
-                const { date, hours } = dateObj
-                const parsedDate = parseDateString(date) // Convierte la fecha al formato correcto
-                return {
-                    date: new DateObject(parsedDate), // Convierte la fecha a DateObject
-                    hours: hours || [],
-                }
-            })
-
-            const hours = formattedDates.map(date => date.hours)
-            // Luego, establece formattedDates directamente en setSelectedDays
-            setSelectedDays(formattedDates)
-            sethoursFromDatabase(hours)
-        }
-
-        // También puedes manejar la carga de las fechas y horas aquí
-    }, [isEditing, serviceData])
-
     const ReactQuill = useMemo(
         () => dynamic(() => import('react-quill'), { ssr: false }),
         []
@@ -103,6 +67,11 @@ const ServiceFormModal: FC<Props> = ({
     }
     const handleDescripcionChange = (event: any) => {
         setDescripcion(event.target.value)
+    }
+
+    function parseDateString(dateString: string): Date {
+        const [day, month, year] = dateString.split('/')
+        return new Date(Number(year), Number(month) - 1, Number(day))
     }
 
     const handleDayChange = (dates: DateObject[] | DateObject | null) => {
@@ -175,6 +144,37 @@ const ServiceFormModal: FC<Props> = ({
 
         onClose()
     }
+
+    // Cuando se inicia el modo de edición, establecer los datos existentes del servicio
+    useEffect(() => {
+        if (isEditing && serviceData) {
+            setUrlPicture(serviceData.urlPicture)
+            setUrlVideo(serviceData.urlVideo)
+            setDescripcion(serviceData.descripcion)
+            setTitle(serviceData.title)
+            setPrice(serviceData.price)
+
+            // Manejar la carga de las fechas y horas aquí
+            const serviceDates = isEditing ? serviceData?.dates || [] : []
+
+            // Convierte las fechas en objetos DateObject
+            const formattedDates = serviceDates.map(dateObj => {
+                const { date, hours } = dateObj
+                const parsedDate = parseDateString(date) // Convierte la fecha al formato correcto
+                return {
+                    date: new DateObject(parsedDate), // Convierte la fecha a DateObject
+                    hours: hours || [],
+                }
+            })
+
+            const hours = formattedDates.map(date => date.hours)
+            // Luego, establece formattedDates directamente en setSelectedDays
+            setSelectedDays(formattedDates)
+            sethoursFromDatabase(hours)
+        }
+
+        // También puedes manejar la carga de las fechas y horas aquí
+    }, [isEditing, serviceData])
 
     return (
         <Dialog open={open} onClose={onClose}>

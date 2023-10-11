@@ -91,41 +91,38 @@ export const useLogicDashboard = () => {
         }
     }, [router])
 
-    const createService = useCallback(
-        async (service: Services) => {
-            try {
-                const token = getAuthenticatedToken()
-                const headers = {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`,
-                }
-                const response = await fetch('/api/services/postService', {
-                    method: 'POST',
-                    headers,
-                    body: JSON.stringify(service),
-                })
-                if (response.ok) {
-                    const data: Services = await response.json()
-                    return data
-                } else {
-                    console.error('Error al crear el servicio')
-                }
-            } catch (error) {
-                console.error('Error al enviar el objeto:', error)
-            } finally {
-                // En el lugar apropiado de tu componente después de crear o editar un servicio con éxito:
-                notification.success({
-                    message: `El servicio ${service.title} se ha creado/actualizado con éxito`,
-                    description: 'El servicio se ha creado con éxito.',
-                    style: {
-                        marginLeft: 335 - 600,
-                        marginTop: 50,
-                    },
-                })
+    const createService = useCallback(async (service: Services) => {
+        try {
+            const token = getAuthenticatedToken()
+            const headers = {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
             }
-        },
-        [router]
-    )
+            const response = await fetch('/api/services/postService', {
+                method: 'POST',
+                headers,
+                body: JSON.stringify(service),
+            })
+            if (response.ok) {
+                const data: Services = await response.json()
+                return data
+            } else {
+                console.error('Error al crear el servicio')
+            }
+        } catch (error) {
+            console.error('Error al enviar el objeto:', error)
+        } finally {
+            // En el lugar apropiado de tu componente después de crear o editar un servicio con éxito:
+            notification.success({
+                message: `El servicio ${service.title} se ha creado/actualizado con éxito`,
+                description: 'El servicio se ha creado con éxito.',
+                style: {
+                    marginLeft: 335 - 600,
+                    marginTop: 50,
+                },
+            })
+        }
+    }, [])
 
     const getServices = useCallback(async () => {
         try {
@@ -150,76 +147,70 @@ export const useLogicDashboard = () => {
         }
     }, [])
 
-    const updateService = useCallback(
-        async (service: Services) => {
-            try {
-                const token = getAuthenticatedToken()
-                const headers = {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`,
-                }
-                const response = await fetch('/api/services/updateService', {
-                    method: 'PUT',
-                    headers,
-                    body: JSON.stringify(service),
-                })
-                if (response.ok) {
-                    const data: Services = await response.json()
-                    return data
-                } else {
-                    console.error('Error al actualizar el servicio')
-                }
-            } catch (error) {
-                console.error('Error al enviar el objeto:', error)
-            } finally {
-                notification.success({
-                    message: `El servicio ${service.title} se ha actualizado con éxito`,
-                    description: 'El servicio se ha actualizado con éxito.',
-                    style: {
-                        marginLeft: 335 - 600,
-                        marginTop: 50,
-                    },
-                })
+    const updateService = useCallback(async (service: Services) => {
+        try {
+            const token = getAuthenticatedToken()
+            const headers = {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
             }
-        },
-        [router]
-    )
+            const response = await fetch('/api/services/updateService', {
+                method: 'PUT',
+                headers,
+                body: JSON.stringify(service),
+            })
+            if (response.ok) {
+                const data: Services = await response.json()
+                return data
+            } else {
+                console.error('Error al actualizar el servicio')
+            }
+        } catch (error) {
+            console.error('Error al enviar el objeto:', error)
+        } finally {
+            notification.success({
+                message: `El servicio ${service.title} se ha actualizado con éxito`,
+                description: 'El servicio se ha actualizado con éxito.',
+                style: {
+                    marginLeft: 335 - 600,
+                    marginTop: 50,
+                },
+            })
+        }
+    }, [])
 
-    const deleteService = useCallback(
-        async (serviceId: string) => {
-            try {
-                const token = getAuthenticatedToken()
-                const headers = {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`,
-                }
-                const response = await fetch(
-                    `/api/services/deleteService?id=${serviceId}`,
-                    {
-                        method: 'DELETE',
-                        headers,
-                    }
-                )
-                if (response.ok) {
-                    const data: Services = await response.json()
-                    return data
-                } else {
-                    console.error('Error al eliminar el servicio')
-                }
-            } catch (error) {
-                console.error('Error al enviar el objeto:', error)
-            } finally {
-                notification.success({
-                    message: 'El servicio se ha eliminado con éxito',
-                    style: {
-                        marginLeft: 335 - 600,
-                        marginTop: 50,
-                    },
-                })
+    const deleteService = useCallback(async (serviceId: string) => {
+        try {
+            const token = getAuthenticatedToken()
+            const headers = {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
             }
-        },
-        [router]
-    )
+            const response = await fetch(
+                `/api/services/deleteService?id=${serviceId}`,
+                {
+                    method: 'DELETE',
+                    headers,
+                }
+            )
+            if (response.ok) {
+                const data: Services = await response.json()
+                return data
+            } else {
+                console.error('Error al eliminar el servicio')
+            }
+        } catch (error) {
+            console.error('Error al enviar el objeto:', error)
+        } finally {
+            notification.success({
+                message: 'El servicio se ha eliminado con éxito',
+                style: {
+                    marginLeft: 335 - 600,
+                    marginTop: 50,
+                },
+            })
+        }
+    }, [])
 
     return {
         currentUser,

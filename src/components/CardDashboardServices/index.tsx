@@ -10,12 +10,7 @@ const styleIconButtons = {
     marginRight: '10px',
 }
 
-const CardDashboardServices: FC<Props> = ({
-    onClick,
-    service,
-    onEdit,
-    onDelete,
-}) => {
+const CardDashboardServices: FC<Props> = ({ service, onEdit, onDelete }) => {
     return (
         <Card
             style={{ width: 300, margin: 10 }}
