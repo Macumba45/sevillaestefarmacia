@@ -1,6 +1,8 @@
 'use client'
 
 import { FC, memo, useEffect } from 'react'
+import { useLogicHome } from './logic'
+import { getAuthenticatedToken } from '../../storage/storage'
 import ResponsiveAppBar from '@/components/MenuNavBar'
 import { Button } from '@mui/material'
 import conocenosImg from '../assets/HOME/conocenos.webp'
@@ -23,15 +25,44 @@ import {
 } from './styles'
 
 const Home: FC = () => {
+    const {
+        logOut,
+        getUserInfoDetails,
+        handleButtonClick,
+        isDrawerOpen,
+        closeDrawer,
+        handleOpenNavMenu,
+        handleCloseNavMenu,
+        closeDrawerButton,
+        isDrawerOpenButton,
+        buttonName,
+    } = useLogicHome()
+
     useEffect(() => {
         document.title = 'Farmacia Santa Bárbara'
     }),
         []
 
+    useEffect(() => {
+        if (getAuthenticatedToken()) {
+            getUserInfoDetails()
+        }
+    }, [getUserInfoDetails])
+
     return (
         <div>
             <NavContainer>
-                <ResponsiveAppBar />
+                <ResponsiveAppBar
+                    closeDrawer={() => closeDrawer()}
+                    handleButtonClick={() => handleButtonClick()}
+                    handleCloseNavMenu={() => handleCloseNavMenu()}
+                    handleOpenNavMenu={() => handleOpenNavMenu()}
+                    closeDrawerButton={() => closeDrawerButton()}
+                    isDrawerOpenButton={isDrawerOpenButton}
+                    isDrawerOpen={isDrawerOpen}
+                    buttonName={buttonName}
+                    onLogOut={() => logOut()}
+                />
             </NavContainer>
             <ContainerConocenos>
                 <TitleConocenos>Salud + Vida + Emociones</TitleConocenos>

@@ -37,7 +37,7 @@ const drawerWidth = 240
 const ResponsiveDrawer: FC<Props> = props => {
     const {
         currentUser,
-        getUserInfo,
+        getUserInfoData,
         router,
         mobileOpen,
         handleDrawerToggle,
@@ -66,9 +66,9 @@ const ResponsiveDrawer: FC<Props> = props => {
     const container =
         window !== undefined ? () => window().document.body : undefined
     useEffect(() => {
-        getUserInfo()
+        getUserInfoData()
         getServices()
-    }, [getUserInfo, getServices])
+    }, [getUserInfoData, getServices])
 
     useEffect(() => {
         if (currentUser && userLoaded) {

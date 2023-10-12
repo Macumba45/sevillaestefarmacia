@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react'
+import { getUserInfo } from '@/services/user'
 import { getAuthenticatedToken } from '../../../storage/storage'
 import { useRouter } from 'next/navigation'
 import { Services, User } from '../../../types/types'
@@ -68,28 +69,9 @@ export const useLogicDashboard = () => {
         setOpenDeleteModal(false)
     }
 
-    const getUserInfo = useCallback(async () => {
-        try {
-            const token = getAuthenticatedToken()
-            const headers = {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
-            }
-            const response = await fetch('/api/user/getUserInfo', {
-                method: 'GET',
-                headers,
-            })
-            if (response.ok) {
-                const data = await response.json()
-                setCurrentUser(data.user)
-                return data
-            } else {
-                console.error('Error al obtener el usuario')
-                router.push('/')
-            }
-        } catch (error) {
-            console.error('Error al enviar el objeto:', error)
-        }
+    const getUserInfoData = useCallback(async () => {
+        const userInfo = await getUserInfo()
+        setCurrentUser(userInfo.user)
     }, [])
 
     const createService = useCallback(async (service: Services) => {
@@ -215,7 +197,7 @@ export const useLogicDashboard = () => {
 
     return {
         currentUser,
-        getUserInfo,
+        getUserInfoData,
         router,
         mobileOpen,
         handleDrawerToggle,

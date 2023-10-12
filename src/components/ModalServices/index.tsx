@@ -1,6 +1,5 @@
-import React, { FC, useMemo, useState, useEffect } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import { useLogicDashboard } from '@/app/dashboard/logic'
-import dynamic from 'next/dynamic'
 import { DateObject } from 'react-multi-date-picker'
 import DatePickerComponent from '../DaysSelect'
 import { Services } from '../../../types/types'
@@ -47,11 +46,6 @@ const ServiceFormModal: FC<Props> = ({
         { date: DateObject; hours: string[] }[]
     >([])
     const [hoursFromDatabase, sethoursFromDatabase] = useState<string[][]>([])
-
-    const ReactQuill = useMemo(
-        () => dynamic(() => import('react-quill'), { ssr: false }),
-        []
-    )
 
     const handleUrlPictureChange = (event: any) => {
         setUrlPicture(event.target.value)

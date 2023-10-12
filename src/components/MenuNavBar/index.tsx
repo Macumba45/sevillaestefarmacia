@@ -1,10 +1,7 @@
 'use client'
-import { FC, memo, use, useEffect, useState } from 'react'
-import { useLogicDashboard } from '@/app/dashboard/logic'
-import { User } from '../../../types/types'
+import { FC, memo } from 'react'
 import Link from 'next/link'
-import CustomButton from '../CustomButtonNavBar'
-import { getAuthenticatedToken } from '../../../storage/storage'
+import ExitToAppIcon from '@mui/icons-material/ExitToApp'
 import Drawer from '@mui/material/Drawer'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
@@ -53,31 +50,28 @@ const pagesMobile = [
     'Mi cuenta',
 ]
 
-const ResponsiveAppBar: FC = () => {
-    const { getUserInfo, currentUser } = useLogicDashboard()
-    const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+interface Props {
+    onLogOut: () => void
+    handleOpenNavMenu: () => void
+    handleCloseNavMenu: () => void
+    handleButtonClick: () => void
+    closeDrawer: () => void
+    isDrawerOpen: boolean
+    isDrawerOpenButton: boolean
+    closeDrawerButton: () => void
+    buttonName: string
+}
 
-    const logOut = () => {
-        if (typeof window !== 'undefined') {
-            localStorage.removeItem('token')
-            window.location.reload()
-        }
-    }
-
-    useEffect(() => {
-        if (getAuthenticatedToken()) {
-            getUserInfo()
-        }
-    }, [])
-
-    const handleOpenNavMenu = () => {
-        setIsDrawerOpen(true)
-    }
-
-    const handleCloseNavMenu = () => {
-        setIsDrawerOpen(false)
-    }
-
+const ResponsiveAppBar: FC<Props> = ({
+    onLogOut,
+    handleButtonClick,
+    isDrawerOpen,
+    isDrawerOpenButton,
+    handleOpenNavMenu,
+    handleCloseNavMenu,
+    closeDrawerButton,
+    buttonName,
+}) => {
     return (
         <AppBar style={stylesNavBar} position="sticky">
             <Container maxWidth="xl">
@@ -180,10 +174,44 @@ const ResponsiveAppBar: FC = () => {
 
                     <Box sx={{ flexGrow: 0 }}>
                         <ButtonLoginContainer>
-                            <CustomButton
-                                currentUser={currentUser as User}
-                                onLogOut={logOut}
-                            />
+                            <>
+                                <Button
+                                    sx={{
+                                        color: 'black',
+                                        display: 'block',
+                                        backgroundColor: 'white',
+                                        ':hover': {
+                                            backgroundColor: '#d3d3d3',
+                                        },
+                                    }}
+                                    variant="contained"
+                                    onClick={handleButtonClick}
+                                >
+                                    {buttonName}
+                                </Button>
+                                <Drawer
+                                    sx={{ zIndex: 99999999 }}
+                                    anchor="right"
+                                    open={isDrawerOpenButton}
+                                    onClose={closeDrawerButton}
+                                >
+                                    <Button
+                                        href="/perfil"
+                                        onClick={closeDrawerButton}
+                                    >
+                                        Perfil
+                                    </Button>
+                                    <Button
+                                        startIcon={<ExitToAppIcon />}
+                                        onClick={() => {
+                                            onLogOut()
+                                            closeDrawerButton()
+                                        }}
+                                    >
+                                        Cerrar Sesión
+                                    </Button>
+                                </Drawer>
+                            </>
                         </ButtonLoginContainer>
                     </Box>
                 </Toolbar>
