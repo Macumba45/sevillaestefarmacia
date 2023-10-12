@@ -10,12 +10,14 @@ const handleSubmitSignUp = async (
     req: NextApiRequest,
     res: NextApiResponse
 ) => {
-    const { email, password, name } = req.body
+    const { email, password, name, phone } = req.body
+    console.log(req.body)
     const userExists = await findUserEmail(email)
     if (
         typeof email !== 'string' ||
         typeof password !== 'string' ||
-        typeof name !== 'string'
+        typeof name !== 'string' ||
+        typeof phone !== 'string'
     ) {
         res.status(400).json({
             message: 'Email and password must be strings in the request body',
@@ -31,6 +33,7 @@ const handleSubmitSignUp = async (
         email: email,
         password: password,
         name: name,
+        phone: phone,
     }
 
     try {
@@ -41,7 +44,7 @@ const handleSubmitSignUp = async (
         // Reemplaza la contraseña en el objeto userData
         userData.password = hashedPassword
         // Guarda el usuario en la base de datos con la contraseña cifrada
-        const user = createUser(email, hashedPassword, name)
+        const user = createUser(email, hashedPassword, name, phone)
         const token = jwt.sign({ userData }, 'token')
         res.status(200).json({
             message: 'User created successfully',

@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const LogoImg = styled.img`
     width: 10rem;
+    cursor: pointer;
 `
 
 export const ButtonLoginContainer = styled.div`

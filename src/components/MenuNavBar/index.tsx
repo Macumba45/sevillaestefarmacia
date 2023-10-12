@@ -1,4 +1,11 @@
-import * as React from 'react'
+'use client'
+import { FC, memo, use, useEffect, useState } from 'react'
+import { useLogicDashboard } from '@/app/dashboard/logic'
+import { User } from '../../../types/types'
+import Link from 'next/link'
+import CustomButton from '../CustomButtonNavBar'
+import { getAuthenticatedToken } from '../../../storage/storage'
+import Drawer from '@mui/material/Drawer'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
@@ -10,7 +17,14 @@ import MenuItem from '@mui/material/MenuItem'
 import logo from '../../assets/logo/logo.png'
 import InstagramIcon from '@mui/icons-material/Instagram'
 import { ButtonLoginContainer, LogoImg } from './styles'
-import { Drawer } from '@mui/material'
+
+const stylesNavBar = {
+    display: 'flex',
+    alignItems: 'center',
+    padding: '0 10px',
+    backgroundColor: 'black',
+    color: 'white',
+}
 
 const pages = [
     'Servicios',
@@ -34,11 +48,27 @@ const pagesMobile = [
                 <InstagramIcon sx={{ mr: 1, ml: 1 }} />
             </>
         ),
+        route: 'https://www.instagram.com/farmaciasantabarbara/',
     },
+    'Mi cuenta',
 ]
 
-function ResponsiveAppBar() {
-    const [isDrawerOpen, setIsDrawerOpen] = React.useState(false)
+const ResponsiveAppBar: FC = () => {
+    const { getUserInfo, currentUser } = useLogicDashboard()
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+
+    const logOut = () => {
+        if (typeof window !== 'undefined') {
+            localStorage.removeItem('token')
+            window.location.reload()
+        }
+    }
+
+    useEffect(() => {
+        if (getAuthenticatedToken()) {
+            getUserInfo()
+        }
+    }, [])
 
     const handleOpenNavMenu = () => {
         setIsDrawerOpen(true)
@@ -46,14 +76,6 @@ function ResponsiveAppBar() {
 
     const handleCloseNavMenu = () => {
         setIsDrawerOpen(false)
-    }
-
-    const stylesNavBar = {
-        display: 'flex',
-        alignItems: 'center',
-        padding: '0 10px',
-        backgroundColor: 'black',
-        color: 'white',
     }
 
     return (
@@ -113,6 +135,7 @@ function ResponsiveAppBar() {
                                             >
                                                 {page.name}
                                                 {page.icon}
+                                                <Link href={page.route}></Link>
                                             </div>
                                         ) : (
                                             <div>{page}</div>
@@ -157,17 +180,10 @@ function ResponsiveAppBar() {
 
                     <Box sx={{ flexGrow: 0 }}>
                         <ButtonLoginContainer>
-                            <Button
-                                sx={{
-                                    color: 'black',
-                                    display: 'block',
-                                    backgroundColor: 'white',
-                                    ':hover': { backgroundColor: '#d3d3d3' },
-                                }}
-                                variant="contained"
-                            >
-                                Iniciar Sesión
-                            </Button>
+                            <CustomButton
+                                currentUser={currentUser as User}
+                                onLogOut={logOut}
+                            />
                         </ButtonLoginContainer>
                     </Box>
                 </Toolbar>
@@ -175,4 +191,4 @@ function ResponsiveAppBar() {
         </AppBar>
     )
 }
-export default ResponsiveAppBar
+export default memo(ResponsiveAppBar)

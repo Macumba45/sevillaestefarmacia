@@ -53,13 +53,15 @@ const SignUp: FC = () => {
         const name = formData.get('firstName') as string
         const email = (formData.get('email') as string).toLowerCase()
         const password = formData.get('password') as string
+        const phone = formData.get('phone') as string
+        console.log(name, email, password, phone)
 
-        if (email && password && name) {
+        if (email && password && name && phone) {
             try {
                 setLoading(true)
                 const response = await fetch('/api/auth/signup', {
                     method: 'POST',
-                    body: JSON.stringify({ email, password, name }),
+                    body: JSON.stringify({ email, password, name, phone }),
                     headers: { 'Content-Type': 'application/json' },
                 })
                 if (response.ok) {
@@ -110,74 +112,105 @@ const SignUp: FC = () => {
     }, [])
 
     return (
-        <ThemeProvider theme={defaultTheme}>
-            <Container component="main" maxWidth="xs">
-                <CssBaseline />
-                <Box
-                    sx={{
-                        marginTop: 8,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                    }}
-                >
-                    <Avatar sx={{ m: 1, bgcolor: '#4675A6' }}>
-                        <LockOutlinedIcon />
-                    </Avatar>
-                    <Typography component="h1" variant="h5">
-                        Regístrate
-                    </Typography>
-                    <Box
-                        component="form"
-                        noValidate
-                        onSubmit={handleSubmit}
-                        sx={{ mt: 3 }}
-                    >
-                        <Grid container spacing={2}>
-                            <Grid item xs={12} sm={12}>
-                                <TextField
-                                    autoComplete="given-name"
-                                    name="firstName"
-                                    required
-                                    fullWidth
-                                    id="firstName"
-                                    label="Nombre"
-                                    autoFocus
-                                    inputProps={{
-                                        select: {
-                                            '&:before': {
-                                                borderColor: 'black',
-                                            },
-                                            '&:after': {
-                                                borderColor: 'black',
-                                            },
-                                        },
-                                    }}
-                                />
-                            </Grid>
+        <div
 
-                            <Grid item xs={12}>
-                                <TextField
-                                    required
-                                    fullWidth
-                                    id="email"
-                                    label="Email"
-                                    name="email"
-                                    autoComplete="email"
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    required
-                                    fullWidth
-                                    name="password"
-                                    label="Contraseña"
-                                    type="password"
-                                    id="password"
-                                    autoComplete="new-password"
-                                />
-                            </Grid>
-                            {/* <Grid item xs={12}>
+        // style={{
+        //     display: 'flex',
+        //     justifyContent: 'center',
+        //     alignItems: 'center',
+        //     height: '80vh',
+        // }}
+        >
+            <ThemeProvider theme={defaultTheme}>
+                <Container component="main" maxWidth="xs">
+                    <CssBaseline />
+                    <Box
+                        sx={{
+                            marginTop: 8,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <Avatar sx={{ m: 1, bgcolor: '#4675A6' }}>
+                            <LockOutlinedIcon />
+                        </Avatar>
+                        <Typography component="h1" variant="h5">
+                            Regístrate
+                        </Typography>
+                        <Box
+                            component="form"
+                            noValidate
+                            onSubmit={handleSubmit}
+                            sx={{ mt: 3 }}
+                        >
+                            <Grid container spacing={2}>
+                                <Grid item xs={12} sm={12}>
+                                    <TextField
+                                        autoComplete="given-name"
+                                        name="firstName"
+                                        required
+                                        fullWidth
+                                        id="firstName"
+                                        label="Nombre"
+                                        autoFocus
+                                        inputProps={{
+                                            select: {
+                                                '&:before': {
+                                                    borderColor: 'black',
+                                                },
+                                                '&:after': {
+                                                    borderColor: 'black',
+                                                },
+                                            },
+                                        }}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={12}>
+                                    <TextField
+                                        autoComplete="phone"
+                                        type="number"
+                                        name="phone"
+                                        required
+                                        fullWidth
+                                        id="phone"
+                                        label="Teléfono"
+                                        autoFocus
+                                        inputProps={{
+                                            select: {
+                                                '&:before': {
+                                                    borderColor: 'black',
+                                                },
+                                                '&:after': {
+                                                    borderColor: 'black',
+                                                },
+                                            },
+                                        }}
+                                    />
+                                </Grid>
+
+                                <Grid item xs={12}>
+                                    <TextField
+                                        required
+                                        fullWidth
+                                        id="email"
+                                        label="Email"
+                                        name="email"
+                                        autoComplete="email"
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        required
+                                        fullWidth
+                                        name="password"
+                                        label="Contraseña"
+                                        type="password"
+                                        id="password"
+                                        autoComplete="new-password"
+                                    />
+                                </Grid>
+                                {/* <Grid item xs={12}>
                                 <FormControlLabel
                                     control={
                                         <Checkbox
@@ -198,77 +231,79 @@ const SignUp: FC = () => {
                                     }
                                 />
                             </Grid> */}
-                        </Grid>
-                        {error && (
-                            <Typography
-                                variant="body2"
-                                color="error"
-                                align="center"
-                                sx={{ mt: 2 }}
-                            >
-                                {error}
-                            </Typography>
-                        )}
-                        <Stack direction="row" mb={2} mt={2} spacing={2}>
-                            <LoadingButton
-                                id="signup-button"
-                                type="submit"
-                                variant="contained"
-                                fullWidth
-                                loading={loading}
-                                sx={{
-                                    backgroundColor: '#4675A6',
-                                    color: 'white',
-                                    ':hover': {
-                                        backgroundColor: '#42ACE8',
-                                    },
-                                }}
-                            >
-                                Crear cuenta
-                            </LoadingButton>
-                        </Stack>
-                        <Grid container justifyContent="flex-end">
-                            <Grid item>
-                                <Link
-                                    href={'/auth/login'}
-                                    variant="body2"
-                                    style={{ color: '#4675A6' }}
-                                >
-                                    ¿Ya tienes una cuenta? Inicia sesión
-                                </Link>
                             </Grid>
-                        </Grid>
+                            {error && (
+                                <Typography
+                                    variant="body2"
+                                    color="error"
+                                    align="center"
+                                    sx={{ mt: 2 }}
+                                >
+                                    {error}
+                                </Typography>
+                            )}
+                            <Stack direction="row" mb={2} mt={2} spacing={2}>
+                                <LoadingButton
+                                    id="signup-button"
+                                    type="submit"
+                                    variant="contained"
+                                    fullWidth
+                                    loading={loading}
+                                    sx={{
+                                        backgroundColor: '#4675A6',
+                                        color: 'white',
+                                        ':hover': {
+                                            backgroundColor: '#42ACE8',
+                                        },
+                                    }}
+                                >
+                                    Crear cuenta
+                                </LoadingButton>
+                            </Stack>
+                            <Grid container justifyContent="flex-end">
+                                <Grid item>
+                                    <Link
+                                        href={'/auth/login'}
+                                        variant="body2"
+                                        style={{ color: '#4675A6' }}
+                                    >
+                                        ¿Ya tienes una cuenta? Inicia sesión
+                                    </Link>
+                                </Grid>
+                            </Grid>
+                        </Box>
                     </Box>
-                </Box>
-                <Snackbar
-                    open={snackbarOpen}
-                    autoHideDuration={4000}
-                    onClose={handleSnackbarClose}
-                >
-                    <MuiAlert
+                    <Snackbar
+                        open={snackbarOpen}
+                        autoHideDuration={4000}
                         onClose={handleSnackbarClose}
-                        severity="error"
-                        sx={{ width: '100%' }}
                     >
-                        Por favor, completa todos los campos para registrarte
-                    </MuiAlert>
-                </Snackbar>
+                        <MuiAlert
+                            onClose={handleSnackbarClose}
+                            severity="error"
+                            sx={{ width: '100%' }}
+                        >
+                            Por favor, completa todos los campos para
+                            registrarte
+                        </MuiAlert>
+                    </Snackbar>
 
-                <Snackbar
-                    open={successSnackbarOpen}
-                    autoHideDuration={4000}
-                    onClose={handleSuccessSnackbarClose}
-                >
-                    <MuiAlert
+                    <Snackbar
+                        open={successSnackbarOpen}
+                        autoHideDuration={4000}
                         onClose={handleSuccessSnackbarClose}
-                        severity="success"
-                        sx={{ width: '100%' }}
                     >
-                        ¡Te has registrado!
-                    </MuiAlert>
-                </Snackbar>
-            </Container>
-        </ThemeProvider>
+                        <MuiAlert
+                            onClose={handleSuccessSnackbarClose}
+                            severity="success"
+                            sx={{ width: '100%' }}
+                        >
+                            ¡Te has registrado!
+                        </MuiAlert>
+                    </Snackbar>
+                </Container>
+            </ThemeProvider>
+        </div>
     )
 }
 

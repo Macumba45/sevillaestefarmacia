@@ -1,7 +1,7 @@
 import React from 'react'
 import './reset.css'
-import StyledComponentsRegistry from '@/lib/AntdRegistry'
-require('dotenv').config()
+import StyledComponentsRegistryAntd from '@/lib/AntdRegistry'
+import StyledComponentsRegistry from '@/lib/StyledComponentsRegistry'
 
 export const metadata = {
     title: 'Create Next App',
@@ -18,7 +18,9 @@ const RootLayout = ({ children }: React.PropsWithChildren) => (
         </head>
 
         <body>
-            <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+            <StyledComponentsRegistryAntd>
+                <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+            </StyledComponentsRegistryAntd>
         </body>
     </html>
 )

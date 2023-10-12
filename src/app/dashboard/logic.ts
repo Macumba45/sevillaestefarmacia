@@ -82,6 +82,7 @@ export const useLogicDashboard = () => {
             if (response.ok) {
                 const data = await response.json()
                 setCurrentUser(data.user)
+                return data
             } else {
                 console.error('Error al obtener el usuario')
                 router.push('/')
@@ -89,7 +90,7 @@ export const useLogicDashboard = () => {
         } catch (error) {
             console.error('Error al enviar el objeto:', error)
         }
-    }, [router])
+    }, [])
 
     const createService = useCallback(async (service: Services) => {
         try {

@@ -4,6 +4,7 @@ export type User = {
     password?: string
     name?: string
     role?: string
+    phone?: string
 }
 
 export type LoginRequestBody = {
