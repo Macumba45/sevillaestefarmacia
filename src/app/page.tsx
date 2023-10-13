@@ -22,7 +22,9 @@ import {
     DescriptionDermo,
     ContainerNutricion,
     DescriptionNutricion,
+    LoadingContainer,
 } from './styles'
+import CircularIndeterminate from '@/components/Loader'
 
 const Home: FC = () => {
     const {
@@ -36,6 +38,7 @@ const Home: FC = () => {
         closeDrawerButton,
         isDrawerOpenButton,
         buttonName,
+        isLoading,
     } = useLogicHome()
 
     useEffect(() => {
@@ -49,6 +52,13 @@ const Home: FC = () => {
         }
     }, [])
 
+    if (isLoading) {
+        return (
+            <LoadingContainer>
+                <CircularIndeterminate />
+            </LoadingContainer>
+        )
+    }
     return (
         <div>
             <NavContainer>

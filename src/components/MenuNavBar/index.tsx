@@ -1,4 +1,5 @@
 'use client'
+
 import { FC, memo } from 'react'
 import Link from 'next/link'
 import ExitToAppIcon from '@mui/icons-material/ExitToApp'
@@ -10,57 +11,11 @@ import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 import Container from '@mui/material/Container'
 import Button from '@mui/material/Button'
-import MenuItem from '@mui/material/MenuItem'
 import logo from '../../assets/logo/logo.png'
-import InstagramIcon from '@mui/icons-material/Instagram'
-import { ButtonLoginContainer, LogoImg } from './styles'
-
-const stylesNavBar = {
-    display: 'flex',
-    alignItems: 'center',
-    padding: '0 10px',
-    backgroundColor: 'black',
-    color: 'white',
-}
-
-const pages = [
-    'Servicios',
-    'Talleres',
-    'Blog',
-    'Tarjeta CLUB',
-    {
-        name: '',
-        icon: <InstagramIcon sx={{ mr: 1, ml: 1 }} />,
-    },
-]
-const pagesMobile = [
-    'Servicios',
-    'Talleres',
-    'Blog',
-    'Tarjeta CLUB',
-    {
-        name: 'Síguenos',
-        icon: (
-            <>
-                <InstagramIcon sx={{ mr: 1, ml: 1 }} />
-            </>
-        ),
-        route: 'https://www.instagram.com/farmaciasantabarbara/',
-    },
-    'Mi cuenta',
-]
-
-interface Props {
-    onLogOut: () => void
-    handleOpenNavMenu: () => void
-    handleCloseNavMenu: () => void
-    handleButtonClick: () => void
-    closeDrawer: () => void
-    isDrawerOpen: boolean
-    isDrawerOpenButton: boolean
-    closeDrawerButton: () => void
-    buttonName: string
-}
+import { ButtonLoginContainer, LogoImg, stylesNavBar } from './styles'
+import { Props } from './types'
+import { pages, pagesMobile, settings } from './utility'
+import { Divider } from '@mui/material'
 
 const ResponsiveAppBar: FC<Props> = ({
     onLogOut,
@@ -84,6 +39,7 @@ const ResponsiveAppBar: FC<Props> = ({
                         }}
                         src={logo.src}
                         alt="Farmacia Santa Bárbara"
+                        onClick={() => location.reload()}
                     />
 
                     <Box
@@ -109,32 +65,67 @@ const ResponsiveAppBar: FC<Props> = ({
                             anchor="right"
                             open={isDrawerOpen}
                             onClose={handleCloseNavMenu}
-                            sx={{ zIndex: 9999999 }}
+                            sx={{ zIndex: 9999999, padding: 400 }}
                         >
                             <div
                                 style={{
-                                    width: '250px', // Establece el ancho que desees para el panel lateral
+                                    width: '220px', // Establece el ancho que desees para el panel lateral
                                     padding: '20px',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'flex-start',
                                 }}
                             >
-                                {/* Aquí puedes colocar los elementos que quieras en el panel lateral */}
                                 {pagesMobile.map((page, index) => (
-                                    <MenuItem key={index}>
-                                        {typeof page === 'object' ? (
+                                    <Button key={index}>
+                                        <Link
+                                            style={{
+                                                textDecoration: 'none',
+                                                color: 'black',
+                                                display: 'flex',
+                                            }}
+                                            href={page?.route as string}
+                                        >
                                             <div
                                                 style={{
                                                     display: 'flex',
                                                     alignItems: 'center',
                                                 }}
                                             >
-                                                {page.name}
-                                                {page.icon}
-                                                <Link href={page.route}></Link>
+                                                {page?.icon}
+                                                {page?.name}
                                             </div>
-                                        ) : (
-                                            <div>{page}</div>
-                                        )}
-                                    </MenuItem>
+                                        </Link>
+                                    </Button>
+                                ))}
+                                <Divider
+                                    sx={{
+                                        height: '2px',
+                                        backgroundColor: 'black',
+                                        width: '100%',
+                                    }}
+                                />
+                                {settings.map((page, index) => (
+                                    <Button key={index}>
+                                        <Link
+                                            style={{
+                                                textDecoration: 'none',
+                                                color: 'black',
+                                                display: 'flex',
+                                            }}
+                                            href={page?.route as string}
+                                        >
+                                            <div
+                                                style={{
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                }}
+                                            >
+                                                {page?.icon}
+                                                {page?.name}
+                                            </div>
+                                        </Link>
+                                    </Button>
                                 ))}
                             </div>
                         </Drawer>
@@ -150,24 +141,26 @@ const ResponsiveAppBar: FC<Props> = ({
                             },
                         }}
                     >
-                        {pages.map(page => (
-                            <Button
-                                sx={{
-                                    color: 'white',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    fontWeight: 300,
-                                }}
-                                key={page.toString()}
-                            >
-                                {typeof page === 'object' ? (
-                                    <>
-                                        {page.name} {page.icon}
-                                    </>
-                                ) : (
-                                    <>{page}</>
-                                )}
+                        {pages.map((page, index) => (
+                            <Button key={index}>
+                                <Link
+                                    style={{
+                                        textDecoration: 'none',
+                                        color: 'white',
+                                        fontWeight: 500,
+                                    }}
+                                    href={page?.route as string}
+                                >
+                                    <div
+                                        style={{
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                        }}
+                                    >
+                                        {page?.icon}
+                                        {page?.name}
+                                    </div>
+                                </Link>
                             </Button>
                         ))}
                     </Box>
@@ -194,6 +187,11 @@ const ResponsiveAppBar: FC<Props> = ({
                                     anchor="right"
                                     open={isDrawerOpenButton}
                                     onClose={closeDrawerButton}
+                                    PaperProps={{
+                                        sx: {
+                                            width: 300,
+                                        },
+                                    }}
                                 >
                                     <Button
                                         href="/perfil"

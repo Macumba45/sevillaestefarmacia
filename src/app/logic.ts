@@ -6,12 +6,15 @@ export const useLogicHome = () => {
     const [currentUser, setCurrentUser] = useState<User | null>(null)
     const [isDrawerOpen, setIsDrawerOpen] = useState(false)
     const [isDrawerOpenButton, setIsDrawerOpenButton] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
 
     //////////// NAVBARLOGIC///////////////////
 
     const getUserInfoDetails = async () => {
+        setIsLoading(true)
         const userInfo = await getUserInfo()
         setCurrentUser(userInfo.user)
+        setIsLoading(false)
     }
 
     const handleButtonClick = () => {
@@ -56,7 +59,7 @@ export const useLogicHome = () => {
         currentUser?.role === 'admin'
             ? 'Ir al Dashboard'
             : currentUser?.role === 'user'
-            ? 'Perfil'
+            ? 'Mi perfil'
             : 'Iniciar Sesión'
 
     //////////// NAVBARLOGIC///////////////////
@@ -72,5 +75,6 @@ export const useLogicHome = () => {
         closeDrawerButton,
         isDrawerOpenButton,
         buttonName,
+        isLoading,
     }
 }

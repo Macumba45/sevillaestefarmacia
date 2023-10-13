@@ -14,3 +14,10 @@ export const ButtonLoginContainer = styled.div`
         display: none;
     }
 `
+export const stylesNavBar = {
+    display: 'flex',
+    alignItems: 'center',
+    padding: '0 10px',
+    backgroundColor: 'black',
+    color: 'white',
+}

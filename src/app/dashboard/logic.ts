@@ -21,6 +21,7 @@ export const useLogicDashboard = () => {
     const [isEditing, setIsEditing] = useState(false)
     const [openDeleteModal, setOpenDeleteModal] = useState(false)
     const [serviceToDelete, setServiceToDelete] = useState('') // Almacena el id del servicio a eliminar
+    const [isLoading, setIsLoading] = useState<boolean>(false)
 
     const handleOpen = () => {
         setOpen(true)
@@ -71,6 +72,7 @@ export const useLogicDashboard = () => {
     }
 
     const getUserInfoData = useCallback(async () => {
+        setIsLoading(true)
         const userInfo = await getUserInfo()
         setCurrentUser(userInfo.user)
     }, [])
@@ -83,6 +85,7 @@ export const useLogicDashboard = () => {
     const getServiceData = useCallback(async () => {
         const services = await getServices()
         setServices(services)
+        setIsLoading(false)
         return services
     }, [])
 
@@ -182,5 +185,6 @@ export const useLogicDashboard = () => {
         closeModalDelete,
         handleConfirmDelete,
         handleDeleteClick,
+        isLoading,
     }
 }

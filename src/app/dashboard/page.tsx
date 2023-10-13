@@ -31,7 +31,12 @@ import SearchInputComp from '@/components/InpuntSearch'
 import ServiceFormModal from '@/components/ModalServices'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import DeleteConfirmationModal from '@/components/ModalConfirmationDelete'
-import { CardServicesContainer, CitasContainer } from './styles'
+import {
+    CardServicesContainer,
+    CitasContainer,
+    LoadingContainer,
+} from './styles'
+import CircularIndeterminate from '@/components/Loader'
 
 const drawerWidth = 240
 
@@ -61,6 +66,7 @@ const ResponsiveDrawer: FC<Props> = props => {
         handleConfirmDelete,
         handleDeleteClick,
         closeModalDelete,
+        isLoading,
     } = useLogicDashboard()
 
     const { window } = props
@@ -151,6 +157,14 @@ const ResponsiveDrawer: FC<Props> = props => {
             </List>
         </div>
     )
+
+    if (isLoading) {
+        return (
+            <LoadingContainer>
+                <CircularIndeterminate />
+            </LoadingContainer>
+        )
+    }
 
     return (
         <Box sx={{ display: 'flex' }}>

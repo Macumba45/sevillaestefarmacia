@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from 'react'
-import { setAuthenticatedToken } from '../../../../../storage/storage'
+import { handleLoginDashboard } from '../../../../services/auth'
 import { useRouter } from 'next/navigation'
 
 export const useLogicLogin = () => {
@@ -8,27 +8,8 @@ export const useLogicLogin = () => {
     const [password, setPassword] = useState<string>('')
 
     const handleLogin = async () => {
-        try {
-            const response = await fetch('/api/auth/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email: email, password: password }),
-            })
-            if (response.ok) {
-                const data = await response.json()
-                setAuthenticatedToken(data.token)
-                // window.localStorage.setItem(
-                //     'user',
-                //     JSON.stringify(data.user.role)
-                // )
-                router.push('/dashboard')
-                return data
-            }
-        } catch (error) {
-            console.log(error)
-        }
+        await handleLoginDashboard(email, password)
+        router.push('/dashboard')
     }
 
     const handleChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {

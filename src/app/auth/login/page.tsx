@@ -68,7 +68,7 @@ const Login: FC = () => {
     }, [])
 
     // Define el título dinámico
-    const dynamicTitle = 'FishGram - Inicio de sesión'
+    const dynamicTitle = 'Farmarcia Santa Bárbara - Inicio de sesión'
 
     // Actualiza el título cuando el componente se monta
     useEffect(() => {

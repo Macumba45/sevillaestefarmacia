@@ -3,7 +3,6 @@ import { useLogicDashboard } from '@/app/dashboard/logic'
 import { DateObject } from 'react-multi-date-picker'
 import DatePickerComponent from '../DaysSelect'
 import { Services } from '../../../types/types'
-import es from 'date-fns/locale/es'
 import {
     Button,
     Dialog,
@@ -84,7 +83,6 @@ const ServiceFormModal: FC<Props> = ({
 
     const generateAvailableHours = () => {
         const hours: string[] = []
-        console.log(hours)
         for (let hour = 9; hour < 21; hour++) {
             for (let minute = 0; minute < 60; minute += 30) {
                 hours.push(
