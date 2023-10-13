@@ -30,7 +30,7 @@ const ServiceFormModal: FC<Props> = ({
     isEditing,
     serviceData,
 }) => {
-    const { createService, updateService } = useLogicDashboard()
+    const { createNewService, updateService } = useLogicDashboard()
     const [urlPicture, setUrlPicture] = useState(
         'https://picsum.photos/200/300.jpg'
     )
@@ -81,7 +81,8 @@ const ServiceFormModal: FC<Props> = ({
     }
 
     const generateAvailableHours = () => {
-        const hours = []
+        const hours: string[] = []
+        console.log(hours)
         for (let hour = 9; hour < 21; hour++) {
             for (let minute = 0; minute < 60; minute += 30) {
                 hours.push(
@@ -133,13 +134,12 @@ const ServiceFormModal: FC<Props> = ({
             await updateService(serviceDataToSubmit)
         } else {
             // Si estamos en modo creación, llamamos a la función de creación
-            await createService(serviceDataToSubmit)
+            await createNewService(serviceDataToSubmit)
         }
 
         onClose()
     }
 
-    // Cuando se inicia el modo de edición, establecer los datos existentes del servicio
     useEffect(() => {
         if (isEditing && serviceData) {
             setUrlPicture(serviceData.urlPicture)
@@ -151,23 +151,27 @@ const ServiceFormModal: FC<Props> = ({
             // Manejar la carga de las fechas y horas aquí
             const serviceDates = isEditing ? serviceData?.dates || [] : []
 
-            // Convierte las fechas en objetos DateObject
-            const formattedDates = serviceDates.map(dateObj => {
-                const { date, hours } = dateObj
-                const parsedDate = parseDateString(date) // Convierte la fecha al formato correcto
-                return {
-                    date: new DateObject(parsedDate), // Convierte la fecha a DateObject
-                    hours: hours || [],
-                }
-            })
+            // Convierte las fechas en objetos DateObject y filtra las fechas pasadas
+            const formattedDates = serviceDates
+                .map(dateObj => {
+                    const { date, hours } = dateObj
+                    const parsedDate = parseDateString(date) // Convierte la fecha al formato correcto
+                    return {
+                        date: new DateObject(parsedDate), // Convierte la fecha a DateObject
+                        hours: hours || [],
+                    }
+                })
+                .filter(dateObject => {
+                    // Filtra las fechas que no sean pasadas
+                    return dateObject.date.toDate() >= new Date()
+                })
 
             const hours = formattedDates.map(date => date.hours)
+
             // Luego, establece formattedDates directamente en setSelectedDays
             setSelectedDays(formattedDates)
             sethoursFromDatabase(hours)
         }
-
-        // También puedes manejar la carga de las fechas y horas aquí
     }, [isEditing, serviceData])
 
     return (

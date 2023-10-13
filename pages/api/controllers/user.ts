@@ -28,8 +28,6 @@ export const findUserById = async (id: string): Promise<User | null> => {
         },
     })
 
-    console.log(prismaUser)
-
     if (!prismaUser) {
         return null
     }
@@ -68,6 +66,5 @@ export const createUser = async (
         role: newUser.role,
         phone: newUser.phone as string,
     }
-    console.log(user)
     return user
 }

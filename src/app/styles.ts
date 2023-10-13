@@ -11,7 +11,7 @@ export const NavContainer = styled.nav`
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     z-index: 9999;
 `
-export const ContainerConocenos = styled.div`
+export const ContainerConocenos = styled.section`
     display: flex;
     justify-content: center;
     flex-direction: column;

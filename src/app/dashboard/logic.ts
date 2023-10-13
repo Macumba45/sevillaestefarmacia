@@ -4,6 +4,7 @@ import { getAuthenticatedToken } from '../../../storage/storage'
 import { useRouter } from 'next/navigation'
 import { Services, User } from '../../../types/types'
 import { notification } from 'antd'
+import { createService } from '@/services/service'
 
 export const useLogicDashboard = () => {
     const [currentUser, setCurrentUser] = useState<User>()
@@ -30,7 +31,7 @@ export const useLogicDashboard = () => {
     const openEditModalFunction = async (service: Services) => {
         setServiceData(service) // Almacena los datos en el estado
         setOpen(true)
-        setIsEditing(true) // Abre el modal
+        setIsEditing(true)
     }
     const closeEditModalFunction = () => setOpenEditModal(false)
 
@@ -74,37 +75,9 @@ export const useLogicDashboard = () => {
         setCurrentUser(userInfo.user)
     }, [])
 
-    const createService = useCallback(async (service: Services) => {
-        try {
-            const token = getAuthenticatedToken()
-            const headers = {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
-            }
-            const response = await fetch('/api/services/postService', {
-                method: 'POST',
-                headers,
-                body: JSON.stringify(service),
-            })
-            if (response.ok) {
-                const data: Services = await response.json()
-                return data
-            } else {
-                console.error('Error al crear el servicio')
-            }
-        } catch (error) {
-            console.error('Error al enviar el objeto:', error)
-        } finally {
-            // En el lugar apropiado de tu componente después de crear o editar un servicio con éxito:
-            notification.success({
-                message: `El servicio ${service.title} se ha creado/actualizado con éxito`,
-                description: 'El servicio se ha creado con éxito.',
-                style: {
-                    marginLeft: 335 - 600,
-                    marginTop: 50,
-                },
-            })
-        }
+    const createNewService = useCallback(async (service: Services) => {
+        const createNewService = createService(service)
+        return createNewService
     }, [])
 
     const getServices = useCallback(async () => {
@@ -211,7 +184,7 @@ export const useLogicDashboard = () => {
         handleOpen,
         userLoaded,
         setUserLoaded,
-        createService,
+        createNewService,
         getServices,
         services,
         setServices,

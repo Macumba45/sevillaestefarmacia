@@ -47,7 +47,7 @@ const Home: FC = () => {
         if (getAuthenticatedToken()) {
             getUserInfoDetails()
         }
-    }, [getUserInfoDetails])
+    }, [])
 
     return (
         <div>

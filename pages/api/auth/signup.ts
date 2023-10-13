@@ -11,7 +11,6 @@ const handleSubmitSignUp = async (
     res: NextApiResponse
 ) => {
     const { email, password, name, phone } = req.body
-    console.log(req.body)
     const userExists = await findUserEmail(email)
     if (
         typeof email !== 'string' ||

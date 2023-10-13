@@ -31,6 +31,7 @@ import SearchInputComp from '@/components/InpuntSearch'
 import ServiceFormModal from '@/components/ModalServices'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import DeleteConfirmationModal from '@/components/ModalConfirmationDelete'
+import { getAuthenticatedToken } from '../../../storage/storage'
 
 const drawerWidth = 240
 
@@ -66,12 +67,16 @@ const ResponsiveDrawer: FC<Props> = props => {
     const container =
         window !== undefined ? () => window().document.body : undefined
     useEffect(() => {
-        getUserInfoData()
-        getServices()
-    }, [getUserInfoData, getServices])
+        if (getAuthenticatedToken()) {
+            getUserInfoData()
+            getServices()
+        } else {
+            router.push('/')
+        }
+    }, [getUserInfoData, getServices, router])
 
     useEffect(() => {
-        if (currentUser && userLoaded) {
+        if (currentUser?.role && userLoaded && getAuthenticatedToken()) {
             if (currentUser.role !== 'admin') {
                 router.push('/')
             }
