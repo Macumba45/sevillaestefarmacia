@@ -1,7 +1,7 @@
 'use client'
 import { FC, useEffect } from 'react'
 import { useLogicDashboard } from './logic'
-import { CardServicesContainer, CitasContainer } from './styles'
+import { getAuthenticatedToken } from '../../../storage/storage'
 import { Props } from './types'
 import logo from '../../assets/logo/logo.png'
 import AppBar from '@mui/material/AppBar'
@@ -31,7 +31,7 @@ import SearchInputComp from '@/components/InpuntSearch'
 import ServiceFormModal from '@/components/ModalServices'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import DeleteConfirmationModal from '@/components/ModalConfirmationDelete'
-import { getAuthenticatedToken } from '../../../storage/storage'
+import { CardServicesContainer, CitasContainer } from './styles'
 
 const drawerWidth = 240
 
@@ -52,7 +52,7 @@ const ResponsiveDrawer: FC<Props> = props => {
         handleOpen,
         userLoaded,
         setUserLoaded,
-        getServices,
+        getServiceData,
         services,
         openEditModalFunction,
         serviceData,
@@ -69,11 +69,11 @@ const ResponsiveDrawer: FC<Props> = props => {
     useEffect(() => {
         if (getAuthenticatedToken()) {
             getUserInfoData()
-            getServices()
+            getServiceData()
         } else {
             router.push('/')
         }
-    }, [getUserInfoData, getServices, router])
+    }, [getUserInfoData, getServiceData, router])
 
     useEffect(() => {
         if (currentUser?.role && userLoaded && getAuthenticatedToken()) {

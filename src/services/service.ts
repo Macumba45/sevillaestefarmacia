@@ -2,6 +2,28 @@ import { notification } from 'antd'
 import { getAuthenticatedToken } from '../../storage/storage'
 import { Services } from '../../types/types'
 
+export const getServices = async () => {
+    try {
+        const token = getAuthenticatedToken()
+        const headers = {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+        }
+        const response = await fetch('/api/services/getService', {
+            method: 'GET',
+            headers,
+        })
+        if (response.ok) {
+            const data: Services[] = await response.json()
+            return data
+        } else {
+            console.error('Error al obtener los servicios')
+        }
+    } catch (error) {
+        console.error('Error al enviar el objeto:', error)
+    }
+}
+
 export const createService = async (service: Services) => {
     try {
         const token = getAuthenticatedToken()

@@ -3,7 +3,7 @@ import { useLogicDashboard } from '@/app/dashboard/logic'
 import { DateObject } from 'react-multi-date-picker'
 import DatePickerComponent from '../DaysSelect'
 import { Services } from '../../../types/types'
-import 'react-quill/dist/quill.snow.css' // Importa los estilos CSS de Quill
+import es from 'date-fns/locale/es'
 import {
     Button,
     Dialog,
@@ -45,6 +45,8 @@ const ServiceFormModal: FC<Props> = ({
     const [selectedDays, setSelectedDays] = useState<
         { date: DateObject; hours: string[] }[]
     >([])
+
+    // console.log(selectedDays.map(day => day.date.toDate().toLocaleString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })))
     const [hoursFromDatabase, sethoursFromDatabase] = useState<string[][]>([])
 
     const handleUrlPictureChange = (event: any) => {
@@ -266,7 +268,17 @@ const ServiceFormModal: FC<Props> = ({
                                     <Typography
                                         sx={{ mt: 2, mb: 2, fontWeight: 700 }}
                                     >
-                                        {selectedDay.date.format('DD/MM/YYYY')}
+                                        {selectedDay.date
+                                            .toDate()
+                                            .toLocaleString('es-ES', {
+                                                weekday: 'long',
+                                                year: 'numeric',
+                                                month: 'long',
+                                                day: 'numeric',
+                                            })
+                                            .replace(/^\w/, c =>
+                                                c.toUpperCase()
+                                            )}{' '}
                                     </Typography>
                                     <ul
                                         style={{

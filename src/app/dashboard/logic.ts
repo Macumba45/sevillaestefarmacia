@@ -4,7 +4,7 @@ import { getAuthenticatedToken } from '../../../storage/storage'
 import { useRouter } from 'next/navigation'
 import { Services, User } from '../../../types/types'
 import { notification } from 'antd'
-import { createService } from '@/services/service'
+import { createService, getServices } from '@/services/service'
 
 export const useLogicDashboard = () => {
     const [currentUser, setCurrentUser] = useState<User>()
@@ -80,27 +80,10 @@ export const useLogicDashboard = () => {
         return createNewService
     }, [])
 
-    const getServices = useCallback(async () => {
-        try {
-            const token = getAuthenticatedToken()
-            const headers = {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
-            }
-            const response = await fetch('/api/services/getService', {
-                method: 'GET',
-                headers,
-            })
-            if (response.ok) {
-                const data: Services[] = await response.json()
-                setServices(data)
-                return data
-            } else {
-                console.error('Error al obtener los servicios')
-            }
-        } catch (error) {
-            console.error('Error al enviar el objeto:', error)
-        }
+    const getServiceData = useCallback(async () => {
+        const services = await getServices()
+        setServices(services)
+        return services
     }, [])
 
     const updateService = useCallback(async (service: Services) => {
@@ -185,7 +168,7 @@ export const useLogicDashboard = () => {
         userLoaded,
         setUserLoaded,
         createNewService,
-        getServices,
+        getServiceData,
         services,
         setServices,
         openEditModal,
