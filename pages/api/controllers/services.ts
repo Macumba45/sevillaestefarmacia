@@ -31,6 +31,7 @@ export const getServices = async (): Promise<any[]> => {
             hours: date.hours.map(hour => ({
                 id: hour.id,
                 hour: hour.hour,
+                isBooked: hour.isBooked,
             })),
         })),
     }))

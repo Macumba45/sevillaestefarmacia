@@ -65,16 +65,16 @@ export const useLogicHome = () => {
     //////////// NAVBARLOGIC///////////////////
 
     return {
-        logOut,
+        buttonName,
+        closeDrawer,
+        closeDrawerButton,
         getUserInfoDetails,
         handleButtonClick,
-        isDrawerOpen,
-        closeDrawer,
-        handleOpenNavMenu,
         handleCloseNavMenu,
-        closeDrawerButton,
+        handleOpenNavMenu,
+        isDrawerOpen,
         isDrawerOpenButton,
-        buttonName,
         isLoading,
+        logOut,
     }
 }

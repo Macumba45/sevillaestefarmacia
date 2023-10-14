@@ -29,7 +29,7 @@ const ServiceFormModal: FC<Props> = ({
     isEditing,
     serviceData,
 }) => {
-    const { createNewService, updateService } = useLogicDashboard()
+    const { createNewService, updateServiceData } = useLogicDashboard()
     const [urlPicture, setUrlPicture] = useState(
         'https://picsum.photos/200/300.jpg'
     )
@@ -131,7 +131,7 @@ const ServiceFormModal: FC<Props> = ({
         if (isEditing && serviceData) {
             // Si estamos en modo edición, llamamos a la función de actualización
             serviceDataToSubmit.id = serviceData.id
-            await updateService(serviceDataToSubmit)
+            await updateServiceData(serviceDataToSubmit)
         } else {
             // Si estamos en modo creación, llamamos a la función de creación
             await createNewService(serviceDataToSubmit)

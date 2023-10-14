@@ -54,7 +54,7 @@ const ResponsiveDrawer: FC<Props> = props => {
         titleDrawer,
         open,
         setOpen,
-        handleOpen,
+        handleOpenModaService,
         userLoaded,
         setUserLoaded,
         getServiceData,
@@ -262,7 +262,7 @@ const ResponsiveDrawer: FC<Props> = props => {
                 {route === 'servicios' && (
                     <>
                         <CardServicesContainer>
-                            <FloatAddServices onClick={handleOpen} />
+                            <FloatAddServices onClick={handleOpenModaService} />
                             {open && (
                                 <ServiceFormModal
                                     open={open}
@@ -368,7 +368,7 @@ const ResponsiveDrawer: FC<Props> = props => {
                 )}
                 {route === 'blog' && (
                     <>
-                        <FloatAddServices onClick={handleOpen} />
+                        <FloatAddServices onClick={handleOpenModaService} />
                         {/* {open && (
                             <ServiceFormModal
                                 open={open}
@@ -379,7 +379,7 @@ const ResponsiveDrawer: FC<Props> = props => {
                 )}
                 {route === 'clientes' && (
                     <>
-                        <FloatAddServices onClick={handleOpen} />
+                        <FloatAddServices onClick={handleOpenModaService} />
                         {/* {open && (
                             <ServiceFormModal
                                 open={open}
