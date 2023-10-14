@@ -37,6 +37,7 @@ import {
     CitasContainer,
     LoadingContainer,
 } from './styles'
+import LinearIndeterminate from '@/components/LoaderLinear/indx'
 
 const drawerWidth = 240
 
@@ -251,7 +252,10 @@ const Dashboard: FC<Props> = props => {
                 <Toolbar />
                 {isLoading ? (
                     <LoadingContainer>
-                        <CircularIndeterminate />
+                        <LinearIndeterminate
+                            label="Cargando servicios..."
+                            width={400}
+                        />
                     </LoadingContainer>
                 ) : (
                     <div>

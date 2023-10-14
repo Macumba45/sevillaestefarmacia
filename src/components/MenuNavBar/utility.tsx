@@ -1,4 +1,5 @@
 import InstagramIcon from '@mui/icons-material/Instagram'
+import { User } from '../../../types/types'
 
 export const pages = [
     {
@@ -77,15 +78,14 @@ export const pagesMobile = [
     },
 ]
 
-export const settings = [
+export const settings = (userRole: string) => [
     {
-        name: 'Mi perfil',
+        name: userRole, // Usar el parámetro aquí
         icon: (
             <>
                 <InstagramIcon sx={{ mr: 1, ml: 1 }} />
             </>
         ),
-        route: '/perfil',
     },
     {
         name: 'Cerrar sesión',
@@ -94,6 +94,5 @@ export const settings = [
                 <InstagramIcon sx={{ mr: 1, ml: 1 }} />
             </>
         ),
-        route: '/auth/login',
     },
 ]
