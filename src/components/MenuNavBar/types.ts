@@ -10,5 +10,5 @@ export type Props = {
     isDrawerOpenButton: boolean
     closeDrawerButton: () => void
     buttonName: string
-    userRole: User
+    userRole: User | null
 }

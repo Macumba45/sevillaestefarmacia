@@ -75,7 +75,7 @@ const Home: FC = () => {
                     isDrawerOpen={isDrawerOpen}
                     buttonName={buttonName}
                     onLogOut={() => logOut()}
-                    userRole={currentUser as User}
+                    userRole={currentUser}
                 />
             </NavContainer>
             <ContainerConocenos>
