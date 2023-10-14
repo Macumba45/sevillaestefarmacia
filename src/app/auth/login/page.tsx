@@ -15,6 +15,7 @@ import Stack from '@mui/material/Stack'
 import LoadingButton from '@mui/lab/LoadingButton'
 import { SpanError } from './styles'
 import { setAuthenticatedToken } from '../../../../storage/storage'
+import { handleLoginUser } from '../../../services/auth'
 
 const Login: FC = () => {
     const router = useRouter()
@@ -29,20 +30,14 @@ const Login: FC = () => {
         if (email && password) {
             try {
                 setLoading(true)
-                const response = await fetch('/api/auth/login', {
-                    method: 'POST',
-                    body: JSON.stringify({ email, password }),
-                    headers: { 'Content-Type': 'application/json' },
-                })
-                if (response.ok) {
-                    const data = await response.json()
-                    setAuthenticatedToken(data.token) // Almacena el token JWT en el estado
+                const login = await handleLoginUser(email, password)
+                if (login) {
                     router.push('/')
                     // Realiza alguna acción en respuesta al éxito
                 } else {
                     // Error al hacer login de usuario
                     setLoading(false)
-                    const errorMessage = await response.text()
+                    const errorMessage = 'Error al iniciar sesión'
                     setError(errorMessage)
                 }
             } catch (error) {

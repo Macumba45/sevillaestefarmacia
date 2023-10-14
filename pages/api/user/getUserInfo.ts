@@ -26,7 +26,7 @@ export default async function handler(
                 return
             }
             delete user.password
-            res.status(200).json({ user })
+            res.status(200).json(user)
         } catch (error: any) {
             res.status(400).json({ message: error.message })
         }

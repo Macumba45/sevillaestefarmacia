@@ -1,6 +1,6 @@
 import { setAuthenticatedToken } from '../../storage/storage'
 
-export const handleLoginDashboard = async (email: string, password: string) => {
+export const handleLoginUser = async (email: string, password: string) => {
     try {
         const response = await fetch('/api/auth/login', {
             method: 'POST',

@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from 'react'
-import { handleLoginDashboard } from '../../../../services/auth'
+import { handleLoginUser } from '../../../../services/auth'
 import { useRouter } from 'next/navigation'
 
 export const useLogicLogin = () => {
@@ -8,7 +8,7 @@ export const useLogicLogin = () => {
     const [password, setPassword] = useState<string>('')
 
     const handleLogin = async () => {
-        await handleLoginDashboard(email, password)
+        await handleLoginUser(email, password)
         router.push('/dashboard')
     }
 

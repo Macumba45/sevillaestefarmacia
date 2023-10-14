@@ -17,7 +17,7 @@ export const useLogicDashboard = () => {
     const [route, setRoute] = useState('servicios')
     const [userLoaded, setUserLoaded] = useState(false)
     const [open, setOpen] = useState(false)
-    const [services, setServices] = useState<Services[]>([])
+    const [services, setServices] = useState<Services[]>()
     const [openEditModal, setOpenEditModal] = useState(false)
     const [serviceData, setServiceData] = useState<Services>()
     const [isEditing, setIsEditing] = useState(false)
@@ -29,24 +29,16 @@ export const useLogicDashboard = () => {
     const getUserInfoData = useCallback(async () => {
         setIsLoading(true)
         const userInfo = await getUserInfo()
-        setCurrentUser(userInfo.user)
+        setCurrentUser(userInfo as User)
     }, [])
 
-    const createNewService = useCallback(
-        async (service: Services) => {
-            const createdService = await createService(service)
-            if (createdService) {
-                setServices([...services, createdService])
-                console.log([...services, createdService])
-                await getServiceData()
-            }
-        },
-        [services]
-    )
+    const createNewService = useCallback(async (service: Services) => {
+        const createdService = await createService(service)
+        return createdService
+    }, [])
 
     const getServiceData = useCallback(async () => {
         const services = await getServices()
-        if (!services) return
         setServices(services)
         setIsLoading(false)
         return services

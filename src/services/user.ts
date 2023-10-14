@@ -1,6 +1,7 @@
 import { getAuthenticatedToken } from '../../storage/storage'
+import { User } from '../../types/types'
 
-export const getUserInfo = async () => {
+export const getUserInfo = async (): Promise<User | undefined> => {
     try {
         const token = getAuthenticatedToken()
         const headers = {

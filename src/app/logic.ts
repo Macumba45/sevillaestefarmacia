@@ -13,7 +13,7 @@ export const useLogicHome = () => {
     const getUserInfoDetails = async () => {
         setIsLoading(true)
         const userInfo = await getUserInfo()
-        setCurrentUser(userInfo.user)
+        setCurrentUser(userInfo as User)
         setIsLoading(false)
     }
 
