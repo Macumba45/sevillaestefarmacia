@@ -1,5 +1,5 @@
 'use client'
-import { FC, useEffect } from 'react'
+import { FC, memo, useEffect } from 'react'
 import { useLogicDashboard } from './logic'
 import { getAuthenticatedToken } from '../../../storage/storage'
 import { Props } from './types'
@@ -31,16 +31,16 @@ import SearchInputComp from '@/components/InpuntSearch'
 import ServiceFormModal from '@/components/ModalServices'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import DeleteConfirmationModal from '@/components/ModalConfirmationDelete'
+import CircularIndeterminate from '@/components/Loader'
 import {
     CardServicesContainer,
     CitasContainer,
     LoadingContainer,
 } from './styles'
-import CircularIndeterminate from '@/components/Loader'
 
 const drawerWidth = 240
 
-const ResponsiveDrawer: FC<Props> = props => {
+const Dashboard: FC<Props> = props => {
     const {
         currentUser,
         getUserInfoData,
@@ -70,6 +70,7 @@ const ResponsiveDrawer: FC<Props> = props => {
     } = useLogicDashboard()
 
     const { window } = props
+
     const container =
         window !== undefined ? () => window().document.body : undefined
 
@@ -158,14 +159,6 @@ const ResponsiveDrawer: FC<Props> = props => {
             </List>
         </div>
     )
-
-    if (isLoading) {
-        return (
-            <LoadingContainer>
-                <CircularIndeterminate />
-            </LoadingContainer>
-        )
-    }
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -256,142 +249,159 @@ const ResponsiveDrawer: FC<Props> = props => {
                 }}
             >
                 <Toolbar />
-                {route === 'dashboard' && (
-                    // Aquí renderiza el contenido del dashboard
-                    <Typography paragraph>Contenido del Dashboard</Typography>
-                )}
-                {route === 'servicios' && (
-                    <>
-                        <CardServicesContainer>
-                            <FloatAddServices onClick={handleOpenModaService} />
-                            {open && (
-                                <ServiceFormModal
-                                    open={open}
-                                    onClose={() => setOpen(false)}
-                                    isEditing={isEditing}
-                                    serviceData={serviceData}
-                                />
-                            )}
-                            {services?.length === 0 ? (
-                                <Typography
-                                    sx={{
-                                        textAlign: 'center',
-                                        fontSize: '1.2rem',
-                                        fontWeight: 600,
-                                        marginTop: '1rem',
+                {isLoading ? (
+                    <LoadingContainer>
+                        <CircularIndeterminate />
+                    </LoadingContainer>
+                ) : (
+                    <div>
+                        {route === 'dashboard' && (
+                            <Typography paragraph>
+                                Contenido del Dashboard
+                            </Typography>
+                        )}
+                        {route === 'servicios' && (
+                            <>
+                                <CardServicesContainer>
+                                    <FloatAddServices
+                                        onClick={handleOpenModaService}
+                                    />
+                                    {open && (
+                                        <ServiceFormModal
+                                            open={open}
+                                            onClose={() => setOpen(false)}
+                                            isEditing={isEditing}
+                                            serviceData={serviceData}
+                                        />
+                                    )}
+                                    {services?.length === 0 ? (
+                                        <Typography
+                                            sx={{
+                                                textAlign: 'center',
+                                                fontSize: '1.2rem',
+                                                fontWeight: 600,
+                                                marginTop: '1rem',
+                                            }}
+                                        >
+                                            No hay servicios disponibles
+                                        </Typography>
+                                    ) : (
+                                        services?.map(item => (
+                                            <CardDashboardServices
+                                                service={item}
+                                                key={item.id}
+                                                onEdit={() =>
+                                                    openEditModalFunction(item)
+                                                }
+                                                onDelete={() =>
+                                                    handleDeleteClick(
+                                                        item.id as string
+                                                    )
+                                                }
+                                            />
+                                        ))
+                                    )}
+                                    {openDeleteModal && (
+                                        <DeleteConfirmationModal
+                                            open={openDeleteModal}
+                                            onClose={closeModalDelete}
+                                            onDelete={handleConfirmDelete}
+                                        />
+                                    )}
+                                </CardServicesContainer>
+                            </>
+                        )}
+                        {route === 'citas' && (
+                            <CitasContainer>
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        flexDirection: 'row',
+                                        alignItems: 'center',
+                                        width: '100%',
+                                        height: 80,
+                                        marginLeft: 40,
                                     }}
                                 >
-                                    No hay servicios disponibles
-                                </Typography>
-                            ) : (
-                                services?.map(item => (
-                                    <CardDashboardServices
-                                        service={item}
-                                        key={item.id}
-                                        onEdit={() =>
-                                            openEditModalFunction(item)
-                                        }
-                                        onDelete={() =>
-                                            handleDeleteClick(item.id as string)
-                                        }
-                                    />
-                                ))
-                            )}
-                            {openDeleteModal && (
-                                <DeleteConfirmationModal
-                                    open={openDeleteModal}
-                                    onClose={closeModalDelete}
-                                    onDelete={handleConfirmDelete}
-                                />
-                            )}
-                        </CardServicesContainer>
-                    </>
-                )}
-                {route === 'citas' && (
-                    <CitasContainer>
-                        <div
-                            style={{
-                                display: 'flex',
-                                flexDirection: 'row',
-                                alignItems: 'center',
-                                width: '100%',
-                                height: 80,
-                                marginLeft: 40,
-                            }}
-                        >
-                            <DatePickerComp />
-                            <SearchInputComp />
-                        </div>
+                                    <DatePickerComp />
+                                    <SearchInputComp />
+                                </div>
 
-                        <AlignItemsList
-                            serviceType="Pendientes"
-                            user="Juan Rodriguez"
-                            date="12/12/2021 a las 12:00"
-                            phone="123456789"
-                        />
-                        <AlignItemsList
-                            serviceType="Pendientes"
-                            user="Pedro Rodriguez"
-                            date="12/12/2021 a las 12:00"
-                            phone="123456789"
-                        />
-                        <AlignItemsList
-                            serviceType="Pendientes"
-                            user="Juan Rodriguez"
-                            date="12/12/2021 a las 12:00"
-                            phone="123456789"
-                        />
-                        <AlignItemsList
-                            serviceType="Pendientes"
-                            user="Ana Rodriguez"
-                            date="12/12/2021 a las 12:00"
-                            phone="123456789"
-                        />
-                        <AlignItemsList
-                            serviceType="Pendientes"
-                            user="Ramon Rodriguez"
-                            date="12/12/2021 a las 12:00"
-                            phone="123456789"
-                        />
-                        <AlignItemsList
-                            serviceType="Pendientes"
-                            user="Pepe Rodriguez"
-                            date="12/12/2021 a las 12:00"
-                            phone="123456789"
-                        />
-                        <AlignItemsList
-                            serviceType="Pendientes"
-                            user="Gonzalo Rodriguez"
-                            date="12/12/2021 a las 12:00"
-                            phone="123456789"
-                        />
-                    </CitasContainer>
-                )}
-                {route === 'blog' && (
-                    <>
-                        <FloatAddServices onClick={handleOpenModaService} />
-                        {/* {open && (
-                            <ServiceFormModal
-                                open={open}
-                                onClose={() => setOpen(false)}
-                            />
-                        )} */}
-                    </>
-                )}
-                {route === 'clientes' && (
-                    <>
-                        <FloatAddServices onClick={handleOpenModaService} />
-                        {/* {open && (
-                            <ServiceFormModal
-                                open={open}
-                                onClose={() => closeEditModalFunction()}
-                            />
-                        )} */}
-                    </>
+                                <AlignItemsList
+                                    serviceType="Pendientes"
+                                    user="Juan Rodriguez"
+                                    date="12/12/2021 a las 12:00"
+                                    phone="123456789"
+                                />
+                                <AlignItemsList
+                                    serviceType="Pendientes"
+                                    user="Pedro Rodriguez"
+                                    date="12/12/2021 a las 12:00"
+                                    phone="123456789"
+                                />
+                                <AlignItemsList
+                                    serviceType="Pendientes"
+                                    user="Juan Rodriguez"
+                                    date="12/12/2021 a las 12:00"
+                                    phone="123456789"
+                                />
+                                <AlignItemsList
+                                    serviceType="Pendientes"
+                                    user="Ana Rodriguez"
+                                    date="12/12/2021 a las 12:00"
+                                    phone="123456789"
+                                />
+                                <AlignItemsList
+                                    serviceType="Pendientes"
+                                    user="Ramon Rodriguez"
+                                    date="12/12/2021 a las 12:00"
+                                    phone="123456789"
+                                />
+                                <AlignItemsList
+                                    serviceType="Pendientes"
+                                    user="Pepe Rodriguez"
+                                    date="12/12/2021 a las 12:00"
+                                    phone="123456789"
+                                />
+                                <AlignItemsList
+                                    serviceType="Pendientes"
+                                    user="Gonzalo Rodriguez"
+                                    date="12/12/2021 a las 12:00"
+                                    phone="123456789"
+                                />
+                            </CitasContainer>
+                        )}
+                        {route === 'blog' && (
+                            <>
+                                <FloatAddServices
+                                    onClick={handleOpenModaService}
+                                />
+                                {/* {open && (
+                    <ServiceFormModal
+                        open={open}
+                        onClose={() => setOpen(false)}
+                    />
+                )} */}
+                            </>
+                        )}
+                        {route === 'clientes' && (
+                            <>
+                                <FloatAddServices
+                                    onClick={handleOpenModaService}
+                                />
+                                {/* {open && (
+                    <ServiceFormModal
+                        open={open}
+                        onClose={() => closeEditModalFunction()}
+                    />
+                )} */}
+                            </>
+                        )}
+                    </div>
                 )}
             </Box>
         </Box>
     )
 }
 
-export default ResponsiveDrawer
+export default memo(Dashboard)

@@ -76,5 +76,6 @@ export const useLogicHome = () => {
         isDrawerOpenButton,
         isLoading,
         logOut,
+        currentUser,
     }
 }

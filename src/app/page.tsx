@@ -25,6 +25,7 @@ import {
     LoadingContainer,
 } from './styles'
 import CircularIndeterminate from '@/components/Loader'
+import { User } from '../../types/types'
 
 const Home: FC = () => {
     const {
@@ -39,6 +40,7 @@ const Home: FC = () => {
         isDrawerOpenButton,
         buttonName,
         isLoading,
+        currentUser,
     } = useLogicHome()
 
     useEffect(() => {
@@ -59,6 +61,7 @@ const Home: FC = () => {
             </LoadingContainer>
         )
     }
+
     return (
         <div>
             <NavContainer>
@@ -72,6 +75,7 @@ const Home: FC = () => {
                     isDrawerOpen={isDrawerOpen}
                     buttonName={buttonName}
                     onLogOut={() => logOut()}
+                    userRole={currentUser as User}
                 />
             </NavContainer>
             <ContainerConocenos>

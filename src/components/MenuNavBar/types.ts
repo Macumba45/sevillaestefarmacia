@@ -1,3 +1,5 @@
+import { User } from '../../../types/types'
+
 export type Props = {
     onLogOut: () => void
     handleOpenNavMenu: () => void
@@ -8,4 +10,5 @@ export type Props = {
     isDrawerOpenButton: boolean
     closeDrawerButton: () => void
     buttonName: string
+    userRole: User
 }

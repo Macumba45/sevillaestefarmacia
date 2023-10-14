@@ -16,6 +16,7 @@ import { ButtonLoginContainer, LogoImg, stylesNavBar } from './styles'
 import { Props } from './types'
 import { pages, pagesMobile, settings } from './utility'
 import { Divider } from '@mui/material'
+import InstagramIcon from '@mui/icons-material/Instagram'
 
 const ResponsiveAppBar: FC<Props> = ({
     onLogOut,
@@ -26,7 +27,28 @@ const ResponsiveAppBar: FC<Props> = ({
     handleCloseNavMenu,
     closeDrawerButton,
     buttonName,
+    userRole,
 }) => {
+    const settings = [
+        {
+            name: userRole?.role === 'admin' ? 'Ir al dashboard' : 'Mi perfil',
+            icon: (
+                <>
+                    <InstagramIcon sx={{ mr: 1, ml: 1 }} />
+                </>
+            ),
+            route: '/perfil',
+        },
+        {
+            name: 'Cerrar sesión',
+            icon: (
+                <>
+                    <InstagramIcon sx={{ mr: 1, ml: 1 }} />
+                </>
+            ),
+            route: '/auth/login',
+        },
+    ]
     return (
         <AppBar style={stylesNavBar} position="sticky">
             <Container maxWidth="xl">
