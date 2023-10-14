@@ -1,6 +1,9 @@
 'use client'
 
 import { FC, useEffect, useState } from 'react'
+import { handleLoginUser } from '../../../services/auth'
+import { useRouter } from 'next/navigation'
+import { SpanError } from './styles'
 import Avatar from '@mui/material/Avatar'
 import CssBaseline from '@mui/material/CssBaseline'
 import TextField from '@mui/material/TextField'
@@ -10,12 +13,8 @@ import Box from '@mui/material/Box'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
-import { useRouter } from 'next/navigation'
 import Stack from '@mui/material/Stack'
 import LoadingButton from '@mui/lab/LoadingButton'
-import { SpanError } from './styles'
-import { setAuthenticatedToken } from '../../../../storage/storage'
-import { handleLoginUser } from '../../../services/auth'
 
 const Login: FC = () => {
     const router = useRouter()
@@ -37,7 +36,7 @@ const Login: FC = () => {
                 } else {
                     // Error al hacer login de usuario
                     setLoading(false)
-                    const errorMessage = 'Error al iniciar sesión'
+                    const errorMessage = 'Usuario o contraseña incorrectos'
                     setError(errorMessage)
                 }
             } catch (error) {
@@ -112,9 +111,7 @@ const Login: FC = () => {
                             type="password"
                             id="password"
                         />
-                        {error && (
-                            <SpanError>Error al iniciar sesión</SpanError>
-                        )}
+                        {error && <SpanError>{error}</SpanError>}
 
                         <Stack direction="row" mb={2} mt={2} spacing={2}>
                             <LoadingButton
