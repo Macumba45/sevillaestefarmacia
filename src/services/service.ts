@@ -15,7 +15,7 @@ const notificationSuccess = (serviceName: string) => {
     })
 }
 
-export const getServices = async () => {
+export const getServices = async (): Promise<Services[] | undefined> => {
     try {
         const headers = {
             'Content-Type': 'application/json',
@@ -36,7 +36,9 @@ export const getServices = async () => {
     }
 }
 
-export const createService = async (service: Services) => {
+export const createService = async (
+    service: Services
+): Promise<Services | undefined> => {
     try {
         const headers = {
             'Content-Type': 'application/json',
@@ -60,7 +62,9 @@ export const createService = async (service: Services) => {
     }
 }
 
-export const updateService = async (service: Services) => {
+export const updateService = async (
+    service: Services
+): Promise<Services | undefined> => {
     try {
         const headers = {
             'Content-Type': 'application/json',
@@ -84,10 +88,12 @@ export const updateService = async (service: Services) => {
     }
 }
 
-export const deleteService = async (serviceId: string) => {
+export const deleteService = async (
+    serviceId: string
+): Promise<Services | undefined> => {
     try {
         const headers = {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application.json',
             Authorization: `Bearer ${token}`,
         }
         const response = await fetch(

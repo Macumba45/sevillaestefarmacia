@@ -72,6 +72,7 @@ const ResponsiveDrawer: FC<Props> = props => {
     const { window } = props
     const container =
         window !== undefined ? () => window().document.body : undefined
+
     useEffect(() => {
         if (getAuthenticatedToken()) {
             getUserInfoData()
