@@ -14,7 +14,7 @@ export const findUserEmail = async (email: string): Promise<User | null> => {
     const user: User = {
         id: prismaUser.id,
         email: prismaUser.email,
-        name: prismaUser.name as string,
+        name: prismaUser.name,
         password: prismaUser.password,
         role: prismaUser.role,
     }

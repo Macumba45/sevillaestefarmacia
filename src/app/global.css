@@ -1,0 +1,16 @@
+/* global.css */
+
+/* Establecer Cormorant Garamond como la fuente predeterminada */
+body {
+    font-family: 'Cormorant Garamond', serif;
+}
+
+/* Asegurarse de que todos los elementos de texto utilicen la fuente deseada */
+h1,
+h2,
+h3,
+p,
+a,
+span {
+    font-family: 'Cormorant Garamond', serif;
+}

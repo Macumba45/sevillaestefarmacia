@@ -1,5 +1,18 @@
 import styled from 'styled-components'
 
+export const ContainerDesktop = styled.div`
+    margin-top: 5rem;
+    @media screen and (min-width: 899px) {
+        display: flex;
+    }
+`
+
+export const ContainerDesktopServices = styled.div`
+    @media screen and (min-width: 899px) {
+        display: flex;
+    }
+`
+
 export const LoadingContainer = styled.div`
     display: flex;
     justify-content: center;
@@ -23,41 +36,61 @@ export const ContainerConocenos = styled.section`
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    margin-top: 5rem;
     width: 100%;
-    height: 90vh;
-    background-color: #eaeaea;
+    height: 350px;
+    margin-top: 5rem;
+    background-color: #fdf1f1;
 `
 export const ContainerImgHome = styled.div`
     display: flex;
     width: 100%;
+    height: 100vh;
     justify-content: center;
     align-items: center;
+
+    @media screen and (min-width: 899px) {
+    }
 `
 
 export const ContainerDermo = styled.div`
     display: flex;
     flex-direction: column;
+    justify-content: center;
     width: 100%;
-    height: 90vh;
-    background-color: #c2e0ff;
+    height: 600px;
+    background-color: #ebf0f6;
     @media screen and (min-width: 899px) {
-        height: 110vh;
+        height: 100vh;
+    }
+`
+
+export const ContainerNutricion = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 600px;
+    background-color: #f6f6eb;
+    @media screen and (min-width: 899px) {
+        height: 100vh;
     }
 `
 
 export const ImgConocenos = styled.img`
     width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    object-position: center; /* Ajusta la posición de la imagen al centro */
 `
 
 export const TitleConocenos = styled.h1`
-    font-size: 2rem;
+    font-size: 1.8rem;
     color: black;
     margin-top: 2rem;
     text-align: center;
-    font-family: Roboto, sans-serif;
+    font-family: 'Cormorant Garamond', serif;
     @media screen and (min-width: 899px) {
-        font-size: 4rem;
+        font-size: 3rem;
     }
 `
 
@@ -67,10 +100,11 @@ export const SubtitleConocenos = styled.h2`
     margin-top: 2rem;
     text-align: center;
     line-height: 2rem;
-    font-family: Roboto, sans-serif;
+    width: 250px;
     @media screen and (min-width: 899px) {
-        font-size: 2.5rem;
+        font-size: 2rem;
         line-height: 4rem;
+        width: 100%;
     }
 `
 
@@ -82,19 +116,16 @@ export const ButtonContainerConocenos = styled.div`
 
 export const TitleDermo = styled.h1`
     font-size: 2rem;
-    margin-top: 5rem;
     margin-bottom: 1rem;
     color: black;
-    margin-left: 1rem;
     text-align: left;
-    font-family: Roboto, sans-serif;
-    line-height: 3rem;
+    padding-left: 2rem;
+    line-height: 2.5rem;
     font-weight: 500;
     @media screen and (min-width: 899px) {
-        font-size: 4rem;
-        line-height: 5rem;
+        font-size: 3rem;
+        line-height: 3rem;
         margin-left: 2rem;
-        margin-top: 5rem;
     }
 `
 export const SubtitleDermo = styled.h2`
@@ -110,11 +141,9 @@ export const SubtitleDermo = styled.h2`
     margin-top: 3rem;
     margin-bottom: 3rem;
     line-height: 2rem;
-    font-family: Roboto, sans-serif;
     @media screen and (min-width: 899px) {
-        font-size: 2.5rem;
-        line-height: 4rem;
-        min-width: 300px;
+        font-size: 2rem;
+        line-height: 2rem;
     }
 `
 
@@ -123,14 +152,15 @@ export const DescriptionDermo = styled.p`
     font-size: 1.5rem;
     color: black;
     text-align: center;
-    line-height: 2.5rem;
-    font-family: Roboto, sans-serif;
+    line-height: 2rem;
     font-weight: 300;
-    text-align: center;
     margin: 0 auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
+
     @media screen and (min-width: 899px) {
         font-size: 2rem;
-        line-height: 4rem;
+        line-height: 2.5rem;
     }
 `
 
@@ -140,24 +170,12 @@ export const ButtonContainerDermo = styled.div`
     margin-top: 3rem;
 `
 
-export const ContainerNutricion = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100vh;
-    background-color: #fffccf;
-    @media screen and (min-width: 899px) {
-        height: 110vh;
-    }
-`
-
 export const DescriptionNutricion = styled.p`
     display: flex;
     font-size: 1.5rem;
     color: black;
     text-align: center;
     line-height: 2.5rem;
-    font-family: Roboto, sans-serif;
     font-weight: 300;
     text-align: center;
     margin: 0 auto;

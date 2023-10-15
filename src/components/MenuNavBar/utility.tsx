@@ -3,8 +3,8 @@ import { User } from '../../../types/types'
 
 export const pages = [
     {
-        name: 'Servicios',
-        route: '/servicios',
+        name: 'Farmacia',
+        route: '/conocenos',
     },
     ,
     {
@@ -26,19 +26,19 @@ export const pages = [
                 <InstagramIcon sx={{ mr: 1, ml: 1 }} />
             </>
         ),
-        route: 'https://www.instagram.com/farmaciasantabarbara/',
+        route: 'https://www.instagram.com/sevillaestefarmacia/',
     },
 ]
 
 export const pagesMobile = [
     {
-        name: 'Servicios',
+        name: 'Farmacia',
         icon: (
             <>
                 <InstagramIcon sx={{ mr: 1, ml: 1 }} />
             </>
         ),
-        route: '/servicios',
+        route: '/conocenos',
     },
     {
         name: 'Talleres',
@@ -74,7 +74,7 @@ export const pagesMobile = [
                 <InstagramIcon sx={{ mr: 1, ml: 1 }} />
             </>
         ),
-        route: 'https://www.instagram.com/farmaciasantabarbara/',
+        route: 'https://www.instagram.com/sevillaestefarmacia/',
     },
 ]
 

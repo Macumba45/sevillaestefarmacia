@@ -107,6 +107,11 @@ const ResponsiveAppBar: FC<Props> = ({
                                                 display: 'flex',
                                             }}
                                             href={page?.route as string}
+                                            target={
+                                                page.name === 'Síguenos'
+                                                    ? '_blank'
+                                                    : ''
+                                            }
                                         >
                                             <div
                                                 style={{
@@ -172,6 +177,7 @@ const ResponsiveAppBar: FC<Props> = ({
                                         fontWeight: 500,
                                     }}
                                     href={page?.route as string}
+                                    target={page?.name === '' ? '_blank' : ''}
                                 >
                                     <div
                                         style={{

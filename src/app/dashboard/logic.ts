@@ -11,7 +11,7 @@ import {
 
 export const useLogicDashboard = () => {
     const [currentUser, setCurrentUser] = useState<User>()
-    const [titleDrawer, setTitleDrawer] = useState<string>('Dashboard')
+    const [titleDrawer, setTitleDrawer] = useState<string>('servicios')
     const router = useRouter()
     const [mobileOpen, setMobileOpen] = useState(false)
     const [route, setRoute] = useState('servicios')

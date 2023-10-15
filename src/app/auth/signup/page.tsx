@@ -2,9 +2,17 @@
 
 import { FC, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { createTheme, ThemeProvider } from '@mui/material/styles'
+import { setAuthenticatedToken } from '../../../../storage/storage'
 import { LoadingButton } from '@mui/lab'
-import { Checkbox, FormControlLabel, Snackbar, Stack } from '@mui/material'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
+import {
+    Checkbox,
+    FormControl,
+    FormControlLabel,
+    InputLabel,
+    Snackbar,
+    Stack,
+} from '@mui/material'
 import Avatar from '@mui/material/Avatar'
 import CssBaseline from '@mui/material/CssBaseline'
 import TextField from '@mui/material/TextField'
@@ -15,7 +23,6 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import MuiAlert from '@mui/material/Alert'
-import { setAuthenticatedToken } from '../../../../storage/storage'
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme()
@@ -27,6 +34,7 @@ const SignUp: FC = () => {
     const [hasReadConditions, setHasReadConditions] = useState(false)
     const [snackbarOpen, setSnackbarOpen] = useState(false)
     const [successSnackbarOpen, setSuccessSnackbarOpen] = useState(false)
+    const [showDateInput, setShowDateInput] = useState(false)
 
     const handleSnackbarClose = (event?: any, reason?: string) => {
         if (reason === 'clickaway') {
@@ -54,6 +62,7 @@ const SignUp: FC = () => {
         const email = (formData.get('email') as string).toLowerCase()
         const password = formData.get('password') as string
         const phone = formData.get('phone') as string
+        const date = formData.get('birthday') as string
 
         if (email && password && name && phone) {
             try {
@@ -81,8 +90,6 @@ const SignUp: FC = () => {
             }
         } else {
             setSnackbarOpen(true)
-
-            console.log('Los valores de email y/o password son nulos')
         }
     }
 
@@ -103,7 +110,7 @@ const SignUp: FC = () => {
     }, [])
 
     // Define el título dinámico
-    const dynamicTitle = 'Farmaacia Santa Bárbara - Registro'
+    const dynamicTitle = 'Farmacia Santa Bárbara - Registro'
 
     // Actualiza el título cuando el componente se monta
     useEffect(() => {
@@ -165,6 +172,49 @@ const SignUp: FC = () => {
                                         }}
                                     />
                                 </Grid>
+                                {/* <Grid item xs={12} sm={12}>
+                                    <TextField
+                                        autoComplete="given-name"
+                                        name="lastName"
+                                        required
+                                        fullWidth
+                                        id="lastName"
+                                        label="Apellidos"
+                                        autoFocus
+                                        inputProps={{
+                                            select: {
+                                                '&:before': {
+                                                    borderColor: 'black',
+                                                },
+                                                '&:after': {
+                                                    borderColor: 'black',
+                                                },
+                                            },
+                                        }}
+                                    />
+                                </Grid> */}
+                                {/* <Grid item xs={12} sm={12}>
+                                    <FormControl fullWidth>
+                                        {showDateInput ? (
+                                            <TextField
+                                                type="date"
+                                                name="birthday"
+                                                fullWidth
+                                            />
+                                        ) : (
+                                            <>
+                                                <InputLabel htmlFor="birthday">
+                                                    Fecha de nacimiento
+                                                </InputLabel>
+                                                <TextField
+                                                    onClick={() =>
+                                                        setShowDateInput(true)
+                                                    }
+                                                />
+                                            </>
+                                        )}
+                                    </FormControl>
+                                </Grid> */}
                                 <Grid item xs={12} sm={12}>
                                     <TextField
                                         autoComplete="phone"
@@ -195,7 +245,6 @@ const SignUp: FC = () => {
                                         id="email"
                                         label="Email"
                                         name="email"
-                                        autoComplete="email"
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
@@ -206,7 +255,6 @@ const SignUp: FC = () => {
                                         label="Contraseña"
                                         type="password"
                                         id="password"
-                                        autoComplete="new-password"
                                     />
                                 </Grid>
                                 {/* <Grid item xs={12}>

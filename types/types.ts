@@ -5,6 +5,7 @@ export type User = {
     name?: string
     role?: string
     phone?: string
+    birthdate?: string
 }
 
 export type LoginRequestBody = {

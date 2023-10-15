@@ -46,6 +46,7 @@ const CardDashboardServices: FC<Props> = ({ service, onEdit, onDelete }) => {
                             color: 'green',
                             fontSize: '16px',
                             fontWeight: 600,
+                            fontFamily: 'Roboto',
                         }}
                     >
                         {service.price}€

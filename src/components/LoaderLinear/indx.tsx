@@ -12,15 +12,13 @@ interface Props {
 const LinearIndeterminate: FC<Props> = ({ width, label }) => {
     return (
         <Box sx={{ width: width }}>
-            {label && (
-                <Typography
-                    textAlign={'center'}
-                    variant="subtitle1"
-                    marginBottom={1}
-                >
-                    {label}
-                </Typography>
-            )}
+            <Typography
+                textAlign={'center'}
+                variant="subtitle1"
+                marginBottom={1}
+            >
+                {label}
+            </Typography>
             <LinearProgress />
         </Box>
     )

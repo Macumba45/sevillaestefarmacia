@@ -21,10 +21,10 @@ export const useLogicLogin = () => {
     }
 
     return {
-        handleLogin,
+        email,
         handleChangeEmail,
         handleChangePassword,
-        email,
+        handleLogin,
         password,
     }
 }

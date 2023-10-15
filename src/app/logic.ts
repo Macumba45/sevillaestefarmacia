@@ -68,6 +68,7 @@ export const useLogicHome = () => {
         buttonName,
         closeDrawer,
         closeDrawerButton,
+        currentUser,
         getUserInfoDetails,
         handleButtonClick,
         handleCloseNavMenu,
@@ -76,6 +77,6 @@ export const useLogicHome = () => {
         isDrawerOpenButton,
         isLoading,
         logOut,
-        currentUser,
+        setIsLoading,
     }
 }

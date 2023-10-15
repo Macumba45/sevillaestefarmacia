@@ -1,5 +1,6 @@
 import React from 'react'
 import './reset.css'
+import './global.css'
 import StyledComponentsRegistryAntd from '@/lib/AntdRegistry'
 import StyledComponentsRegistry from '@/lib/StyledComponentsRegistry'
 
@@ -14,6 +15,10 @@ const RootLayout = ({ children }: React.PropsWithChildren) => (
             <link
                 rel="stylesheet"
                 href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
+            />
+            <link
+                rel="stylesheet"
+                href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap"
             />
         </head>
 

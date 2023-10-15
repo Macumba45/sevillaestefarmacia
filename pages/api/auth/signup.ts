@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import jwt from 'jsonwebtoken'
 import { createUser, findUserEmail } from '../controllers/user'
 import { User } from '../../../types/types'
+import { type } from 'os'
 // import { sendEmailNewUser } from '../nodeMailer/newUser'
 // import { newUserNotification } from '../nodeMailer/newUserNotification'
 const bcrypt = require('bcrypt')
@@ -12,17 +13,7 @@ const handleSubmitSignUp = async (
 ) => {
     const { email, password, name, phone } = req.body
     const userExists = await findUserEmail(email)
-    if (
-        typeof email !== 'string' ||
-        typeof password !== 'string' ||
-        typeof name !== 'string' ||
-        typeof phone !== 'string'
-    ) {
-        res.status(400).json({
-            message: 'Email and password must be strings in the request body',
-        })
-        return
-    }
+
     if (userExists) {
         res.status(400).json({ message: 'User already exists' })
         return
@@ -43,8 +34,9 @@ const handleSubmitSignUp = async (
         // Reemplaza la contraseña en el objeto userData
         userData.password = hashedPassword
         // Guarda el usuario en la base de datos con la contraseña cifrada
-        const user = createUser(email, hashedPassword, name, phone)
-        const token = jwt.sign({ userData }, 'token')
+        const user = await createUser(email, hashedPassword, name, phone)
+        const userId = user?.id // Obtén el ID del usuario recién creado
+        const token = jwt.sign({ userId }, 'token') // Incluye el ID del usuario en el token
         res.status(200).json({
             message: 'User created successfully',
             user,
