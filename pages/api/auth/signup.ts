@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import jwt from 'jsonwebtoken'
 import { createUser, findUserEmail } from '../controllers/user'
 import { User } from '../../../types/types'
-import { type } from 'os'
+import jwt from 'jsonwebtoken'
+
 // import { sendEmailNewUser } from '../nodeMailer/newUser'
 // import { newUserNotification } from '../nodeMailer/newUserNotification'
 const bcrypt = require('bcrypt')

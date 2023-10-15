@@ -3,26 +3,23 @@
 import { FC, memo, useEffect } from 'react'
 import { useLogicHome } from './logic'
 import { getAuthenticatedToken } from '../../storage/storage'
+import Services from '@/components/Services'
 import ResponsiveAppBar from '@/components/MenuNavBar'
 import { Button } from '@mui/material'
-import conocenosImg from '../assets/HOME/conocenos.webp'
-import cerezas from '../assets/HOME/8552022.jpg'
 import CircularIndeterminate from '@/components/Loader'
+import dermo from '../assets/HOME/DERMO_FOTO.jpg'
+import nutricion from '../assets/HOME/NUTRICION_FOTO.jpg'
+import laboratorio from '../assets/HOME/LABORATORIO_FOTO.jpg'
+import spd from '../assets/HOME/SPD_FOTO.jpg'
+import pendientes from '../assets/HOME/PENDIENTES_BEBE_FOTO.png'
+import veterinaria from '../assets/HOME/VETERINARIA_FOTO.png'
 import {
     ButtonContainerConocenos,
     ContainerConocenos,
-    ContainerDermo,
-    ContainerImgHome,
-    ImgConocenos,
     NavContainer,
     SubtitleConocenos,
     TitleConocenos,
-    TitleDermo,
-    SubtitleDermo,
-    DescriptionDermo,
-    ContainerNutricion,
     LoadingContainer,
-    ContainerDesktopServices,
 } from './styles'
 
 const Home: FC = () => {
@@ -101,75 +98,85 @@ const Home: FC = () => {
                     </Button>
                 </ButtonContainerConocenos>
             </ContainerConocenos>
-            <ContainerDesktopServices>
-                <ContainerDermo>
-                    <TitleDermo>
-                        DERMOCOSMÉTICA <br /> FARMACÉUTICA
-                    </TitleDermo>
-                    <SubtitleDermo>Análisis de la Piel</SubtitleDermo>
-                    <DescriptionDermo>
-                        ¿Te gustaría conocer más <br /> sobre tu piel o tu salud
-                        capilar?
-                    </DescriptionDermo>
-                    <ButtonContainerConocenos>
-                        <Button
-                            variant="outlined"
-                            sx={{
-                                color: 'black',
-                                borderColor: 'black',
-                                width: '200px',
-                                borderRadius: '130px',
-                                backgroundColor: 'white',
-                                ':hover': {
-                                    backgroundColor: 'black',
-                                    color: 'white',
-                                    borderColor: 'transparent',
-                                },
-                                fontFamily: 'Cormorant Garamond',
-                            }}
-                        >
-                            Más información
-                        </Button>
-                    </ButtonContainerConocenos>
-                </ContainerDermo>
-                <ContainerImgHome>
-                    <ImgConocenos src={conocenosImg.src} />
-                </ContainerImgHome>
-            </ContainerDesktopServices>
-            <ContainerDesktopServices>
-                <ContainerImgHome>
-                    <ImgConocenos src={cerezas.src} />
-                </ContainerImgHome>
-                <ContainerNutricion>
-                    <TitleDermo>
-                        NUTRICIÓN CLÍNICA <br /> Y DEPORTIVA
-                    </TitleDermo>
-                    <SubtitleDermo>Nutrición</SubtitleDermo>
-                    <DescriptionDermo>
-                        Nuestro propósito no es llegar lo antes posible, sino
-                        darte las herramientas para llegar al objetivo dando
-                        siempre prioridad a tu salud.
-                    </DescriptionDermo>
-                    <ButtonContainerConocenos>
-                        <Button
-                            variant="outlined"
-                            sx={{
-                                color: 'black',
-                                borderColor: 'black',
-                                width: '200px',
-                                borderRadius: '130px',
-                                ':hover': {
-                                    backgroundColor: 'white',
-                                    color: 'black',
-                                    borderColor: 'white',
-                                },
-                            }}
-                        >
-                            Más información
-                        </Button>
-                    </ButtonContainerConocenos>
-                </ContainerNutricion>
-            </ContainerDesktopServices>
+            <Services
+                title="DERMOCOSMÉTICA FARMACÉUTICA"
+                subTitle="Análisis de la Piel"
+                description="¿Te gustaría conocer más sobre tu piel o tu salud capilar?"
+                buttonName="Más información"
+                backGrodunColor="#ebf0f6"
+                picture={dermo.src}
+                widthMobile="390px"
+                widthTitle="450px"
+                imagePosition="bottom"
+            />
+            <Services
+                title="NUTRICIÓN CLÍNICA Y DEPORTIVA"
+                subTitle="Nutrición"
+                description="Nuestro propósito no es llegar lo antes posible, sino darte las herramientas para llegar al objetivo dando siempre prioridad a tu salud."
+                buttonName="Más información"
+                backGrodunColor="#f6f6eb"
+                picture={nutricion.src}
+                widthMobile="390px"
+                widthDesktop="610px"
+                widthTitle="500px"
+                imagePosition="bottom"
+                flexDirection="row-reverse"
+            />
+            <Services
+                title="LABORATORIO"
+                subTitle="Formulación Magistral"
+                description="Especialistas en Formulación Magistral
+                creando fórmulas y preparados oficiales
+                con más de 30 años de experiencia."
+                buttonName="Más información"
+                backGrodunColor="#ebf0f6"
+                picture={laboratorio.src}
+                widthMobile="390px"
+                widthDesktop="540px"
+                imagePosition="bottom"
+            />
+            <Services
+                title="SISTEMA PERSONALIZADO DE DOSIFICACIÓN"
+                subTitle="SPD"
+                description="Ayudamos especialmente a familiares mayores
+                que son polimedicados o pacientes que tienen
+                dificultad para seguir su medicación."
+                buttonName="Más información"
+                backGrodunColor="#f6f6eb"
+                picture={spd.src}
+                widthMobile="390px"
+                widthDesktop="610px"
+                imagePosition="bottom"
+                flexDirection="row-reverse"
+            />
+            <Services
+                title="SUS PRIMEROS PENDIENTES"
+                subTitle="Pendientes bebé"
+                description="Nuestro servicio de pendientes cuenta
+                con un equipo sanitario de profesionales
+                farmacéuticos cualificado."
+                buttonName="Más información"
+                backGrodunColor="#ebf0f6"
+                picture={pendientes.src}
+                widthMobile="390px"
+                widthDesktop="610px"
+                widthTitle="330px"
+                imagePosition="bottom"
+            />
+            <Services
+                title="TU MASCOTA EN BUENAS MANOS"
+                subTitle="Farmacia Veterinaria"
+                description="Disponemos de productos veterinarios
+                para tus mascotas y animales de granja."
+                buttonName="Más información"
+                backGrodunColor="#f6f6eb"
+                picture={veterinaria.src}
+                widthMobile="390px"
+                widthDesktop="610px"
+                widthTitle="380px"
+                imagePosition="bottom"
+                flexDirection="row-reverse"
+            />
         </div>
     )
 }

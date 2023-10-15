@@ -14,7 +14,7 @@ import Button from '@mui/material/Button'
 import logo from '../../assets/logo/logo.png'
 import { ButtonLoginContainer, LogoImg, stylesNavBar } from './styles'
 import { Props } from './types'
-import { pages, pagesMobile, settings } from './utility'
+import { pages, pagesMobile } from './utility'
 import { Divider } from '@mui/material'
 import InstagramIcon from '@mui/icons-material/Instagram'
 

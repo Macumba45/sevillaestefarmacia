@@ -1,5 +1,4 @@
 import InstagramIcon from '@mui/icons-material/Instagram'
-import { User } from '../../../types/types'
 
 export const pages = [
     {

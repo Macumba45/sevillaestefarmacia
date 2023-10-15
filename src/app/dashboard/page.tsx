@@ -31,7 +31,6 @@ import SearchInputComp from '@/components/InpuntSearch'
 import ServiceFormModal from '@/components/ModalServices'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import DeleteConfirmationModal from '@/components/ModalConfirmationDelete'
-import CircularIndeterminate from '@/components/Loader'
 import {
     CardServicesContainer,
     CitasContainer,
