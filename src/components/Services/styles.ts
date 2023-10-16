@@ -83,14 +83,14 @@ export const DescriptionDermo = styled.p<{
     widthDesktop?: string
 }>`
     display: flex;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: black;
     text-align: center;
     line-height: 2rem;
     font-weight: 300;
     margin: 0 auto;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
     width: ${props => props.widthMobile};
     @media screen and (min-width: 899px) {
         font-size: 2rem;

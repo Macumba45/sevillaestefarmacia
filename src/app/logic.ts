@@ -1,12 +1,14 @@
 import { getUserInfo } from '@/services/user'
 import { useState } from 'react'
 import { User } from '../../types/types'
+import { useRouter } from 'next/navigation'
 
 export const useLogicHome = () => {
     const [currentUser, setCurrentUser] = useState<User | null>(null)
     const [isDrawerOpen, setIsDrawerOpen] = useState(false)
     const [isDrawerOpenButton, setIsDrawerOpenButton] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
+    const router = useRouter()
 
     //////////// NAVBARLOGIC///////////////////
 
@@ -26,7 +28,7 @@ export const useLogicHome = () => {
             openDrawerButton()
         } else {
             // Redirigir a la página de inicio de sesión
-            window.location.href = '/auth/login'
+            router.push('/auth/login')
         }
     }
 

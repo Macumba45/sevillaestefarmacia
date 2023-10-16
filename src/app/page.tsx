@@ -21,6 +21,7 @@ import {
     TitleConocenos,
     LoadingContainer,
 } from './styles'
+import Footer from '@/components/Footer'
 
 const Home: FC = () => {
     const {
@@ -105,8 +106,8 @@ const Home: FC = () => {
                 buttonName="Más información"
                 backGrodunColor="#ebf0f6"
                 picture={dermo.src}
-                widthMobile="390px"
-                widthTitle="450px"
+                widthMobile="320px"
+                widthTitle="330px"
                 imagePosition="bottom"
             />
             <Services
@@ -116,10 +117,10 @@ const Home: FC = () => {
                 buttonName="Más información"
                 backGrodunColor="#f6f6eb"
                 picture={nutricion.src}
-                widthMobile="390px"
                 widthDesktop="610px"
-                widthTitle="500px"
+                widthTitle="330px"
                 imagePosition="bottom"
+                widthMobile="320px"
                 flexDirection="row-reverse"
             />
             <Services
@@ -131,7 +132,7 @@ const Home: FC = () => {
                 buttonName="Más información"
                 backGrodunColor="#ebf0f6"
                 picture={laboratorio.src}
-                widthMobile="390px"
+                widthMobile="320px"
                 widthDesktop="540px"
                 imagePosition="bottom"
             />
@@ -144,7 +145,7 @@ const Home: FC = () => {
                 buttonName="Más información"
                 backGrodunColor="#f6f6eb"
                 picture={spd.src}
-                widthMobile="390px"
+                widthMobile="320px"
                 widthDesktop="610px"
                 imagePosition="bottom"
                 flexDirection="row-reverse"
@@ -158,7 +159,7 @@ const Home: FC = () => {
                 buttonName="Más información"
                 backGrodunColor="#ebf0f6"
                 picture={pendientes.src}
-                widthMobile="390px"
+                widthMobile="320px"
                 widthDesktop="610px"
                 widthTitle="330px"
                 imagePosition="bottom"
@@ -171,12 +172,14 @@ const Home: FC = () => {
                 buttonName="Más información"
                 backGrodunColor="#f6f6eb"
                 picture={veterinaria.src}
-                widthMobile="390px"
+                widthMobile="320px"
                 widthDesktop="610px"
-                widthTitle="380px"
+                widthTitle="330px"
                 imagePosition="bottom"
                 flexDirection="row-reverse"
             />
+
+            <Footer />
         </div>
     )
 }
