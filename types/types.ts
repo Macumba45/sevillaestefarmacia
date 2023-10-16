@@ -24,6 +24,7 @@ export type Services = {
     urlPicture: string
     urlVideo: string
     title: string
+    subtitle: string
     descripcion: string
     dates?: { date: string; hours: string[] }[] // Cambia el nombre de la propiedad
     price: string
@@ -33,7 +34,7 @@ export type Services = {
 
 export type ServiceData = {
     title: string
-    subTitle: string
+    subtitle: string
     descripcion: string
     pictureUrl: string
     videoUrl: string

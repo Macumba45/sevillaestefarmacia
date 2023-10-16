@@ -101,9 +101,9 @@ const Home: FC = () => {
                 </ButtonContainerConocenos>
             </ContainerConocenos>
             <Services
-                id="clnsrccg60001xy2xt4awtahh"
+                id="clnsx96ds0001xyyk7teubf6m"
                 title="DERMOCOSMÉTICA FARMACÉUTICA"
-                subTitle="Análisis de la Piel"
+                subtitle="Análisis de la Piel"
                 description="¿Te gustaría conocer más sobre tu piel o tu salud capilar?"
                 buttonName="Más información"
                 backGrodunColor="#ebf0f6"
@@ -113,9 +113,9 @@ const Home: FC = () => {
                 imagePosition="bottom"
             />
             <Services
-                id="clnsrckr00003xy2xg5h7uwrb"
+                id="clnsxjnf80003xyyk3quxzg92"
                 title="NUTRICIÓN CLÍNICA Y DEPORTIVA"
-                subTitle="Nutrición"
+                subtitle="Nutrición"
                 description="Nuestro propósito no es llegar lo antes posible, sino darte las herramientas para llegar al objetivo dando siempre prioridad a tu salud."
                 buttonName="Más información"
                 backGrodunColor="#f6f6eb"
@@ -128,9 +128,9 @@ const Home: FC = () => {
                 widthTitleDesktop="480px"
             />
             <Services
-                id="clnsrcrb10005xy2xd4p3kiwu"
+                id="clnsxk5pj0005xyykygmt7i56"
                 title="LABORATORIO"
-                subTitle="Formulación Magistral"
+                subtitle="Formulación Magistral"
                 description="Especialistas en Formulación Magistral
                 creando fórmulas y preparados oficiales
                 con más de 30 años de experiencia."
@@ -142,9 +142,9 @@ const Home: FC = () => {
                 imagePosition="bottom"
             />
             <Services
-                id="clnsrcze90007xy2xpwx656vr"
+                id="clnsxkjo60007xyyk3f29f9z9"
                 title="SISTEMA PERSONALIZADO DE DOSIFICACIÓN"
-                subTitle="SPD"
+                subtitle="SPD"
                 description="Ayudamos especialmente a familiares mayores
                 que son polimedicados o pacientes que tienen
                 dificultad para seguir su medicación."
@@ -157,9 +157,9 @@ const Home: FC = () => {
                 flexDirection="row-reverse"
             />
             <Services
-                id="clnsrd6bo0009xy2xzigf5odq"
+                id="clnsxkxrs0009xyykmj8au8sd"
                 title="SUS PRIMEROS PENDIENTES"
-                subTitle="Pendientes bebé"
+                subtitle="Pendientes bebé"
                 description="Nuestro servicio de pendientes cuenta
                 con un equipo sanitario de profesionales
                 farmacéuticos cualificado."
@@ -172,9 +172,9 @@ const Home: FC = () => {
                 imagePosition="bottom"
             />
             <Services
-                id="clnsrdcsf000bxy2xgq7z1h7x"
+                id="clnsxldjk000bxyykec5uspw6"
                 title="TU MASCOTA EN BUENAS MANOS"
-                subTitle="Farmacia Veterinaria"
+                subtitle="Farmacia Veterinaria"
                 description="Disponemos de productos veterinarios
                 para tus mascotas y animales de granja."
                 buttonName="Más información"

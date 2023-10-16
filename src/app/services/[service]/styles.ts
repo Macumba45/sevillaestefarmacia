@@ -20,6 +20,7 @@ export const TitleServices = styled.h1<{
 }>`
     font-size: 2rem;
     margin-bottom: 1rem;
+    margin-top: 8rem;
     color: black;
     text-align: left;
     padding-left: 2rem;
@@ -31,5 +32,24 @@ export const TitleServices = styled.h1<{
         font-size: 3rem;
         line-height: 3rem;
         margin-left: 2rem;
+    }
+`
+
+export const SubtitleServices = styled.h2`
+    padding: 0.5rem 3.5rem;
+    border-radius: 30px;
+    font-size: 1.5rem;
+    max-width: 500px;
+    min-width: 200px;
+    text-align: center;
+    margin: 0 auto;
+    color: white;
+    background-color: black;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    line-height: 2rem;
+    @media screen and (min-width: 899px) {
+        font-size: 2rem;
+        line-height: 2rem;
     }
 `

@@ -20,6 +20,7 @@ export const getServices = async (): Promise<any[]> => {
         urlPicture: service.urlPicture,
         urlVideo: service.urlVideo,
         title: service.title,
+        subtitle: service.subtitle,
         descripcion: service.descripcion,
         price: service.price,
         adminId: service.adminId,
@@ -41,6 +42,7 @@ export const createService = async (
     urlVideo: string,
     urlPicture: string,
     title: string,
+    subTitle: string,
     descripcion: string,
     dates: Array<string>, // Fechas en formato DD/MM/YYYY
     hours: Array<Array<string>>, // Horas correspondientes a cada fecha
@@ -52,6 +54,7 @@ export const createService = async (
             urlVideo: urlVideo,
             urlPicture: urlPicture,
             title: title,
+            subtitle: subTitle,
             descripcion: descripcion,
             price: price,
             adminId: adminId,
@@ -79,6 +82,7 @@ export const updateService = async (
     urlVideo: string,
     urlPicture: string,
     title: string,
+    subtitle: string,
     descripcion: string,
     dates: Array<{ date: string; hours: string[] }>, // Fechas en formato DD/MM/YYYY
     price: string
@@ -174,6 +178,7 @@ export const updateService = async (
             urlVideo: urlVideo,
             urlPicture: urlPicture,
             title: title,
+            subtitle: subtitle,
             descripcion: descripcion,
             price: price,
         },
@@ -255,6 +260,7 @@ export const serviceById = async (id: string): Promise<Services | null> => {
         urlPicture: service.urlPicture,
         urlVideo: service.urlVideo,
         title: service.title,
+        subtitle: service.subtitle,
         descripcion: service.descripcion,
         price: service.price,
         createdAt: service.createdAt,

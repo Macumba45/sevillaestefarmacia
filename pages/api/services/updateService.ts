@@ -16,13 +16,21 @@ export default async function handler(
         // Dentro de tu función handler antes de llamar a updateService
 
         try {
-            const { id, urlVideo, urlPicture, title, descripcion, price } =
-                req.body
+            const {
+                id,
+                urlVideo,
+                urlPicture,
+                title,
+                subtitle,
+                descripcion,
+                price,
+            } = req.body
             const service = await updateService(
                 id as string,
                 urlVideo,
                 urlPicture,
                 title,
+                subtitle,
                 descripcion,
                 transformedDates,
                 price

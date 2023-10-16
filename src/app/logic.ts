@@ -89,7 +89,6 @@ export const useLogicHome = () => {
         logOut,
         setIsLoading,
         serviceData,
-        getServiceDetails,
         router,
         fetchServiceDetails,
     }

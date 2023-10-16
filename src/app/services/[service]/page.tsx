@@ -2,7 +2,12 @@
 
 import { FC, memo, useEffect } from 'react'
 import { useLogicHome } from '@/app/logic'
-import { Container, TitleServices } from './styles'
+import {
+    Container,
+    NavContainer,
+    SubtitleServices,
+    TitleServices,
+} from './styles'
 import ResponsiveAppBar from '@/components/MenuNavBar'
 
 interface Props {
@@ -27,7 +32,6 @@ const Page: FC<Props> = ({ params }) => {
         isLoading,
         logOut,
         setIsLoading,
-        getServiceDetails,
         router,
         fetchServiceDetails,
     } = useLogicHome()
@@ -39,22 +43,25 @@ const Page: FC<Props> = ({ params }) => {
 
     return (
         <Container>
-            <ResponsiveAppBar
-                closeDrawer={() => closeDrawer()}
-                handleButtonClick={() => handleButtonClick()}
-                handleCloseNavMenu={() => handleCloseNavMenu()}
-                handleOpenNavMenu={() => handleOpenNavMenu()}
-                closeDrawerButton={() => closeDrawerButton()}
-                isDrawerOpenButton={isDrawerOpenButton}
-                isDrawerOpen={isDrawerOpen}
-                buttonName={buttonName}
-                onLogOut={() => logOut()}
-                userRole={currentUser}
-            />
+            <NavContainer>
+                <ResponsiveAppBar
+                    closeDrawer={() => closeDrawer()}
+                    handleButtonClick={() => handleButtonClick()}
+                    handleCloseNavMenu={() => handleCloseNavMenu()}
+                    handleOpenNavMenu={() => handleOpenNavMenu()}
+                    closeDrawerButton={() => closeDrawerButton()}
+                    isDrawerOpenButton={isDrawerOpenButton}
+                    isDrawerOpen={isDrawerOpen}
+                    buttonName={buttonName}
+                    onLogOut={() => logOut()}
+                    userRole={currentUser}
+                />
+            </NavContainer>
 
-            <TitleServices widthtitle="300px">
+            <TitleServices widthtitle="400px" widthtitledesktop="800px">
                 {serviceData?.title}
             </TitleServices>
+            <SubtitleServices>{serviceData?.subtitle}</SubtitleServices>
         </Container>
     )
 }

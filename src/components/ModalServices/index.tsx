@@ -40,6 +40,7 @@ const ServiceFormModal: FC<Props> = ({
         'Esto es una prueba de descripción'
     )
     const [title, setTitle] = useState('Titulo de prueba')
+    const [subtitle, setSubtitle] = useState('Subtitulo de prueba')
     const [price, setPrice] = useState('100')
     const [selectedDays, setSelectedDays] = useState<
         { date: DateObject; hours: string[] }[]
@@ -56,6 +57,10 @@ const ServiceFormModal: FC<Props> = ({
     }
     const handleTitleChange = (event: any) => {
         setTitle(event.target.value)
+    }
+
+    const handleSubtitleChange = (event: any) => {
+        setSubtitle(event.target.value)
     }
     const handlePriceChange = (event: any) => {
         setPrice(event.target.value)
@@ -121,6 +126,7 @@ const ServiceFormModal: FC<Props> = ({
             urlPicture,
             urlVideo,
             title,
+            subtitle,
             price,
             descripcion,
             dates: selectedDays.map(day => ({
@@ -147,6 +153,8 @@ const ServiceFormModal: FC<Props> = ({
             setDescripcion(serviceData.descripcion)
             setTitle(serviceData.title)
             setPrice(serviceData.price)
+            setSubtitle(serviceData.subtitle)
+            console.log(serviceData.subtitle)
 
             // Manejar la carga de las fechas y horas aquí
             const serviceDates = isEditing ? serviceData?.dates || [] : []
@@ -212,6 +220,15 @@ const ServiceFormModal: FC<Props> = ({
                         fullWidth
                         value={title}
                         onChange={handleTitleChange}
+                    />
+                    <TextField
+                        margin="dense"
+                        name="subtitle"
+                        label="Subtítulo"
+                        type="text"
+                        fullWidth
+                        value={subtitle}
+                        onChange={handleSubtitleChange}
                     />
                     <TextField
                         margin="dense"

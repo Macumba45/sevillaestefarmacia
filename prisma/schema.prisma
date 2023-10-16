@@ -25,6 +25,7 @@ model Services {
   urlPicture  String   @map("url_picture")
   urlVideo    String   @map("url_video")
   title       String
+  subtitle    String
   descripcion String
   price       String
   adminId     String   @map("admin_id")

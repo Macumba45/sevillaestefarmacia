@@ -17,7 +17,7 @@ import Link from 'next/link'
 interface Props {
     id?: string
     title: string
-    subTitle: string
+    subtitle: string
     description: string
     buttonName: string
     backGrodunColor: string
@@ -34,7 +34,7 @@ interface Props {
 const Services: FC<Props> = ({
     id,
     title,
-    subTitle,
+    subtitle,
     description,
     buttonName,
     backGrodunColor,
@@ -66,7 +66,7 @@ const Services: FC<Props> = ({
                     >
                         {title}
                     </TitleServices>
-                    <SubtitleServices>{subTitle}</SubtitleServices>
+                    <SubtitleServices>{subtitle}</SubtitleServices>
                     <ContainerDescriptionServices>
                         <DescriptionServices
                             widthmobile={widthMobile}

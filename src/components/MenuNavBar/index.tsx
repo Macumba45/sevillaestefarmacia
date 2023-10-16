@@ -61,7 +61,7 @@ const ResponsiveAppBar: FC<Props> = ({
                         }}
                         src={logo.src}
                         alt="Farmacia Santa Bárbara"
-                        onClick={() => location.reload()}
+                        onClick={() => (location.href = '/')}
                     />
 
                     <Box
