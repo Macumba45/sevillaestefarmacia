@@ -27,8 +27,20 @@ const Footer: FC = () => {
             </EmailFooter>
             <PhoneNumer>682 734 237</PhoneNumer>
             <LogosSocialMedia>
-                <InstagramIcon sx={{ color: 'white', cursor: 'pointer' }} />
-                <LocationOnIcon sx={{ color: 'white', cursor: 'pointer' }} />
+                <InstagramIcon
+                    sx={{
+                        color: 'white',
+                        cursor: 'pointer',
+                        marginRight: '0.5rem',
+                    }}
+                />
+                <LocationOnIcon
+                    sx={{
+                        color: 'white',
+                        cursor: 'pointer',
+                        marginLeft: '0.5rem',
+                    }}
+                />
             </LogosSocialMedia>
             <PolicyLinksContainer>
                 <PolicyLinks>Términos y Condiciones</PolicyLinks>
@@ -36,7 +48,7 @@ const Footer: FC = () => {
                 <PolicyLinks>Aviso Legal</PolicyLinks>
             </PolicyLinksContainer>
             <ContainerLogos>
-                <PicturesLogos src={junta.src} />
+                <PicturesLogos style={{ width: '250px' }} src={junta.src} />
                 <PicturesLogos src={españa.src} />
                 <PicturesLogos src={recuperacion.src} />
                 <PicturesLogos src={unionEuropea.src} />

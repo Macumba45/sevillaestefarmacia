@@ -31,6 +31,14 @@ export type Services = {
     updatedAt?: Date
 }
 
+export type ServiceData = {
+    title: string
+    subTitle: string
+    descripcion: string
+    pictureUrl: string
+    videoUrl: string
+}
+
 export type Dates = {
     id?: string
     dates: string

@@ -1,13 +1,13 @@
 import styled from 'styled-components'
 
-export const ContainerDesktopServices = styled.div<{ flexDirection?: string }>`
+export const ContainerDesktopServices = styled.div<{ flexdirection?: string }>`
     @media screen and (min-width: 899px) {
         display: flex;
-        flex-direction: ${props => props.flexDirection};
+        flex-direction: ${props => props.flexdirection};
     }
 `
 
-export const ContainerImgHome = styled.div`
+export const ContainerImgServices = styled.div`
     display: flex;
     width: 100%;
     height: 100vh;
@@ -20,7 +20,7 @@ export const ContainerImgHome = styled.div`
     }
 `
 
-export const ContainerDermo = styled.div`
+export const ContainerServices = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -31,20 +31,23 @@ export const ContainerDermo = styled.div`
     }
 `
 
-export const ImgConocenos = styled.img`
+export const ImgServices = styled.img`
     width: 100%;
     height: 100vh;
     object-fit: cover;
     object-position: center; /* Ajusta la posición de la imagen al centro */
 `
 
-export const ButtonContainerConocenos = styled.div`
+export const ButtonContainerServices = styled.div`
     display: flex;
     justify-content: center;
     margin-top: 3rem;
 `
 
-export const TitleDermo = styled.h1<{ widthTitle?: string }>`
+export const TitleServices = styled.h1<{
+    widthtitle?: string
+    widthtitledesktop?: string
+}>`
     font-size: 2rem;
     margin-bottom: 1rem;
     color: black;
@@ -52,14 +55,15 @@ export const TitleDermo = styled.h1<{ widthTitle?: string }>`
     padding-left: 2rem;
     line-height: 2.5rem;
     font-weight: 500;
-    width: ${props => props.widthTitle};
+    width: ${props => props.widthtitle};
     @media screen and (min-width: 899px) {
+        width: ${props => props.widthtitledesktop};
         font-size: 3rem;
         line-height: 3rem;
         margin-left: 2rem;
     }
 `
-export const SubtitleDermo = styled.h2`
+export const SubtitleServices = styled.h2`
     padding: 0.5rem 3.5rem;
     border-radius: 30px;
     font-size: 1.5rem;
@@ -78,11 +82,15 @@ export const SubtitleDermo = styled.h2`
     }
 `
 
-export const DescriptionDermo = styled.p<{
-    widthMobile?: string
-    widthDesktop?: string
-}>`
+export const ContainerDescriptionServices = styled.div`
     display: flex;
+    justify-content: center;
+`
+
+export const DescriptionServices = styled.p<{
+    widthmobile?: string
+    widthdesktop?: string
+}>`
     font-size: 1.2rem;
     color: black;
     text-align: center;
@@ -91,10 +99,10 @@ export const DescriptionDermo = styled.p<{
     margin: 0 auto;
     margin-left: 2rem;
     margin-right: 2rem;
-    width: ${props => props.widthMobile};
+    width: ${props => props.widthmobile};
     @media screen and (min-width: 899px) {
         font-size: 2rem;
         line-height: 2.5rem;
-        width: ${props => props.widthDesktop};
+        width: ${props => props.widthdesktop};
     }
 `

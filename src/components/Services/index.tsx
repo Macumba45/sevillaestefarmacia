@@ -1,18 +1,21 @@
 import { FC, memo } from 'react'
 import {
+    ButtonContainerServices,
+    ContainerDescriptionServices,
     ContainerDesktopServices,
-    ContainerDermo,
-    TitleDermo,
-    SubtitleDermo,
-    DescriptionDermo,
-    ButtonContainerConocenos,
-    ContainerImgHome,
-    ImgConocenos,
+    ContainerImgServices,
+    ContainerServices,
+    DescriptionServices,
+    ImgServices,
+    SubtitleServices,
+    TitleServices,
 } from './styles'
 import { Button } from '@mui/material'
 import React from 'react'
+import Link from 'next/link'
 
 interface Props {
+    id?: string
     title: string
     subTitle: string
     description: string
@@ -22,11 +25,14 @@ interface Props {
     widthMobile?: string
     widthDesktop?: string
     widthTitle?: string
+    widthTitleDesktop?: string
     flexDirection?: string
     imagePosition?: 'top' | 'bottom' // Prop para controlar la posición de la imagen
+    onClick?: () => void
 }
 
 const Services: FC<Props> = ({
+    id,
     title,
     subTitle,
     description,
@@ -36,8 +42,10 @@ const Services: FC<Props> = ({
     widthMobile,
     widthDesktop,
     widthTitle,
+    widthTitleDesktop,
     flexDirection,
     imagePosition = 'bottom', // Valor predeterminado para imagePosition
+    onClick,
 }) => {
     return (
         <div
@@ -45,46 +53,55 @@ const Services: FC<Props> = ({
                 backgroundColor: backGrodunColor,
             }}
         >
-            <ContainerDesktopServices flexDirection={flexDirection}>
+            <ContainerDesktopServices flexdirection={flexDirection}>
                 {imagePosition === 'top' && ( // Renderiza la imagen arriba si imagePosition es 'top'
-                    <ContainerImgHome>
-                        <ImgConocenos src={picture} />
-                    </ContainerImgHome>
+                    <ContainerImgServices>
+                        <ImgServices src={picture} />
+                    </ContainerImgServices>
                 )}
-                <ContainerDermo>
-                    <TitleDermo widthTitle={widthTitle}>{title}</TitleDermo>
-                    <SubtitleDermo>{subTitle}</SubtitleDermo>
-                    <DescriptionDermo
-                        widthMobile={widthMobile}
-                        widthDesktop={widthDesktop}
+                <ContainerServices>
+                    <TitleServices
+                        widthtitledesktop={widthTitleDesktop}
+                        widthtitle={widthTitle}
                     >
-                        {description}
-                    </DescriptionDermo>
-                    <ButtonContainerConocenos>
-                        <Button
-                            variant="outlined"
-                            sx={{
-                                color: 'black',
-                                borderColor: 'black',
-                                width: '200px',
-                                borderRadius: '130px',
-                                backgroundColor: 'white',
-                                ':hover': {
-                                    backgroundColor: 'black',
-                                    color: 'white',
-                                    borderColor: 'transparent',
-                                },
-                                fontFamily: 'Cormorant Garamond',
-                            }}
+                        {title}
+                    </TitleServices>
+                    <SubtitleServices>{subTitle}</SubtitleServices>
+                    <ContainerDescriptionServices>
+                        <DescriptionServices
+                            widthmobile={widthMobile}
+                            widthdesktop={widthDesktop}
                         >
-                            {buttonName}
-                        </Button>
-                    </ButtonContainerConocenos>
-                </ContainerDermo>
+                            {description}
+                        </DescriptionServices>
+                    </ContainerDescriptionServices>
+                    <ButtonContainerServices>
+                        <Link href={`/services/${id}`}>
+                            <Button
+                                variant="outlined"
+                                sx={{
+                                    color: 'black',
+                                    borderColor: 'black',
+                                    width: '200px',
+                                    borderRadius: '130px',
+                                    backgroundColor: 'white',
+                                    ':hover': {
+                                        backgroundColor: 'black',
+                                        color: 'white',
+                                        borderColor: 'transparent',
+                                    },
+                                    fontFamily: 'Cormorant Garamond',
+                                }}
+                            >
+                                {buttonName}
+                            </Button>
+                        </Link>
+                    </ButtonContainerServices>
+                </ContainerServices>
                 {imagePosition === 'bottom' && ( // Renderiza la imagen abajo si imagePosition es 'bottom'
-                    <ContainerImgHome>
-                        <ImgConocenos src={picture} />
-                    </ContainerImgHome>
+                    <ContainerImgServices>
+                        <ImgServices src={picture} />
+                    </ContainerImgServices>
                 )}
             </ContainerDesktopServices>
         </div>

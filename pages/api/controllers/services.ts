@@ -231,3 +231,39 @@ export const editDateFromService = async (
 
     return updatedDate
 }
+
+export const serviceById = async (id: string): Promise<Services | null> => {
+    const service = await prisma.services.findUnique({
+        where: {
+            id: id,
+        },
+        include: {
+            dates: {
+                include: {
+                    hours: true,
+                },
+            },
+        },
+    })
+
+    if (!service) {
+        return null
+    }
+
+    const serviceData: Services = {
+        id: service.id,
+        urlPicture: service.urlPicture,
+        urlVideo: service.urlVideo,
+        title: service.title,
+        descripcion: service.descripcion,
+        price: service.price,
+        createdAt: service.createdAt,
+        updatedAt: service.updatedAt,
+        dates: service.dates.map(date => ({
+            date: date.dates,
+            hours: date.hours.map(hour => hour.hour),
+        })),
+    }
+
+    return serviceData
+}

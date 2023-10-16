@@ -114,3 +114,25 @@ export const deleteService = async (
         console.error('Error al enviar el objeto:', error)
     }
 }
+
+export const getServiceDetails = async (id: string) => {
+    try {
+        const token = getAuthenticatedToken()
+        const headers = {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`, // Agregar el token al header 'Authorization'
+        }
+        const response = await fetch(`/api/services/serviceDetails?id=${id}`, {
+            method: 'GET',
+            headers,
+        })
+        if (response.ok) {
+            const data = await response.json()
+            return data
+        } else {
+            throw new Error('Error en la respuesta del servidor')
+        }
+    } catch (error) {
+        console.error('Error al enviar el objeto:', error)
+    }
+}

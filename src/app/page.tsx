@@ -1,6 +1,6 @@
 'use client'
 
-import { FC, memo, useEffect } from 'react'
+import { FC, memo, useEffect, useState } from 'react'
 import { useLogicHome } from './logic'
 import { getAuthenticatedToken } from '../../storage/storage'
 import Services from '@/components/Services'
@@ -37,6 +37,7 @@ const Home: FC = () => {
         buttonName,
         isLoading,
         currentUser,
+        router,
     } = useLogicHome()
 
     useEffect(() => {
@@ -100,6 +101,7 @@ const Home: FC = () => {
                 </ButtonContainerConocenos>
             </ContainerConocenos>
             <Services
+                id="clnsrccg60001xy2xt4awtahh"
                 title="DERMOCOSMÉTICA FARMACÉUTICA"
                 subTitle="Análisis de la Piel"
                 description="¿Te gustaría conocer más sobre tu piel o tu salud capilar?"
@@ -111,6 +113,7 @@ const Home: FC = () => {
                 imagePosition="bottom"
             />
             <Services
+                id="clnsrckr00003xy2xg5h7uwrb"
                 title="NUTRICIÓN CLÍNICA Y DEPORTIVA"
                 subTitle="Nutrición"
                 description="Nuestro propósito no es llegar lo antes posible, sino darte las herramientas para llegar al objetivo dando siempre prioridad a tu salud."
@@ -118,12 +121,14 @@ const Home: FC = () => {
                 backGrodunColor="#f6f6eb"
                 picture={nutricion.src}
                 widthDesktop="610px"
-                widthTitle="330px"
+                widthTitle="350px"
                 imagePosition="bottom"
                 widthMobile="320px"
                 flexDirection="row-reverse"
+                widthTitleDesktop="480px"
             />
             <Services
+                id="clnsrcrb10005xy2xd4p3kiwu"
                 title="LABORATORIO"
                 subTitle="Formulación Magistral"
                 description="Especialistas en Formulación Magistral
@@ -137,6 +142,7 @@ const Home: FC = () => {
                 imagePosition="bottom"
             />
             <Services
+                id="clnsrcze90007xy2xpwx656vr"
                 title="SISTEMA PERSONALIZADO DE DOSIFICACIÓN"
                 subTitle="SPD"
                 description="Ayudamos especialmente a familiares mayores
@@ -151,6 +157,7 @@ const Home: FC = () => {
                 flexDirection="row-reverse"
             />
             <Services
+                id="clnsrd6bo0009xy2xzigf5odq"
                 title="SUS PRIMEROS PENDIENTES"
                 subTitle="Pendientes bebé"
                 description="Nuestro servicio de pendientes cuenta
@@ -165,6 +172,7 @@ const Home: FC = () => {
                 imagePosition="bottom"
             />
             <Services
+                id="clnsrdcsf000bxy2xgq7z1h7x"
                 title="TU MASCOTA EN BUENAS MANOS"
                 subTitle="Farmacia Veterinaria"
                 description="Disponemos de productos veterinarios
@@ -177,6 +185,7 @@ const Home: FC = () => {
                 widthTitle="330px"
                 imagePosition="bottom"
                 flexDirection="row-reverse"
+                widthTitleDesktop="378px"
             />
 
             <Footer />

@@ -1,13 +1,16 @@
 import { getUserInfo } from '@/services/user'
 import { useState } from 'react'
-import { User } from '../../types/types'
+import { ServiceData, Services, User } from '../../types/types'
 import { useRouter } from 'next/navigation'
+import { getServices, getServiceDetails } from '@/services/service'
+import { getAuthenticatedToken } from '../../storage/storage'
 
 export const useLogicHome = () => {
     const [currentUser, setCurrentUser] = useState<User | null>(null)
     const [isDrawerOpen, setIsDrawerOpen] = useState(false)
     const [isDrawerOpenButton, setIsDrawerOpenButton] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
+    const [serviceData, setServiceData] = useState<ServiceData>()
     const router = useRouter()
 
     //////////// NAVBARLOGIC///////////////////
@@ -17,6 +20,11 @@ export const useLogicHome = () => {
         const userInfo = await getUserInfo()
         setCurrentUser(userInfo as User)
         setIsLoading(false)
+    }
+
+    const fetchServiceDetails = async (id: string) => {
+        const serviceDetails = await getServiceDetails(id)
+        setServiceData(serviceDetails)
     }
 
     const handleButtonClick = () => {
@@ -80,5 +88,9 @@ export const useLogicHome = () => {
         isLoading,
         logOut,
         setIsLoading,
+        serviceData,
+        getServiceDetails,
+        router,
+        fetchServiceDetails,
     }
 }

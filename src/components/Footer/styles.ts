@@ -7,6 +7,9 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    @media screen and (min-width: 899px) {
+        height: 450px;
+    }
 `
 
 export const ConocenosText = styled.h2`
@@ -20,12 +23,12 @@ export const ConocenosText = styled.h2`
 export const EmailFooter = styled.a`
     color: white;
     text-align: center;
+    text-decoration: none;
 `
 
 export const PhoneNumer = styled.p`
     color: white;
     text-align: center;
-    text-decoration: none;
     margin-top: 1rem;
 `
 
@@ -52,7 +55,6 @@ export const PolicyLinks = styled.a`
     color: white;
     text-align: center;
     margin: 0.5rem;
-    text-decoration: underline;
     cursor: pointer;
 `
 
@@ -65,6 +67,7 @@ export const ContainerLogos = styled.div`
     margin: 2rem auto;
     @media screen and (min-width: 899px) {
         width: 100%;
+        margin: 0 auto;
     }
 `
 
@@ -72,12 +75,15 @@ export const PicturesLogos = styled.img`
     width: 100px;
     margin: 1rem;
     cursor: pointer;
+    object-fit: cover;
+    object-position: center;
     @media screen and (min-width: 899px) {
-        width: 150px;
+        width: 180px;
     }
 `
 
 export const CopyRight = styled.p`
     color: white;
     text-align: center;
+    margin-bottom: 2rem;
 `
