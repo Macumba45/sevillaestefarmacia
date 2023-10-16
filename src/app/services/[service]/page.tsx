@@ -85,7 +85,15 @@ const Page: FC<Props> = ({ params }) => {
                 />
             </NavContainer>
 
-            <TitleServices widthtitle="320px" widthtitledesktop="800px">
+            <TitleServices
+                widthtitle="320px"
+                widthtitledesktop={
+                    serviceData?.title ===
+                    'SISTEMA PERSONALIZADO DE DOSIFICACIÓN'
+                        ? '600px' // Ancho personalizado si el título coincide
+                        : '500px' // Ancho predeterminado para otros títulos de escritorio
+                }
+            >
                 {serviceData?.title}
             </TitleServices>
             <SubtitleServices>{serviceData?.subtitle}</SubtitleServices>

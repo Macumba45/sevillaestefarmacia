@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const Container = styled.div`
     background-color: black;
     width: 100%;
-    height: 600px;
+    height: 700px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -78,7 +78,7 @@ export const PicturesLogos = styled.img`
     object-fit: cover;
     object-position: center;
     @media screen and (min-width: 899px) {
-        width: 180px;
+        width: 170px;
     }
 `
 
