@@ -13,16 +13,27 @@ const styleIconButtons = {
 const CardDashboardServices: FC<Props> = ({ service, onEdit, onDelete }) => {
     return (
         <Card
-            style={{ width: 300, margin: 10 }}
+            style={{
+                width: 300,
+                margin: 10,
+                objectFit: 'cover',
+                objectPosition: 'center',
+            }}
             cover={
                 <img
                     alt="example"
-                    src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+                    src={service.urlPicture}
+                    style={{
+                        width: '100%',
+                        height: 150,
+                        objectFit: 'cover',
+                        objectPosition: 'center',
+                    }}
                 />
             }
             actions={[
                 <DeleteOutlined
-                    onClick={onDelete}
+                    // onClick={onDelete}
                     style={styleIconButtons}
                     key="delete"
                 />,

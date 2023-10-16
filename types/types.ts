@@ -38,6 +38,7 @@ export type ServiceData = {
     descripcion: string
     pictureUrl: string
     videoUrl: string
+    price: string
 }
 
 export type Dates = {

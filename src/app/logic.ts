@@ -1,9 +1,8 @@
 import { getUserInfo } from '@/services/user'
 import { useState } from 'react'
-import { ServiceData, Services, User } from '../../types/types'
+import { ServiceData, User } from '../../types/types'
 import { useRouter } from 'next/navigation'
-import { getServices, getServiceDetails } from '@/services/service'
-import { getAuthenticatedToken } from '../../storage/storage'
+import { getServiceDetails } from '@/services/service'
 
 export const useLogicHome = () => {
     const [currentUser, setCurrentUser] = useState<User | null>(null)
@@ -23,8 +22,10 @@ export const useLogicHome = () => {
     }
 
     const fetchServiceDetails = async (id: string) => {
+        setIsLoading(true)
         const serviceDetails = await getServiceDetails(id)
         setServiceData(serviceDetails)
+        setIsLoading(false)
     }
 
     const handleButtonClick = () => {

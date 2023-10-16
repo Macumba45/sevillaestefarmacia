@@ -3,6 +3,9 @@ import { prisma } from '../../../src/lib/client'
 
 export const getServices = async (): Promise<any[]> => {
     const prismaServices = await prisma.services.findMany({
+        orderBy: {
+            createdAt: 'asc',
+        },
         include: {
             dates: {
                 include: {

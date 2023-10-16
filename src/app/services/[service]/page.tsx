@@ -2,13 +2,22 @@
 
 import { FC, memo, useEffect } from 'react'
 import { useLogicHome } from '@/app/logic'
+import Link from 'next/link'
+import ResponsiveAppBar from '@/components/MenuNavBar'
+import CircularIndeterminate from '@/components/Loader'
+import { Button, Fab } from '@mui/material'
+import WhatsAppIcon from '@mui/icons-material/WhatsApp'
 import {
+    ButtonContainerServices,
     Container,
+    DescriptionServices,
+    FloatButtonContainer,
+    LoadingContainer,
     NavContainer,
     SubtitleServices,
     TitleServices,
 } from './styles'
-import ResponsiveAppBar from '@/components/MenuNavBar'
+import DermoDescription from '@/components/DescriptionServices/dermo'
 
 interface Props {
     params: {
@@ -31,7 +40,6 @@ const Page: FC<Props> = ({ params }) => {
         isDrawerOpenButton,
         isLoading,
         logOut,
-        setIsLoading,
         router,
         fetchServiceDetails,
     } = useLogicHome()
@@ -40,6 +48,25 @@ const Page: FC<Props> = ({ params }) => {
         getUserInfoDetails()
         fetchServiceDetails(params.service)
     }, [])
+
+    if (isLoading) {
+        return (
+            <LoadingContainer>
+                <CircularIndeterminate />
+            </LoadingContainer>
+        )
+    }
+
+    const contactWhatsApp = () => {
+        const phoneNumber = '+34682296561'
+        const message = `Hola Farmacia Santa Bárbara, me gustaría solicitar información sobre el servicio ${serviceData?.title}`
+
+        const whatsappURL = `whatsapp://send?phone=${phoneNumber}&text=${encodeURIComponent(
+            message
+        )}`
+
+        window.open(whatsappURL)
+    }
 
     return (
         <Container>
@@ -58,10 +85,54 @@ const Page: FC<Props> = ({ params }) => {
                 />
             </NavContainer>
 
-            <TitleServices widthtitle="400px" widthtitledesktop="800px">
+            <TitleServices widthtitle="320px" widthtitledesktop="800px">
                 {serviceData?.title}
             </TitleServices>
             <SubtitleServices>{serviceData?.subtitle}</SubtitleServices>
+            <DermoDescription price={serviceData?.price as string} />
+            <ButtonContainerServices>
+                <Link href={'/'}>
+                    <Button
+                        variant="outlined"
+                        sx={{
+                            color: 'white',
+                            borderColor: 'black',
+                            width: '300px',
+                            borderRadius: '130px',
+                            backgroundColor: 'black',
+                            ':hover': {
+                                backgroundColor: 'white',
+                                color: 'black',
+                                borderColor: 'black',
+                            },
+                            fontFamily: 'Cormorant Garamond',
+                        }}
+                    >
+                        Solicitar cita
+                    </Button>
+                </Link>
+            </ButtonContainerServices>
+            <FloatButtonContainer>
+                <Fab
+                    onClick={contactWhatsApp}
+                    sx={{
+                        color: 'white',
+                        borderColor: 'black',
+                        width: '100%',
+                        borderRadius: '130px',
+                        backgroundColor: 'black',
+                        ':hover': {
+                            backgroundColor: 'white',
+                            color: 'black',
+                            borderColor: 'black',
+                        },
+                        fontFamily: 'Cormorant Garamond',
+                    }}
+                    variant="extended"
+                >
+                    ¿Te asesoramos?
+                </Fab>
+            </FloatButtonContainer>
         </Container>
     )
 }

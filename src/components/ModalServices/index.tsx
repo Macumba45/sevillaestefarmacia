@@ -3,6 +3,8 @@ import { useLogicDashboard } from '@/app/dashboard/logic'
 import { DateObject } from 'react-multi-date-picker'
 import DatePickerComponent from '../DaysSelect'
 import { Services } from '../../../types/types'
+import ReactQuill from 'react-quill'
+import 'react-quill/dist/quill.snow.css' // Estilo por defecto
 import {
     Button,
     Dialog,
@@ -37,7 +39,7 @@ const ServiceFormModal: FC<Props> = ({
         'https://picsum.photos/200/300.jpg'
     )
     const [descripcion, setDescripcion] = useState(
-        'Esto es una prueba de descripción'
+        serviceData?.descripcion || ''
     )
     const [title, setTitle] = useState('Titulo de prueba')
     const [subtitle, setSubtitle] = useState('Subtitulo de prueba')
@@ -65,9 +67,9 @@ const ServiceFormModal: FC<Props> = ({
     const handlePriceChange = (event: any) => {
         setPrice(event.target.value)
     }
-    const handleDescripcionChange = (event: any) => {
-        setDescripcion(event.target.value)
-    }
+    // const handleDescripcionChange = (event: any) => {
+    //     setDescripcion(event.target.value)
+    // }
 
     function parseDateString(dateString: string): Date {
         const [day, month, year] = dateString.split('/')
@@ -154,7 +156,6 @@ const ServiceFormModal: FC<Props> = ({
             setTitle(serviceData.title)
             setPrice(serviceData.price)
             setSubtitle(serviceData.subtitle)
-            console.log(serviceData.subtitle)
 
             // Manejar la carga de las fechas y horas aquí
             const serviceDates = isEditing ? serviceData?.dates || [] : []
@@ -239,16 +240,27 @@ const ServiceFormModal: FC<Props> = ({
                         value={price}
                         onChange={handlePriceChange}
                     />
-                    <TextField
-                        margin="dense"
-                        name="descripcion"
-                        label="Descripción"
-                        type="text"
-                        multiline
-                        rows={4}
-                        fullWidth
+                    <ReactQuill
                         value={descripcion}
-                        onChange={handleDescripcionChange}
+                        onChange={setDescripcion}
+                        theme="snow" // Puedes elegir otros temas si lo deseas
+                        modules={{
+                            toolbar: [
+                                [
+                                    { header: '1' },
+                                    { header: '2' },
+                                    { font: [] },
+                                ],
+                                [{ list: 'ordered' }, { list: 'bullet' }],
+                                ['bold', 'italic', 'underline', 'strike'], // Agrega 'strike' para tachado
+                                ['blockquote'],
+                                ['link'],
+                                [{ align: [] }],
+                                ['code-block'],
+                                [{ script: 'sub' }, { script: 'super' }], // Subíndice y superíndice
+                                ['clean'],
+                            ],
+                        }}
                     />
                 </div>
                 <div

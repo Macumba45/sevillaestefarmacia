@@ -28,7 +28,6 @@ interface Props {
     widthTitleDesktop?: string
     flexDirection?: string
     imagePosition?: 'top' | 'bottom' // Prop para controlar la posición de la imagen
-    onClick?: () => void
 }
 
 const Services: FC<Props> = ({
@@ -45,7 +44,6 @@ const Services: FC<Props> = ({
     widthTitleDesktop,
     flexDirection,
     imagePosition = 'bottom', // Valor predeterminado para imagePosition
-    onClick,
 }) => {
     return (
         <div

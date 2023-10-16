@@ -1,5 +1,12 @@
 import styled from 'styled-components'
 
+export const LoadingContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+`
+
 export const Container = styled.div``
 
 export const NavContainer = styled.nav`
@@ -39,17 +46,50 @@ export const SubtitleServices = styled.h2`
     padding: 0.5rem 3.5rem;
     border-radius: 30px;
     font-size: 1.5rem;
-    max-width: 500px;
-    min-width: 200px;
+    width: 200px;
     text-align: center;
-    margin: 0 auto;
+    margin: 3rem auto;
     color: white;
     background-color: black;
-    margin-top: 3rem;
-    margin-bottom: 3rem;
     line-height: 2rem;
     @media screen and (min-width: 899px) {
         font-size: 2rem;
         line-height: 2rem;
+        width: 300px;
     }
+`
+
+export const DescriptionServices = styled.p<{
+    widthmobile?: string
+    widthdesktop?: string
+}>`
+    font-size: 1.2rem;
+    color: black;
+    text-align: left;
+    line-height: 2rem;
+    font-weight: 300;
+    margin: 0 auto;
+    margin-left: 2rem;
+    @media screen and (min-width: 899px) {
+        font-size: 1.5rem;
+        text-align: center;
+        line-height: 2.5rem;
+        margin-left: 0rem;
+
+        width: ${props => props.widthdesktop};
+    }
+`
+
+export const ButtonContainerServices = styled.div`
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+`
+
+export const FloatButtonContainer = styled.div`
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 9999;
 `

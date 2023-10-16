@@ -1,6 +1,6 @@
 'use client'
 
-import { FC, memo, useEffect, useState } from 'react'
+import { FC, memo, useEffect } from 'react'
 import { useLogicHome } from './logic'
 import { getAuthenticatedToken } from '../../storage/storage'
 import Services from '@/components/Services'
