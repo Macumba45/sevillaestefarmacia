@@ -49,6 +49,8 @@ const Page: FC<Props> = ({ params }) => {
     const handleOpen = () => setOpen(true)
     const handleClose = () => setOpen(false)
 
+    console.log(serviceData?.id)
+
     const contactWhatsApp = () => {
         const phoneNumber = '+34682296561'
         const message = `Hola Farmacia Santa Bárbara, me gustaría solicitar información sobre el servicio ${serviceData?.title}`
@@ -107,7 +109,7 @@ const Page: FC<Props> = ({ params }) => {
                 widthtitle="320px"
                 widthtitledesktop={
                     serviceData?.title ===
-                    'SISTEMA PERSONALIZADO DE DOSIFICACIÓN'
+                        'SISTEMA PERSONALIZADO DE DOSIFICACIÓN'
                         ? '600px' // Ancho personalizado si el título coincide
                         : '500px' // Ancho predeterminado para otros títulos de escritorio
                 }
@@ -117,25 +119,69 @@ const Page: FC<Props> = ({ params }) => {
             <SubtitleServices>{serviceData?.subtitle}</SubtitleServices>
             <DermoDescription price={serviceData?.price as string} />
             <ButtonContainerServices>
-                <Button
-                    onClick={handleOpen}
-                    variant="outlined"
-                    sx={{
-                        color: 'white',
-                        borderColor: 'black',
-                        width: '300px',
-                        borderRadius: '130px',
-                        backgroundColor: 'black',
-                        ':hover': {
-                            backgroundColor: 'white',
-                            color: 'black',
+                {serviceData?.id === 'clnsx96ds0001xyyk7teubf6m' ||
+                    serviceData?.id === 'clnsxjnf80003xyyk3quxzg92' ||
+                    serviceData?.id === 'clnsxkxrs0009xyykmj8au8sd' ? (
+                    <Button
+                        onClick={handleOpen}
+                        variant="outlined"
+                        sx={{
+                            color: 'white',
                             borderColor: 'black',
-                        },
-                        fontFamily: 'Cormorant Garamond',
-                    }}
-                >
-                    Solicitar cita
-                </Button>
+                            width: '300px',
+                            borderRadius: '130px',
+                            backgroundColor: 'black',
+                            ':hover': {
+                                backgroundColor: 'white',
+                                color: 'black',
+                                borderColor: 'black',
+                            },
+                            fontFamily: 'Cormorant Garamond',
+                        }}
+                    >
+                        Reservar cita
+                    </Button>
+                ) : serviceData?.id === 'clnsxldjk000bxyykec5uspw6' ? (
+                    <Button
+                        onClick={contactWhatsApp} // La función que maneja el chat de WhatsApp
+                        variant="outlined"
+                        sx={{
+                            color: 'white',
+                            borderColor: 'black',
+                            width: '300px',
+                            borderRadius: '130px',
+                            backgroundColor: 'black',
+                            ':hover': {
+                                backgroundColor: 'white',
+                                color: 'black',
+                                borderColor: 'black',
+                            },
+                            fontFamily: 'Cormorant Garamond',
+                        }}
+                    >
+                        Chatear por WhatsApp
+                    </Button>
+                ) : (
+                    <Button
+                        onClick={handleReservarCita}
+                        variant="outlined"
+                        sx={{
+                            color: 'white',
+                            borderColor: 'black',
+                            width: '300px',
+                            borderRadius: '130px',
+                            backgroundColor: 'black',
+                            ':hover': {
+                                backgroundColor: 'white',
+                                color: 'black',
+                                borderColor: 'black',
+                            },
+                            fontFamily: 'Cormorant Garamond',
+                        }}
+                    >
+                        Pagar el servicio
+                    </Button>
+                )}
             </ButtonContainerServices>
             <FloatButtonContainer>
                 <Fab
