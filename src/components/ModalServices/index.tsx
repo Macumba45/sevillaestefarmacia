@@ -240,28 +240,6 @@ const ServiceFormModal: FC<Props> = ({
                         value={price}
                         onChange={handlePriceChange}
                     />
-                    <ReactQuill
-                        value={descripcion}
-                        onChange={setDescripcion}
-                        theme="snow" // Puedes elegir otros temas si lo deseas
-                        modules={{
-                            toolbar: [
-                                [
-                                    { header: '1' },
-                                    { header: '2' },
-                                    { font: [] },
-                                ],
-                                [{ list: 'ordered' }, { list: 'bullet' }],
-                                ['bold', 'italic', 'underline', 'strike'], // Agrega 'strike' para tachado
-                                ['blockquote'],
-                                ['link'],
-                                [{ align: [] }],
-                                ['code-block'],
-                                [{ script: 'sub' }, { script: 'super' }], // Subíndice y superíndice
-                                ['clean'],
-                            ],
-                        }}
-                    />
                 </div>
                 <div
                     style={{

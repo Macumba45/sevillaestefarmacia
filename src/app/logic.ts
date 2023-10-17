@@ -1,6 +1,6 @@
 import { getUserInfo } from '@/services/user'
 import { useState } from 'react'
-import { ServiceData, User } from '../../types/types'
+import { ServiceData, Services, User } from '../../types/types'
 import { useRouter } from 'next/navigation'
 import { getServiceDetails } from '@/services/service'
 
@@ -9,7 +9,7 @@ export const useLogicHome = () => {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false)
     const [isDrawerOpenButton, setIsDrawerOpenButton] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
-    const [serviceData, setServiceData] = useState<ServiceData>()
+    const [serviceData, setServiceData] = useState<Services>()
     const router = useRouter()
 
     //////////// NAVBARLOGIC///////////////////

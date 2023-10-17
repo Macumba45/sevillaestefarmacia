@@ -26,7 +26,7 @@ export type Services = {
     title: string
     subtitle: string
     descripcion: string
-    dates?: { date: string; hours: string[] }[] // Cambia el nombre de la propiedad
+    dates?: { date: string; hours: string[] }[]
     price: string
     createdAt?: Date
     updatedAt?: Date

@@ -1,6 +1,6 @@
 'use client'
 
-import { FC, memo, useEffect } from 'react'
+import { FC, memo, useEffect, useState } from 'react'
 import { useLogicHome } from '@/app/logic'
 import Link from 'next/link'
 import ResponsiveAppBar from '@/components/MenuNavBar'
@@ -18,6 +18,7 @@ import {
     TitleServices,
 } from './styles'
 import DermoDescription from '@/components/DescriptionServices/dermo'
+import OrderServicesDate from '@/components/ModalOrderTime'
 
 interface Props {
     params: {
@@ -43,6 +44,10 @@ const Page: FC<Props> = ({ params }) => {
         router,
         fetchServiceDetails,
     } = useLogicHome()
+
+    const [open, setOpen] = useState(false)
+    const handleOpen = () => setOpen(true)
+    const handleClose = () => setOpen(false)
 
     useEffect(() => {
         getUserInfoDetails()
@@ -99,26 +104,25 @@ const Page: FC<Props> = ({ params }) => {
             <SubtitleServices>{serviceData?.subtitle}</SubtitleServices>
             <DermoDescription price={serviceData?.price as string} />
             <ButtonContainerServices>
-                <Link href={'/'}>
-                    <Button
-                        variant="outlined"
-                        sx={{
-                            color: 'white',
+                <Button
+                    onClick={handleOpen}
+                    variant="outlined"
+                    sx={{
+                        color: 'white',
+                        borderColor: 'black',
+                        width: '300px',
+                        borderRadius: '130px',
+                        backgroundColor: 'black',
+                        ':hover': {
+                            backgroundColor: 'white',
+                            color: 'black',
                             borderColor: 'black',
-                            width: '300px',
-                            borderRadius: '130px',
-                            backgroundColor: 'black',
-                            ':hover': {
-                                backgroundColor: 'white',
-                                color: 'black',
-                                borderColor: 'black',
-                            },
-                            fontFamily: 'Cormorant Garamond',
-                        }}
-                    >
-                        Solicitar cita
-                    </Button>
-                </Link>
+                        },
+                        fontFamily: 'Cormorant Garamond',
+                    }}
+                >
+                    Solicitar cita
+                </Button>
             </ButtonContainerServices>
             <FloatButtonContainer>
                 <Fab
@@ -141,6 +145,17 @@ const Page: FC<Props> = ({ params }) => {
                     ¿Te asesoramos?
                 </Fab>
             </FloatButtonContainer>
+            <OrderServicesDate
+                dates={
+                    serviceData?.dates?.map(date => ({
+                        dates: date.date,
+                        hours: date.hours,
+                    })) || []
+                }
+                handlClickOpen={handleOpen}
+                handleClose={handleClose}
+                open={open}
+            />
         </Container>
     )
 }
