@@ -43,7 +43,7 @@
         "next.config.js",
         "jest.config.ts",
         "test/controllers/user/user.test.ts",
-        "pages/api/stripe/checkoutSessions.js"
+        "pages/api/stripe/checkout_sessions.js"
     ],
     "exclude": ["node_modules"]
 }

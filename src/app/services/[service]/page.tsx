@@ -2,15 +2,15 @@
 
 import { FC, memo, useEffect, useState } from 'react'
 import { useLogicHome } from '@/app/logic'
-import Link from 'next/link'
 import ResponsiveAppBar from '@/components/MenuNavBar'
 import CircularIndeterminate from '@/components/Loader'
 import { Button, Fab } from '@mui/material'
-import WhatsAppIcon from '@mui/icons-material/WhatsApp'
+import DermoDescription from '@/components/DescriptionServices/dermo'
+import OrderServicesDate from '@/components/ModalOrderTime'
+import { stripePayment } from '@/services/stripe'
 import {
     ButtonContainerServices,
     Container,
-    DescriptionServices,
     FloatButtonContainer,
     LoadingContainer,
     NavContainer,
@@ -19,9 +19,6 @@ import {
     VideoYoutube,
     VideoYoutubeContainer,
 } from './styles'
-import DermoDescription from '@/components/DescriptionServices/dermo'
-import OrderServicesDate from '@/components/ModalOrderTime'
-import { stripePayment } from '@/services/stripe'
 
 interface Props {
     params: {
@@ -51,20 +48,6 @@ const Page: FC<Props> = ({ params }) => {
     const [open, setOpen] = useState(false)
     const handleOpen = () => setOpen(true)
     const handleClose = () => setOpen(false)
-    const video = serviceData?.urlVideo
-
-    useEffect(() => {
-        getUserInfoDetails()
-        fetchServiceDetails(params.service)
-    }, [])
-
-    if (isLoading) {
-        return (
-            <LoadingContainer>
-                <CircularIndeterminate />
-            </LoadingContainer>
-        )
-    }
 
     const contactWhatsApp = () => {
         const phoneNumber = '+34682296561'
@@ -81,15 +64,26 @@ const Page: FC<Props> = ({ params }) => {
         try {
             // Llama a la función stripePayment para crear una sesión de pago
             const sessionData = await stripePayment(
-                'price_1O2DlVL8xRKNThtRrCzulC6J',
-                'prod_OptYQj6tN2NqVA'
-            ) // Reemplaza "precio" e "idProducto" con tus valores reales
-
-            // Una vez que obtienes la URL de la sesión de pago de Stripe, redirige al usuario a esa URL
-            window.location.href = sessionData.url
+                1,
+                'price_1O2DaNL8xRKNThtRM1vOjXKH'
+            )
+            router.push(sessionData.url)
         } catch (error) {
             console.error('Error al crear la sesión de pago: ', error)
         }
+    }
+
+    useEffect(() => {
+        getUserInfoDetails()
+        fetchServiceDetails(params.service)
+    }, [])
+
+    if (isLoading) {
+        return (
+            <LoadingContainer>
+                <CircularIndeterminate />
+            </LoadingContainer>
+        )
     }
 
     return (
@@ -179,7 +173,7 @@ const Page: FC<Props> = ({ params }) => {
                 <VideoYoutube
                     width="560"
                     height="315"
-                    src={video}
+                    src={serviceData?.urlVideo}
                     title="YouTube video player"
                     allowFullScreen
                 ></VideoYoutube>

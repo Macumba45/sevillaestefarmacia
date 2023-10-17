@@ -1,22 +1,16 @@
 import { getAuthenticatedToken } from '../../storage/storage'
 
-const token = getAuthenticatedToken()
-
-export const stripePayment = async (amount: string, id: string) => {
+export const stripePayment = async (amount: number, id: string) => {
     try {
-        const headers = {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-        }
-        const response = await fetch('/api/stripe/checkoutSessions', {
+        const response = await fetch('/api/stripe/checkout_sessions', {
             method: 'POST',
-            headers,
             body: JSON.stringify({ amount, id }),
         })
 
         console.log(response)
         if (response.ok) {
             const data = await response.json()
+            console.log(data)
             return data
         }
     } catch (error) {
