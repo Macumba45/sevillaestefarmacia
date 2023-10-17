@@ -43,10 +43,10 @@ export const TitleServices = styled.h1<{
 `
 
 export const SubtitleServices = styled.h2`
-    padding: 0.5rem 3.5rem;
+    padding: 0.5rem 1rem;
     border-radius: 30px;
     font-size: 1.5rem;
-    width: 200px;
+    width: 250px;
     text-align: center;
     margin: 3rem auto;
     color: white;
@@ -55,6 +55,8 @@ export const SubtitleServices = styled.h2`
     @media screen and (min-width: 899px) {
         font-size: 2rem;
         line-height: 2rem;
+        padding: 0.5rem 3rem;
+
         width: 300px;
     }
 `
@@ -92,4 +94,19 @@ export const FloatButtonContainer = styled.div`
     bottom: 2rem;
     right: 2rem;
     z-index: 9999;
+`
+
+export const VideoYoutubeContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+`
+
+export const VideoYoutube = styled.iframe`
+    width: 90%;
+    @media screen and (min-width: 899px) {
+        width: 800px;
+        height: 500px;
+    }
 `

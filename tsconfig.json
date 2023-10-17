@@ -42,7 +42,8 @@
         "src/app/dashboard/auth/callback/route.js",
         "next.config.js",
         "jest.config.ts",
-        "test/controllers/user/user.test.ts"
+        "test/controllers/user/user.test.ts",
+        "pages/api/stripe/checkoutSessions.js"
     ],
     "exclude": ["node_modules"]
 }

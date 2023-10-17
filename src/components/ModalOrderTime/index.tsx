@@ -18,18 +18,30 @@ interface Props {
     }[]
     open: boolean
     handleClose?: () => void
-    handlClickOpen?: () => void
+    handleReservarCita: () => void
 }
 
 const OrderServicesDate: FC<Props> = ({
     dates,
     open,
-    handlClickOpen,
     handleClose,
+    handleReservarCita,
 }) => {
     const [selectedDate, setSelectedDate] = useState<string>('')
     const [selectedHour, setSelectedHour] = useState<string>('')
-    console.log(selectedDate, selectedHour)
+    const today = new Date()
+
+    // Filtra las fechas que son iguales o posteriores a la fecha de hoy
+    const upcomingDates = dates?.filter(date => {
+        const parts = date.dates.split('/') // Divide la fecha en partes
+        const day = parseInt(parts[0], 10)
+        const month = parseInt(parts[1], 10) - 1 // Resta 1 al mes (0-indexado)
+        const year = parseInt(parts[2], 10)
+        const dateObject = new Date(year, month, day)
+
+        // Compara la fecha con la fecha de hoy
+        return dateObject >= today
+    })
 
     const getAvailableHours = (selectedDate: string) => {
         if (dates) {
@@ -43,14 +55,54 @@ const OrderServicesDate: FC<Props> = ({
         return []
     }
 
+    function formatDateString(inputDate: any) {
+        // Parsea la fecha en formato "dd/mm/yyyy" a un objeto Date
+        const parts = inputDate.split('/')
+        const day = parseInt(parts[0], 10)
+        const month = parseInt(parts[1], 10) - 1 // Resta 1 al mes porque los meses en JavaScript son 0-indexados
+        const year = parseInt(parts[2], 10)
+        const dateObject = new Date(year, month, day)
+
+        // Define los nombres de los días de la semana y de los meses
+        const daysOfWeek = [
+            'Domingo',
+            'Lunes',
+            'Martes',
+            'Miércoles',
+            'Jueves',
+            'Viernes',
+            'Sábado',
+        ]
+        const months = [
+            'enero',
+            'febrero',
+            'marzo',
+            'abril',
+            'mayo',
+            'junio',
+            'julio',
+            'agosto',
+            'septiembre',
+            'octubre',
+            'noviembre',
+            'diciembre',
+        ]
+
+        // Obtiene el día de la semana, el día del mes y el mes en formato deseado
+        const dayOfWeek = daysOfWeek[dateObject.getDay()]
+        const dayOfMonth = dateObject.getDate()
+        const monthName = months[dateObject.getMonth()]
+
+        // Combina los valores en el formato deseado
+        const formattedDate = `${dayOfWeek}, ${dayOfMonth} de ${monthName}`
+
+        return formattedDate
+    }
+
     const handleDateChange = (event: SelectChangeEvent) => {
         const newDate = event.target.value as string
         setSelectedDate(newDate)
         setSelectedHour('') // Reiniciar la hora seleccionada
-
-        // Puedes hacer lo que quieras con las horas aquí, como establecer una variable de estado para ellas.
-        const hours = getAvailableHours(newDate)
-        // Ahora tienes las horas disponibles en el arreglo 'hours'.
     }
 
     return (
@@ -62,14 +114,18 @@ const OrderServicesDate: FC<Props> = ({
                         sx={{
                             mt: 2,
                             minWidth: 120,
-                            flexDirection: 'row',
+                            flexDirection: 'column',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
                             height: '100px',
+                            '@media (min-width: 600px)': {
+                                flexDirection: 'row',
+                                height: '80px',
+                            },
                         }}
                     >
-                        <FormControl sx={{ mr: 2, width: 300 }}>
+                        <FormControl sx={{ width: 280, margin: 1 }}>
                             <InputLabel
                                 sx={{
                                     '&.Mui-focused': {
@@ -109,15 +165,15 @@ const OrderServicesDate: FC<Props> = ({
                                 <MenuItem value={''}>
                                     Selecciona una fecha
                                 </MenuItem>
-                                {dates?.map((date, index) => (
+                                {upcomingDates?.map((date, index) => (
                                     <MenuItem key={index} value={date.dates}>
-                                        {date.dates}
+                                        {formatDateString(date.dates)}
                                     </MenuItem>
                                 ))}
                             </Select>
                         </FormControl>
 
-                        <FormControl sx={{ ml: 2, width: 300 }}>
+                        <FormControl sx={{ width: 280, margin: 1 }}>
                             <InputLabel
                                 sx={{
                                     '&.Mui-focused': {
@@ -174,12 +230,12 @@ const OrderServicesDate: FC<Props> = ({
                     </FormControl>
                 </DialogContent>
                 <DialogActions
-                    sx={{ display: 'flex', justifyContent: 'center', mb: 5 }}
+                    sx={{ display: 'flex', justifyContent: 'center', mb: 3 }}
                 >
                     <Button
                         sx={{ color: 'white', backgroundColor: 'black' }}
                         variant="contained"
-                        onClick={handleClose}
+                        onClick={handleReservarCita}
                     >
                         Reservar cita
                     </Button>

@@ -16,9 +16,12 @@ import {
     NavContainer,
     SubtitleServices,
     TitleServices,
+    VideoYoutube,
+    VideoYoutubeContainer,
 } from './styles'
 import DermoDescription from '@/components/DescriptionServices/dermo'
 import OrderServicesDate from '@/components/ModalOrderTime'
+import { stripePayment } from '@/services/stripe'
 
 interface Props {
     params: {
@@ -48,6 +51,7 @@ const Page: FC<Props> = ({ params }) => {
     const [open, setOpen] = useState(false)
     const handleOpen = () => setOpen(true)
     const handleClose = () => setOpen(false)
+    const video = serviceData?.urlVideo
 
     useEffect(() => {
         getUserInfoDetails()
@@ -71,6 +75,21 @@ const Page: FC<Props> = ({ params }) => {
         )}`
 
         window.open(whatsappURL)
+    }
+
+    const handleReservarCita = async () => {
+        try {
+            // Llama a la función stripePayment para crear una sesión de pago
+            const sessionData = await stripePayment(
+                'price_1O2DlVL8xRKNThtRrCzulC6J',
+                'prod_OptYQj6tN2NqVA'
+            ) // Reemplaza "precio" e "idProducto" con tus valores reales
+
+            // Una vez que obtienes la URL de la sesión de pago de Stripe, redirige al usuario a esa URL
+            window.location.href = sessionData.url
+        } catch (error) {
+            console.error('Error al crear la sesión de pago: ', error)
+        }
     }
 
     return (
@@ -152,10 +171,19 @@ const Page: FC<Props> = ({ params }) => {
                         hours: date.hours,
                     })) || []
                 }
-                handlClickOpen={handleOpen}
                 handleClose={handleClose}
                 open={open}
+                handleReservarCita={handleReservarCita}
             />
+            <VideoYoutubeContainer>
+                <VideoYoutube
+                    width="560"
+                    height="315"
+                    src={video}
+                    title="YouTube video player"
+                    allowFullScreen
+                ></VideoYoutube>
+            </VideoYoutubeContainer>
         </Container>
     )
 }
