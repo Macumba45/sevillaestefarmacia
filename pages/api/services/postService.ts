@@ -34,6 +34,7 @@ export default async function handler(
             descripcion,
             price,
             dates,
+            priceId,
         }: Services = req.body
 
         if (!Array.isArray(dates)) {
@@ -55,6 +56,7 @@ export default async function handler(
             allDates,
             hours,
             price,
+            priceId as string,
             user?.id as string
         )
 

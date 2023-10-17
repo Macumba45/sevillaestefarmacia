@@ -1,14 +1,19 @@
+import { NextApiRequest, NextApiResponse } from 'next'
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 
-export default async function handler(req, res) {
+export default async function handler(
+    req: NextApiRequest,
+    res: NextApiResponse
+) {
     if (req.method === 'POST') {
         try {
+            const priceId = req.body.priceId
             // Create Checkout Sessions from body params.
             const session = await stripe.checkout.sessions.create({
                 line_items: [
                     {
                         // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-                        price: 'price_1O2DlVL8xRKNThtRrCzulC6J',
+                        price: priceId,
                         quantity: 1,
                     },
                 ],
@@ -18,7 +23,7 @@ export default async function handler(req, res) {
                 cancel_url: `${req.headers.origin}/?canceled=true`,
             })
             res.status(200).json(session)
-        } catch (err) {
+        } catch (err: any) {
             res.status(err.statusCode || 500).json(err.message)
         }
     } else {

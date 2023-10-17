@@ -26,6 +26,7 @@ export const getServices = async (): Promise<any[]> => {
         subtitle: service.subtitle,
         descripcion: service.descripcion,
         price: service.price,
+        priceId: service.priceId,
         adminId: service.adminId,
         createdAt: service.createdAt,
         updatedAt: service.updatedAt,
@@ -50,7 +51,8 @@ export const createService = async (
     dates: Array<string>, // Fechas en formato DD/MM/YYYY
     hours: Array<Array<string>>, // Horas correspondientes a cada fecha
     price: string,
-    adminId: string
+    adminId: string,
+    priceId: string
 ): Promise<Services | null> => {
     const newService = await prisma.services.create({
         data: {
@@ -61,6 +63,7 @@ export const createService = async (
             descripcion: descripcion,
             price: price,
             adminId: adminId,
+            priceId: priceId,
             dates: {
                 create: dates.map((date, index) => {
                     return {
@@ -88,7 +91,8 @@ export const updateService = async (
     subtitle: string,
     descripcion: string,
     dates: Array<{ date: string; hours: string[] }>, // Fechas en formato DD/MM/YYYY
-    price: string
+    price: string,
+    priceId: string
 ): Promise<Services | null> => {
     // Obtén el servicio existente
     const existingService = await prisma.services.findUnique({
@@ -184,6 +188,7 @@ export const updateService = async (
             subtitle: subtitle,
             descripcion: descripcion,
             price: price,
+            priceId: priceId,
         },
     })
 
@@ -268,6 +273,7 @@ export const serviceById = async (id: string): Promise<Services | null> => {
         price: service.price,
         createdAt: service.createdAt,
         updatedAt: service.updatedAt,
+        priceId: service.priceId,
         dates: service.dates.map(date => ({
             date: date.dates,
             hours: date.hours.map(hour => hour.hour),

@@ -24,6 +24,7 @@ export default async function handler(
                 subtitle,
                 descripcion,
                 price,
+                priceId,
             } = req.body
             const service = await updateService(
                 id as string,
@@ -33,7 +34,8 @@ export default async function handler(
                 subtitle,
                 descripcion,
                 transformedDates,
-                price
+                price,
+                priceId
             )
             res.status(200).json(service)
         } catch (error: any) {

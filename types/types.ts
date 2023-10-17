@@ -28,6 +28,7 @@ export type Services = {
     descripcion: string
     dates?: { date: string; hours: string[] }[]
     price: string
+    priceId?: string
     createdAt?: Date
     updatedAt?: Date
 }

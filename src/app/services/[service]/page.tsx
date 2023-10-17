@@ -49,8 +49,6 @@ const Page: FC<Props> = ({ params }) => {
     const handleOpen = () => setOpen(true)
     const handleClose = () => setOpen(false)
 
-    console.log(serviceData?.id)
-
     const contactWhatsApp = () => {
         const phoneNumber = '+34682296561'
         const message = `Hola Farmacia Santa Bárbara, me gustaría solicitar información sobre el servicio ${serviceData?.title}`
@@ -64,11 +62,8 @@ const Page: FC<Props> = ({ params }) => {
 
     const handleReservarCita = async () => {
         try {
-            // Llama a la función stripePayment para crear una sesión de pago
-            const sessionData = await stripePayment(
-                1,
-                'price_1O2DaNL8xRKNThtRM1vOjXKH'
-            )
+            const priceId = serviceData?.priceId as string
+            const sessionData = await stripePayment(1, priceId)
             router.push(sessionData.url)
         } catch (error) {
             console.error('Error al crear la sesión de pago: ', error)
@@ -109,9 +104,9 @@ const Page: FC<Props> = ({ params }) => {
                 widthtitle="320px"
                 widthtitledesktop={
                     serviceData?.title ===
-                        'SISTEMA PERSONALIZADO DE DOSIFICACIÓN'
-                        ? '600px' // Ancho personalizado si el título coincide
-                        : '500px' // Ancho predeterminado para otros títulos de escritorio
+                    'SISTEMA PERSONALIZADO DE DOSIFICACIÓN'
+                        ? '600px'
+                        : '500px'
                 }
             >
                 {serviceData?.title}
@@ -120,8 +115,8 @@ const Page: FC<Props> = ({ params }) => {
             <DermoDescription price={serviceData?.price as string} />
             <ButtonContainerServices>
                 {serviceData?.id === 'clnsx96ds0001xyyk7teubf6m' ||
-                    serviceData?.id === 'clnsxjnf80003xyyk3quxzg92' ||
-                    serviceData?.id === 'clnsxkxrs0009xyykmj8au8sd' ? (
+                serviceData?.id === 'clnsxjnf80003xyyk3quxzg92' ||
+                serviceData?.id === 'clnsxkxrs0009xyykmj8au8sd' ? (
                     <Button
                         onClick={handleOpen}
                         variant="outlined"
