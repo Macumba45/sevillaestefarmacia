@@ -8,6 +8,7 @@ export default async function handler(
     if (req.method === 'POST') {
         try {
             const priceId = req.body.priceId
+            const hourId = req.body.hourId
             // Create Checkout Sessions from body params.
             const session = await stripe.checkout.sessions.create({
                 line_items: [
@@ -17,13 +18,15 @@ export default async function handler(
                         quantity: 1,
                     },
                 ],
+                invoice_creation: {
+                    enabled: true,
+                },
                 mode: 'payment',
                 payment_method_types: ['card'],
-                success_url: `${req.headers.origin}/?success=true`,
+                success_url: `${req.headers.origin}/success`,
                 cancel_url: `${req.headers.origin}/?canceled=true`,
                 metadata: {
-                    fechaCita: '2023-10-31',
-                    horaCita: '15:30',
+                    hourId: hourId,
                 },
             })
             console.log(session)

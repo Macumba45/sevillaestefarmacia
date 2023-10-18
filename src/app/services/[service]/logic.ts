@@ -12,6 +12,13 @@ export const useLogicPageServicesDetail = () => {
     const handleOpen = () => setOpen(true)
     const handleClose = () => setOpen(false)
 
+    const fetchServiceDetails = async (id: string) => {
+        setIsLoading(true)
+        const serviceDetails = await getServiceDetails(id)
+        document.title = `Farmacia Santa Bárbara - ${serviceDetails?.title}`
+        setServiceData(serviceDetails)
+        setIsLoading(false)
+    }
     const contactWhatsApp = () => {
         const phoneNumber = '+34682296561'
         const message = `Hola Farmacia Santa Bárbara, me gustaría solicitar información sobre el servicio ${serviceData?.title}`
@@ -25,19 +32,13 @@ export const useLogicPageServicesDetail = () => {
 
     const handleReservarCita = async () => {
         try {
+            console.log('serviceData: ', serviceData)
             const priceId = serviceData?.priceId as string
-            const sessionData = await stripePayment(1, priceId)
+            const sessionData = await stripePayment(1, priceId) // Pasa el hourId a stripePayment
             router.push(sessionData.url)
         } catch (error) {
             console.error('Error al crear la sesión de pago: ', error)
         }
-    }
-    const fetchServiceDetails = async (id: string) => {
-        setIsLoading(true)
-        const serviceDetails = await getServiceDetails(id)
-        document.title = `Farmacia Santa Bárbara - ${serviceDetails?.title}`
-        setServiceData(serviceDetails)
-        setIsLoading(false)
     }
 
     return {

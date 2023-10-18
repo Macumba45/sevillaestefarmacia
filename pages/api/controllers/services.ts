@@ -253,7 +253,13 @@ export const serviceById = async (id: string): Promise<Services | null> => {
         include: {
             dates: {
                 include: {
-                    hours: true,
+                    hours: {
+                        select: {
+                            id: true,
+                            hour: true,
+                            isBooked: true,
+                        },
+                    },
                 },
             },
         },
@@ -263,7 +269,17 @@ export const serviceById = async (id: string): Promise<Services | null> => {
         return null
     }
 
-    const serviceData: Services = {
+    const transformedDates = service.dates.map(date => ({
+        date: date.dates,
+        hours: date.hours.map(hour => ({
+            id: hour.id,
+            hour: hour.hour,
+            isBooked: hour.isBooked,
+        })),
+    }))
+
+    // Construir el objeto Services con la estructura esperada
+    const serviceData: any = {
         id: service.id,
         urlPicture: service.urlPicture,
         urlVideo: service.urlVideo,
@@ -274,10 +290,7 @@ export const serviceById = async (id: string): Promise<Services | null> => {
         createdAt: service.createdAt,
         updatedAt: service.updatedAt,
         priceId: service.priceId,
-        dates: service.dates.map(date => ({
-            date: date.dates,
-            hours: date.hours.map(hour => hour.hour),
-        })),
+        dates: transformedDates,
     }
 
     return serviceData
