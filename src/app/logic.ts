@@ -1,6 +1,6 @@
 import { getUserInfo } from '@/services/user'
 import { useState } from 'react'
-import { ServiceData, Services, User } from '../../types/types'
+import { Services, User } from '../../types/types'
 import { useRouter } from 'next/navigation'
 import { getServiceDetails } from '@/services/service'
 

@@ -32,11 +32,11 @@ const CardDashboardServices: FC<Props> = ({ service, onEdit, onDelete }) => {
                 />
             }
             actions={[
-                <DeleteOutlined
-                    // onClick={onDelete}
-                    style={styleIconButtons}
-                    key="delete"
-                />,
+                // <DeleteOutlined
+                //     // onClick={onDelete}
+                //     style={styleIconButtons}
+                //     key="delete"
+                // />,
                 <EditOutlined
                     onClick={onEdit}
                     style={styleIconButtons}

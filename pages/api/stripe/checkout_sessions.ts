@@ -21,7 +21,12 @@ export default async function handler(
                 payment_method_types: ['card'],
                 success_url: `${req.headers.origin}/?success=true`,
                 cancel_url: `${req.headers.origin}/?canceled=true`,
+                metadata: {
+                    fechaCita: '2023-10-31',
+                    horaCita: '15:30',
+                },
             })
+            console.log(session)
             res.status(200).json(session)
         } catch (err: any) {
             res.status(err.statusCode || 500).json(err.message)

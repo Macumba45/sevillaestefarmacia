@@ -108,7 +108,7 @@ const Home: FC = () => {
                 buttonName="Más información"
                 backGrodunColor="#ebf0f6"
                 picture={dermo.src}
-                widthMobile="320px"
+                widthMobile="385px"
                 widthTitle="330px"
                 imagePosition="bottom"
             />

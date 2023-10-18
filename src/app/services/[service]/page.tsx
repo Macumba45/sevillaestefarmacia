@@ -1,13 +1,13 @@
 'use client'
 
-import { FC, memo, useEffect, useState } from 'react'
+import { FC, memo, useEffect } from 'react'
 import { useLogicHome } from '@/app/logic'
 import ResponsiveAppBar from '@/components/MenuNavBar'
 import CircularIndeterminate from '@/components/Loader'
 import { Button, Fab } from '@mui/material'
 import DermoDescription from '@/components/DescriptionServices/dermo'
 import OrderServicesDate from '@/components/ModalOrderTime'
-import { stripePayment } from '@/services/stripe'
+import { useLogicPageServicesDetail } from './logic'
 import {
     ButtonContainerServices,
     Container,
@@ -28,7 +28,6 @@ interface Props {
 
 const Page: FC<Props> = ({ params }) => {
     const {
-        serviceData,
         buttonName,
         closeDrawer,
         closeDrawerButton,
@@ -39,36 +38,20 @@ const Page: FC<Props> = ({ params }) => {
         handleOpenNavMenu,
         isDrawerOpen,
         isDrawerOpenButton,
-        isLoading,
         logOut,
         router,
-        fetchServiceDetails,
     } = useLogicHome()
 
-    const [open, setOpen] = useState(false)
-    const handleOpen = () => setOpen(true)
-    const handleClose = () => setOpen(false)
-
-    const contactWhatsApp = () => {
-        const phoneNumber = '+34682296561'
-        const message = `Hola Farmacia Santa Bárbara, me gustaría solicitar información sobre el servicio ${serviceData?.title}`
-
-        const whatsappURL = `whatsapp://send?phone=${phoneNumber}&text=${encodeURIComponent(
-            message
-        )}`
-
-        window.open(whatsappURL)
-    }
-
-    const handleReservarCita = async () => {
-        try {
-            const priceId = serviceData?.priceId as string
-            const sessionData = await stripePayment(1, priceId)
-            router.push(sessionData.url)
-        } catch (error) {
-            console.error('Error al crear la sesión de pago: ', error)
-        }
-    }
+    const {
+        contactWhatsApp,
+        fetchServiceDetails,
+        handleOpen,
+        handleClose,
+        handleReservarCita,
+        isLoading,
+        open,
+        serviceData,
+    } = useLogicPageServicesDetail()
 
     useEffect(() => {
         getUserInfoDetails()
@@ -84,7 +67,7 @@ const Page: FC<Props> = ({ params }) => {
     }
 
     return (
-        <Container>
+        <Container backGrounColor="#ebf0f6">
             <NavContainer>
                 <ResponsiveAppBar
                     closeDrawer={() => closeDrawer()}

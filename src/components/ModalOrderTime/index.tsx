@@ -1,7 +1,7 @@
 'use client'
 import * as React from 'react'
 import Button from '@mui/material/Button'
-import Dialog, { DialogProps } from '@mui/material/Dialog'
+import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
@@ -118,7 +118,7 @@ const OrderServicesDate: FC<Props> = ({
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            height: '100px',
+                            height: '150px',
                             '@media (min-width: 600px)': {
                                 flexDirection: 'row',
                                 height: '80px',

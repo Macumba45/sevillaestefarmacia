@@ -7,7 +7,12 @@ export const LoadingContainer = styled.div`
     height: 100vh;
 `
 
-export const Container = styled.div``
+export const Container = styled.div<{ backGrounColor?: string }>`
+    background-color: ${props => props.backGrounColor};
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+`
 
 export const NavContainer = styled.nav`
     display: flex;

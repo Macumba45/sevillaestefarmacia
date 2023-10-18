@@ -3,7 +3,6 @@ import { useLogicDashboard } from '@/app/dashboard/logic'
 import { DateObject } from 'react-multi-date-picker'
 import DatePickerComponent from '../DaysSelect'
 import { Services } from '../../../types/types'
-import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css' // Estilo por defecto
 import {
     Button,
