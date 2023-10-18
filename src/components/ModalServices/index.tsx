@@ -132,9 +132,13 @@ const ServiceFormModal: FC<Props> = ({
             descripcion,
             dates: selectedDays.map(day => ({
                 date: day.date.format('DD/MM/YYYY'),
-                hours: day.hours,
+                hours: day.hours.map(hour => ({
+                    hour: hour,
+                    isBooked: false,
+                })),
             })),
         }
+
         if (isEditing && serviceData) {
             // Si estamos en modo edición, llamamos a la función de actualización
             serviceDataToSubmit.id = serviceData.id
@@ -163,10 +167,12 @@ const ServiceFormModal: FC<Props> = ({
             const formattedDates = serviceDates
                 .map(dateObj => {
                     const { date, hours } = dateObj
-                    const parsedDate = parseDateString(date) // Convierte la fecha al formato correcto
+                    const parsedDate = parseDateString(date as string) // Convierte la fecha al formato correcto
                     return {
                         date: new DateObject(parsedDate), // Convierte la fecha a DateObject
-                        hours: hours || [],
+                        hours: hours
+                            ? hours.map(hour => hour.hour as string)
+                            : [], // Extracción de las horas como cadenas
                     }
                 })
                 .filter(dateObject => {
@@ -176,7 +182,7 @@ const ServiceFormModal: FC<Props> = ({
 
             const hours = formattedDates.map(date => date.hours)
 
-            // Luego, establece formattedDates directamente en setSelectedDays
+            // Luego, establece formattedDates y hours directamente en setSelectedDays y sethoursFromDatabase
             setSelectedDays(formattedDates)
             sethoursFromDatabase(hours)
         }

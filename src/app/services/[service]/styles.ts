@@ -7,8 +7,8 @@ export const LoadingContainer = styled.div`
     height: 100vh;
 `
 
-export const Container = styled.div<{ backGrounColor?: string }>`
-    background-color: ${props => props.backGrounColor};
+export const Container = styled.div<{ backgrouncolor?: string }>`
+    background-color: ${props => props.backgrouncolor};
     width: 100%;
     display: flex;
     flex-direction: column;

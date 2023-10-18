@@ -26,35 +26,26 @@ export type Services = {
     title: string
     subtitle: string
     descripcion: string
-    dates?: { date: string; hours: string[] }[]
+    dates?: Dates[]
     price: string
     priceId?: string
     createdAt?: Date
     updatedAt?: Date
 }
 
-export type ServiceData = {
-    title: string
-    subtitle: string
-    descripcion: string
-    pictureUrl: string
-    videoUrl: string
-    price: string
-}
-
 export type Dates = {
     id?: string
-    dates: string
-    serviceId: string
+    date: string
+    hours: Hour[]
+    serviceId?: string
     createdAt?: Date
     updatedAt?: Date
 }
 
-export type Hours = {
+export type Hour = {
     id?: string
-    hours: string[]
+    hour: string
     isBooked: boolean
-    dateId: string
     createdAt?: Date
     updatedAt?: Date
 }

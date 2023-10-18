@@ -9,6 +9,7 @@ export default async function handler(
         try {
             const priceId = req.body.priceId
             const hourId = req.body.hourId
+            console.log(hourId)
             // Create Checkout Sessions from body params.
             const session = await stripe.checkout.sessions.create({
                 line_items: [

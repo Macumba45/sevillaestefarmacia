@@ -6,7 +6,7 @@ import ResponsiveAppBar from '@/components/MenuNavBar'
 import CircularIndeterminate from '@/components/Loader'
 import { Button, Fab } from '@mui/material'
 import DermoDescription from '@/components/DescriptionServices/dermo'
-import OrderServicesDate from '@/components/ModalOrderTime'
+import ModalOrderTime from '@/components/ModalOrderTime'
 import { useLogicPageServicesDetail } from './logic'
 import {
     ButtonContainerServices,
@@ -67,7 +67,7 @@ const Page: FC<Props> = ({ params }) => {
     }
 
     return (
-        <Container backGrounColor="#ebf0f6">
+        <Container backgrouncolor="#ebf0f6">
             <NavContainer>
                 <ResponsiveAppBar
                     closeDrawer={() => closeDrawer()}
@@ -182,13 +182,8 @@ const Page: FC<Props> = ({ params }) => {
                     ¿Te asesoramos?
                 </Fab>
             </FloatButtonContainer>
-            <OrderServicesDate
-                dates={
-                    serviceData?.dates?.map(date => ({
-                        dates: date.date,
-                        hours: date.hours,
-                    })) || []
-                }
+            <ModalOrderTime
+                dates={serviceData?.dates}
                 handleClose={handleClose}
                 open={open}
                 handleReservarCita={handleReservarCita}

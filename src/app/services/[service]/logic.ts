@@ -32,7 +32,6 @@ export const useLogicPageServicesDetail = () => {
 
     const handleReservarCita = async () => {
         try {
-            console.log('serviceData: ', serviceData)
             const priceId = serviceData?.priceId as string
             const sessionData = await stripePayment(1, priceId) // Pasa el hourId a stripePayment
             router.push(sessionData.url)

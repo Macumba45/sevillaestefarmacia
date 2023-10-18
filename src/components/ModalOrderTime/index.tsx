@@ -10,30 +10,28 @@ import MenuItem from '@mui/material/MenuItem'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 import { FC, useState } from 'react'
 import { InputLabel } from '@mui/material'
+import { Dates, Hour } from '../../../types/types'
 
 interface Props {
-    dates?: {
-        dates: string
-        hours: string[]
-    }[]
+    dates?: Dates[]
     open: boolean
     handleClose?: () => void
     handleReservarCita: () => void
 }
 
-const OrderServicesDate: FC<Props> = ({
+const ModalOrderTime: FC<Props> = ({
     dates,
     open,
     handleClose,
     handleReservarCita,
 }) => {
     const [selectedDate, setSelectedDate] = useState<string>('')
-    const [selectedHour, setSelectedHour] = useState<string>('')
+    const [selectedHour, setSelectedHour] = useState<Hour>()
     const today = new Date()
 
     // Filtra las fechas que son iguales o posteriores a la fecha de hoy
     const upcomingDates = dates?.filter(date => {
-        const parts = date.dates.split('/') // Divide la fecha en partes
+        const parts = date.date.split('/') // Divide la fecha en partes
         const day = parseInt(parts[0], 10)
         const month = parseInt(parts[1], 10) - 1 // Resta 1 al mes (0-indexado)
         const year = parseInt(parts[2], 10)
@@ -46,7 +44,7 @@ const OrderServicesDate: FC<Props> = ({
     const getAvailableHours = (selectedDate: string) => {
         if (dates) {
             const selectedService = dates.find(
-                date => date.dates === selectedDate
+                date => date.date === selectedDate
             )
             if (selectedService) {
                 return selectedService.hours
@@ -101,8 +99,9 @@ const OrderServicesDate: FC<Props> = ({
 
     const handleDateChange = (event: SelectChangeEvent) => {
         const newDate = event.target.value as string
+        const newHours = getAvailableHours(newDate)
         setSelectedDate(newDate)
-        setSelectedHour('') // Reiniciar la hora seleccionada
+        setSelectedHour(newHours as any) // Reiniciar la hora seleccionada
     }
 
     return (
@@ -166,8 +165,8 @@ const OrderServicesDate: FC<Props> = ({
                                     Selecciona una fecha
                                 </MenuItem>
                                 {upcomingDates?.map((date, index) => (
-                                    <MenuItem key={index} value={date.dates}>
-                                        {formatDateString(date.dates)}
+                                    <MenuItem key={index} value={date.date}>
+                                        {formatDateString(date.date)}
                                     </MenuItem>
                                 ))}
                             </Select>
@@ -203,16 +202,14 @@ const OrderServicesDate: FC<Props> = ({
                                         },
                                 }}
                                 label="Elija una hora"
-                                value={selectedHour}
+                                value={selectedHour?.hour || ''}
                                 onChange={(event: SelectChangeEvent) =>
-                                    setSelectedHour(
-                                        event.target.value as string
-                                    )
+                                    setSelectedHour({
+                                        hour: event.target.value as string,
+                                        isBooked: false,
+                                        id: '',
+                                    })
                                 }
-                                inputProps={{
-                                    name: 'hours',
-                                    id: 'hours',
-                                }}
                                 disabled={!selectedDate}
                             >
                                 <MenuItem value={''}>
@@ -220,8 +217,12 @@ const OrderServicesDate: FC<Props> = ({
                                 </MenuItem>
                                 {getAvailableHours(selectedDate).map(
                                     (hour, index) => (
-                                        <MenuItem key={index} value={hour}>
-                                            {hour}
+                                        <MenuItem key={index} value={hour.hour}>
+                                            {`${hour.hour as any} - ${
+                                                hour.isBooked
+                                                    ? 'Reservado'
+                                                    : 'Disponible'
+                                            }`}
                                         </MenuItem>
                                     )
                                 )}
@@ -248,4 +249,4 @@ const OrderServicesDate: FC<Props> = ({
     )
 }
 
-export default OrderServicesDate
+export default ModalOrderTime

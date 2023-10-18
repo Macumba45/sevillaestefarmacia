@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import jwt, { JwtPayload } from 'jsonwebtoken'
 import { findUserById } from '../controllers/user'
 import { createService } from '../controllers/services'
-import { Services } from '../../../types/types'
+import { Hour, Services } from '../../../types/types'
 
 export default async function handler(
     req: NextApiRequest,
@@ -44,8 +44,12 @@ export default async function handler(
             return
         }
 
-        const allDates: string[] = dates.map(serviceDate => serviceDate.date)
-        const hours: string[][] = dates.map(serviceDate => serviceDate.hours)
+        const allDates: string[] = dates.map(
+            serviceDate => serviceDate.date as string
+        )
+        const hours = dates.map(serviceDate =>
+            serviceDate.hours.map(hour => hour.hour)
+        )
 
         const newService = await createService(
             urlPicture,
