@@ -11,10 +11,16 @@ interface Props {
 }
 
 const PaymentSuccessComponent: FC<Props> = ({ params }) => {
-    const { paymentSuccess } = useLogicPayment()
+    const { paymentSuccess, router } = useLogicPayment()
 
     useEffect(() => {
         paymentSuccess(params.paymentId)
+    }, [])
+
+    useEffect(() => {
+        if (!params.paymentId) {
+            router.push('/')
+        }
     }, [])
 
     return (
@@ -27,7 +33,7 @@ const PaymentSuccessComponent: FC<Props> = ({ params }) => {
         >
             <h1>Pago Completado</h1>
             <p>¡Gracias por tu compra!</p>
-            <Button variant="contained" color="primary">
+            <Button href="/" variant="contained" color="primary">
                 Volver a la página principal
             </Button>
         </Box>

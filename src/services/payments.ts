@@ -33,6 +33,8 @@ export const stripePaymentTrue = async (paymentId: string) => {
         if (response.ok) {
             const data = await response.json()
             return data
+        } else if (response.status === 500) {
+            window.location.href = '/'
         }
     } catch (error) {
         console.log(error)
