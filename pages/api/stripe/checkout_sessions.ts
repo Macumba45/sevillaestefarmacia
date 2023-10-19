@@ -8,8 +8,8 @@ export default async function handler(
     if (req.method === 'POST') {
         try {
             const priceId = req.body.priceId
-            const hourId = req.body.hourId
-            console.log(hourId)
+            const paymentId = req.body.paymentId
+            console.log(paymentId)
             // Create Checkout Sessions from body params.
             const session = await stripe.checkout.sessions.create({
                 line_items: [
@@ -24,13 +24,13 @@ export default async function handler(
                 },
                 mode: 'payment',
                 payment_method_types: ['card'],
-                success_url: `${req.headers.origin}/success`,
+                success_url: `${req.headers.origin}/payment/${paymentId}`,
                 cancel_url: `${req.headers.origin}/?canceled=true`,
                 metadata: {
-                    hourId: hourId,
+                    paymentId: paymentId,
                 },
             })
-            console.log(session)
+            console.log(session.metadata.paymentId)
             res.status(200).json(session)
         } catch (err: any) {
             res.status(err.statusCode || 500).json(err.message)

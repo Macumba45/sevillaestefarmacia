@@ -8,7 +8,7 @@ import DialogTitle from '@mui/material/DialogTitle'
 import FormControl from '@mui/material/FormControl'
 import MenuItem from '@mui/material/MenuItem'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { InputLabel } from '@mui/material'
 import { Dates, Hour } from '../../../types/types'
 
@@ -17,6 +17,8 @@ interface Props {
     open: boolean
     handleClose?: () => void
     handleReservarCita: () => void
+    onHourIdChange: (newHourId: string) => void
+    onDateIdChange: (newDateId: string) => void
 }
 
 const ModalOrderTime: FC<Props> = ({
@@ -24,9 +26,17 @@ const ModalOrderTime: FC<Props> = ({
     open,
     handleClose,
     handleReservarCita,
+    onHourIdChange,
+    onDateIdChange,
 }) => {
-    const [selectedDate, setSelectedDate] = useState<string>('')
+    const [selectedDate, setSelectedDate] = useState<{
+        date: string
+        id: string
+    }>({ date: '', id: '' })
     const [selectedHour, setSelectedHour] = useState<Hour>()
+    // Dentro del componente
+    const [dateIdMap, setDateIdMap] = useState<{ [date: string]: string }>({})
+
     const today = new Date()
 
     // Filtra las fechas que son iguales o posteriores a la fecha de hoy
@@ -100,9 +110,28 @@ const ModalOrderTime: FC<Props> = ({
     const handleDateChange = (event: SelectChangeEvent) => {
         const newDate = event.target.value as string
         const newHours = getAvailableHours(newDate)
-        setSelectedDate(newDate)
-        setSelectedHour(newHours as any) // Reiniciar la hora seleccionada
+        setSelectedDate({ date: newDate, id: dateIdMap[newDate] }) // Asumiendo que dateIdMap tiene el mapeo de IDs por fecha
+        setSelectedHour(newHours as any)
+        onDateIdChange(dateIdMap[newDate]) // Pasar la ID en lugar de la fecha
     }
+
+    useEffect(() => {
+        if (dates) {
+            const dateIdMap = dates.reduce(
+                (map, date) => {
+                    if (date && date.date && date.id) {
+                        map[date.date] = date.id
+                    } else {
+                        console.error('Fecha o ID faltante en:', date)
+                    }
+                    return map
+                },
+                {} as { [date: string]: string }
+            )
+
+            setDateIdMap(dateIdMap)
+        }
+    }, [dates])
 
     return (
         <React.Fragment>
@@ -137,7 +166,7 @@ const ModalOrderTime: FC<Props> = ({
                             </InputLabel>
                             <Select
                                 label="Selecciona Fecha"
-                                value={selectedDate}
+                                value={selectedDate.date || ''}
                                 onChange={handleDateChange}
                                 inputProps={{
                                     name: 'dates',
@@ -166,7 +195,10 @@ const ModalOrderTime: FC<Props> = ({
                                 </MenuItem>
                                 {upcomingDates?.map((date, index) => (
                                     <MenuItem key={index} value={date.date}>
-                                        {formatDateString(date.date)}
+                                        {' '}
+                                        {/* ID de la fecha como valor */}
+                                        {formatDateString(date.date)}{' '}
+                                        {/* Fecha como texto del elemento */}
                                     </MenuItem>
                                 ))}
                             </Select>
@@ -203,19 +235,29 @@ const ModalOrderTime: FC<Props> = ({
                                 }}
                                 label="Elija una hora"
                                 value={selectedHour?.hour || ''}
-                                onChange={(event: SelectChangeEvent) =>
+                                onChange={(event: SelectChangeEvent) => {
+                                    const newHourId = dates
+                                        ?.map(date => date.hours)
+                                        .flat()
+                                        .find(
+                                            hour =>
+                                                hour.hour === event.target.value
+                                        )?.id
+
                                     setSelectedHour({
                                         hour: event.target.value as string,
-                                        isBooked: false,
-                                        id: '',
+                                        id: newHourId,
                                     })
-                                }
+
+                                    // Notifica el cambio en hourId a la vista principal
+                                    onHourIdChange(newHourId || '') // Puedes proporcionar un valor predeterminado si es necesario
+                                }}
                                 disabled={!selectedDate}
                             >
                                 <MenuItem value={''}>
                                     Selecciona una hora
                                 </MenuItem>
-                                {getAvailableHours(selectedDate).map(
+                                {getAvailableHours(selectedDate.date).map(
                                     (hour, index) => (
                                         <MenuItem key={index} value={hour.hour}>
                                             {`${hour.hour as any} - ${

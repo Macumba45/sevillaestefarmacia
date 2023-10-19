@@ -265,6 +265,7 @@ export const serviceById = async (id: string): Promise<Services | null> => {
     }
 
     const transformedDates = service.dates.map(date => ({
+        id: date.id, // Agregar la id de la fecha
         date: date.dates,
         hours: date.hours.map(hour => ({
             id: hour.id,
@@ -274,7 +275,7 @@ export const serviceById = async (id: string): Promise<Services | null> => {
     }))
 
     // Construir el objeto Services con la estructura esperada
-    const serviceData: any = {
+    const serviceData: Services = {
         id: service.id,
         priceId: service.priceId,
         urlPicture: service.urlPicture,

@@ -1,6 +1,6 @@
 'use client'
 
-import { FC, memo, useEffect } from 'react'
+import { FC, memo, useEffect, useState } from 'react'
 import { useLogicHome } from '@/app/logic'
 import ResponsiveAppBar from '@/components/MenuNavBar'
 import CircularIndeterminate from '@/components/Loader'
@@ -51,6 +51,8 @@ const Page: FC<Props> = ({ params }) => {
         isLoading,
         open,
         serviceData,
+        setHourId,
+        setDateId,
     } = useLogicPageServicesDetail()
 
     useEffect(() => {
@@ -187,7 +189,14 @@ const Page: FC<Props> = ({ params }) => {
                 handleClose={handleClose}
                 open={open}
                 handleReservarCita={handleReservarCita}
+                onHourIdChange={newHourId => {
+                    setHourId(newHourId)
+                }}
+                onDateIdChange={newDateIr => {
+                    setDateId(newDateIr)
+                }} // Maneja el cambio en selectDate
             />
+
             <VideoYoutubeContainer>
                 <VideoYoutube
                     width="560"

@@ -1,7 +1,22 @@
-import React from 'react'
-import { Box, Button } from '@mui/material'
+'use client'
 
-const PaymentSuccessComponent = () => {
+import React, { FC, useEffect } from 'react'
+import { Box, Button } from '@mui/material'
+import { useLogicPayment } from './logic'
+
+interface Props {
+    params: {
+        paymentId: string
+    }
+}
+
+const PaymentSuccessComponent: FC<Props> = ({ params }) => {
+    const { paymentSuccess } = useLogicPayment()
+
+    useEffect(() => {
+        paymentSuccess(params.paymentId)
+    }, [])
+
     return (
         <Box
             display="flex"

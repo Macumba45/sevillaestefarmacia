@@ -18,6 +18,7 @@ model User {
   services  ServiceToUser[]
   createdAt DateTime        @default(now())
   updatedAt DateTime        @updatedAt
+  Payments  Payments[]
 }
 
 model Services {
@@ -30,9 +31,22 @@ model Services {
   price       String
   priceId     String?
   dates       Dates[]
+  Payments    Payments[]
   users       ServiceToUser[] // Relación muchos a muchos a través de ServiceToUser
   createdAt   DateTime        @default(now())
   updatedAt   DateTime        @updatedAt
+}
+
+model Payments {
+  id        String   @id @default(cuid())
+  userId    String
+  serviceId String
+  dateId    String
+  hourId    String
+  user      User     @relation(fields: [userId], references: [id])
+  service   Services @relation(fields: [serviceId], references: [id])
+  payed     Boolean  @default(false)
+  createdAt DateTime @default(now())
 }
 
 model ServiceToUser {

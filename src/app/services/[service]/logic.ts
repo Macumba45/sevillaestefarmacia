@@ -1,14 +1,19 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { getServiceDetails } from '@/services/service'
 import { stripePayment } from '@/services/stripe'
+import { stripePaymentInProgress } from '@/services/payments'
 import { useRouter } from 'next/navigation'
-import { Services } from '../../../../types/types'
+import { Services, User } from '../../../../types/types'
+import { getUserInfo } from '@/services/user'
 
 export const useLogicPageServicesDetail = () => {
     const router = useRouter()
     const [open, setOpen] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const [serviceData, setServiceData] = useState<Services>()
+    const [hourId, setHourId] = useState<string>('')
+    const [dateId, setDateId] = useState<string>('')
+    const [currentUser, setCurrentUser] = useState<User | null>(null)
     const handleOpen = () => setOpen(true)
     const handleClose = () => setOpen(false)
 
@@ -19,6 +24,17 @@ export const useLogicPageServicesDetail = () => {
         setServiceData(serviceDetails)
         setIsLoading(false)
     }
+
+    const getUserInfoDetails = async () => {
+        setIsLoading(true)
+        const userInfo = await getUserInfo()
+        setCurrentUser(userInfo as User)
+    }
+
+    useEffect(() => {
+        getUserInfoDetails()
+    }, [])
+
     const contactWhatsApp = () => {
         const phoneNumber = '+34682296561'
         const message = `Hola Farmacia Santa Bárbara, me gustaría solicitar información sobre el servicio ${serviceData?.title}`
@@ -32,8 +48,17 @@ export const useLogicPageServicesDetail = () => {
 
     const handleReservarCita = async () => {
         try {
+            const userId = currentUser?.id as string
+            const serviceId = serviceData?.id as string
             const priceId = serviceData?.priceId as string
-            const sessionData = await stripePayment(1, priceId) // Pasa el hourId a stripePayment
+            const payment = await stripePaymentInProgress(
+                userId,
+                serviceId,
+                dateId,
+                hourId
+            )
+            console.log(payment)
+            const sessionData = await stripePayment(1, priceId, payment.id) // Pasa el hourId a stripePayment
             router.push(sessionData.url)
         } catch (error) {
             console.error('Error al crear la sesión de pago: ', error)
@@ -49,5 +74,7 @@ export const useLogicPageServicesDetail = () => {
         isLoading,
         open,
         serviceData,
+        setHourId,
+        setDateId,
     }
 }
