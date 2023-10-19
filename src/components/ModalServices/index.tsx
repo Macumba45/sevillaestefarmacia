@@ -31,6 +31,8 @@ const ServiceFormModal: FC<Props> = ({
     serviceData,
 }) => {
     const { createNewService, updateServiceData } = useLogicDashboard()
+    const [disabledHours, setDisabledHours] = useState<string[]>([])
+
     const [urlPicture, setUrlPicture] = useState(
         'https://picsum.photos/200/300.jpg'
     )
@@ -88,18 +90,39 @@ const ServiceFormModal: FC<Props> = ({
     }
 
     const generateAvailableHours = () => {
-        const hours: string[] = []
+        const hours = []
         for (let hour = 9; hour < 21; hour++) {
             for (let minute = 0; minute < 60; minute += 30) {
-                hours.push(
-                    `${String(hour).padStart(2, '0')}:${String(minute).padStart(
-                        2,
-                        '0'
-                    )}`
-                )
+                let hourId = null // Inicializa hourId como nulo
+
+                // Encuentra la hourId correspondiente en serviceData.payments
+                if (serviceData?.dates) {
+                    for (const date of serviceData.dates) {
+                        for (const payment of date.hours) {
+                            if (
+                                payment.hour ===
+                                `${String(hour).padStart(2, '0')}:${String(
+                                    minute
+                                ).padStart(2, '0')}`
+                            ) {
+                                hourId = payment.id // Corrige la asignación a payment.hourId
+                                break
+                            }
+                        }
+                        if (hourId) {
+                            break
+                        }
+                    }
+                }
+                hours.push({
+                    hour: `${String(hour).padStart(2, '0')}:${String(
+                        minute
+                    ).padStart(2, '0')}`,
+                    hourId,
+                })
             }
         }
-        return hours
+        return hours || []
     }
 
     const handleHourChange = (dateIndex: number, hour: string) => {
@@ -298,18 +321,18 @@ const ServiceFormModal: FC<Props> = ({
                                         }}
                                     >
                                         {generateAvailableHours().map(
-                                            (hour, hourIndex) => (
+                                            (hourData, hourIndex) => (
                                                 <li key={hourIndex}>
                                                     <FormControlLabel
                                                         control={
                                                             <Checkbox
-                                                                checked={
+                                                                value={
                                                                     !isEditing
                                                                         ? selectedDay.hours.includes(
-                                                                              hour
+                                                                              hourData.hour
                                                                           )
                                                                         : selectedDay.hours.includes(
-                                                                              hour
+                                                                              hourData.hour
                                                                           ) ||
                                                                           (hoursFromDatabase[
                                                                               index
@@ -321,30 +344,40 @@ const ServiceFormModal: FC<Props> = ({
                                                                                       item: any
                                                                                   ) =>
                                                                                       item.hour ===
-                                                                                      hour
+                                                                                      hourData.hour
+                                                                              ))
+                                                                }
+                                                                checked={
+                                                                    !isEditing
+                                                                        ? selectedDay.hours.includes(
+                                                                              hourData.hour
+                                                                          )
+                                                                        : selectedDay.hours.includes(
+                                                                              hourData.hour
+                                                                          ) ||
+                                                                          (hoursFromDatabase[
+                                                                              index
+                                                                          ] &&
+                                                                              hoursFromDatabase[
+                                                                                  index
+                                                                              ].some(
+                                                                                  (
+                                                                                      item: any
+                                                                                  ) =>
+                                                                                      item.hour ===
+                                                                                      hourData.hour
                                                                               ))
                                                                 }
                                                                 onChange={() =>
                                                                     handleHourChange(
                                                                         index,
-                                                                        hour
+                                                                        hourData.hour
                                                                     )
                                                                 }
-                                                                disabled={
-                                                                    isEditing &&
-                                                                    hoursFromDatabase[
-                                                                        index
-                                                                    ]?.some(
-                                                                        (
-                                                                            item: any
-                                                                        ) =>
-                                                                            item.hour ===
-                                                                            hour
-                                                                    )
-                                                                }
+                                                                // disabled={hoursWithHourIdFiltered.some((hourInfo: any) => hourInfo.hour === hourData.hour)}
                                                             />
                                                         }
-                                                        label={hour}
+                                                        label={hourData.hour}
                                                     />
                                                 </li>
                                             )

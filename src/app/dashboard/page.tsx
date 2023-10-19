@@ -40,7 +40,7 @@ import LinearIndeterminate from '@/components/LoaderLinear/indx'
 
 const drawerWidth = 240
 
-const Dashboard: FC<Props> = props => {
+const Dashboard: FC<Props> = () => {
     const {
         currentUser,
         getUserInfoData,
@@ -68,11 +68,6 @@ const Dashboard: FC<Props> = props => {
         closeModalDelete,
         isLoading,
     } = useLogicDashboard()
-
-    const { window } = props
-
-    const container =
-        window !== undefined ? () => window().document.body : undefined
 
     useEffect(() => {
         if (getAuthenticatedToken()) {
@@ -208,7 +203,7 @@ const Dashboard: FC<Props> = props => {
             >
                 {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
                 <Drawer
-                    container={container}
+                    component={'div'}
                     variant="temporary"
                     open={mobileOpen}
                     onClose={handleDrawerToggle}

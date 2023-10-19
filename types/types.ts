@@ -22,17 +22,17 @@ export type Services = {
     createdAt?: Date
     updatedAt?: Date
     users?: User[]
+    payments?: Payment[]
 }
 
 export type Payment = {
     id?: string
-    userId: string
-    serviceId: string
-    dateId: string
-    hourId: string
-    payed: boolean
+    dateId?: string
+    hourId?: string
+    payed?: boolean
     createdAt?: Date
-    updatedAt?: Date
+    user?: User
+    service?: Services
 }
 
 export type Dates = {

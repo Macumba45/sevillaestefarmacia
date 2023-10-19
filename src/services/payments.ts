@@ -1,3 +1,7 @@
+import { getAuthenticatedToken } from '../../storage/storage'
+
+const token = getAuthenticatedToken()
+
 export const stripePaymentInProgress = async (
     userId: string,
     serviceId: string,
@@ -35,6 +39,25 @@ export const stripePaymentTrue = async (paymentId: string) => {
             return data
         } else if (response.status === 500) {
             window.location.href = '/'
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const fetchPaymentsData = async () => {
+    try {
+        const headers = {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+        }
+        const response = await fetch('/api/payments/getPayments', {
+            method: 'GET',
+            headers,
+        })
+        if (response.ok) {
+            const data = await response.json()
+            return data
         }
     } catch (error) {
         console.log(error)

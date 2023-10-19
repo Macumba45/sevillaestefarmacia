@@ -1,6 +1,7 @@
 'use client'
 
 import { FC, memo, useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { useLogicHome } from '@/app/logic'
 import ResponsiveAppBar from '@/components/MenuNavBar'
 import CircularIndeterminate from '@/components/Loader'
@@ -54,6 +55,18 @@ const Page: FC<Props> = ({ params }) => {
         setHourId,
         setDateId,
     } = useLogicPageServicesDetail()
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const { history } = window
+            const originalTitle = serviceData?.title // Título original con espacios
+            if (originalTitle) {
+                const newTitle = originalTitle.replace(/\s/g, '-')
+                const newURL = `/services/${encodeURIComponent(newTitle)}` // Codificar el título para manejar caracteres especiales
+                history.pushState(null, '', newURL)
+            }
+        }
+    }, [serviceData?.title])
 
     useEffect(() => {
         getUserInfoDetails()

@@ -10,7 +10,8 @@ import MenuItem from '@mui/material/MenuItem'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 import { FC, useEffect, useState } from 'react'
 import { InputLabel } from '@mui/material'
-import { Dates, Hour } from '../../../types/types'
+import { Dates, Hour, Payment } from '../../../types/types'
+import { fetchPaymentsData } from '@/services/payments'
 
 interface Props {
     dates?: Dates[]
@@ -36,7 +37,7 @@ const ModalOrderTime: FC<Props> = ({
     const [selectedHour, setSelectedHour] = useState<Hour>()
     // Dentro del componente
     const [dateIdMap, setDateIdMap] = useState<{ [date: string]: string }>({})
-
+    const [payments, setPayments] = useState([])
     const today = new Date()
 
     // Filtra las fechas que son iguales o posteriores a la fecha de hoy
@@ -57,7 +58,17 @@ const ModalOrderTime: FC<Props> = ({
                 date => date.date === selectedDate
             )
             if (selectedService) {
-                return selectedService.hours
+                return selectedService.hours.map(hour => {
+                    // Verifica si hay un pago con payed: true para esta hora
+                    const isBooked = payments.some(
+                        (payment: Payment) =>
+                            payment.hourId === hour.id && payment.payed
+                    )
+                    return {
+                        ...hour,
+                        isBooked,
+                    }
+                })
             }
         }
         return []
@@ -114,6 +125,14 @@ const ModalOrderTime: FC<Props> = ({
         setSelectedHour(newHours as any)
         onDateIdChange(dateIdMap[newDate]) // Pasar la ID en lugar de la fecha
     }
+
+    useEffect(() => {
+        const loadPayments = async () => {
+            const paymentsData = await fetchPaymentsData()
+            setPayments(paymentsData)
+        }
+        loadPayments()
+    }, [])
 
     useEffect(() => {
         if (dates) {
@@ -195,10 +214,7 @@ const ModalOrderTime: FC<Props> = ({
                                 </MenuItem>
                                 {upcomingDates?.map((date, index) => (
                                     <MenuItem key={index} value={date.date}>
-                                        {' '}
-                                        {/* ID de la fecha como valor */}
                                         {formatDateString(date.date)}{' '}
-                                        {/* Fecha como texto del elemento */}
                                     </MenuItem>
                                 ))}
                             </Select>
@@ -239,6 +255,10 @@ const ModalOrderTime: FC<Props> = ({
                                     const newHourId = dates
                                         ?.map(date => date.hours)
                                         .flat()
+                                        .filter(
+                                            hour =>
+                                                hour.hour === event.target.value
+                                        )
                                         .find(
                                             hour =>
                                                 hour.hour === event.target.value
@@ -252,14 +272,21 @@ const ModalOrderTime: FC<Props> = ({
                                     // Notifica el cambio en hourId a la vista principal
                                     onHourIdChange(newHourId || '') // Puedes proporcionar un valor predeterminado si es necesario
                                 }}
-                                disabled={!selectedDate}
+                                disabled={
+                                    selectedDate.date.length === 0 &&
+                                    !selectedDate.date
+                                }
                             >
                                 <MenuItem value={''}>
                                     Selecciona una hora
                                 </MenuItem>
                                 {getAvailableHours(selectedDate.date).map(
                                     (hour, index) => (
-                                        <MenuItem key={index} value={hour.hour}>
+                                        <MenuItem
+                                            disabled={hour.isBooked}
+                                            key={index}
+                                            value={hour.hour}
+                                        >
                                             {`${hour.hour as any} - ${
                                                 hour.isBooked
                                                     ? 'Reservado'
@@ -279,6 +306,7 @@ const ModalOrderTime: FC<Props> = ({
                         sx={{ color: 'white', backgroundColor: 'black' }}
                         variant="contained"
                         onClick={handleReservarCita}
+                        disabled={!selectedHour && !selectedDate}
                     >
                         Reservar cita
                     </Button>
