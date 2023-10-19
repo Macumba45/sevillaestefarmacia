@@ -9,31 +9,39 @@ datasource db {
 }
 
 model User {
-  id        String     @id @default(cuid())
-  email     String     @unique
+  id        String          @id @default(cuid())
+  email     String          @unique
   name      String
   password  String
-  role      String     @default("user")
+  role      String          @default("user")
   phone     String?
-  services  Services[]
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
+  services  ServiceToUser[]
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
 }
 
 model Services {
-  id          String   @id @default(cuid())
-  urlPicture  String   @map("url_picture")
-  urlVideo    String   @map("url_video")
+  id          String          @id @default(cuid())
+  urlPicture  String          @map("url_picture")
+  urlVideo    String          @map("url_video")
   title       String
   subtitle    String
   descripcion String
   price       String
-  priceId     String   @map("price_id")
-  adminId     String   @map("admin_id")
-  admin       User     @relation(fields: [adminId], references: [id])
+  priceId     String?
   dates       Dates[]
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  users       ServiceToUser[] // Relación muchos a muchos a través de ServiceToUser
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+}
+
+model ServiceToUser {
+  id        String   @id @default(cuid())
+  userId    String
+  serviceId String
+  user      User     @relation(fields: [userId], references: [id])
+  service   Services @relation(fields: [serviceId], references: [id])
+  createdAt DateTime @default(now())
 }
 
 model Dates {
@@ -54,4 +62,15 @@ model Hours {
   date      Dates    @relation(fields: [dateId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Talleres {
+  id          String   @id @default(cuid())
+  title       String
+  subtitle    String
+  descripcion String
+  urlPicture  String   @map("url_picture")
+  urlVideo    String   @map("url_video")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }

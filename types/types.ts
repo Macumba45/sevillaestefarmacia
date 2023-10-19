@@ -2,21 +2,11 @@ export type User = {
     id?: string
     email?: string
     password?: string
+    services?: Services[]
     name?: string
     role?: string
     phone?: string
     birthdate?: string
-}
-
-export type LoginRequestBody = {
-    email: string
-    password: string
-}
-
-export type SuccessResponse = {
-    message: string
-    user: User
-    token: string
 }
 
 export type Services = {
@@ -28,9 +18,10 @@ export type Services = {
     descripcion: string
     dates?: Dates[]
     price: string
-    priceId?: string
+    priceId?: string | null
     createdAt?: Date
     updatedAt?: Date
+    users?: User[]
 }
 
 export type Dates = {
@@ -48,4 +39,15 @@ export type Hour = {
     isBooked: boolean
     createdAt?: Date
     updatedAt?: Date
+}
+
+export type LoginRequestBody = {
+    email: string
+    password: string
+}
+
+export type SuccessResponse = {
+    message: string
+    user: User
+    token: string
 }

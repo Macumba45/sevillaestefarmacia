@@ -1,12 +1,13 @@
 import { Dates, Services } from '../../../types/types'
 import { prisma } from '../../../src/lib/client'
 
-export const getServices = async (): Promise<any[]> => {
+export const getServices = async (): Promise<Services[]> => {
     const prismaServices = await prisma.services.findMany({
         orderBy: {
             createdAt: 'asc',
         },
         include: {
+            users: true,
             dates: {
                 include: {
                     hours: true,
@@ -19,6 +20,7 @@ export const getServices = async (): Promise<any[]> => {
     }
     // Mapear los datos para estructurarlos como desees
     const servicesData = prismaServices.map(service => ({
+        users: service.users,
         id: service.id,
         urlPicture: service.urlPicture,
         urlVideo: service.urlVideo,
@@ -26,8 +28,7 @@ export const getServices = async (): Promise<any[]> => {
         subtitle: service.subtitle,
         descripcion: service.descripcion,
         price: service.price,
-        priceId: service.priceId,
-        adminId: service.adminId,
+        priceId: service.priceId as string,
         createdAt: service.createdAt,
         updatedAt: service.updatedAt,
         dates: service.dates.map(date => ({
@@ -50,9 +51,7 @@ export const createService = async (
     descripcion: string,
     dates: Array<string>, // Fechas en formato DD/MM/YYYY
     hours: Array<Array<string>>, // Horas correspondientes a cada fecha
-    price: string,
-    adminId: string,
-    priceId: string
+    price: string
 ): Promise<Services | null> => {
     const newService = await prisma.services.create({
         data: {
@@ -62,8 +61,6 @@ export const createService = async (
             subtitle: subTitle,
             descripcion: descripcion,
             price: price,
-            adminId: adminId,
-            priceId: priceId,
             dates: {
                 create: dates.map((date, index) => {
                     return {
@@ -91,8 +88,7 @@ export const updateService = async (
     subtitle: string,
     descripcion: string,
     dates: Array<{ date: string; hours: string[] }>, // Fechas en formato DD/MM/YYYY
-    price: string,
-    priceId: string
+    price: string
 ): Promise<Services | null> => {
     // Obtén el servicio existente
     const existingService = await prisma.services.findUnique({
@@ -143,7 +139,7 @@ export const updateService = async (
                         !existingDate.hours.some(hour => hour.hour === newHour)
                 )
                 .map(newHour => ({
-                    hour: newHour, // Asegúrate de que newHour sea una cadena (string)
+                    hour: newHour,
                 }))
 
             await prisma.dates.update({
@@ -188,7 +184,6 @@ export const updateService = async (
             subtitle: subtitle,
             descripcion: descripcion,
             price: price,
-            priceId: priceId,
         },
     })
 
@@ -281,6 +276,7 @@ export const serviceById = async (id: string): Promise<Services | null> => {
     // Construir el objeto Services con la estructura esperada
     const serviceData: any = {
         id: service.id,
+        priceId: service.priceId,
         urlPicture: service.urlPicture,
         urlVideo: service.urlVideo,
         title: service.title,
@@ -289,7 +285,6 @@ export const serviceById = async (id: string): Promise<Services | null> => {
         price: service.price,
         createdAt: service.createdAt,
         updatedAt: service.updatedAt,
-        priceId: service.priceId,
         dates: transformedDates,
     }
 
