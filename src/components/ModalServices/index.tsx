@@ -2,7 +2,7 @@ import React, { FC, useState, useEffect } from 'react'
 import { useLogicDashboard } from '@/app/dashboard/logic'
 import { DateObject } from 'react-multi-date-picker'
 import DatePickerComponent from '../DaysSelect'
-import { Services } from '../../../types/types'
+import { Hour, Services } from '../../../types/types'
 import 'react-quill/dist/quill.snow.css' // Estilo por defecto
 import {
     Button,
@@ -31,7 +31,6 @@ const ServiceFormModal: FC<Props> = ({
     serviceData,
 }) => {
     const { createNewService, updateServiceData } = useLogicDashboard()
-    const [disabledHours, setDisabledHours] = useState<string[]>([])
 
     const [urlPicture, setUrlPicture] = useState(
         'https://picsum.photos/200/300.jpg'
@@ -48,9 +47,11 @@ const ServiceFormModal: FC<Props> = ({
     const [selectedDays, setSelectedDays] = useState<
         { date: DateObject; hours: string[] }[]
     >([])
-
-    // console.log(selectedDays.map(day => day.date.toDate().toLocaleString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })))
-    const [hoursFromDatabase, sethoursFromDatabase] = useState<string[][]>([])
+    const [selectedHours, setSelectedHours] = useState<{
+        [date: string]: string[]
+    }>({})
+    const [hoursFromDatabase, sethoursFromDatabase] = useState<Hour[][]>([])
+    const [hoursUnavailable, setHoursUnavailable] = useState<Hour[][]>([])
 
     const handleUrlPictureChange = (event: any) => {
         setUrlPicture(event.target.value)
@@ -81,7 +82,7 @@ const ServiceFormModal: FC<Props> = ({
         if (Array.isArray(dates)) {
             const updatedSelectedDays = dates.map(date => ({
                 date,
-                hours: [],
+                hours: selectedHours[date.format('DD/MM/YYYY')] || [], // Recuperar horas seleccionadas si ya existen
             }))
             setSelectedDays(updatedSelectedDays)
         } else {
@@ -89,44 +90,9 @@ const ServiceFormModal: FC<Props> = ({
         }
     }
 
-    const generateAvailableHours = () => {
-        const hours = []
-        for (let hour = 9; hour < 21; hour++) {
-            for (let minute = 0; minute < 60; minute += 30) {
-                let hourId = null // Inicializa hourId como nulo
-
-                // Encuentra la hourId correspondiente en serviceData.payments
-                if (serviceData?.dates) {
-                    for (const date of serviceData.dates) {
-                        for (const payment of date.hours) {
-                            if (
-                                payment.hour ===
-                                `${String(hour).padStart(2, '0')}:${String(
-                                    minute
-                                ).padStart(2, '0')}`
-                            ) {
-                                hourId = payment.id // Corrige la asignación a payment.hourId
-                                break
-                            }
-                        }
-                        if (hourId) {
-                            break
-                        }
-                    }
-                }
-                hours.push({
-                    hour: `${String(hour).padStart(2, '0')}:${String(
-                        minute
-                    ).padStart(2, '0')}`,
-                    hourId,
-                })
-            }
-        }
-        return hours || []
-    }
-
     const handleHourChange = (dateIndex: number, hour: string) => {
         const updatedSelectedDays = [...selectedDays]
+        const selectedDate = selectedDays[dateIndex].date.format('DD/MM/YYYY')
         if (updatedSelectedDays[dateIndex]) {
             const { hours } = updatedSelectedDays[dateIndex]
             const hourIndex = hours.indexOf(hour)
@@ -137,12 +103,27 @@ const ServiceFormModal: FC<Props> = ({
             }
             setSelectedDays(updatedSelectedDays)
 
-            // Actualiza hoursFromDatabase con los cambios
-            const updatedHoursFromDatabase = [...hoursFromDatabase]
-            updatedHoursFromDatabase[dateIndex] =
-                updatedSelectedDays[dateIndex].hours
-            sethoursFromDatabase(updatedHoursFromDatabase)
+            // Actualiza selectedHours con los cambios
+            setSelectedHours({
+                ...selectedHours,
+                [selectedDate]: updatedSelectedDays[dateIndex].hours,
+            })
         }
+    }
+
+    const generateAvailableHours = () => {
+        const hours: string[] = []
+        for (let hour = 9; hour < 21; hour++) {
+            for (let minute = 0; minute < 60; minute += 30) {
+                hours.push(
+                    `${String(hour).padStart(2, '0')}:${String(minute).padStart(
+                        2,
+                        '0'
+                    )}`
+                )
+            }
+        }
+        return hours
     }
 
     const handleSubmit = async () => {
@@ -183,6 +164,24 @@ const ServiceFormModal: FC<Props> = ({
             setPrice(serviceData.price)
             setSubtitle(serviceData.subtitle)
 
+            const serviceIsPayed = serviceData?.payments?.map(
+                payment => payment.hourId
+            )
+            const hoursAvailable = serviceData?.dates?.map(date =>
+                date.hours.map(hour => hour.id)
+            )
+
+            let matchingIDs: any = []
+
+            if (serviceIsPayed && hoursAvailable) {
+                matchingIDs = serviceIsPayed.filter(id =>
+                    hoursAvailable.some(hours => hours.includes(id))
+                )
+            }
+
+            console.log('IDs coincidentes:', matchingIDs)
+
+            setHoursUnavailable(matchingIDs)
             // Manejar la carga de las fechas y horas aquí
             const serviceDates = isEditing ? serviceData?.dates || [] : []
 
@@ -190,26 +189,30 @@ const ServiceFormModal: FC<Props> = ({
             const formattedDates = serviceDates
                 .map(dateObj => {
                     const { date, hours } = dateObj
-                    const parsedDate = parseDateString(date as string) // Convierte la fecha al formato correcto
+                    const parsedDate = parseDateString(date as string)
+
+                    // Incluye los IDs de las horas
+                    const formattedHours = hours.map(hour => ({
+                        id: hour.id,
+                        hour: hour.hour as string,
+                    }))
+
                     return {
-                        date: new DateObject(parsedDate), // Convierte la fecha a DateObject
-                        hours: hours
-                            ? hours.map(hour => hour.hour as string)
-                            : [], // Extracción de las horas como cadenas
+                        date: new DateObject(parsedDate),
+                        hours: formattedHours, // Ahora incluye los IDs
                     }
                 })
                 .filter(dateObject => {
-                    // Filtra las fechas que no sean pasadas
                     return dateObject.date.toDate() >= new Date()
                 })
 
             const hours = formattedDates.map(date => date.hours)
 
             // Luego, establece formattedDates y hours directamente en setSelectedDays y sethoursFromDatabase
-            setSelectedDays(formattedDates)
-            sethoursFromDatabase(hours)
+            setSelectedDays(formattedDates as any)
+            sethoursFromDatabase(hours as Hour[][])
         }
-    }, [isEditing, serviceData])
+    }, [isEditing, serviceData, setSelectedDays])
 
     return (
         <Dialog open={open} onClose={onClose}>
@@ -321,39 +324,18 @@ const ServiceFormModal: FC<Props> = ({
                                         }}
                                     >
                                         {generateAvailableHours().map(
-                                            (hourData, hourIndex) => (
+                                            (hour, hourIndex) => (
                                                 <li key={hourIndex}>
                                                     <FormControlLabel
                                                         control={
                                                             <Checkbox
-                                                                value={
-                                                                    !isEditing
-                                                                        ? selectedDay.hours.includes(
-                                                                              hourData.hour
-                                                                          )
-                                                                        : selectedDay.hours.includes(
-                                                                              hourData.hour
-                                                                          ) ||
-                                                                          (hoursFromDatabase[
-                                                                              index
-                                                                          ] &&
-                                                                              hoursFromDatabase[
-                                                                                  index
-                                                                              ].some(
-                                                                                  (
-                                                                                      item: any
-                                                                                  ) =>
-                                                                                      item.hour ===
-                                                                                      hourData.hour
-                                                                              ))
-                                                                }
                                                                 checked={
                                                                     !isEditing
                                                                         ? selectedDay.hours.includes(
-                                                                              hourData.hour
+                                                                              hour
                                                                           )
                                                                         : selectedDay.hours.includes(
-                                                                              hourData.hour
+                                                                              hour
                                                                           ) ||
                                                                           (hoursFromDatabase[
                                                                               index
@@ -365,19 +347,31 @@ const ServiceFormModal: FC<Props> = ({
                                                                                       item: any
                                                                                   ) =>
                                                                                       item.hour ===
-                                                                                      hourData.hour
-                                                                              ))
+                                                                                      hour
+                                                                              )) ||
+                                                                          false
                                                                 }
                                                                 onChange={() =>
                                                                     handleHourChange(
                                                                         index,
-                                                                        hourData.hour
+                                                                        hour
                                                                     )
                                                                 }
-                                                                // disabled={hoursWithHourIdFiltered.some((hourInfo: any) => hourInfo.hour === hourData.hour)}
+                                                                disabled={
+                                                                    isEditing &&
+                                                                    hoursFromDatabase[
+                                                                        index
+                                                                    ]?.some(
+                                                                        (
+                                                                            item: any
+                                                                        ) =>
+                                                                            item.hour ===
+                                                                            hour
+                                                                    )
+                                                                }
                                                             />
                                                         }
-                                                        label={hourData.hour}
+                                                        label={hour}
                                                     />
                                                 </li>
                                             )
