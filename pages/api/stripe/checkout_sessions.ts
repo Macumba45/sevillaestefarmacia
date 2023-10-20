@@ -9,7 +9,6 @@ export default async function handler(
         try {
             const priceId = req.body.priceId
             const paymentId = req.body.paymentId
-            console.log(paymentId)
             // Create Checkout Sessions from body params.
             const session = await stripe.checkout.sessions.create({
                 line_items: [
@@ -30,7 +29,6 @@ export default async function handler(
                     paymentId: paymentId,
                 },
             })
-            console.log(session.metadata.paymentId)
             res.status(200).json(session)
         } catch (err: any) {
             res.status(err.statusCode || 500).json(err.message)

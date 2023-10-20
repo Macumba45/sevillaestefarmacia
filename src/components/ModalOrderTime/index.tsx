@@ -35,7 +35,6 @@ const ModalOrderTime: FC<Props> = ({
         id: string
     }>({ date: '', id: '' })
     const [selectedHour, setSelectedHour] = useState<Hour>()
-    // Dentro del componente
     const [dateIdMap, setDateIdMap] = useState<{ [date: string]: string }>({})
     const [payments, setPayments] = useState([])
     const today = new Date()
@@ -120,9 +119,7 @@ const ModalOrderTime: FC<Props> = ({
 
     const handleDateChange = (event: SelectChangeEvent) => {
         const newDate = event.target.value as string
-        const newHours = getAvailableHours(newDate)
         setSelectedDate({ date: newDate, id: dateIdMap[newDate] }) // Asumiendo que dateIdMap tiene el mapeo de IDs por fecha
-        setSelectedHour(newHours as any)
         onDateIdChange(dateIdMap[newDate]) // Pasar la ID en lugar de la fecha
     }
 
@@ -306,9 +303,11 @@ const ModalOrderTime: FC<Props> = ({
                         sx={{ color: 'white', backgroundColor: 'black' }}
                         variant="contained"
                         onClick={handleReservarCita}
-                        disabled={!selectedHour && !selectedDate}
+                        disabled={!selectedHour || !selectedDate}
                     >
-                        Reservar cita
+                        {document.location.pathname === '/dashboard'
+                            ? 'Actualizar cita'
+                            : 'Reservar cita'}
                     </Button>
                     <Button sx={{ color: 'black' }} onClick={handleClose}>
                         Cancelar

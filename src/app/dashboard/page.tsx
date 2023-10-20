@@ -3,6 +3,7 @@ import { FC, memo, useEffect } from 'react'
 import { useLogicDashboard } from './logic'
 import { getAuthenticatedToken } from '../../../storage/storage'
 import { Props } from './types'
+import LinearIndeterminate from '@/components/LoaderLinear/indx'
 import logo from '../../assets/logo/logo.png'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
@@ -36,43 +37,52 @@ import {
     CitasContainer,
     LoadingContainer,
 } from './styles'
-import LinearIndeterminate from '@/components/LoaderLinear/indx'
+import ModalOrderTime from '@/components/ModalOrderTime'
 
 const drawerWidth = 240
 
 const Dashboard: FC<Props> = () => {
     const {
-        currentUser,
-        getUserInfoData,
-        router,
-        mobileOpen,
-        handleDrawerToggle,
-        route,
+        allPayments,
         changeRoute,
-        logOut,
-        titlePage,
-        titleDrawer,
-        open,
-        setOpen,
-        handleOpenModaService,
-        userLoaded,
-        setUserLoaded,
+        closeModalDelete,
+        currentUser,
+        getAllPayments,
         getServiceData,
-        services,
-        openEditModalFunction,
-        serviceData,
-        isEditing,
-        openDeleteModal,
+        getUserInfoData,
         handleConfirmDelete,
         handleDeleteClick,
-        closeModalDelete,
+        handleDrawerToggle,
+        handleOpenModaService,
+        isEditing,
         isLoading,
+        logOut,
+        mobileOpen,
+        open,
+        openDeleteModal,
+        openEditModalFunction,
+        openModalEditDateAndHour,
+        openModalEditDateAndHourFunction,
+        route,
+        router,
+        serviceData,
+        services,
+        setOpen,
+        setUserLoaded,
+        titleDrawer,
+        titlePage,
+        userLoaded,
+        closeModalEditDateAndHourFunction,
+        setDateId,
+        setHourId,
+        openEditModalDateAndHour,
     } = useLogicDashboard()
 
     useEffect(() => {
         if (getAuthenticatedToken()) {
             getUserInfoData()
             getServiceData()
+            getAllPayments()
         } else {
             router.push('/')
         }
@@ -103,8 +113,8 @@ const Dashboard: FC<Props> = () => {
             icon: <MedicalServicesIcon />,
             route: 'servicios',
         },
-        { text: 'Clientes', icon: <AccountCircleIcon />, route: 'clientes' },
         { text: 'Próximas citas', icon: <DateRangeIcon />, route: 'citas' },
+        { text: 'Clientes', icon: <AccountCircleIcon />, route: 'clientes' },
         { text: 'Blog', icon: <RssFeedIcon />, route: 'blog' },
     ]
 
@@ -262,7 +272,7 @@ const Dashboard: FC<Props> = () => {
                             <>
                                 <CardServicesContainer>
                                     <FloatAddServices
-                                        onClick={handleOpenModaService}
+                                        onClick={() => handleOpenModaService()}
                                     />
                                     {open && (
                                         <ServiceFormModal
@@ -311,7 +321,7 @@ const Dashboard: FC<Props> = () => {
                         )}
                         {route === 'citas' && (
                             <CitasContainer>
-                                <div
+                                {/* <div
                                     style={{
                                         display: 'flex',
                                         flexDirection: 'row',
@@ -323,49 +333,40 @@ const Dashboard: FC<Props> = () => {
                                 >
                                     <DatePickerComp />
                                     <SearchInputComp />
-                                </div>
+                                </div> */}
 
-                                <AlignItemsList
-                                    serviceType="Pendientes"
-                                    user="Juan Rodriguez"
-                                    date="12/12/2021 a las 12:00"
-                                    phone="123456789"
-                                />
-                                <AlignItemsList
-                                    serviceType="Pendientes"
-                                    user="Pedro Rodriguez"
-                                    date="12/12/2021 a las 12:00"
-                                    phone="123456789"
-                                />
-                                <AlignItemsList
-                                    serviceType="Pendientes"
-                                    user="Juan Rodriguez"
-                                    date="12/12/2021 a las 12:00"
-                                    phone="123456789"
-                                />
-                                <AlignItemsList
-                                    serviceType="Pendientes"
-                                    user="Ana Rodriguez"
-                                    date="12/12/2021 a las 12:00"
-                                    phone="123456789"
-                                />
-                                <AlignItemsList
-                                    serviceType="Pendientes"
-                                    user="Ramon Rodriguez"
-                                    date="12/12/2021 a las 12:00"
-                                    phone="123456789"
-                                />
-                                <AlignItemsList
-                                    serviceType="Pendientes"
-                                    user="Pepe Rodriguez"
-                                    date="12/12/2021 a las 12:00"
-                                    phone="123456789"
-                                />
-                                <AlignItemsList
-                                    serviceType="Pendientes"
-                                    user="Gonzalo Rodriguez"
-                                    date="12/12/2021 a las 12:00"
-                                    phone="123456789"
+                                {allPayments.map((item: any, index) => (
+                                    <AlignItemsList
+                                        key={index}
+                                        serviceType={item.service.title}
+                                        user={item.user.name}
+                                        date={item.date.dates}
+                                        hour={item.hour.hour}
+                                        phone={item.user.phone}
+                                        editDateAndHour={() =>
+                                            openEditModalDateAndHour(item)
+                                        }
+                                    />
+                                ))}
+
+                                <ModalOrderTime
+                                    open={openModalEditDateAndHour}
+                                    handleClose={
+                                        closeModalEditDateAndHourFunction
+                                    }
+                                    dates={serviceData?.service?.dates?.map(
+                                        (item: any) => ({
+                                            ...item,
+                                            date: item.dates,
+                                        })
+                                    )}
+                                    handleReservarCita={handleOpenModaService}
+                                    onHourIdChange={newHourId => {
+                                        setHourId(newHourId)
+                                    }}
+                                    onDateIdChange={newDateIr => {
+                                        setDateId(newDateIr)
+                                    }} // Maneja el cambio en selectDate
                                 />
                             </CitasContainer>
                         )}

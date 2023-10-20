@@ -8,9 +8,11 @@ import {
     updateService,
     deleteService,
 } from '@/services/service'
+import { fetchPaymentsData } from '@/services/payments'
 
 export const useLogicDashboard = () => {
     const [currentUser, setCurrentUser] = useState<User>()
+    const [allPayments, setAllPayments] = useState<Services[]>([])
     const [titleDrawer, setTitleDrawer] = useState<string>('servicios')
     const router = useRouter()
     const [mobileOpen, setMobileOpen] = useState(false)
@@ -24,6 +26,10 @@ export const useLogicDashboard = () => {
     const [openDeleteModal, setOpenDeleteModal] = useState(false)
     const [serviceToDelete, setServiceToDelete] = useState('') // Almacena el id del servicio a eliminar
     const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [openModalEditDateAndHour, setOpenModalEditDateAndHour] =
+        useState(false)
+    const [hourId, setHourId] = useState<string>('')
+    const [dateId, setDateId] = useState<string>('')
     const titlePage = 'Dashboard'
 
     const getUserInfoData = useCallback(async () => {
@@ -52,6 +58,12 @@ export const useLogicDashboard = () => {
     const updateServiceData = useCallback(async (service: Services) => {
         await updateService(service)
         return
+    }, [])
+
+    const getAllPayments = useCallback(async () => {
+        const payments = await fetchPaymentsData()
+        setAllPayments(payments)
+        return payments
     }, [])
 
     const handleOpenModaService = () => {
@@ -103,6 +115,20 @@ export const useLogicDashboard = () => {
         setOpenDeleteModal(false)
     }
 
+    const openEditModalDateAndHour = async (service: Services) => {
+        setServiceData(service) // Almacena los datos en el estado
+        setOpenModalEditDateAndHour(true)
+        setIsEditing(true)
+    }
+
+    const openModalEditDateAndHourFunction = () => {
+        setOpenModalEditDateAndHour(true)
+    }
+
+    const closeModalEditDateAndHourFunction = () => {
+        setOpenModalEditDateAndHour(false)
+    }
+
     return {
         changeRoute,
         closeEditModalFunction,
@@ -134,5 +160,15 @@ export const useLogicDashboard = () => {
         titlePage,
         updateServiceData,
         userLoaded,
+        getAllPayments,
+        allPayments,
+        openModalEditDateAndHourFunction,
+        openModalEditDateAndHour,
+        closeModalEditDateAndHourFunction,
+        hourId,
+        setHourId,
+        dateId,
+        setDateId,
+        openEditModalDateAndHour,
     }
 }

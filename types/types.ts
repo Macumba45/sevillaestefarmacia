@@ -23,15 +23,18 @@ export type Services = {
     updatedAt?: Date
     users?: User[]
     payments?: Payment[]
+    service?: Services
 }
 
 export type Payment = {
     id?: string
+    user?: User
+    date: Dates
+    hour: Hour
     dateId?: string
     hourId?: string
     payed?: boolean
     createdAt?: Date
-    user?: User
     service?: Services
 }
 
@@ -46,7 +49,7 @@ export type Dates = {
 
 export type Hour = {
     id?: string
-    hour: string
+    hour?: string
     isBooked?: boolean
     createdAt?: Date
     updatedAt?: Date

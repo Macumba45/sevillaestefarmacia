@@ -57,7 +57,6 @@ export const useLogicPageServicesDetail = () => {
                 dateId,
                 hourId
             )
-            console.log(payment)
             const sessionData = await stripePayment(1, priceId, payment.id) // Pasa el hourId a stripePayment
             router.push(sessionData.url)
         } catch (error) {
