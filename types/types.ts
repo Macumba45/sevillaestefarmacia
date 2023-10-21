@@ -22,7 +22,7 @@ export type Services = {
     createdAt?: Date
     updatedAt?: Date
     users?: User[]
-    payments?: Payment[]
+    payment?: Payment[]
     service?: Services
 }
 

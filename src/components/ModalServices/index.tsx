@@ -47,10 +47,9 @@ const ServiceFormModal: FC<Props> = ({
     const [selectedDays, setSelectedDays] = useState<
         { date: DateObject; hours: string[] }[]
     >([])
-    const [selectedHours, setSelectedHours] = useState<{
-        [date: string]: string[]
-    }>({})
+    const [selectedHours, setSelectedHours] = useState<Hour>({})
     const [hoursFromDatabase, sethoursFromDatabase] = useState<Hour[][]>([])
+    console.log('hoursFromDatabase:', hoursFromDatabase)
     const [hoursUnavailable, setHoursUnavailable] = useState<Hour[][]>([])
 
     const handleUrlPictureChange = (event: any) => {
@@ -69,9 +68,6 @@ const ServiceFormModal: FC<Props> = ({
     const handlePriceChange = (event: any) => {
         setPrice(event.target.value)
     }
-    // const handleDescripcionChange = (event: any) => {
-    //     setDescripcion(event.target.value)
-    // }
 
     function parseDateString(dateString: string): Date {
         const [day, month, year] = dateString.split('/')
@@ -80,9 +76,9 @@ const ServiceFormModal: FC<Props> = ({
 
     const handleDayChange = (dates: DateObject[] | DateObject | null) => {
         if (Array.isArray(dates)) {
-            const updatedSelectedDays = dates.map(date => ({
-                date,
-                hours: selectedHours[date.format('DD/MM/YYYY')] || [], // Recuperar horas seleccionadas si ya existen
+            const updatedSelectedDays = dates.map(dateObj => ({
+                date: dateObj,
+                hours: selectedHours.hour ? [selectedHours.hour] : [], // Usar selectedHours.hour como una cadena en un array
             }))
             setSelectedDays(updatedSelectedDays)
         } else {
@@ -90,14 +86,14 @@ const ServiceFormModal: FC<Props> = ({
         }
     }
 
-    const handleHourChange = (dateIndex: number, hour: string) => {
+    const handleHourChange = (dateIndex: number, hour: Hour) => {
         const updatedSelectedDays = [...selectedDays]
         const selectedDate = selectedDays[dateIndex].date.format('DD/MM/YYYY')
         if (updatedSelectedDays[dateIndex]) {
             const { hours } = updatedSelectedDays[dateIndex]
-            const hourIndex = hours.indexOf(hour)
+            const hourIndex = hours.indexOf(hour as string)
             if (hourIndex === -1) {
-                updatedSelectedDays[dateIndex].hours.push(hour)
+                updatedSelectedDays[dateIndex].hours.push(hour as string)
             } else {
                 updatedSelectedDays[dateIndex].hours.splice(hourIndex, 1)
             }
@@ -106,7 +102,9 @@ const ServiceFormModal: FC<Props> = ({
             // Actualiza selectedHours con los cambios
             setSelectedHours({
                 ...selectedHours,
-                [selectedDate]: updatedSelectedDays[dateIndex].hours,
+                [selectedDate]: updatedSelectedDays[dateIndex].hours.map(
+                    hour => hour
+                ),
             })
         }
     }
@@ -164,12 +162,17 @@ const ServiceFormModal: FC<Props> = ({
             setPrice(serviceData.price)
             setSubtitle(serviceData.subtitle)
 
-            const serviceIsPayed = serviceData?.payments?.map(
+            console.log('Datos del servicio:', serviceData)
+
+            const serviceIsPayed = serviceData?.payment?.map(
                 payment => payment.hourId
             )
+            console.log('IDs pagados:', serviceIsPayed)
             const hoursAvailable = serviceData?.dates?.map(date =>
                 date.hours.map(hour => hour.id)
             )
+
+            console.log('IDs disponibles:', hoursAvailable)
 
             let matchingIDs: any = []
 
@@ -354,7 +357,7 @@ const ServiceFormModal: FC<Props> = ({
                                                                 onChange={() =>
                                                                     handleHourChange(
                                                                         index,
-                                                                        hour
+                                                                        hour as Hour
                                                                     )
                                                                 }
                                                                 disabled={

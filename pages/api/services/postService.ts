@@ -46,9 +46,9 @@ export default async function handler(
         const allDates: string[] = dates.map(
             serviceDate => serviceDate.date as string
         )
-        const hours: string[][] = dates.map((serviceDate) =>
-            serviceDate.hours.map((hour) => hour.hour ?? "") // Usa ?? para manejar los valores undefined
-        );
+        const hours: string[][] = dates.map(
+            serviceDate => serviceDate.hours.map(hour => hour.hour ?? '') // Usa ?? para manejar los valores undefined
+        )
 
         const newService = await createService(
             urlPicture,

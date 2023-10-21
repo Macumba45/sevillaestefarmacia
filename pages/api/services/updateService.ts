@@ -13,6 +13,8 @@ export default async function handler(
                 return typeof hourItem === 'object' ? hourItem.hour : hourItem
             }),
         }))
+
+        console.log(transformedDates)
         // Dentro de tu función handler antes de llamar a updateService
 
         try {
