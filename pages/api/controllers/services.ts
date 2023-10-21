@@ -12,7 +12,6 @@ export const getServices = async (): Promise<Services[]> => {
                     id: true,
                 },
             },
-            Payments: true,
             dates: {
                 include: {
                     hours: true,
@@ -26,7 +25,6 @@ export const getServices = async (): Promise<Services[]> => {
     // Mapear los datos para estructurarlos como desees
     const servicesData = prismaServices.map(service => ({
         // users: service.users,
-        payments: service.Payments,
         id: service.id,
         urlPicture: service.urlPicture,
         urlVideo: service.urlVideo,
@@ -49,6 +47,7 @@ export const getServices = async (): Promise<Services[]> => {
     }))
     return servicesData
 }
+
 export const createService = async (
     urlVideo: string,
     urlPicture: string,
