@@ -1,22 +1,20 @@
 import * as React from 'react'
-import { FC, useEffect } from 'react'
+import { FC } from 'react'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import Divider from '@mui/material/Divider'
 import ListItemText from '@mui/material/ListItemText'
-import ListItemAvatar from '@mui/material/ListItemAvatar'
-import Avatar from '@mui/material/Avatar'
 import Typography from '@mui/material/Typography'
 import { Button } from '@mui/material'
 import { ButtonContainer } from './styles'
 
 interface Props {
-    user: string
+    user?: string
     serviceType?: string
-    date: string
+    date?: string
     phone?: string
     hour?: string
-    editDateAndHour?: () => void
+    openEditModalDateAndHour?: () => void
 }
 
 const AlignItemsList: FC<Props> = ({
@@ -25,7 +23,7 @@ const AlignItemsList: FC<Props> = ({
     date,
     phone,
     hour,
-    editDateAndHour,
+    openEditModalDateAndHour,
 }) => {
     function formatDateString(inputDate: any) {
         // Parsea la fecha en formato "dd/mm/yyyy" a un objeto Date
@@ -157,7 +155,7 @@ const AlignItemsList: FC<Props> = ({
                     </Button>
 
                     <Button
-                        onClick={editDateAndHour}
+                        onClick={openEditModalDateAndHour}
                         variant="contained"
                         sx={{
                             p: 0.5,

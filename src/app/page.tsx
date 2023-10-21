@@ -101,7 +101,7 @@ const Home: FC = () => {
                 </ButtonContainerConocenos>
             </ContainerConocenos>
             <Services
-                id="clnsx96ds0001xyyk7teubf6m"
+                id="clo0dzomz0001xy04kzkxay49"
                 title="DERMOCOSMÉTICA FARMACÉUTICA"
                 subtitle="Análisis de la Piel"
                 description="¿Te gustaría conocer más sobre tu piel o tu salud capilar?"
@@ -113,7 +113,7 @@ const Home: FC = () => {
                 imagePosition="bottom"
             />
             <Services
-                id="clnsxjnf80003xyyk3quxzg92"
+                id="clo0e0a200002xy04bwqml93h"
                 title="NUTRICIÓN CLÍNICA Y DEPORTIVA"
                 subtitle="Nutrición"
                 description="Nuestro propósito no es llegar lo antes posible, sino darte las herramientas para llegar al objetivo dando siempre prioridad a tu salud."
@@ -128,7 +128,7 @@ const Home: FC = () => {
                 widthTitleDesktop="480px"
             />
             <Services
-                id="clnsxk5pj0005xyykygmt7i56"
+                id="clo0e0mn50003xy040gwqse36"
                 title="LABORATORIO"
                 subtitle="Formulación Magistral"
                 description="Especialistas en Formulación Magistral
@@ -142,7 +142,7 @@ const Home: FC = () => {
                 imagePosition="bottom"
             />
             <Services
-                id="clnsxkjo60007xyyk3f29f9z9"
+                id="clo0e17d30004xy04cjklg2px"
                 title="SISTEMA PERSONALIZADO DE DOSIFICACIÓN"
                 subtitle="SPD"
                 description="Ayudamos especialmente a familiares mayores
@@ -157,7 +157,7 @@ const Home: FC = () => {
                 flexDirection="row-reverse"
             />
             <Services
-                id="clnsxkxrs0009xyykmj8au8sd"
+                id="clo0e1e3p0005xy04izx8uzqa"
                 title="SUS PRIMEROS PENDIENTES"
                 subtitle="Pendientes bebé"
                 description="Nuestro servicio de pendientes cuenta
@@ -172,7 +172,7 @@ const Home: FC = () => {
                 imagePosition="bottom"
             />
             <Services
-                id="clnsxldjk000bxyykec5uspw6"
+                id="clo0e1q180006xy04pu96nyml"
                 title="TU MASCOTA EN BUENAS MANOS"
                 subtitle="Farmacia Veterinaria"
                 description="Disponemos de productos veterinarios

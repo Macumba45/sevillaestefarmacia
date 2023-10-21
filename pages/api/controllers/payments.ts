@@ -86,3 +86,21 @@ export const makePaymentTrue = async (paymentId: string): Promise<void> => {
 
     return
 }
+
+export const editDateAndHour = async (
+    paymentId: string,
+    hourId: string,
+    dateId: string
+): Promise<void> => {
+    await prisma.payments.update({
+        where: {
+            id: paymentId,
+        },
+        data: {
+            dateId: dateId,
+            hourId: hourId,
+        },
+    })
+
+    return
+}

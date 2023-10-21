@@ -16,19 +16,23 @@ import { fetchPaymentsData } from '@/services/payments'
 interface Props {
     dates?: Dates[]
     open: boolean
+    isEditing?: boolean
     handleClose?: () => void
     handleReservarCita: () => void
     onHourIdChange: (newHourId: string) => void
     onDateIdChange: (newDateId: string) => void
+    editDateAndHour?: () => void
 }
 
 const ModalOrderTime: FC<Props> = ({
     dates,
     open,
+    isEditing,
     handleClose,
     handleReservarCita,
     onHourIdChange,
     onDateIdChange,
+    editDateAndHour,
 }) => {
     const [selectedDate, setSelectedDate] = useState<{
         date: string
@@ -50,6 +54,15 @@ const ModalOrderTime: FC<Props> = ({
         // Compara la fecha con la fecha de hoy
         return dateObject >= today
     })
+
+    let buttonName: string
+    if (document.location.pathname === '/dashboard') {
+        buttonName = 'Actualizar cita'
+        isEditing = true
+    } else {
+        buttonName = 'Reservar cita'
+        isEditing = false
+    }
 
     const getAvailableHours = (selectedDate: string) => {
         if (dates) {
@@ -302,12 +315,12 @@ const ModalOrderTime: FC<Props> = ({
                     <Button
                         sx={{ color: 'white', backgroundColor: 'black' }}
                         variant="contained"
-                        onClick={handleReservarCita}
+                        onClick={
+                            isEditing ? editDateAndHour : handleReservarCita
+                        }
                         disabled={!selectedHour || !selectedDate}
                     >
-                        {document.location.pathname === '/dashboard'
-                            ? 'Actualizar cita'
-                            : 'Reservar cita'}
+                        {buttonName}
                     </Button>
                     <Button sx={{ color: 'black' }} onClick={handleClose}>
                         Cancelar

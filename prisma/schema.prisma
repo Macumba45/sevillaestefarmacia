@@ -47,6 +47,7 @@ model Payments {
   service   Services @relation(fields: [serviceId], references: [id])
   payed     Boolean  @default(false)
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model ServiceToUser {

@@ -111,9 +111,9 @@ const Page: FC<Props> = ({ params }) => {
             <SubtitleServices>{serviceData?.subtitle}</SubtitleServices>
             <DermoDescription price={serviceData?.price as string} />
             <ButtonContainerServices>
-                {serviceData?.id === 'clnsx96ds0001xyyk7teubf6m' ||
-                serviceData?.id === 'clnsxjnf80003xyyk3quxzg92' ||
-                serviceData?.id === 'clnsxkxrs0009xyykmj8au8sd' ? (
+                {serviceData?.id === 'clo0dzomz0001xy04kzkxay49' ||
+                serviceData?.id === 'clo0e0a200002xy04bwqml93h' ||
+                serviceData?.id === 'clo0e1e3p0005xy04izx8uzqa' ? (
                     <Button
                         onClick={handleOpen}
                         variant="outlined"
@@ -133,7 +133,7 @@ const Page: FC<Props> = ({ params }) => {
                     >
                         Reservar cita
                     </Button>
-                ) : serviceData?.id === 'clnsxldjk000bxyykec5uspw6' ? (
+                ) : serviceData?.id === 'clo0e1q180006xy04pu96nyml' ? (
                     <Button
                         onClick={contactWhatsApp} // La función que maneja el chat de WhatsApp
                         variant="outlined"

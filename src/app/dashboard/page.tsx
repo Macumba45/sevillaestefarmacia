@@ -3,6 +3,7 @@ import { FC, memo, useEffect } from 'react'
 import { useLogicDashboard } from './logic'
 import { getAuthenticatedToken } from '../../../storage/storage'
 import { Props } from './types'
+import ModalOrderTime from '@/components/ModalOrderTime'
 import LinearIndeterminate from '@/components/LoaderLinear/indx'
 import logo from '../../assets/logo/logo.png'
 import AppBar from '@mui/material/AppBar'
@@ -37,7 +38,6 @@ import {
     CitasContainer,
     LoadingContainer,
 } from './styles'
-import ModalOrderTime from '@/components/ModalOrderTime'
 
 const drawerWidth = 240
 
@@ -46,7 +46,9 @@ const Dashboard: FC<Props> = () => {
         allPayments,
         changeRoute,
         closeModalDelete,
+        closeModalEditDateAndHourFunction,
         currentUser,
+        editDateAndHour,
         getAllPayments,
         getServiceData,
         getUserInfoData,
@@ -60,22 +62,24 @@ const Dashboard: FC<Props> = () => {
         mobileOpen,
         open,
         openDeleteModal,
+        openEditModalDateAndHour,
         openEditModalFunction,
         openModalEditDateAndHour,
         openModalEditDateAndHourFunction,
+        paymentId,
         route,
         router,
         serviceData,
         services,
+        setDateId,
+        setHourId,
         setOpen,
         setUserLoaded,
         titleDrawer,
         titlePage,
         userLoaded,
-        closeModalEditDateAndHourFunction,
-        setDateId,
-        setHourId,
-        openEditModalDateAndHour,
+        hourId,
+        dateId,
     } = useLogicDashboard()
 
     useEffect(() => {
@@ -114,7 +118,7 @@ const Dashboard: FC<Props> = () => {
             route: 'servicios',
         },
         { text: 'Próximas citas', icon: <DateRangeIcon />, route: 'citas' },
-        { text: 'Clientes', icon: <AccountCircleIcon />, route: 'clientes' },
+        { text: 'Talleres', icon: <AccountCircleIcon />, route: 'talleres' },
         { text: 'Blog', icon: <RssFeedIcon />, route: 'blog' },
     ]
 
@@ -340,10 +344,10 @@ const Dashboard: FC<Props> = () => {
                                         key={index}
                                         serviceType={item.service.title}
                                         user={item.user.name}
-                                        date={item.date.dates}
-                                        hour={item.hour.hour}
+                                        date={item.date ? item.date.dates : ''}
+                                        hour={item.hour ? item.hour.hour : ''}
                                         phone={item.user.phone}
-                                        editDateAndHour={() =>
+                                        openEditModalDateAndHour={() =>
                                             openEditModalDateAndHour(item)
                                         }
                                     />
@@ -366,7 +370,14 @@ const Dashboard: FC<Props> = () => {
                                     }}
                                     onDateIdChange={newDateIr => {
                                         setDateId(newDateIr)
-                                    }} // Maneja el cambio en selectDate
+                                    }}
+                                    editDateAndHour={() =>
+                                        editDateAndHour(
+                                            paymentId,
+                                            hourId,
+                                            dateId
+                                        )
+                                    }
                                 />
                             </CitasContainer>
                         )}
@@ -383,7 +394,7 @@ const Dashboard: FC<Props> = () => {
                 )} */}
                             </>
                         )}
-                        {route === 'clientes' && (
+                        {route === 'talleres' && (
                             <>
                                 <FloatAddServices
                                     onClick={handleOpenModaService}

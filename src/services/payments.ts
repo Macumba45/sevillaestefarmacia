@@ -13,6 +13,7 @@ export const stripePaymentInProgress = async (
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
             },
             body: JSON.stringify({ userId, serviceId, dateId, hourId }),
         })
@@ -31,6 +32,7 @@ export const stripePaymentTrue = async (paymentId: string) => {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
             },
             body: JSON.stringify({ paymentId }),
         })
@@ -54,6 +56,29 @@ export const fetchPaymentsData = async () => {
         const response = await fetch('/api/payments/getPayments', {
             method: 'GET',
             headers,
+        })
+        if (response.ok) {
+            const data = await response.json()
+            return data
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const editDateAndHourFromPayments = async (
+    paymentId: string,
+    dateId: string,
+    hourId: string
+) => {
+    try {
+        const response = await fetch('/api/payments/editDateAndHour', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({ paymentId, dateId, hourId }),
         })
         if (response.ok) {
             const data = await response.json()
