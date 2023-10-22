@@ -7,6 +7,7 @@ import ListItemText from '@mui/material/ListItemText'
 import Typography from '@mui/material/Typography'
 import { Button } from '@mui/material'
 import { ButtonContainer } from './styles'
+import CallRoundedIcon from '@mui/icons-material/CallRounded'
 
 interface Props {
     user?: string
@@ -140,18 +141,20 @@ const AlignItemsList: FC<Props> = ({
                 <ButtonContainer>
                     <Button
                         variant="contained"
-                        {...(phone && {
-                            onClick: () => {
-                                window.open(`tel:${phone}`)
-                            },
-                        })}
+                        // {...(phone && {
+                        //     onClick: () => {
+                        //         window.open(`tel:${phone}`)
+                        //     },
+                        // })}
                         sx={{
                             p: 0.5,
                             mt: 2,
                             backgroundColor: 'green',
+                            width: '140px',
                         }}
                     >
-                        Llamar al cliente
+                        <CallRoundedIcon sx={{ mr: 1 }} />
+                        {phone}
                     </Button>
 
                     <Button
@@ -161,6 +164,7 @@ const AlignItemsList: FC<Props> = ({
                             p: 0.5,
                             mt: 2,
                             ml: 2,
+                            width: '140px',
                             backgroundColor: 'blue',
                         }}
                     >

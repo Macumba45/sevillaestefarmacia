@@ -74,7 +74,12 @@ const Services: FC<Props> = ({
                         </DescriptionServices>
                     </ContainerDescriptionServices>
                     <ButtonContainerServices>
-                        <Link href={`/services/${id}`}>
+                        <Link
+                            style={{
+                                textDecoration: 'none',
+                            }}
+                            href={`/services/${id}`}
+                        >
                             <Button
                                 variant="outlined"
                                 sx={{

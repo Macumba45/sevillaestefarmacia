@@ -175,7 +175,7 @@ const Home: FC = () => {
                 widthDesktop="500px"
                 imagePosition="bottom"
                 flexDirection="row-reverse"
-                widthTitle="500px"
+                widthTitle="300px"
             />
             <Services
                 id="clo0e1e3p0005xy04izx8uzqa"

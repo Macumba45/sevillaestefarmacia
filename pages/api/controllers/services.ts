@@ -53,10 +53,10 @@ export const getServices = async (): Promise<Services[]> => {
         createdAt: service.createdAt,
         updatedAt: service.updatedAt,
         payment: service.payments as Payment[],
-        dates: service.dates.map(date => ({
+        dates: service.dates.map((date: any) => ({
             id: date.id,
             date: date.dates,
-            hours: date.hours.map(hour => ({
+            hours: date.hours.map((hour: any) => ({
                 id: hour.id,
                 hour: hour.hour,
                 isBooked: hour.isBooked,
@@ -136,10 +136,12 @@ export const updateService = async (
     }
 
     // Obtén las fechas existentes
-    const existingDates = existingService.dates.map(date => date.dates)
+    const existingDates = existingService.dates.map((date: any) => date.dates)
 
     // Filtra las fechas que ya existen y las que son nuevas
-    const existingDateStrings = existingDates.map(date => date.toString())
+    const existingDateStrings = existingDates.map((date: any) =>
+        date.toString()
+    )
     // const newDateStrings = dates.map(newDate => newDate.date)
 
     // Identifica las fechas nuevas
@@ -154,7 +156,7 @@ export const updateService = async (
 
     for (const newDate of datesToUpdate) {
         const existingDate = existingService.dates.find(
-            date => date.dates.toString() === newDate.date
+            (date: any) => date.dates.toString() === newDate.date
         )
 
         if (existingDate) {
@@ -163,12 +165,12 @@ export const updateService = async (
                     if (typeof newHour === 'string') {
                         // Si es una cadena, verificar si ya existe
                         return !existingDate.hours.some(
-                            hour => hour.hour === newHour
+                            (hour: any) => hour.hour === newHour
                         )
                     } else {
                         // Si es un objeto, verificar si la hora ya existe
                         return !existingDate.hours.some(
-                            hour => hour.hour === newHour.hour
+                            (hour: any) => hour.hour === newHour.hour
                         )
                     }
                 })
@@ -244,47 +246,6 @@ export const deleteService = async (id: string): Promise<Services | null> => {
     return deletedService
 }
 
-// export const editDateFromService = async (
-//     dateId: string,
-//     newDate: string,
-//     hours: string
-// ): Promise<Dates | null> => {
-//     const existingDate = await prisma.dates.findUnique({
-//         where: {
-//             id: dateId,
-//         },
-//         include: {
-//             hours: true,
-//         },
-//     })
-
-//     if (!existingDate) {
-//         return null
-//     }
-
-//     // Actualiza la fecha y la hora
-//     const updatedDate = await prisma.dates.update({
-//         where: {
-//             id: dateId,
-//         },
-//         data: {
-//             dates: newDate,
-//             hours: {
-//                 update: {
-//                     where: {
-//                         id: existingDate.hours[0].id,
-//                     },
-//                     data: {
-//                         hour: hours,
-//                     },
-//                 },
-//             },
-//         },
-//     })
-
-//     return updatedDate
-// }
-
 export const serviceById = async (id: string): Promise<Services | null> => {
     const service = await prisma.services.findUnique({
         where: {
@@ -312,10 +273,10 @@ export const serviceById = async (id: string): Promise<Services | null> => {
         return null
     }
 
-    const transformedDates = service.dates.map(date => ({
+    const transformedDates = service.dates.map((date: any) => ({
         id: date.id, // Agregar la id de la fecha
         date: date.dates,
-        hours: date.hours.map(hour => ({
+        hours: date.hours.map((hour: any) => ({
             id: hour.id,
             hour: hour.hour,
             isBooked: hour.isBooked,
