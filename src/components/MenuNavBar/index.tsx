@@ -15,8 +15,14 @@ import logo from '../../assets/logo/logo.png'
 import { ButtonLoginContainer, LogoImg, stylesNavBar } from './styles'
 import { Props } from './types'
 import { pages, pagesMobile } from './utility'
-import { Divider } from '@mui/material'
-import InstagramIcon from '@mui/icons-material/Instagram'
+import {
+    Accordion,
+    AccordionDetails,
+    AccordionSummary,
+    Divider,
+    Typography,
+} from '@mui/material'
+import { ExpandMore as ExpandMoreIcon } from '@mui/icons-material'
 
 const ResponsiveAppBar: FC<Props> = ({
     onLogOut,
@@ -32,20 +38,12 @@ const ResponsiveAppBar: FC<Props> = ({
     const settings = [
         {
             name: userRole?.role === 'admin' ? 'Ir al dashboard' : 'Mi perfil',
-            icon: (
-                <>
-                    <InstagramIcon sx={{ mr: 1, ml: 1 }} />
-                </>
-            ),
-            route: '/perfil',
+
+            route: userRole?.role === 'admin' ? '/dashboard' : '/perfil',
         },
         {
             name: 'Cerrar sesión',
-            icon: (
-                <>
-                    <InstagramIcon sx={{ mr: 1, ml: 1 }} />
-                </>
-            ),
+
             route: '/auth/login',
         },
     ]
@@ -78,7 +76,7 @@ const ResponsiveAppBar: FC<Props> = ({
                         <IconButton
                             size="large"
                             aria-label="account of current user"
-                            onClick={handleOpenNavMenu} // Aquí
+                            onClick={handleOpenNavMenu}
                             color="inherit"
                         >
                             <MenuIcon />
@@ -87,7 +85,12 @@ const ResponsiveAppBar: FC<Props> = ({
                             anchor="right"
                             open={isDrawerOpen}
                             onClose={handleCloseNavMenu}
-                            sx={{ zIndex: 9999999, padding: 400 }}
+                            PaperProps={{
+                                sx: {
+                                    backgroundColor: 'black',
+                                },
+                            }}
+                            sx={{ zIndex: 9999999 }}
                         >
                             <div
                                 style={{
@@ -99,37 +102,115 @@ const ResponsiveAppBar: FC<Props> = ({
                                 }}
                             >
                                 {pagesMobile.map((page, index) => (
-                                    <Button key={index}>
-                                        <Link
-                                            style={{
-                                                textDecoration: 'none',
-                                                color: 'black',
-                                                display: 'flex',
-                                            }}
-                                            href={page?.route as string}
-                                            target={
-                                                page.name === 'Síguenos'
-                                                    ? '_blank'
-                                                    : ''
-                                            }
-                                        >
-                                            <div
-                                                style={{
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                }}
-                                            >
-                                                {page?.icon}
-                                                {page?.name}
-                                            </div>
-                                        </Link>
-                                    </Button>
+                                    <div key={index}>
+                                        {page.name === 'Servicios' ? (
+                                            <Accordion>
+                                                <AccordionSummary
+                                                    sx={{
+                                                        backgroundColor:
+                                                            'black',
+                                                        color: 'white',
+                                                        paddingLeft: '7px',
+                                                    }}
+                                                    expandIcon={
+                                                        <ExpandMoreIcon
+                                                            sx={{
+                                                                color: 'white',
+                                                            }}
+                                                        />
+                                                    }
+                                                >
+                                                    <Typography
+                                                        sx={{
+                                                            fontFamily:
+                                                                'Cormorant Garamond',
+                                                            fontSize:
+                                                                '0.875rem',
+                                                        }}
+                                                    >
+                                                        {page.name.toLocaleUpperCase()}
+                                                    </Typography>
+                                                </AccordionSummary>
+                                                <AccordionDetails
+                                                    sx={{
+                                                        backgroundColor:
+                                                            'black',
+                                                    }}
+                                                >
+                                                    {page.subpages?.map(
+                                                        (
+                                                            subpage,
+                                                            subpageIndex
+                                                        ) => (
+                                                            <Button
+                                                                sx={{
+                                                                    fontFamily:
+                                                                        'Cormorant Garamond',
+                                                                    display:
+                                                                        'flex',
+                                                                    justifyContent:
+                                                                        'flex-end',
+                                                                    minWidth: 0,
+                                                                }}
+                                                                key={
+                                                                    subpageIndex
+                                                                }
+                                                            >
+                                                                <Link
+                                                                    style={{
+                                                                        textDecoration:
+                                                                            'none',
+                                                                        color: 'white', // Puedes personalizar el color
+                                                                    }}
+                                                                    href={
+                                                                        subpage.route as string
+                                                                    }
+                                                                >
+                                                                    {
+                                                                        subpage.name
+                                                                    }
+                                                                </Link>
+                                                            </Button>
+                                                        )
+                                                    )}
+                                                </AccordionDetails>
+                                            </Accordion>
+                                        ) : (
+                                            <Button>
+                                                <Link
+                                                    style={{
+                                                        textDecoration: 'none',
+                                                        color: 'white',
+                                                        display: 'flex',
+                                                    }}
+                                                    href={page.route as string}
+                                                    target={
+                                                        page.name === 'Síguenos'
+                                                            ? '_blank'
+                                                            : ''
+                                                    }
+                                                >
+                                                    <div
+                                                        style={{
+                                                            display: 'flex',
+                                                            alignItems:
+                                                                'center',
+                                                        }}
+                                                    >
+                                                        {page.name}
+                                                    </div>
+                                                </Link>
+                                            </Button>
+                                        )}
+                                    </div>
                                 ))}
                                 <Divider
                                     sx={{
-                                        height: '2px',
-                                        backgroundColor: 'black',
+                                        height: '1px',
+                                        backgroundColor: 'white',
                                         width: '100%',
+                                        mt: 2,
+                                        mb: 2,
                                     }}
                                 />
                                 {settings.map((page, index) => (
@@ -137,7 +218,7 @@ const ResponsiveAppBar: FC<Props> = ({
                                         <Link
                                             style={{
                                                 textDecoration: 'none',
-                                                color: 'black',
+                                                color: 'white',
                                                 display: 'flex',
                                             }}
                                             href={page?.route as string}
@@ -148,7 +229,6 @@ const ResponsiveAppBar: FC<Props> = ({
                                                     alignItems: 'center',
                                                 }}
                                             >
-                                                {page?.icon}
                                                 {page?.name}
                                             </div>
                                         </Link>
@@ -224,6 +304,10 @@ const ResponsiveAppBar: FC<Props> = ({
                                     <Button
                                         href="/perfil"
                                         onClick={closeDrawerButton}
+                                        sx={{
+                                            color: 'white',
+                                            backgroundColor: 'red',
+                                        }}
                                     >
                                         Perfil
                                     </Button>
