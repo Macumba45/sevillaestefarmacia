@@ -90,7 +90,7 @@ model Talleres {
   updatedAt   DateTime @updatedAt
 }
 
-model Blog {
+model Blogs {
   id          String   @id @default(cuid())
   title       String
   subtitle    String

@@ -55,6 +55,7 @@ const Page: FC<Props> = ({ params }) => {
         serviceData,
         setHourId,
         setDateId,
+        onDateIdChange,
     } = useLogicPageServicesDetail()
 
     useEffect(() => {
@@ -204,9 +205,7 @@ const Page: FC<Props> = ({ params }) => {
                 onHourIdChange={newHourId => {
                     setHourId(newHourId)
                 }}
-                onDateIdChange={newDateIr => {
-                    setDateId(newDateIr)
-                }} // Maneja el cambio en selectDate
+                onDateIdChange={onDateIdChange}
             />
 
             <VideoYoutubeContainer>

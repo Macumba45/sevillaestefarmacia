@@ -9,7 +9,6 @@ export default async function handler(
         try {
             // Recupera el ID o identificador único de la hora que el usuario seleccionó
             const hourId = req.body.selectedHourId
-            console.log(hourId)
             // Marca la hora como reservada en tu base de datos
             await markHourAsBooked(hourId)
 

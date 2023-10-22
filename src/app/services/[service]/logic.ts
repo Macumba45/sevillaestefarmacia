@@ -25,6 +25,10 @@ export const useLogicPageServicesDetail = () => {
         setIsLoading(false)
     }
 
+    const onDateIdChange = (newDateIr: string) => {
+        setDateId(newDateIr)
+        setHourId('')
+    }
     const getUserInfoDetails = async () => {
         setIsLoading(true)
         const userInfo = await getUserInfo()
@@ -80,5 +84,6 @@ export const useLogicPageServicesDetail = () => {
         serviceData,
         setHourId,
         setDateId,
+        onDateIdChange,
     }
 }

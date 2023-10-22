@@ -50,11 +50,6 @@ const ServiceFormModal: FC<Props> = ({
     >([])
     const [selectedHours, setSelectedHours] = useState<Hour>({})
     const [hoursFromDatabase, sethoursFromDatabase] = useState<Hour[][]>([])
-    console.log('hoursFromDatabase:', hoursFromDatabase)
-    const [hoursUnavailable, setHoursUnavailable] = useState<Hour[]>([])
-    console.log(
-        hoursFromDatabase[1]?.some((item: Hour) => item.isBooked === true)
-    )
 
     const handleUrlPictureChange = (event: any) => {
         setUrlPicture(event.target.value)
@@ -170,30 +165,8 @@ const ServiceFormModal: FC<Props> = ({
             setPrice(serviceData.price)
             setSubtitle(serviceData.subtitle)
 
-            const serviceIsPayed = serviceData?.payment?.map(
-                payment => payment.hourId
-            )
-            const hoursAvailable = serviceData?.dates?.map(date =>
-                date.hours.map(hour => hour.id)
-            )
-
-            console.log('IDs disponibles:', hoursAvailable)
-
-            let matchingIDs: any = []
-
-            if (serviceIsPayed && hoursAvailable) {
-                matchingIDs = serviceIsPayed.filter(id =>
-                    hoursAvailable.some(hours => hours.includes(id))
-                )
-            }
-
-            console.log('IDs coincidentes:', matchingIDs)
-
-            setHoursUnavailable(matchingIDs)
-
             // Manejar la carga de las fechas y horas aquí
             const serviceDates = isEditing ? serviceData?.dates || [] : []
-            console.log('serviceDates:', serviceDates)
 
             // Convierte las fechas en objetos DateObject y filtra las fechas pasadas
             const formattedDates = serviceDates

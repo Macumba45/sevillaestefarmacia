@@ -27,10 +27,10 @@ export type Services = {
 }
 
 export type Payment = {
-    id?: string
+    id: string
     user?: User
-    date: Dates
-    hour: Hour
+    date?: Dates
+    hour?: Hour
     dateId?: string
     hourId?: string
     payed?: boolean

@@ -18,11 +18,11 @@ const PaymentSuccessComponent: FC<Props> = ({ params }) => {
         getPaymentData(params.paymentId)
     }, [params])
 
-    useEffect(() => {
-        if (!params.paymentId) {
-            router.push('/')
-        }
-    }, [])
+    // useEffect(() => {
+    //     if (!params.paymentId) {
+    //         router.push('/')
+    //     }
+    // }, [])
 
     return (
         <Box

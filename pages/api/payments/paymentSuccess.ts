@@ -10,8 +10,8 @@ export default async function handler(
         if (typeof paymentId !== 'string') {
             throw new Error('ID no válido')
         }
-        const payment = await makePaymentTrue(paymentId)
-        res.status(200).json({ payment })
+        await makePaymentTrue(paymentId)
+        res.status(200).json({ message: 'Pago realizado' })
     } else {
         res.status(405).json({ message: 'Método no permitido' })
     }

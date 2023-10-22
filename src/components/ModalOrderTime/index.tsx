@@ -41,10 +41,17 @@ const ModalOrderTime: FC<Props> = ({
         date: string
         id: string
     }>({ date: '', id: '' })
-    const [selectedHour, setSelectedHour] = useState<Hour>()
+    const [selectedHour, setSelectedHour] = useState<Hour>({
+        hour: '',
+        id: '',
+    })
     const [dateIdMap, setDateIdMap] = useState<{ [date: string]: string }>({})
     const [payments, setPayments] = useState([])
     const today = new Date()
+
+    const resetHour = () => {
+        setSelectedHour({ hour: '', id: '' })
+    }
 
     // Filtra las fechas que son iguales o posteriores a la fecha de hoy
     const upcomingDates = dates?.filter(date => {
@@ -68,6 +75,10 @@ const ModalOrderTime: FC<Props> = ({
     }
 
     const getAvailableHours = (selectedDate: string) => {
+        if (!selectedDate) {
+            return []
+        }
+
         if (dates) {
             const selectedService = dates.find(
                 date => date.date === selectedDate
@@ -140,11 +151,16 @@ const ModalOrderTime: FC<Props> = ({
     }
 
     useEffect(() => {
-        const loadPayments = async () => {
-            const paymentsData = await fetchPaymentsData()
-            setPayments(paymentsData)
+        if (
+            window.location.pathname === '/dashboard' ||
+            window.location.pathname === '/services'
+        ) {
+            const loadPayments = async () => {
+                const paymentsData = await fetchPaymentsData()
+                setPayments(paymentsData)
+            }
+            loadPayments()
         }
-        loadPayments()
     }, [])
 
     useEffect(() => {
@@ -194,12 +210,13 @@ const ModalOrderTime: FC<Props> = ({
                                 }}
                                 id="dates"
                             >
-                                Selecciona Fecha
+                                Selecciona una Fecha
                             </InputLabel>
                             <Select
-                                label="Selecciona Fecha"
+                                label="Selecciona una fecha"
                                 value={selectedDate.date || ''}
                                 onChange={handleDateChange}
+                                onClick={resetHour}
                                 inputProps={{
                                     name: 'dates',
                                     id: 'dates',
@@ -265,25 +282,30 @@ const ModalOrderTime: FC<Props> = ({
                                 label="Elija una hora"
                                 value={selectedHour?.hour || ''}
                                 onChange={(event: SelectChangeEvent) => {
-                                    const newHourId = dates
-                                        ?.map(date => date.hours)
-                                        .flat()
-                                        .filter(
-                                            hour =>
-                                                hour.hour === event.target.value
-                                        )
-                                        .find(
-                                            hour =>
-                                                hour.hour === event.target.value
-                                        )?.id
+                                    // Filtra la hora correspondiente a event.target.value en la fecha seleccionada
+                                    const selectedDateObject = dates!.find(
+                                        date => date.date === selectedDate.date
+                                    )
+                                    if (selectedDateObject) {
+                                        const selectedHour =
+                                            selectedDateObject.hours.find(
+                                                hour =>
+                                                    hour.hour ===
+                                                    event.target.value
+                                            )
+                                        if (selectedHour) {
+                                            // Si se encontró una hora, establece el ID, de lo contrario, establece un valor predeterminado
+                                            const newHourId = selectedHour.id
+                                            setSelectedHour({
+                                                hour: event.target
+                                                    .value as string,
+                                                id: newHourId,
+                                            })
 
-                                    setSelectedHour({
-                                        hour: event.target.value as string,
-                                        id: newHourId,
-                                    })
-
-                                    // Notifica el cambio en hourId a la vista principal
-                                    onHourIdChange(newHourId || '') // Puedes proporcionar un valor predeterminado si es necesario
+                                            // Notifica el cambio en el ID de la hora a la vista principal
+                                            onHourIdChange(newHourId as string)
+                                        }
+                                    }
                                 }}
                                 disabled={
                                     selectedDate.date.length === 0 &&

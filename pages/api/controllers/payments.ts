@@ -7,6 +7,9 @@ export const getPaymentById = async (paymentId: string): Promise<Payment> => {
             id: paymentId,
         },
     })
+    if (payment === null) {
+        throw new Error('Payment not found')
+    }
 
     return payment
 }
