@@ -12,11 +12,13 @@ import { FC, useEffect, useState } from 'react'
 import { InputLabel } from '@mui/material'
 import { Dates, Hour, Payment } from '../../../types/types'
 import { fetchPaymentsData } from '@/services/payments'
+import LoadingButton from '@mui/lab/LoadingButton'
 
 interface Props {
     dates?: Dates[]
     open: boolean
     isEditing?: boolean
+    isLoading: boolean
     handleClose?: () => void
     handleReservarCita: () => void
     onHourIdChange: (newHourId: string) => void
@@ -28,6 +30,7 @@ const ModalOrderTime: FC<Props> = ({
     dates,
     open,
     isEditing,
+    isLoading,
     handleClose,
     handleReservarCita,
     onHourIdChange,
@@ -312,7 +315,8 @@ const ModalOrderTime: FC<Props> = ({
                 <DialogActions
                     sx={{ display: 'flex', justifyContent: 'center', mb: 3 }}
                 >
-                    <Button
+                    <LoadingButton
+                        loading={isLoading}
                         sx={{ color: 'white', backgroundColor: 'black' }}
                         variant="contained"
                         onClick={
@@ -321,7 +325,7 @@ const ModalOrderTime: FC<Props> = ({
                         disabled={!selectedHour || !selectedDate}
                     >
                         {buttonName}
-                    </Button>
+                    </LoadingButton>
                     <Button sx={{ color: 'black' }} onClick={handleClose}>
                         Cancelar
                     </Button>

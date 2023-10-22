@@ -80,6 +80,7 @@ const Dashboard: FC<Props> = () => {
         userLoaded,
         hourId,
         dateId,
+        isLoadingButton,
     } = useLogicDashboard()
 
     useEffect(() => {
@@ -354,6 +355,7 @@ const Dashboard: FC<Props> = () => {
                                 ))}
 
                                 <ModalOrderTime
+                                    isLoading={isLoadingButton}
                                     open={openModalEditDateAndHour}
                                     handleClose={
                                         closeModalEditDateAndHourFunction

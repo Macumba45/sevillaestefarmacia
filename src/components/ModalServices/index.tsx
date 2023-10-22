@@ -4,6 +4,7 @@ import { DateObject } from 'react-multi-date-picker'
 import DatePickerComponent from '../DaysSelect'
 import { Hour, Services } from '../../../types/types'
 import 'react-quill/dist/quill.snow.css' // Estilo por defecto
+import LoadingButton from '@mui/lab/LoadingButton'
 import {
     Button,
     Dialog,
@@ -31,7 +32,7 @@ const ServiceFormModal: FC<Props> = ({
     serviceData,
 }) => {
     const { createNewService, updateServiceData } = useLogicDashboard()
-
+    const [isLoadingButton, setIsLoadingButton] = useState(false)
     const [urlPicture, setUrlPicture] = useState(
         'https://picsum.photos/200/300.jpg'
     )
@@ -50,7 +51,10 @@ const ServiceFormModal: FC<Props> = ({
     const [selectedHours, setSelectedHours] = useState<Hour>({})
     const [hoursFromDatabase, sethoursFromDatabase] = useState<Hour[][]>([])
     console.log('hoursFromDatabase:', hoursFromDatabase)
-    const [hoursUnavailable, setHoursUnavailable] = useState<Hour[][]>([])
+    const [hoursUnavailable, setHoursUnavailable] = useState<Hour[]>([])
+    console.log(
+        hoursFromDatabase[1]?.some((item: Hour) => item.isBooked === true)
+    )
 
     const handleUrlPictureChange = (event: any) => {
         setUrlPicture(event.target.value)
@@ -143,11 +147,15 @@ const ServiceFormModal: FC<Props> = ({
 
         if (isEditing && serviceData) {
             // Si estamos en modo edición, llamamos a la función de actualización
+            setIsLoadingButton(true)
             serviceDataToSubmit.id = serviceData.id
             await updateServiceData(serviceDataToSubmit)
+            setIsLoadingButton(false)
         } else {
             // Si estamos en modo creación, llamamos a la función de creación
+            setIsLoadingButton(true)
             await createNewService(serviceDataToSubmit)
+            setIsLoadingButton(false)
         }
 
         onClose()
@@ -162,12 +170,9 @@ const ServiceFormModal: FC<Props> = ({
             setPrice(serviceData.price)
             setSubtitle(serviceData.subtitle)
 
-            console.log('Datos del servicio:', serviceData)
-
             const serviceIsPayed = serviceData?.payment?.map(
                 payment => payment.hourId
             )
-            console.log('IDs pagados:', serviceIsPayed)
             const hoursAvailable = serviceData?.dates?.map(date =>
                 date.hours.map(hour => hour.id)
             )
@@ -185,8 +190,10 @@ const ServiceFormModal: FC<Props> = ({
             console.log('IDs coincidentes:', matchingIDs)
 
             setHoursUnavailable(matchingIDs)
+
             // Manejar la carga de las fechas y horas aquí
             const serviceDates = isEditing ? serviceData?.dates || [] : []
+            console.log('serviceDates:', serviceDates)
 
             // Convierte las fechas en objetos DateObject y filtra las fechas pasadas
             const formattedDates = serviceDates
@@ -198,6 +205,7 @@ const ServiceFormModal: FC<Props> = ({
                     const formattedHours = hours.map(hour => ({
                         id: hour.id,
                         hour: hour.hour as string,
+                        isBooked: hour.isBooked,
                     }))
 
                     return {
@@ -347,7 +355,7 @@ const ServiceFormModal: FC<Props> = ({
                                                                                   index
                                                                               ].some(
                                                                                   (
-                                                                                      item: any
+                                                                                      item: Hour
                                                                                   ) =>
                                                                                       item.hour ===
                                                                                       hour
@@ -360,18 +368,7 @@ const ServiceFormModal: FC<Props> = ({
                                                                         hour as Hour
                                                                     )
                                                                 }
-                                                                disabled={
-                                                                    isEditing &&
-                                                                    hoursFromDatabase[
-                                                                        index
-                                                                    ]?.some(
-                                                                        (
-                                                                            item: any
-                                                                        ) =>
-                                                                            item.hour ===
-                                                                            hour
-                                                                    )
-                                                                }
+                                                                // disabled={isHourUnavailable(hour as Hour)}
                                                             />
                                                         }
                                                         label={hour}
@@ -389,13 +386,14 @@ const ServiceFormModal: FC<Props> = ({
             <DialogActions
                 sx={{ display: 'flex', justifyContent: 'center', mb: 2, mt: 2 }}
             >
-                <Button
+                <LoadingButton
                     variant="contained"
                     color="success"
                     onClick={handleSubmit}
+                    loading={isLoadingButton}
                 >
                     {isEditing ? 'Editar Servicio' : 'Crear Servicio'}
-                </Button>
+                </LoadingButton>
                 <Button onClick={onClose} color="error">
                     Cancelar
                 </Button>

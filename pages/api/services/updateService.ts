@@ -14,9 +14,6 @@ export default async function handler(
             }),
         }))
 
-        console.log(transformedDates)
-        // Dentro de tu función handler antes de llamar a updateService
-
         try {
             const {
                 id,

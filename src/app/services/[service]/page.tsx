@@ -197,6 +197,7 @@ const Page: FC<Props> = ({ params }) => {
                 </Fab>
             </FloatButtonContainer>
             <ModalOrderTime
+                isLoading={isLoading}
                 dates={serviceData?.dates}
                 handleClose={handleClose}
                 open={open}

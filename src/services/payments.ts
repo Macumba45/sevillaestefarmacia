@@ -1,6 +1,18 @@
+import { notification } from 'antd'
 import { getAuthenticatedToken } from '../../storage/storage'
 
 const token = getAuthenticatedToken()
+
+const notificationSuccess = () => {
+    notification.success({
+        message: `La cita se ha editado con éxito`,
+        // description: 'La cita se ha editado con éxito.',
+        style: {
+            marginLeft: 335 - 600,
+            marginTop: 50,
+        },
+    })
+}
 
 export const stripePaymentInProgress = async (
     userId: string,
@@ -86,5 +98,7 @@ export const editDateAndHourFromPayments = async (
         }
     } catch (error) {
         console.log(error)
+    } finally {
+        notificationSuccess()
     }
 }

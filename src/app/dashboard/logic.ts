@@ -34,6 +34,8 @@ export const useLogicDashboard = () => {
     const [hourId, setHourId] = useState<string>('')
     const [dateId, setDateId] = useState<string>('')
     const [paymentId, setPaymentId] = useState<string>('')
+    const [isLoadingButton, setIsLoadingButton] = useState(false)
+
     const titlePage = 'Dashboard'
 
     const getUserInfoData = useCallback(async () => {
@@ -43,7 +45,9 @@ export const useLogicDashboard = () => {
     }, [])
 
     const createNewService = useCallback(async (service: Services) => {
+        setIsLoadingButton(true)
         const createdService = await createService(service)
+        setIsLoadingButton(false)
         return createdService
     }, [])
 
@@ -60,7 +64,9 @@ export const useLogicDashboard = () => {
     }, [])
 
     const updateServiceData = useCallback(async (service: Services) => {
+        setIsLoadingButton(true)
         await updateService(service)
+        setIsLoadingButton(false)
         return
     }, [])
 
@@ -72,7 +78,9 @@ export const useLogicDashboard = () => {
 
     const editDateAndHour = useCallback(
         async (paymentId: string, dateId: string, hourId: string) => {
+            setIsLoadingButton(true)
             await editDateAndHourFromPayments(paymentId, dateId, hourId)
+            setIsLoadingButton(false)
             setOpenModalEditDateAndHour(false)
             return
         },
@@ -186,5 +194,6 @@ export const useLogicDashboard = () => {
         titlePage,
         updateServiceData,
         userLoaded,
+        isLoadingButton,
     }
 }
