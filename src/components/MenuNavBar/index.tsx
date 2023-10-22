@@ -198,6 +198,7 @@ const ResponsiveAppBar: FC<Props> = ({
                                                         }}
                                                     >
                                                         {page.name}
+                                                        {page.icon}
                                                     </div>
                                                 </Link>
                                             </Button>

@@ -88,6 +88,11 @@ export const pagesMobile = [
     },
     {
         name: 'Síguenos',
+        icon: (
+            <>
+                <InstagramIcon sx={{ mr: 1, ml: 1 }} />
+            </>
+        ),
 
         route: 'https://www.instagram.com/sevillaestefarmacia/',
     },
