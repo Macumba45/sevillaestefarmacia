@@ -11,11 +11,12 @@ interface Props {
 }
 
 const PaymentSuccessComponent: FC<Props> = ({ params }) => {
-    const { paymentSuccess, router } = useLogicPayment()
+    const { paymentSuccess, router, getPaymentData } = useLogicPayment()
 
     useEffect(() => {
         paymentSuccess(params.paymentId)
-    }, [])
+        getPaymentData(params.paymentId)
+    }, [params])
 
     useEffect(() => {
         if (!params.paymentId) {

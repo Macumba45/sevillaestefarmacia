@@ -1,6 +1,16 @@
 import { prisma } from '../../../src/lib/client'
 import { Payment } from '../../../types/types'
 
+export const getPaymentById = async (paymentId: string): Promise<Payment> => {
+    const payment = await prisma.payments.findUnique({
+        where: {
+            id: paymentId,
+        },
+    })
+
+    return payment
+}
+
 export const getPaymentsData = async (): Promise<Payment[]> => {
     const payments = await prisma.payments.findMany({
         orderBy: {
@@ -44,7 +54,7 @@ export const getPaymentsData = async (): Promise<Payment[]> => {
     const dates = await prisma.dates.findMany({
         where: {
             id: {
-                in: dateIds,
+                in: dateIds as string[],
             },
         },
     })
@@ -52,7 +62,7 @@ export const getPaymentsData = async (): Promise<Payment[]> => {
     const hours = await prisma.hours.findMany({
         where: {
             id: {
-                in: hourIds,
+                in: hourIds as string[],
             },
         },
     })

@@ -9,7 +9,6 @@ const notificationSuccess = (serviceName: string) => {
         message: `El servicio ${serviceName} se ha creado con éxito`,
         description: 'El servicio se ha creado con éxito.',
         style: {
-            marginLeft: 335 - 600,
             marginTop: 50,
         },
     })

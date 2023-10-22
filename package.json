@@ -15,6 +15,7 @@
         "@babel/core": "^7.23.0",
         "@babel/preset-env": "^7.22.20",
         "@babel/preset-typescript": "^7.23.0",
+        "@emotion/is-prop-valid": "^1.2.1",
         "@emotion/react": "11.11.1",
         "@emotion/styled": "11.11.0",
         "@mui/icons-material": "5.11.16",

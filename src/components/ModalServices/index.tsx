@@ -335,7 +335,7 @@ const ServiceFormModal: FC<Props> = ({
                                         }}
                                     >
                                         {generateAvailableHours().map(
-                                            (hour, hourIndex) => (
+                                            (hour, hourIndex, hourId) => (
                                                 <li key={hourIndex}>
                                                     <FormControlLabel
                                                         control={
@@ -368,7 +368,26 @@ const ServiceFormModal: FC<Props> = ({
                                                                         hour as Hour
                                                                     )
                                                                 }
-                                                                // disabled={isHourUnavailable(hour as Hour)}
+                                                                disabled={
+                                                                    !isEditing
+                                                                        ? selectedDay.hours.includes(
+                                                                              hour
+                                                                          )
+                                                                        : hoursFromDatabase[
+                                                                              index
+                                                                          ] &&
+                                                                          hoursFromDatabase[
+                                                                              index
+                                                                          ].some(
+                                                                              (
+                                                                                  item: Hour
+                                                                              ) =>
+                                                                                  item.hour ===
+                                                                                      hour &&
+                                                                                  item.isBooked ===
+                                                                                      true
+                                                                          )
+                                                                }
                                                             />
                                                         }
                                                         label={hour}
