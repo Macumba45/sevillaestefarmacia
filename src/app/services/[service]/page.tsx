@@ -14,6 +14,7 @@ import {
     FloatButtonContainer,
     LoadingContainer,
     NavContainer,
+    Picture,
     SubtitleServices,
     TitleServices,
     VideoYoutube,
@@ -67,7 +68,7 @@ const Page: FC<Props> = ({ params }) => {
             </LoadingContainer>
         )
     }
-
+    console.log('serviceData?.title', serviceData)
     return (
         <Container backgrouncolor="#ebf0f6">
             <NavContainer>
@@ -98,6 +99,7 @@ const Page: FC<Props> = ({ params }) => {
             </TitleServices>
             <SubtitleServices>{serviceData?.subtitle}</SubtitleServices>
             <DermoDescription price={serviceData?.price as string} />
+            <Picture src={serviceData?.urlPicture} />
             <ButtonContainerServices>
                 {serviceData?.id === 'clo0dzomz0001xy04kzkxay49' ||
                 serviceData?.id === 'clo0e0a200002xy04bwqml93h' ||

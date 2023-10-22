@@ -47,6 +47,8 @@ const ResponsiveAppBar: FC<Props> = ({
             route: '/auth/login',
         },
     ]
+
+    console.log(settings)
     return (
         <AppBar style={stylesNavBar} position="sticky">
             <Container maxWidth="xl">
@@ -292,35 +294,167 @@ const ResponsiveAppBar: FC<Props> = ({
                                     {buttonName}
                                 </Button>
                                 <Drawer
-                                    sx={{ zIndex: 99999999 }}
                                     anchor="right"
-                                    open={isDrawerOpenButton}
-                                    onClose={closeDrawerButton}
+                                    open={isDrawerOpen}
+                                    onClose={handleCloseNavMenu}
                                     PaperProps={{
                                         sx: {
-                                            width: 300,
+                                            backgroundColor: 'black',
                                         },
                                     }}
+                                    sx={{ zIndex: 9999999 }}
                                 >
-                                    <Button
-                                        href="/perfil"
-                                        onClick={closeDrawerButton}
-                                        sx={{
-                                            color: 'white',
-                                            backgroundColor: 'red',
+                                    <div
+                                        style={{
+                                            width: '220px', // Establece el ancho que desees para el panel lateral
+                                            padding: '20px',
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            alignItems: 'flex-start',
                                         }}
                                     >
-                                        Perfil
-                                    </Button>
-                                    <Button
-                                        startIcon={<ExitToAppIcon />}
-                                        onClick={() => {
-                                            onLogOut()
-                                            closeDrawerButton()
-                                        }}
-                                    >
-                                        Cerrar Sesión
-                                    </Button>
+                                        {pagesMobile.map((page, index) => (
+                                            <div key={index}>
+                                                {page.name === 'Servicios' ? (
+                                                    <Accordion>
+                                                        <AccordionSummary
+                                                            sx={{
+                                                                backgroundColor:
+                                                                    'black',
+                                                                color: 'white',
+                                                                paddingLeft:
+                                                                    '7px',
+                                                            }}
+                                                            expandIcon={
+                                                                <ExpandMoreIcon
+                                                                    sx={{
+                                                                        color: 'white',
+                                                                    }}
+                                                                />
+                                                            }
+                                                        >
+                                                            <Typography
+                                                                sx={{
+                                                                    fontFamily:
+                                                                        'Cormorant Garamond',
+                                                                    fontSize:
+                                                                        '0.875rem',
+                                                                }}
+                                                            >
+                                                                {page.name.toLocaleUpperCase()}
+                                                            </Typography>
+                                                        </AccordionSummary>
+                                                        <AccordionDetails
+                                                            sx={{
+                                                                backgroundColor:
+                                                                    'black',
+                                                            }}
+                                                        >
+                                                            {page.subpages?.map(
+                                                                (
+                                                                    subpage,
+                                                                    subpageIndex
+                                                                ) => (
+                                                                    <Button
+                                                                        sx={{
+                                                                            fontFamily:
+                                                                                'Cormorant Garamond',
+                                                                            display:
+                                                                                'flex',
+                                                                            justifyContent:
+                                                                                'flex-end',
+                                                                            minWidth: 0,
+                                                                        }}
+                                                                        key={
+                                                                            subpageIndex
+                                                                        }
+                                                                    >
+                                                                        <Link
+                                                                            style={{
+                                                                                textDecoration:
+                                                                                    'none',
+                                                                                color: 'white', // Puedes personalizar el color
+                                                                            }}
+                                                                            href={
+                                                                                subpage.route as string
+                                                                            }
+                                                                        >
+                                                                            {
+                                                                                subpage.name
+                                                                            }
+                                                                        </Link>
+                                                                    </Button>
+                                                                )
+                                                            )}
+                                                        </AccordionDetails>
+                                                    </Accordion>
+                                                ) : (
+                                                    <Button>
+                                                        <Link
+                                                            style={{
+                                                                textDecoration:
+                                                                    'none',
+                                                                color: 'white',
+                                                                display: 'flex',
+                                                            }}
+                                                            href={
+                                                                page.route as string
+                                                            }
+                                                            target={
+                                                                page.name ===
+                                                                'Síguenos'
+                                                                    ? '_blank'
+                                                                    : ''
+                                                            }
+                                                        >
+                                                            <div
+                                                                style={{
+                                                                    display:
+                                                                        'flex',
+                                                                    alignItems:
+                                                                        'center',
+                                                                }}
+                                                            >
+                                                                {page.name}
+                                                                {page.icon}
+                                                            </div>
+                                                        </Link>
+                                                    </Button>
+                                                )}
+                                            </div>
+                                        ))}
+                                        <Divider
+                                            sx={{
+                                                height: '1px',
+                                                backgroundColor: 'white',
+                                                width: '100%',
+                                                mt: 2,
+                                                mb: 2,
+                                            }}
+                                        />
+                                        {settings.map((page, index) => (
+                                            <Button key={index}>
+                                                <Link
+                                                    style={{
+                                                        textDecoration: 'none',
+                                                        color: 'white',
+                                                        display: 'flex',
+                                                    }}
+                                                    href={page?.route as string}
+                                                >
+                                                    <div
+                                                        style={{
+                                                            display: 'flex',
+                                                            alignItems:
+                                                                'center',
+                                                        }}
+                                                    >
+                                                        {page?.name}
+                                                    </div>
+                                                </Link>
+                                            </Button>
+                                        ))}
+                                    </div>
                                 </Drawer>
                             </>
                         </ButtonLoginContainer>

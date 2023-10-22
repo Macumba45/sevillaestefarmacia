@@ -115,3 +115,11 @@ export const VideoYoutube = styled.iframe`
         height: 500px;
     }
 `
+export const PictureContainer = styled.div`
+    display: flex;
+`
+export const Picture = styled.img`
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+`

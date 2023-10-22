@@ -31,7 +31,6 @@ const Conocenos: FC = () => {
         isDrawerOpen,
         isDrawerOpenButton,
         logOut,
-        router,
     } = useLogicHome()
 
     const address = 'Calle Periodista Juan Tribuna, 8 (Local 2) 41019 Sevilla'

@@ -34,7 +34,7 @@ export const useLogicHome = () => {
             window.location.href = '/dashboard'
         } else if (currentUser) {
             // Abrir el Drawer con las opciones de Perfil y Cerrar Sesión
-            openDrawerButton()
+            window.location.href = '/perfil'
         } else {
             // Redirigir a la página de inicio de sesión
             router.push('/auth/login')
