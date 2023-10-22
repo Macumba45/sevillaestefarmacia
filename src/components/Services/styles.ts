@@ -58,7 +58,7 @@ export const TitleServices = styled.h1<{
     width: ${props => props.widthtitle};
     @media screen and (min-width: 899px) {
         width: ${props => props.widthtitledesktop};
-        font-size: 3rem;
+        font-size: 2.5rem;
         line-height: 3rem;
         margin-left: 2rem;
     }
@@ -77,7 +77,7 @@ export const SubtitleServices = styled.h2`
     margin-bottom: 3rem;
     line-height: 2rem;
     @media screen and (min-width: 899px) {
-        font-size: 2rem;
+        font-size: 1.5rem;
         line-height: 2rem;
     }
 `
@@ -101,8 +101,8 @@ export const DescriptionServices = styled.p<{
     margin-right: 2rem;
     width: ${props => props.widthmobile};
     @media screen and (min-width: 899px) {
-        font-size: 2rem;
-        line-height: 2.5rem;
+        font-size: 1.6rem;
+        line-height: 2.3rem;
         width: ${props => props.widthdesktop};
     }
 `

@@ -1,5 +1,5 @@
 import { FC, memo } from 'react'
-import { ParrafoServices, Title } from './styles'
+import { Container, ParrafoServices, Title } from './styles'
 
 interface Props {
     price: string
@@ -7,7 +7,7 @@ interface Props {
 
 const DermoDescription: FC<Props> = ({ price }) => {
     return (
-        <div>
+        <Container>
             <Title>
                 ¿Te gustaría conocer más sobre tu piel o tu salud capilar?
             </Title>
@@ -64,7 +64,7 @@ const DermoDescription: FC<Props> = ({ price }) => {
             <ParrafoServices>
                 El coste del servicio es de {price}€.
             </ParrafoServices>
-        </div>
+        </Container>
     )
 }
 

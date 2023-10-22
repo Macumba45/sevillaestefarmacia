@@ -132,7 +132,7 @@ export const TitleConocenos = styled.h1`
 export const SubtitleConocenos = styled.h2`
     font-size: 1.5rem;
     color: black;
-    margin-top: 2rem;
+    margin-top: 1rem;
     text-align: center;
     line-height: 2rem;
     width: 250px;

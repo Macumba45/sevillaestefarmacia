@@ -15,6 +15,7 @@ import {
     LoadingContainer,
     NavContainer,
     Picture,
+    PictureContainer,
     SubtitleServices,
     TitleServices,
     VideoYoutube,
@@ -98,8 +99,16 @@ const Page: FC<Props> = ({ params }) => {
                 {serviceData?.title}
             </TitleServices>
             <SubtitleServices>{serviceData?.subtitle}</SubtitleServices>
-            <DermoDescription price={serviceData?.price as string} />
-            <Picture src={serviceData?.urlPicture} />
+            <div
+                style={{
+                    display: 'flex',
+                }}
+            >
+                <DermoDescription price={serviceData?.price as string} />
+                <PictureContainer>
+                    <Picture src={serviceData?.urlPicture} />
+                </PictureContainer>
+            </div>
             <ButtonContainerServices>
                 {serviceData?.id === 'clo0dzomz0001xy04kzkxay49' ||
                 serviceData?.id === 'clo0e0a200002xy04bwqml93h' ||

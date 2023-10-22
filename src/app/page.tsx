@@ -26,6 +26,7 @@ import {
     IconHeaderTitle,
 } from './styles'
 import Footer from '@/components/Footer'
+import Link from 'next/link'
 
 const Home: FC = () => {
     const {
@@ -85,23 +86,26 @@ const Home: FC = () => {
                     Nos mueve el equilibrio, nos mueve tu salud.
                 </SubtitleConocenos>
                 <ButtonContainerConocenos>
-                    <Button
-                        variant="outlined"
-                        sx={{
-                            color: 'black',
-                            borderColor: 'black',
-                            width: '200px',
-                            borderRadius: '130px',
-                            ':hover': {
-                                backgroundColor: 'white',
+                    <Link href={'/conocenos'}>
+                        <Button
+                            variant="outlined"
+                            sx={{
                                 color: 'black',
-                                borderColor: 'white',
-                            },
-                            fontFamily: 'Cormorant Garamond',
-                        }}
-                    >
-                        Conócenos
-                    </Button>
+                                borderColor: 'black',
+                                width: '200px',
+                                borderRadius: '130px',
+                                backgroundColor: 'white',
+                                ':hover': {
+                                    backgroundColor: 'black',
+                                    color: 'white',
+                                    borderColor: 'transparent',
+                                },
+                                fontFamily: 'Cormorant Garamond',
+                            }}
+                        >
+                            Conócenos
+                        </Button>
+                    </Link>
                 </ButtonContainerConocenos>
             </ContainerConocenos>
             <HeaderServices>
@@ -123,8 +127,8 @@ const Home: FC = () => {
                 buttonName="Más información"
                 backGrodunColor="#ebf0f6"
                 picture={dermo.src}
-                widthMobile="250px"
-                widthDesktop="390px"
+                widthMobile="230px"
+                widthDesktop="330px"
                 widthTitle="330px"
                 imagePosition="bottom"
             />
@@ -136,12 +140,12 @@ const Home: FC = () => {
                 buttonName="Más información"
                 backGrodunColor="#f6f6eb"
                 picture={nutricion.src}
-                widthDesktop="610px"
+                widthDesktop="500px"
                 widthTitle="350px"
                 imagePosition="bottom"
-                widthMobile="320px"
+                widthMobile="350px"
                 flexDirection="row-reverse"
-                widthTitleDesktop="480px"
+                widthTitleDesktop="400px"
             />
             <Services
                 id="clo0e0mn50003xy040gwqse36"
@@ -154,7 +158,7 @@ const Home: FC = () => {
                 backGrodunColor="#ebf0f6"
                 picture={laboratorio.src}
                 widthMobile="320px"
-                widthDesktop="540px"
+                widthDesktop="470px"
                 imagePosition="bottom"
             />
             <Services
@@ -167,10 +171,11 @@ const Home: FC = () => {
                 buttonName="Más información"
                 backGrodunColor="#f6f6eb"
                 picture={spd.src}
-                widthMobile="320px"
-                widthDesktop="610px"
+                widthMobile="350px"
+                widthDesktop="500px"
                 imagePosition="bottom"
                 flexDirection="row-reverse"
+                widthTitle="500px"
             />
             <Services
                 id="clo0e1e3p0005xy04izx8uzqa"
@@ -182,7 +187,7 @@ const Home: FC = () => {
                 buttonName="Más información"
                 backGrodunColor="#ebf0f6"
                 picture={pendientes.src}
-                widthMobile="320px"
+                widthMobile="330px"
                 widthDesktop="610px"
                 widthTitle="330px"
                 imagePosition="bottom"
@@ -197,7 +202,7 @@ const Home: FC = () => {
                 backGrodunColor="#f6f6eb"
                 picture={veterinaria.src}
                 widthMobile="320px"
-                widthDesktop="610px"
+                widthDesktop="430px"
                 widthTitle="330px"
                 imagePosition="bottom"
                 flexDirection="row-reverse"

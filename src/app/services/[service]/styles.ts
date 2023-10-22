@@ -32,7 +32,7 @@ export const TitleServices = styled.h1<{
 }>`
     font-size: 2rem;
     margin-bottom: 1rem;
-    margin-top: 8rem;
+    margin-top: 10rem;
     color: black;
     text-align: left;
     padding-left: 2rem;
@@ -116,10 +116,22 @@ export const VideoYoutube = styled.iframe`
     }
 `
 export const PictureContainer = styled.div`
-    display: flex;
+    display: none;
+    margin-right: 4rem;
+    margin-left: 2rem;
+    object-fit: cover;
+    background-position: left;
+    @media screen and (min-width: 899px) {
+        display: flex;
+    }
 `
 export const Picture = styled.img`
-    width: 100%;
-    height: 100%;
+    width: 400px;
+    height: 90%;
+    display: none;
     object-fit: cover;
+    border-radius: 10px;
+    @media screen and (min-width: 899px) {
+        display: flex;
+    }
 `
