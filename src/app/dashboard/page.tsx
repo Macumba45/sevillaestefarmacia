@@ -32,7 +32,6 @@ import AlignItemsList from '@/components/ListDateAvatar'
 import DatePickerComp from '@/components/InputDayPicker'
 import SearchInputComp from '@/components/InpuntSearch'
 import ServiceFormModal from '@/components/ModalServices'
-import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import DeleteConfirmationModal from '@/components/ModalConfirmationDelete'
 import {
     CardServicesContainer,
@@ -49,6 +48,8 @@ const Dashboard: FC<Props> = () => {
         closeModalDelete,
         closeModalEditDateAndHourFunction,
         currentUser,
+        dateId,
+        datesPaymentsPayed,
         editDateAndHour,
         getAllPayments,
         getServiceData,
@@ -57,8 +58,10 @@ const Dashboard: FC<Props> = () => {
         handleDeleteClick,
         handleDrawerToggle,
         handleOpenModaService,
+        hourId,
         isEditing,
         isLoading,
+        isLoadingButton,
         logOut,
         mobileOpen,
         open,
@@ -79,9 +82,6 @@ const Dashboard: FC<Props> = () => {
         titleDrawer,
         titlePage,
         userLoaded,
-        hourId,
-        dateId,
-        isLoadingButton,
     } = useLogicDashboard()
 
     useEffect(() => {
@@ -341,7 +341,7 @@ const Dashboard: FC<Props> = () => {
                                     <SearchInputComp />
                                 </div> */}
 
-                                {allPayments.map((item: any, index) => (
+                                {datesPaymentsPayed.map((item: any, index) => (
                                     <AlignItemsList
                                         key={index}
                                         serviceType={item.service.title}

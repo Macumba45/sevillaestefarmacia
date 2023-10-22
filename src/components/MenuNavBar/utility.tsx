@@ -21,7 +21,7 @@ export const pages = [
     },
     {
         name: 'Tarjeta CLUB',
-        route: '/tarjetaclub',
+        route: 'https://www.puntosonline.com',
     },
     {
         name: '',
@@ -84,7 +84,7 @@ export const pagesMobile = [
     {
         name: 'Tarjeta CLUB',
 
-        route: '/tarjetaClub',
+        route: 'https://www.puntosonline.com',
     },
     {
         name: 'Síguenos',

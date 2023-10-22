@@ -35,8 +35,10 @@ export const useLogicDashboard = () => {
     const [dateId, setDateId] = useState<string>('')
     const [paymentId, setPaymentId] = useState<string>('')
     const [isLoadingButton, setIsLoadingButton] = useState(false)
-
     const titlePage = 'Dashboard'
+    const datesPaymentsPayed = allPayments?.filter(
+        (payment: any) => payment.payed === true
+    )
 
     const getUserInfoData = useCallback(async () => {
         setIsLoading(true)
@@ -195,5 +197,6 @@ export const useLogicDashboard = () => {
         updateServiceData,
         userLoaded,
         isLoadingButton,
+        datesPaymentsPayed,
     }
 }

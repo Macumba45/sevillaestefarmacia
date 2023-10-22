@@ -2,7 +2,8 @@
 
 import { FC, memo } from 'react'
 import Link from 'next/link'
-import ExitToAppIcon from '@mui/icons-material/ExitToApp'
+import { Props } from './types'
+import { pages, pagesMobile } from './utility'
 import Drawer from '@mui/material/Drawer'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
@@ -12,9 +13,7 @@ import MenuIcon from '@mui/icons-material/Menu'
 import Container from '@mui/material/Container'
 import Button from '@mui/material/Button'
 import logo from '../../assets/logo/logo.png'
-import { ButtonLoginContainer, LogoImg, stylesNavBar } from './styles'
-import { Props } from './types'
-import { pages, pagesMobile } from './utility'
+import { ExpandMore as ExpandMoreIcon } from '@mui/icons-material'
 import {
     Accordion,
     AccordionDetails,
@@ -22,7 +21,12 @@ import {
     Divider,
     Typography,
 } from '@mui/material'
-import { ExpandMore as ExpandMoreIcon } from '@mui/icons-material'
+import {
+    ButtonLoginContainer,
+    LogoContainer,
+    LogoImg,
+    stylesNavBar,
+} from './styles'
 
 const ResponsiveAppBar: FC<Props> = ({
     onLogOut,
@@ -48,22 +52,22 @@ const ResponsiveAppBar: FC<Props> = ({
         },
     ]
 
-    console.log(settings)
     return (
         <AppBar style={stylesNavBar} position="sticky">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    <LogoImg
-                        style={{
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                        }}
-                        src={logo.src}
-                        alt="Farmacia Santa Bárbara"
-                        onClick={() => (location.href = '/')}
-                    />
-
+                    <LogoContainer>
+                        <LogoImg
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                            }}
+                            src={logo.src}
+                            alt="Farmacia Santa Bárbara"
+                            onClick={() => (location.href = '/')}
+                        />
+                    </LogoContainer>
                     <Box
                         sx={{
                             flexGrow: 1,

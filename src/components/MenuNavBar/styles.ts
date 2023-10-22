@@ -1,8 +1,16 @@
 import styled from 'styled-components'
 
+export const LogoContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+`
+
 export const LogoImg = styled.img`
     width: 10rem;
     cursor: pointer;
+    object-fit: cover;
 `
 
 export const ButtonLoginContainer = styled.div`
