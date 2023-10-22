@@ -294,6 +294,9 @@ export const serviceById = async (id: string): Promise<Services | null> => {
             dates: {
                 include: {
                     hours: {
+                        orderBy: {
+                            hour: 'asc'
+                        },
                         select: {
                             id: true,
                             hour: true,

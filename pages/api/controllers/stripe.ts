@@ -13,7 +13,7 @@ export const createPayment = async (
                 serviceId: serviceId,
                 dateId: dateId,
                 hourId: hourId,
-                payed: false, // Puedes establecer el valor inicial según tus necesidades
+                payed: false,
             },
         })
 
