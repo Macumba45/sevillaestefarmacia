@@ -13,6 +13,7 @@ import Divider from '@mui/material/Divider'
 import Drawer from '@mui/material/Drawer'
 import IconButton from '@mui/material/IconButton'
 import DashboardIcon from '@mui/icons-material/Dashboard'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import MedicalServicesIcon from '@mui/icons-material/MedicalServices'
 import HubIcon from '@mui/icons-material/Hub'
 import RssFeedIcon from '@mui/icons-material/RssFeed'
@@ -114,6 +115,12 @@ const Dashboard: FC<Props> = () => {
 
     const itemsTop = [
         { text: 'Dashboard', icon: <DashboardIcon />, route: 'dashboard' },
+        {
+            text: 'Mis clientes',
+            icon: <AccountCircleIcon />,
+            route: 'clientes',
+        },
+
         {
             text: 'Servicios',
             icon: <MedicalServicesIcon />,
@@ -383,6 +390,19 @@ const Dashboard: FC<Props> = () => {
                                     }
                                 />
                             </CitasContainer>
+                        )}
+                        {route === 'clientes' && (
+                            <>
+                                <FloatAddServices
+                                    onClick={handleOpenModaService}
+                                />
+                                {/* {open && (
+                    <ServiceFormModal
+                        open={open}
+                        onClose={() => setOpen(false)}
+                    />
+                )} */}
+                            </>
                         )}
                         {route === 'blog' && (
                             <>

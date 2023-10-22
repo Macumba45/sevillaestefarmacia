@@ -18,7 +18,7 @@ export const ContainerServices = styled.div`
     background-color: #f6f6eb;
     display: none;
     flex-direction: column;
-    margin-left: 2rem;
+    margin-left: 8rem;
     @media screen and (min-width: 899px) {
         display: flex;
     }
@@ -48,7 +48,7 @@ export const Title = styled.h1`
     @media screen and (min-width: 899px) {
         font-size: 2rem;
         line-height: 3rem;
-        margin-left: 2rem;
+        margin-left: 4rem;
         margin-bottom: 2rem;
         margin-top: 3rem;
     }
@@ -66,7 +66,7 @@ export const ParrafoServices = styled.p`
         font-size: 1.2rem;
         text-align: left;
         line-height: 2rem;
-        margin-left: 2rem;
+        margin-left: 4rem;
         margin-bottom: 2rem;
     }
 `
