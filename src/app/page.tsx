@@ -12,7 +12,8 @@ import nutricion from '../assets/HOME/NUTRICION_FOTO.jpg'
 import laboratorio from '../assets/HOME/LABORATORIO_FOTO.jpg'
 import spd from '../assets/HOME/SPD_FOTO.jpg'
 import pendientes from '../assets/HOME/PENDIENTES_BEBE_FOTO.png'
-import veterinaria from '../assets/HOME/VETERINARIA_FOTO.png'
+import veterinaria from '../assets/HOME/VETERINARIA_FOTO_02.jpg'
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import {
     ButtonContainerConocenos,
     ContainerConocenos,
@@ -20,6 +21,9 @@ import {
     SubtitleConocenos,
     TitleConocenos,
     LoadingContainer,
+    HeaderServices,
+    TitleHeaderServices,
+    IconHeaderTitle,
 } from './styles'
 import Footer from '@/components/Footer'
 
@@ -100,6 +104,17 @@ const Home: FC = () => {
                     </Button>
                 </ButtonContainerConocenos>
             </ContainerConocenos>
+            <HeaderServices>
+                <TitleHeaderServices>SERVICIOS</TitleHeaderServices>
+                <IconHeaderTitle>
+                    <ArrowDropDownIcon sx={{ fontSize: 40 }} />
+                    <ArrowDropDownIcon sx={{ fontSize: 40 }} />
+                    <ArrowDropDownIcon sx={{ fontSize: 40 }} />
+                    <ArrowDropDownIcon sx={{ fontSize: 40 }} />
+                    <ArrowDropDownIcon sx={{ fontSize: 40 }} />
+                    <ArrowDropDownIcon sx={{ fontSize: 40 }} />
+                </IconHeaderTitle>
+            </HeaderServices>
             <Services
                 id="clo0dzomz0001xy04kzkxay49"
                 title="DERMOCOSMÉTICA FARMACÉUTICA"

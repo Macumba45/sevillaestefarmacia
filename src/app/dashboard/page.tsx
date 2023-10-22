@@ -14,6 +14,7 @@ import Drawer from '@mui/material/Drawer'
 import IconButton from '@mui/material/IconButton'
 import DashboardIcon from '@mui/icons-material/Dashboard'
 import MedicalServicesIcon from '@mui/icons-material/MedicalServices'
+import HubIcon from '@mui/icons-material/Hub'
 import RssFeedIcon from '@mui/icons-material/RssFeed'
 import LogoutIcon from '@mui/icons-material/Logout'
 import List from '@mui/material/List'
@@ -119,7 +120,7 @@ const Dashboard: FC<Props> = () => {
             route: 'servicios',
         },
         { text: 'Próximas citas', icon: <DateRangeIcon />, route: 'citas' },
-        { text: 'Talleres', icon: <AccountCircleIcon />, route: 'talleres' },
+        { text: 'Talleres', icon: <HubIcon />, route: 'talleres' },
         { text: 'Blog', icon: <RssFeedIcon />, route: 'blog' },
     ]
 

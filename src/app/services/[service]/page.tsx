@@ -55,18 +55,6 @@ const Page: FC<Props> = ({ params }) => {
         setDateId,
     } = useLogicPageServicesDetail()
 
-    // useEffect(() => {
-    //     if (typeof window !== 'undefined') {
-    //         const { history } = window
-    //         const originalTitle = serviceData?.title // Título original con espacios
-    //         if (originalTitle) {
-    //             const newTitle = originalTitle.replace(/\s/g, '-')
-    //             const newURL = `/services/${encodeURIComponent(newTitle)}` // Codificar el título para manejar caracteres especiales
-    //             history.pushState(null, '', newURL)
-    //         }
-    //     }
-    // }, [])
-
     useEffect(() => {
         getUserInfoDetails()
         fetchServiceDetails(params.service)

@@ -21,7 +21,7 @@ export const pages = [
     },
     {
         name: 'Tarjeta CLUB',
-        route: '/tarjetaClub',
+        route: '/tarjetaclub',
     },
     {
         name: '',

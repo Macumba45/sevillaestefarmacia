@@ -1,5 +1,38 @@
 import styled from 'styled-components'
 
+export const HeaderServices = styled.header`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f6f6eb;
+    width: 100%;
+    height: 320px;
+`
+
+export const IconHeaderTitle = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+`
+
+export const TitleHeaderServices = styled.h1`
+    font-size: 1.2rem;
+    color: black;
+    text-align: center;
+    font-weight: 700;
+    padding: 1rem;
+    font-family: 'Cormorant Garamond', serif;
+    border: 2px solid black; /* Personaliza el ancho y el color del borde */
+    border-radius: 30px;
+    width: 250px;
+
+    @media screen and (min-width: 899px) {
+        font-size: 1.5rem;
+    }
+`
+
 export const ContainerDesktop = styled.div`
     margin-top: 5rem;
     @media screen and (min-width: 899px) {
@@ -37,9 +70,11 @@ export const ContainerConocenos = styled.section`
     flex-direction: column;
     align-items: center;
     width: 100%;
-    height: 350px;
+    height: 320px;
     margin-top: 5rem;
-    background-color: #fdf1f1;
+    background-image: url('https://i.postimg.cc/g0m8NTQS/SALUD-VIDA-EMOCIONES-FOTO-FONDO-WEB.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
 `
 export const ContainerImgHome = styled.div`
     display: flex;
@@ -111,7 +146,8 @@ export const SubtitleConocenos = styled.h2`
 export const ButtonContainerConocenos = styled.div`
     display: flex;
     justify-content: center;
-    margin-top: 3rem;
+    align-items: center;
+    margin-top: 2rem;
 `
 
 export const TitleDermo = styled.h1`
