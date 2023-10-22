@@ -29,6 +29,7 @@ export default async function handler(
                     paymentId: paymentId,
                 },
             })
+            console.log(session)
             res.status(200).json(session)
         } catch (err: any) {
             res.status(err.statusCode || 500).json(err.message)

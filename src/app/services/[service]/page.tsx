@@ -69,7 +69,6 @@ const Page: FC<Props> = ({ params }) => {
             </LoadingContainer>
         )
     }
-    console.log('serviceData?.title', serviceData)
     return (
         <Container backgrouncolor="#ebf0f6">
             <NavContainer>
