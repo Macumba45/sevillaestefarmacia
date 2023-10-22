@@ -36,9 +36,14 @@ export const useLogicPageServicesDetail = () => {
     }, [])
 
     const contactWhatsApp = () => {
+        let message = ''
         const phoneNumber = '+34682296561'
-        const message = `Hola Farmacia Santa Bárbara, me gustaría solicitar información sobre el servicio ${serviceData?.title}`
-
+        if (serviceData?.title === 'TU MASCOTA EN BUENAS MANOS') {
+            message = `Hola Farmacia Santa Bárbara, me gustaría solicitar información sobre el servicio ${serviceData?.title}`
+        } else if (serviceData?.title === 'LABORATORIO') {
+            message =
+                'Hola Farmacia Santa Bárbara, me gustaría solicitar presupuesto para realizar una fórmula magistral'
+        }
         const whatsappURL = `whatsapp://send?phone=${phoneNumber}&text=${encodeURIComponent(
             message
         )}`

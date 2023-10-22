@@ -131,7 +131,8 @@ const Page: FC<Props> = ({ params }) => {
                     >
                         Reservar cita
                     </Button>
-                ) : serviceData?.id === 'clo0e1q180006xy04pu96nyml' ? (
+                ) : serviceData?.id === 'clo0e1q180006xy04pu96nyml' ||
+                  serviceData?.id === 'clo0e0mn50003xy040gwqse36' ? (
                     <Button
                         onClick={contactWhatsApp} // La función que maneja el chat de WhatsApp
                         variant="outlined"
@@ -149,7 +150,7 @@ const Page: FC<Props> = ({ params }) => {
                             fontFamily: 'Cormorant Garamond',
                         }}
                     >
-                        Chatear por WhatsApp
+                        Solicitar presupuesto
                     </Button>
                 ) : (
                     <Button
