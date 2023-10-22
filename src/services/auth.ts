@@ -9,8 +9,11 @@ export const handleLoginUser = async (email: string, password: string) => {
             },
             body: JSON.stringify({ email: email, password: password }),
         })
+        console.log(response)
         if (response.ok) {
             const data = await response.json()
+            console.log(data)
+            console.log(data.token)
             setAuthenticatedToken(data.token)
             return data
         }
