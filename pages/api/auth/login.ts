@@ -19,8 +19,6 @@ export default async function handler(
 
         const user = await findUserEmail(email)
 
-        console.log(user)
-
         if (!user) {
             return res.status(404).json({ message: 'User not found' })
         }
@@ -29,28 +27,25 @@ export default async function handler(
             password,
             user.password as string
         )
-        console.log(match)
 
         if (!match) {
-            res.status(401).json({ message: 'Email o Password inválido 3' })
-            return
+            return res
+                .status(401)
+                .json({ message: 'Email o Password inválido' })
         }
 
         // Autenticación exitosa
         const token = jwt.sign({ email: user.email, userId: user.id }, 'token')
-        console.log(token)
+        delete user.password
 
         const response: SuccessResponse = {
             message: 'Inicio de sesión exitoso',
             user,
             token,
         }
-        console.log(response)
-        res.status(200).json(response)
+        return res.status(200).json(response)
     } catch (error: any) {
-        console.log(error.message)
-        res.status(500).json({ message: 'Internal Server Error' })
+        console.error(error.message)
+        return res.status(500).json({ message: 'Internal Server Error' })
     }
-
-    res.status(200).json({ message: 'User found' })
 }
