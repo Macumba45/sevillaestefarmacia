@@ -29,7 +29,7 @@ const UserAvatar: FC<Props> = ({ user }) => {
                 justifyContent: 'center',
                 backgroundColor: 'black',
                 borderRadius: '10px',
-                height: '80px',
+                height: '100px',
                 boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.75)',
             }}
         >
@@ -39,8 +39,9 @@ const UserAvatar: FC<Props> = ({ user }) => {
                     style={{
                         textAlign: 'center',
                         color: 'white',
-                        fontWeight: 900,
-                        fontSize: '1.2rem',
+                        fontWeight: 400,
+                        fontSize: '1rem',
+                        fontFamily: 'Roboto',
                     }}
                 >
                     {user.name}
@@ -50,6 +51,7 @@ const UserAvatar: FC<Props> = ({ user }) => {
                         display: 'flex',
                         justifyContent: 'center',
                         width: '100%',
+                        marginTop: '8px',
                     }}
                 >
                     <Tooltip title={`Teléfono: ${user.phone}`}>
