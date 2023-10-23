@@ -40,6 +40,7 @@ import {
     LoadingContainer,
 } from './styles'
 import UserAvatar from '@/components/UserAvatar'
+import CreateTallerModal from '@/components/ModalTallerAndBlog'
 
 const drawerWidth = 240
 
@@ -426,15 +427,10 @@ const Dashboard: FC<Props> = () => {
                         )}
                         {route === 'talleres' && (
                             <>
+                                <CreateTallerModal open={true} />
                                 <FloatAddServices
                                     onClick={handleOpenModaService}
                                 />
-                                {/* {open && (
-                    <ServiceFormModal
-                        open={open}
-                        onClose={() => closeEditModalFunction()}
-                    />
-                )} */}
                             </>
                         )}
                     </div>

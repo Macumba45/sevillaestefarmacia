@@ -5,6 +5,7 @@ import CardTallerAndBlog from '@/components/CardTallerAndBlog'
 import ResponsiveAppBar from '@/components/MenuNavBar'
 import { useLogicHome } from '../logic'
 import { MainContainer, NavContainer } from './styles'
+import { getAuthenticatedToken } from '../../../storage/storage'
 
 const Blogs: FC = () => {
     const {
@@ -23,8 +24,16 @@ const Blogs: FC = () => {
     } = useLogicHome()
 
     useEffect(() => {
+        if (getAuthenticatedToken()) {
+            getUserInfoDetails()
+        }
+    }, [])
+
+    useEffect(() => {
         document.title = 'Blogs'
     }, [])
+
+    console.log('currentUser', currentUser)
 
     return (
         <MainContainer>

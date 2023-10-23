@@ -5,6 +5,7 @@ import CardTallerAndBlog from '@/components/CardTallerAndBlog'
 import ResponsiveAppBar from '@/components/MenuNavBar'
 import { useLogicHome } from '../logic'
 import { MainContainer, NavContainer } from './styles'
+import { getAuthenticatedToken } from '../../../storage/storage'
 
 const Talleres: FC = () => {
     const {
@@ -21,6 +22,12 @@ const Talleres: FC = () => {
         logOut,
         router,
     } = useLogicHome()
+
+    useEffect(() => {
+        if (getAuthenticatedToken()) {
+            getUserInfoDetails()
+        }
+    }, [])
 
     useEffect(() => {
         document.title = 'Talleres'
