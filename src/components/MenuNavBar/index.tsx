@@ -328,6 +328,9 @@ const ResponsiveAppBar: FC<Props> = ({
                                                                 color: 'white',
                                                                 paddingLeft:
                                                                     '7px',
+                                                                minHeight:
+                                                                    '20px',
+                                                                height: '36.5px',
                                                             }}
                                                             expandIcon={
                                                                 <ExpandMoreIcon

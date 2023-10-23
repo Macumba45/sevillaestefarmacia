@@ -86,7 +86,12 @@ const Home: FC = () => {
                     Nos mueve el equilibrio, nos mueve tu salud.
                 </SubtitleConocenos>
                 <ButtonContainerConocenos>
-                    <Link href={'/conocenos'}>
+                    <Link
+                        style={{
+                            textDecoration: 'none',
+                        }}
+                        href={'/conocenos'}
+                    >
                         <Button
                             variant="outlined"
                             sx={{

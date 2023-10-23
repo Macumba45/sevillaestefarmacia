@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react'
-import { getUserInfo } from '@/services/user'
+import { getAllUsers, getUserInfo } from '@/services/user'
 import { useRouter } from 'next/navigation'
 import { Services, User } from '../../../types/types'
 import {
@@ -15,6 +15,7 @@ import {
 
 export const useLogicDashboard = () => {
     const [currentUser, setCurrentUser] = useState<User>()
+    const [allUsers, setAllUsers] = useState<User[]>([])
     const [allPayments, setAllPayments] = useState<Services[]>([])
     const [titleDrawer, setTitleDrawer] = useState<string>('servicios')
     const router = useRouter()
@@ -39,6 +40,12 @@ export const useLogicDashboard = () => {
     const datesPaymentsPayed = allPayments?.filter(
         (payment: any) => payment.payed === true
     )
+
+    const fetchAllUsers = useCallback(async () => {
+        const users = await getAllUsers()
+        setAllUsers(users as User[])
+        return
+    }, [])
 
     const getUserInfoData = useCallback(async () => {
         setIsLoading(true)
@@ -198,5 +205,7 @@ export const useLogicDashboard = () => {
         userLoaded,
         isLoadingButton,
         datesPaymentsPayed,
+        fetchAllUsers,
+        allUsers,
     }
 }

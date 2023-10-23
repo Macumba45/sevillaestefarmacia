@@ -39,6 +39,7 @@ import {
     CitasContainer,
     LoadingContainer,
 } from './styles'
+import UserAvatar from '@/components/UserAvatar'
 
 const drawerWidth = 240
 
@@ -83,13 +84,18 @@ const Dashboard: FC<Props> = () => {
         titleDrawer,
         titlePage,
         userLoaded,
+        fetchAllUsers,
+        allUsers,
     } = useLogicDashboard()
+
+    console.log('allUsers', allUsers)
 
     useEffect(() => {
         if (getAuthenticatedToken()) {
             getUserInfoData()
             getServiceData()
             getAllPayments()
+            fetchAllUsers()
         } else {
             router.push('/')
         }
@@ -392,17 +398,18 @@ const Dashboard: FC<Props> = () => {
                             </CitasContainer>
                         )}
                         {route === 'clientes' && (
-                            <>
-                                <FloatAddServices
-                                    onClick={handleOpenModaService}
-                                />
-                                {/* {open && (
-                    <ServiceFormModal
-                        open={open}
-                        onClose={() => setOpen(false)}
-                    />
-                )} */}
-                            </>
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    flexWrap: 'wrap',
+                                    justifyContent: 'center',
+                                }}
+                            >
+                                {allUsers &&
+                                    allUsers.map((item: any, index) => (
+                                        <UserAvatar user={item} key={index} />
+                                    ))}
+                            </div>
                         )}
                         {route === 'blog' && (
                             <>

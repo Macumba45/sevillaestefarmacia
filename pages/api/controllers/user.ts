@@ -68,3 +68,17 @@ export const createUser = async (
     }
     return user
 }
+
+export const findAllUsers = async (): Promise<User[]> => {
+    const prismaUsers = await prisma.user.findMany()
+
+    const users = prismaUsers.map(prismaUser => ({
+        id: prismaUser.id,
+        email: prismaUser.email,
+        name: prismaUser.name as string,
+        role: prismaUser.role,
+        phone: prismaUser.phone as string,
+    }))
+
+    return users
+}

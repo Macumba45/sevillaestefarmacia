@@ -8,7 +8,6 @@ const notificationSuccess = () => {
         message: `La cita se ha editado con éxito`,
         // description: 'La cita se ha editado con éxito.',
         style: {
-            marginLeft: 335 - 600,
             marginTop: 50,
         },
     })

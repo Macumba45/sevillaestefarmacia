@@ -55,6 +55,28 @@ export type Hour = {
     updatedAt?: Date
 }
 
+export type Talleres = {
+    id: string
+    title: string
+    subtitle: string
+    date: string
+    descripcion: string
+    urlPicture: string
+    createdAt: Date
+    updatedAt: Date
+}
+
+export type Blogs = {
+    id: string
+    title: string
+    subtitle: string
+    date: string
+    descripcion: string
+    urlPicture: string
+    createdAt: Date
+    updatedAt: Date
+}
+
 export type LoginRequestBody = {
     email: string
     password: string
