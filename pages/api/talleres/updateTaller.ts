@@ -16,7 +16,7 @@ export default async function handler(
             req.body as Talleres
 
         const newTaller = await updateTaller(
-            id,
+            id as string,
             title,
             subtitle,
             date,
