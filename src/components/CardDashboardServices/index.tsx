@@ -13,6 +13,7 @@ const styleIconButtons = {
 const CardDashboardServices: FC<Props> = ({ service, onEdit, onDelete }) => {
     return (
         <Card
+            hoverable
             style={{
                 width: 300,
                 margin: 10,

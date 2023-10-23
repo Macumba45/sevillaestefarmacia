@@ -12,7 +12,12 @@ import {
     editDateAndHourFromPayments,
     fetchPaymentsData,
 } from '@/services/payments'
-import { createTaller, deleteTaller, updateTaller } from '@/services/talleres'
+import {
+    createTaller,
+    deleteTaller,
+    getTalleres,
+    updateTaller,
+} from '@/services/talleres'
 
 export const useLogicDashboard = () => {
     const [currentUser, setCurrentUser] = useState<User>()
@@ -42,6 +47,7 @@ export const useLogicDashboard = () => {
         (payment: any) => payment.payed === true
     )
     const [openModalTallerOrBlog, setOpenModalTallerOrBlog] = useState(false)
+    const [talleres, setTalleres] = useState<Talleres[] | undefined>([])
 
     const fetchAllUsers = useCallback(async () => {
         const users = await getAllUsers()
@@ -97,6 +103,12 @@ export const useLogicDashboard = () => {
         },
         []
     )
+
+    const fetchTalleres = async () => {
+        const talleres = await getTalleres()
+        setTalleres(talleres)
+        return talleres
+    }
 
     const postNewTaller = async (taller: Talleres) => {
         const newTaller = await createTaller(taller)
@@ -238,5 +250,7 @@ export const useLogicDashboard = () => {
         postNewTaller,
         deteleTallerById,
         updateTallerById,
+        fetchTalleres,
+        talleres,
     }
 }

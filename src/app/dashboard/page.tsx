@@ -41,6 +41,7 @@ import {
 } from './styles'
 import UserAvatar from '@/components/UserAvatar'
 import CreateTallerModal from '@/components/ModalTallerAndBlog'
+import CardTallerAndBlog from '@/components/CardTallerAndBlog'
 
 const drawerWidth = 240
 
@@ -90,6 +91,8 @@ const Dashboard: FC<Props> = () => {
         openModalTallerOrBlog,
         handleOpenModalTallerOrBlog,
         handleCloseModalTallerOrBlog,
+        fetchTalleres,
+        talleres,
     } = useLogicDashboard()
 
     useEffect(() => {
@@ -98,10 +101,17 @@ const Dashboard: FC<Props> = () => {
             getServiceData()
             getAllPayments()
             fetchAllUsers()
+            fetchTalleres()
         } else {
             router.push('/')
         }
     }, [getUserInfoData, getServiceData, router])
+
+    useEffect(() => {
+        if (route === 'talleres') {
+            fetchTalleres()
+        }
+    }, [route])
 
     useEffect(() => {
         if (currentUser?.role && userLoaded && getAuthenticatedToken()) {
@@ -428,6 +438,13 @@ const Dashboard: FC<Props> = () => {
                         )}
                         {route === 'talleres' && (
                             <>
+                                {talleres?.map(taller => (
+                                    <CardTallerAndBlog
+                                        key={taller.id}
+                                        mode="taller"
+                                        taller={taller}
+                                    />
+                                ))}
                                 <CreateTallerModal
                                     onClose={handleCloseModalTallerOrBlog}
                                     open={openModalTallerOrBlog}
