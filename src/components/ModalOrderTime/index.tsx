@@ -151,16 +151,11 @@ const ModalOrderTime: FC<Props> = ({
     }
 
     useEffect(() => {
-        if (
-            window.location.pathname === '/dashboard' ||
-            window.location.pathname === '/services'
-        ) {
-            const loadPayments = async () => {
-                const paymentsData = await fetchPaymentsData()
-                setPayments(paymentsData)
-            }
-            loadPayments()
+        const loadPayments = async () => {
+            const paymentsData = await fetchPaymentsData()
+            setPayments(paymentsData)
         }
+        loadPayments()
     }, [])
 
     useEffect(() => {

@@ -1,5 +1,6 @@
 import { prisma } from '../../../src/lib/client'
 import { Payment } from '../../../types/types'
+import { markHourAsBooked } from './hours'
 
 export const getPaymentById = async (paymentId: string): Promise<Payment> => {
     const payment = await prisma.payments.findUnique({
@@ -114,6 +115,7 @@ export const editDateAndHour = async (
             hourId: hourId,
         },
     })
+    await markHourAsBooked(hourId)
 
     return
 }
