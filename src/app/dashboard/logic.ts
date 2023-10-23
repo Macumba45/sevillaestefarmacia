@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react'
 import { getAllUsers, getUserInfo } from '@/services/user'
 import { useRouter } from 'next/navigation'
-import { Services, User } from '../../../types/types'
+import { Services, Talleres, User } from '../../../types/types'
 import {
     createService,
     getServices,
@@ -12,6 +12,7 @@ import {
     editDateAndHourFromPayments,
     fetchPaymentsData,
 } from '@/services/payments'
+import { createTaller, deleteTaller, updateTaller } from '@/services/talleres'
 
 export const useLogicDashboard = () => {
     const [currentUser, setCurrentUser] = useState<User>()
@@ -40,6 +41,7 @@ export const useLogicDashboard = () => {
     const datesPaymentsPayed = allPayments?.filter(
         (payment: any) => payment.payed === true
     )
+    const [openModalTallerOrBlog, setOpenModalTallerOrBlog] = useState(false)
 
     const fetchAllUsers = useCallback(async () => {
         const users = await getAllUsers()
@@ -95,6 +97,21 @@ export const useLogicDashboard = () => {
         },
         []
     )
+
+    const postNewTaller = async (taller: Talleres) => {
+        const newTaller = await createTaller(taller)
+        return newTaller
+    }
+
+    const deteleTallerById = async (id: string) => {
+        const deteleItem = deleteTaller(id)
+        return deteleItem
+    }
+
+    const updateTallerById = async (taller: Talleres) => {
+        const updateItem = updateTaller(taller)
+        return updateItem
+    }
 
     const handleOpenModaService = () => {
         setOpen(true)
@@ -160,6 +177,14 @@ export const useLogicDashboard = () => {
         setOpenModalEditDateAndHour(false)
     }
 
+    const handleOpenModalTallerOrBlog = () => {
+        setOpenModalTallerOrBlog(true)
+    }
+
+    const handleCloseModalTallerOrBlog = () => {
+        setOpenModalTallerOrBlog(false)
+    }
+
     return {
         allPayments,
         changeRoute,
@@ -207,5 +232,11 @@ export const useLogicDashboard = () => {
         datesPaymentsPayed,
         fetchAllUsers,
         allUsers,
+        openModalTallerOrBlog,
+        handleOpenModalTallerOrBlog,
+        handleCloseModalTallerOrBlog,
+        postNewTaller,
+        deteleTallerById,
+        updateTallerById,
     }
 }

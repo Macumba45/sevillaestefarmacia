@@ -16,25 +16,19 @@ export const getTalleres = async (): Promise<Talleres[]> => {
 }
 
 export const createTaller = async (
-    id: string,
     title: string,
     subtitle: string,
     date: string,
     descripcion: string,
-    urlPicture: string,
-    createdAt: Date,
-    updatedAt: Date
+    urlPicture: string
 ): Promise<Talleres> => {
     const newTaller = await prisma.talleres.create({
         data: {
-            id: id,
             title: title,
             subtitle: subtitle,
             date: date,
             descripcion: descripcion,
             urlPicture: urlPicture,
-            createdAt: createdAt,
-            updatedAt: updatedAt,
         },
     })
     return newTaller
@@ -55,9 +49,7 @@ export const updateTaller = async (
     subtitle: string,
     date: string,
     descripcion: string,
-    urlPicture: string,
-    createdAt: Date,
-    updatedAt: Date
+    urlPicture: string
 ): Promise<Talleres> => {
     const taller = await prisma.talleres.update({
         where: {
@@ -69,8 +61,6 @@ export const updateTaller = async (
             date: date,
             descripcion: descripcion,
             urlPicture: urlPicture,
-            createdAt: createdAt,
-            updatedAt: updatedAt,
         },
     })
     return taller

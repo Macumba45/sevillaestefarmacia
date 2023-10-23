@@ -1,38 +1,33 @@
 import React, { useState } from 'react'
 import { Button, Modal, TextField, Box } from '@mui/material'
 import { Talleres } from '../../../types/types'
+import { useLogicDashboard } from '@/app/dashboard/logic'
 
 interface CreateTallerModalProps {
     taller?: Talleres
-    open?: boolean
-    onClose?: () => void
-    onTallerCreate?: (taller: Talleres) => void
+    open: boolean
+    onClose: () => void
 }
 
 const CreateTallerModal: React.FC<CreateTallerModalProps> = ({
     open,
     onClose,
-    onTallerCreate,
 }) => {
+    const { postNewTaller, updateTallerById } = useLogicDashboard()
+
     const [tallerFormData, setTallerFormData] = useState<Talleres>({
-        id: '',
         title: '',
         subtitle: '',
-        date: '',
+        date: '', // Establece la fecha actual en formato "dd/mm/yyyy"
         descripcion: '',
         urlPicture: '',
     })
-
-    console.log('tallerFormData', tallerFormData)
 
     const handleInputChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
     ) => {
         const { name, value } = e.target
-        setTallerFormData({
-            ...tallerFormData,
-            [name]: value,
-        })
+        setTallerFormData({ ...tallerFormData, [name]: value })
     }
 
     const handleCreateTaller = (tallerFormData: Talleres) => {
@@ -41,16 +36,16 @@ const CreateTallerModal: React.FC<CreateTallerModalProps> = ({
             /\n/g,
             '\n'
         )
-
-        // Ahora puedes enviar descripcionConSaltosDeLinea a la base de datos.
-        // Asegúrate de almacenar este valor en la base de datos, no tallerFormData.descripcion.
-        console.log(descripcionConSaltosDeLinea) // Solo para depuración, asegúrate de usarlo en tu función de creación.
-
-        // Resto de tu lógica de creación...
+        const taller = {
+            ...tallerFormData,
+            descripcion: descripcionConSaltosDeLinea,
+        }
+        postNewTaller(taller)
+        onClose()
     }
 
     return (
-        <Modal open={true} onClose={onClose}>
+        <Modal open={open} onClose={onClose}>
             <Box
                 sx={{
                     width: 400,
@@ -64,6 +59,15 @@ const CreateTallerModal: React.FC<CreateTallerModalProps> = ({
                     transform: 'translate(-50%, -50%)',
                 }}
             >
+                <TextField
+                    name="urlPicture"
+                    label="URL de la imagen"
+                    variant="outlined"
+                    fullWidth
+                    margin="dense"
+                    value={tallerFormData.urlPicture}
+                    onChange={handleInputChange}
+                />
                 <TextField
                     name="title"
                     label="Título"
@@ -84,7 +88,7 @@ const CreateTallerModal: React.FC<CreateTallerModalProps> = ({
                 />
                 <TextField
                     name="date"
-                    type="date"
+                    type="text"
                     label="Fecha"
                     variant="outlined"
                     fullWidth
@@ -103,15 +107,7 @@ const CreateTallerModal: React.FC<CreateTallerModalProps> = ({
                     minRows={5}
                     multiline
                 />
-                <TextField
-                    name="urlPicture"
-                    label="URL de la imagen"
-                    variant="outlined"
-                    fullWidth
-                    margin="dense"
-                    value={tallerFormData.urlPicture}
-                    onChange={handleInputChange}
-                />
+
                 <div
                     style={{
                         marginTop: '1rem',
@@ -123,9 +119,18 @@ const CreateTallerModal: React.FC<CreateTallerModalProps> = ({
                     <Button
                         onClick={() => handleCreateTaller(tallerFormData)}
                         variant="contained"
-                        color="primary"
+                        color="success"
+                        sx={{ marginRight: '0.5rem' }}
                     >
                         Crear Taller
+                    </Button>
+                    <Button
+                        onClick={() => onClose()}
+                        variant="contained"
+                        color="error"
+                        sx={{ marginLeft: '0.5rem' }}
+                    >
+                        Cancelar
                     </Button>
                 </div>
             </Box>

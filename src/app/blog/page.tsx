@@ -33,8 +33,6 @@ const Blogs: FC = () => {
         document.title = 'Blogs'
     }, [])
 
-    console.log('currentUser', currentUser)
-
     return (
         <MainContainer>
             <NavContainer>
@@ -51,30 +49,6 @@ const Blogs: FC = () => {
                     userRole={currentUser}
                 />
             </NavContainer>
-            <CardTallerAndBlog />
-            <CardTallerAndBlog />
-
-            <CardTallerAndBlog />
-
-            <CardTallerAndBlog />
-
-            <CardTallerAndBlog />
-
-            <CardTallerAndBlog />
-
-            <CardTallerAndBlog />
-
-            <CardTallerAndBlog />
-
-            <CardTallerAndBlog />
-
-            <CardTallerAndBlog />
-
-            <CardTallerAndBlog />
-
-            <CardTallerAndBlog />
-
-            <CardTallerAndBlog />
         </MainContainer>
     )
 }

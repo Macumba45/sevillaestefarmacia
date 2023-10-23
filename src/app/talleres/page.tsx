@@ -4,8 +4,15 @@ import { FC, memo, useEffect } from 'react'
 import CardTallerAndBlog from '@/components/CardTallerAndBlog'
 import ResponsiveAppBar from '@/components/MenuNavBar'
 import { useLogicHome } from '../logic'
-import { MainContainer, NavContainer } from './styles'
+import {
+    MainContainer,
+    NavContainer,
+    TitleTalleres,
+    SubtitleTalleres,
+    ContainerTalleres,
+} from './styles'
 import { getAuthenticatedToken } from '../../../storage/storage'
+import { useLogicTaller } from './logic'
 
 const Talleres: FC = () => {
     const {
@@ -23,9 +30,12 @@ const Talleres: FC = () => {
         router,
     } = useLogicHome()
 
+    const { fetchTalleres, talleres } = useLogicTaller()
+
     useEffect(() => {
         if (getAuthenticatedToken()) {
             getUserInfoDetails()
+            fetchTalleres()
         }
     }, [])
 
@@ -49,30 +59,17 @@ const Talleres: FC = () => {
                     userRole={currentUser}
                 />
             </NavContainer>
-            <CardTallerAndBlog />
-            <CardTallerAndBlog />
-
-            <CardTallerAndBlog />
-
-            <CardTallerAndBlog />
-
-            <CardTallerAndBlog />
-
-            <CardTallerAndBlog />
-
-            <CardTallerAndBlog />
-
-            <CardTallerAndBlog />
-
-            <CardTallerAndBlog />
-
-            <CardTallerAndBlog />
-
-            <CardTallerAndBlog />
-
-            <CardTallerAndBlog />
-
-            <CardTallerAndBlog />
+            <TitleTalleres>Talleres</TitleTalleres>
+            <SubtitleTalleres>¡No faltes!</SubtitleTalleres>
+            <ContainerTalleres>
+                {talleres?.map(taller => (
+                    <CardTallerAndBlog
+                        key={taller.id}
+                        mode="taller"
+                        taller={taller}
+                    />
+                ))}
+            </ContainerTalleres>
         </MainContainer>
     )
 }

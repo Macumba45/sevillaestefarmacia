@@ -87,9 +87,10 @@ const Dashboard: FC<Props> = () => {
         userLoaded,
         fetchAllUsers,
         allUsers,
+        openModalTallerOrBlog,
+        handleOpenModalTallerOrBlog,
+        handleCloseModalTallerOrBlog,
     } = useLogicDashboard()
-
-    console.log('allUsers', allUsers)
 
     useEffect(() => {
         if (getAuthenticatedToken()) {
@@ -414,9 +415,9 @@ const Dashboard: FC<Props> = () => {
                         )}
                         {route === 'blog' && (
                             <>
-                                <FloatAddServices
+                                {/* <FloatAddServices
                                     onClick={handleOpenModaService}
-                                />
+                                /> */}
                                 {/* {open && (
                     <ServiceFormModal
                         open={open}
@@ -427,9 +428,12 @@ const Dashboard: FC<Props> = () => {
                         )}
                         {route === 'talleres' && (
                             <>
-                                <CreateTallerModal open={true} />
+                                <CreateTallerModal
+                                    onClose={handleCloseModalTallerOrBlog}
+                                    open={openModalTallerOrBlog}
+                                />
                                 <FloatAddServices
-                                    onClick={handleOpenModaService}
+                                    onClick={handleOpenModalTallerOrBlog}
                                 />
                             </>
                         )}

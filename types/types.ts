@@ -56,14 +56,12 @@ export type Hour = {
 }
 
 export type Talleres = {
-    id: string
+    id?: string
     title: string
     subtitle: string
     date: string
     descripcion: string
     urlPicture: string
-    createdAt?: Date
-    updatedAt?: Date
 }
 
 export type Blogs = {
@@ -73,8 +71,8 @@ export type Blogs = {
     date: string
     descripcion: string
     urlPicture: string
-    createdAt?: Date
-    updatedAt?: Date
+    createdAt: Date
+    updatedAt: Date
 }
 
 export type LoginRequestBody = {

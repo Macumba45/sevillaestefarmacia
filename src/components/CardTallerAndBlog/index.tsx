@@ -4,33 +4,61 @@ import { Blogs, Talleres } from '../../../types/types'
 
 const { Meta } = Card
 
+type ModalMode = 'taller' | 'blog'
+
 interface Props {
-    blog?: Blogs
+    mode: ModalMode // Puedes usar 'talleres' o 'blogs' como valores
     taller?: Talleres
+    blog?: Blogs
 }
 
-const CardTallerAndBlog: FC<Props> = ({ blog, taller }) => (
+const CardTallerAndBlog: FC<Props> = ({ mode, blog, taller }) => (
     <div
         style={{
-            margin: '1rem',
+            margin: '1.5rem',
             display: 'flex',
             justifyContent: 'center',
         }}
     >
         <Card
             hoverable
-            style={{ width: 240 }}
+            style={{ width: 280 }}
             cover={
                 <img
-                    alt="example"
-                    src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+                    alt={mode === 'blog' ? blog?.title : taller?.title}
+                    src={
+                        mode === 'blog' ? blog?.urlPicture : taller?.urlPicture
+                    }
+                    // Asegúrate de usar el título correspondiente según el modo.
                 />
             }
         >
-            <Meta title="Europe Street beat" description="www.instagram.com" />
-            <Button type="primary" style={{ marginTop: '1rem' }}>
-                Más información
-            </Button>
+            <Meta
+                title={mode === 'blog' ? blog?.title : taller?.title}
+                description={
+                    mode === 'blog' ? blog?.subtitle : taller?.subtitle
+                }
+            />
+            <div
+                style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                }}
+            >
+                <Button
+                    type="primary"
+                    style={{
+                        marginTop: '2rem',
+                        backgroundColor: 'transparent',
+                        color: 'black',
+                        boxShadow: 'none',
+                        fontFamily: 'Cormorant Garamond',
+                        border: '1px solid black',
+                    }}
+                >
+                    Más información
+                </Button>
+            </div>
         </Card>
     </div>
 )
