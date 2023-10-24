@@ -67,7 +67,6 @@ export const deleteTaller = async (
             },
             body: JSON.stringify({ id }),
         })
-        console.log(response)
         if (response.ok) {
             const data = await response.json()
             return data

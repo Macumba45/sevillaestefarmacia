@@ -7,6 +7,5 @@ export const deteleDateId = async (id: string) => {
         },
     })
 
-    console.log(date)
     return date
 }

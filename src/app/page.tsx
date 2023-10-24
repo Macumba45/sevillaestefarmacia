@@ -63,7 +63,6 @@ const Home: FC = () => {
             </LoadingContainer>
         )
     }
-
     return (
         <div>
             <NavContainer>

@@ -128,7 +128,6 @@ export const useLogicDashboard = () => {
 
     const updateTallerById = async (taller: Talleres) => {
         const updateItem = await updateTaller(taller)
-        console.log(updateItem)
         return updateItem
     }
 
@@ -230,7 +229,6 @@ export const useLogicDashboard = () => {
 
     const openEditModalFunctionTaller = async (taller: Talleres) => {
         setTallerData(taller)
-        console.log(taller)
         setOpenModalTallerOrBlog(true)
         setIsEditingTaller(true)
     }

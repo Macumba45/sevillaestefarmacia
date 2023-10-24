@@ -100,8 +100,6 @@ const Dashboard: FC<Props> = () => {
         deleteDate,
     } = useLogicDashboard()
 
-    console.log(datesPaymentsPayed)
-
     useEffect(() => {
         if (getAuthenticatedToken()) {
             getUserInfoData()

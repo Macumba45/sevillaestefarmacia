@@ -44,7 +44,6 @@ const CreateTallerModal: React.FC<CreateTallerModalProps> = ({
         }
 
         if (isEditing && taller) {
-            console.log(taller)
             await updateTallerById(taller)
         } else {
             await postNewTaller(taller)
