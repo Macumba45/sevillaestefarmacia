@@ -1,4 +1,3 @@
-import { notification } from 'antd'
 import { getAuthenticatedToken } from '../../storage/storage'
 import { Talleres } from '../../types/types'
 

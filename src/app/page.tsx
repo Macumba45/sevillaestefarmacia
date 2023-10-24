@@ -42,7 +42,6 @@ const Home: FC = () => {
         buttonName,
         isLoading,
         currentUser,
-        router,
     } = useLogicHome()
 
     useEffect(() => {

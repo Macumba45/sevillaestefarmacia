@@ -57,6 +57,7 @@ export const useLogicDashboard = () => {
         setIsLoading(true)
         const users = await getAllUsers()
         setAllUsers(users as User[])
+        setIsLoading(false)
         return
     }, [])
 
@@ -64,18 +65,22 @@ export const useLogicDashboard = () => {
         setIsLoading(true)
         const userInfo = await getUserInfo()
         setCurrentUser(userInfo as User)
+        setIsLoading(false)
     }, [])
 
     const createNewService = useCallback(async (service: Services) => {
         setIsLoadingButton(true)
         const createdService = await createService(service)
         setIsLoadingButton(false)
+        setIsLoading(false)
         return createdService
     }, [])
 
     const getServiceData = useCallback(async () => {
+        setIsLoading(true)
         const services = await getServices()
         setServices(services)
+        setIsLoading(false)
         return services
     }, [])
 
@@ -92,6 +97,7 @@ export const useLogicDashboard = () => {
     }, [])
 
     const getAllPayments = useCallback(async () => {
+        setIsLoading(true)
         const payments = await fetchPaymentsData()
         setAllPayments(payments)
         setIsLoading(false)
@@ -110,8 +116,10 @@ export const useLogicDashboard = () => {
     )
 
     const fetchTalleres = async () => {
+        setIsLoading(true)
         const talleres = await getTalleres()
         setTalleres(talleres)
+        setIsLoading(false)
         return talleres
     }
 

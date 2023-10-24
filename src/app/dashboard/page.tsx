@@ -97,38 +97,7 @@ const Dashboard: FC<Props> = () => {
         tallerData,
         openEditModalFunctionTaller,
         isEditingTaller,
-        deleteDate,
     } = useLogicDashboard()
-
-    useEffect(() => {
-        if (getAuthenticatedToken()) {
-            getUserInfoData()
-            getServiceData()
-            getAllPayments()
-            fetchTalleres()
-            fetchAllUsers()
-        } else {
-            router.push('/')
-        }
-    }, [getUserInfoData, getServiceData, router])
-
-    useEffect(() => {
-        if (currentUser?.role && userLoaded && getAuthenticatedToken()) {
-            if (currentUser.role !== 'admin') {
-                router.push('/')
-            }
-        }
-    }, [currentUser, userLoaded, router])
-
-    useEffect(() => {
-        if (currentUser) {
-            setUserLoaded(true)
-        }
-    }, [currentUser, setUserLoaded])
-
-    useEffect(() => {
-        document.title = titlePage
-    }, [titlePage])
 
     const itemsTop = [
         { text: 'Dashboard', icon: <DashboardIcon />, route: 'dashboard' },
@@ -194,6 +163,39 @@ const Dashboard: FC<Props> = () => {
             </List>
         </div>
     )
+
+    useEffect(() => {
+        getUserInfoData()
+        if (route === 'servicios') {
+            getServiceData()
+        } else if (route === 'talleres') {
+            fetchTalleres()
+        } else if (route === 'clientes') {
+            fetchAllUsers()
+        } else if (route === 'citas') {
+            getAllPayments()
+        } else if (route === 'blog') {
+            fetchTalleres()
+        }
+    }, [route])
+
+    useEffect(() => {
+        if (currentUser?.role && userLoaded && getAuthenticatedToken()) {
+            if (currentUser.role !== 'admin') {
+                router.push('/')
+            }
+        }
+    }, [currentUser, userLoaded, router])
+
+    useEffect(() => {
+        if (currentUser) {
+            setUserLoaded(true)
+        }
+    }, [currentUser, setUserLoaded])
+
+    useEffect(() => {
+        document.title = titlePage
+    }, [titlePage])
 
     return (
         <Box sx={{ display: 'flex' }}>
