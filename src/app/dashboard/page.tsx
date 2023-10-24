@@ -166,6 +166,9 @@ const Dashboard: FC<Props> = () => {
 
     useEffect(() => {
         getUserInfoData()
+    }, [])
+
+    useEffect(() => {
         if (route === 'servicios') {
             getServiceData()
         } else if (route === 'talleres') {
