@@ -9,7 +9,7 @@ import FormControl from '@mui/material/FormControl'
 import MenuItem from '@mui/material/MenuItem'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 import { FC, useEffect, useState } from 'react'
-import { InputLabel } from '@mui/material'
+import { CircularProgress, InputLabel } from '@mui/material'
 import { Dates, Hour, Payment } from '../../../types/types'
 import { fetchPaymentsData } from '@/services/payments'
 import LoadingButton from '@mui/lab/LoadingButton'
@@ -48,6 +48,7 @@ const ModalOrderTime: FC<Props> = ({
     const [dateIdMap, setDateIdMap] = useState<{ [date: string]: string }>({})
     const [payments, setPayments] = useState([])
     const today = new Date()
+    const [isLoadingPayments, setIsLoadingPayments] = useState(false)
 
     const resetHour = () => {
         setSelectedHour({ hour: '', id: '' })
@@ -73,6 +74,7 @@ const ModalOrderTime: FC<Props> = ({
         buttonName = 'Reservar cita'
         isEditing = false
     }
+    console.log(payments)
 
     const getAvailableHours = (selectedDate: string) => {
         if (!selectedDate) {
@@ -149,10 +151,10 @@ const ModalOrderTime: FC<Props> = ({
         setSelectedDate({ date: newDate, id: dateIdMap[newDate] }) // Asumiendo que dateIdMap tiene el mapeo de IDs por fecha
         onDateIdChange(dateIdMap[newDate]) // Pasar la ID en lugar de la fecha
         const loadPayments = async () => {
-            console.log('Cargando pagos...')
+            setIsLoadingPayments(true)
             const paymentsData = await fetchPaymentsData()
-            console.log(paymentsData)
             setPayments(paymentsData)
+            setIsLoadingPayments(false)
         }
         loadPayments()
     }
@@ -306,24 +308,35 @@ const ModalOrderTime: FC<Props> = ({
                                     !selectedDate.date
                                 }
                             >
-                                <MenuItem value={''}>
-                                    Selecciona una hora
-                                </MenuItem>
-                                {getAvailableHours(selectedDate.date).map(
-                                    (hour, index) => (
+                                {isLoadingPayments && (
+                                    // Indicador de carga mientras se obtienen los datos
+                                    <MenuItem disabled>
+                                        <CircularProgress
+                                            title="dddddd"
+                                            size={20}
+                                        />
+                                    </MenuItem>
+                                )}
+                                {getAvailableHours(selectedDate.date)
+                                    .sort((a, b) => {
+                                        // Ordenar las horas de más temprano a más tarde
+                                        return a.hour!.localeCompare(
+                                            b.hour as string
+                                        )
+                                    })
+                                    .map((hour, index) => (
                                         <MenuItem
-                                            disabled={hour.isBooked}
                                             key={index}
                                             value={hour.hour}
+                                            disabled={hour.isBooked}
                                         >
-                                            {`${hour.hour as any} - ${
+                                            {`${hour.hour} - ${
                                                 hour.isBooked
                                                     ? 'Reservado'
                                                     : 'Disponible'
                                             }`}
                                         </MenuItem>
-                                    )
-                                )}
+                                    ))}
                             </Select>
                         </FormControl>
                     </FormControl>
