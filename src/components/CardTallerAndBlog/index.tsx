@@ -34,7 +34,17 @@ const CardTallerAndBlog: FC<Props> = ({ mode, blog, taller }) => (
             }
         >
             <Meta
-                title={mode === 'blog' ? blog?.title : taller?.title}
+                title={
+                    <div
+                        style={{
+                            whiteSpace: 'normal', // Permite que el texto se expanda a múltiples líneas
+                            overflow: 'hidden', // Oculta el contenido que no cabe
+                            textOverflow: 'ellipsis', // Agrega puntos suspensivos cuando el texto se recorta
+                        }}
+                    >
+                        {mode === 'blog' ? blog?.title : taller?.title}
+                    </div>
+                }
                 description={
                     mode === 'blog' ? blog?.subtitle : taller?.subtitle
                 }
