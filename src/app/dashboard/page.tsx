@@ -286,22 +286,23 @@ const Dashboard: FC<Props> = () => {
                 }}
             >
                 <Toolbar />
-                {isLoading ? (
-                    <LoadingContainer>
-                        <LinearIndeterminate
-                            label="Cargando datos en el sistema..."
-                            width={400}
-                        />
-                    </LoadingContainer>
-                ) : (
-                    <div>
-                        {route === 'dashboard' && (
-                            <Typography paragraph>
-                                Contenido del Dashboard
-                            </Typography>
-                        )}
-                        {route === 'servicios' && (
-                            <>
+
+                <div>
+                    {route === 'dashboard' && (
+                        <Typography paragraph>
+                            Contenido del Dashboard
+                        </Typography>
+                    )}
+                    {route === 'servicios' && (
+                        <>
+                            {isLoading ? (
+                                <LoadingContainer>
+                                    <LinearIndeterminate
+                                        label="Cargando datos en el sistema..."
+                                        width={400}
+                                    />
+                                </LoadingContainer>
+                            ) : (
                                 <CardServicesContainer>
                                     <FloatAddServices
                                         onClick={() => handleOpenModaService()}
@@ -314,18 +315,7 @@ const Dashboard: FC<Props> = () => {
                                             serviceData={serviceData}
                                         />
                                     )}
-                                    {services?.length === 0 ? (
-                                        <Typography
-                                            sx={{
-                                                textAlign: 'center',
-                                                fontSize: '1.2rem',
-                                                fontWeight: 600,
-                                                marginTop: '1rem',
-                                            }}
-                                        >
-                                            No hay servicios disponibles
-                                        </Typography>
-                                    ) : (
+                                    {services &&
                                         services?.map(item => (
                                             <CardDashboardServices
                                                 service={item}
@@ -339,8 +329,7 @@ const Dashboard: FC<Props> = () => {
                                                     )
                                                 }
                                             />
-                                        ))
-                                    )}
+                                        ))}
                                     {openDeleteModal && (
                                         <DeleteConfirmationModal
                                             open={openDeleteModal}
@@ -349,11 +338,12 @@ const Dashboard: FC<Props> = () => {
                                         />
                                     )}
                                 </CardServicesContainer>
-                            </>
-                        )}
-                        {route === 'citas' && (
-                            <CitasContainer>
-                                {/* <div
+                            )}
+                        </>
+                    )}
+                    {route === 'citas' && (
+                        <CitasContainer>
+                            {/* <div
                                     style={{
                                         display: 'flex',
                                         flexDirection: 'row',
@@ -367,7 +357,15 @@ const Dashboard: FC<Props> = () => {
                                     <SearchInputComp />
                                 </div> */}
 
-                                {datesPaymentsPayed.map((item: any, index) => (
+                            {isLoading ? (
+                                <LoadingContainer>
+                                    <LinearIndeterminate
+                                        label="Cargando datos en el sistema..."
+                                        width={400}
+                                    />
+                                </LoadingContainer>
+                            ) : (
+                                datesPaymentsPayed.map((item: any, index) => (
                                     <AlignItemsList
                                         key={index}
                                         serviceType={item.service.title}
@@ -382,39 +380,41 @@ const Dashboard: FC<Props> = () => {
                                         //     deleteDate(item.dateId)
                                         // }
                                     />
-                                ))}
-
-                                <ModalOrderTime
-                                    isLoading={isLoadingButton}
-                                    open={openModalEditDateAndHour}
-                                    handleClose={
-                                        closeModalEditDateAndHourFunction
-                                    }
-                                    dates={serviceData?.service?.dates?.map(
-                                        (item: any) => ({
-                                            ...item,
-                                            date: item.dates,
-                                        })
-                                    )}
-                                    handleReservarCita={handleOpenModaService}
-                                    onHourIdChange={newHourId => {
-                                        setHourId(newHourId)
-                                    }}
-                                    onDateIdChange={newDateIr => {
-                                        setDateId(newDateIr)
-                                    }}
-                                    editDateAndHour={() =>
-                                        editDateAndHour(
-                                            paymentId,
-                                            hourId,
-                                            dateId
-                                        )
-                                    }
-                                />
-                            </CitasContainer>
-                        )}
-                        {route === 'clientes' && (
-                            <>
+                                ))
+                            )}
+                            <ModalOrderTime
+                                isLoading={isLoadingButton}
+                                open={openModalEditDateAndHour}
+                                handleClose={closeModalEditDateAndHourFunction}
+                                dates={serviceData?.service?.dates?.map(
+                                    (item: any) => ({
+                                        ...item,
+                                        date: item.dates,
+                                    })
+                                )}
+                                handleReservarCita={handleOpenModaService}
+                                onHourIdChange={newHourId => {
+                                    setHourId(newHourId)
+                                }}
+                                onDateIdChange={newDateIr => {
+                                    setDateId(newDateIr)
+                                }}
+                                editDateAndHour={() =>
+                                    editDateAndHour(paymentId, hourId, dateId)
+                                }
+                            />
+                        </CitasContainer>
+                    )}
+                    {route === 'clientes' && (
+                        <>
+                            {isLoading ? (
+                                <LoadingContainer>
+                                    <LinearIndeterminate
+                                        label="Cargando datos en el sistema..."
+                                        width={400}
+                                    />
+                                </LoadingContainer>
+                            ) : (
                                 <div
                                     style={{
                                         display: 'flex',
@@ -430,73 +430,51 @@ const Dashboard: FC<Props> = () => {
                                             />
                                         ))}
                                 </div>
-                            </>
-                        )}
-                        {route === 'blog' && (
-                            <>
-                                <FloatAddServices
-                                    onClick={handleOpenModalTallerOrBlog}
-                                />
-                                <CreateTallerModal
-                                    onClose={handleCloseModalTallerOrBlog}
-                                    open={openModalTallerOrBlog}
-                                    isEditing={isEditingTaller}
-                                    taller={tallerData}
-                                />
-                            </>
-                        )}
-                        {route === 'talleres' && (
-                            <CardTalleresContainer>
-                                {talleres?.length === 0 ? (
-                                    <Typography
-                                        sx={{
-                                            textAlign: 'center',
-                                            fontSize: '1.2rem',
-                                            fontWeight: 600,
-                                            marginTop: '1rem',
-                                        }}
-                                    >
-                                        No hay talleres disponibles
-                                    </Typography>
-                                ) : (
-                                    talleres?.map(taller => (
-                                        <CardDashboardTalleres
-                                            key={taller.id}
-                                            talleres={taller}
-                                            onDelete={() =>
-                                                handleDeleteClickTaller(
-                                                    taller.id as string
-                                                )
-                                            }
-                                            onEdit={() =>
-                                                openEditModalFunctionTaller(
-                                                    taller
-                                                )
-                                            }
-                                        />
-                                    ))
-                                )}
+                            )}
+                        </>
+                    )}
 
-                                <CreateTallerModal
-                                    onClose={handleCloseModalTallerOrBlog}
-                                    open={openModalTallerOrBlog}
-                                    isEditing={isEditingTaller}
-                                    taller={tallerData}
-                                />
-                                <FloatAddServices
-                                    onClick={handleOpenModalTallerOrBlog}
-                                />
-                                {openDeleteModal && (
-                                    <DeleteConfirmationModal
-                                        open={openDeleteModal}
-                                        onClose={closeModalDelete}
-                                        onDelete={handleConfirmTaller}
+                    {route === 'blog' && (
+                        <>
+                            <FloatAddServices
+                                onClick={handleOpenModalTallerOrBlog}
+                            />
+                            <CreateTallerModal
+                                onClose={handleCloseModalTallerOrBlog}
+                                open={openModalTallerOrBlog}
+                                isEditing={isEditingTaller}
+                                taller={tallerData}
+                            />
+                        </>
+                    )}
+                    {route === 'talleres' && (
+                        <CardTalleresContainer>
+                            {isLoading ? (
+                                <LoadingContainer>
+                                    <LinearIndeterminate
+                                        label="Cargando datos en el sistema..."
+                                        width={400}
                                     />
-                                )}
-                            </CardTalleresContainer>
-                        )}
-                    </div>
-                )}
+                                </LoadingContainer>
+                            ) : (
+                                talleres?.map(taller => (
+                                    <CardDashboardTalleres
+                                        key={taller.id}
+                                        talleres={taller}
+                                        onDelete={() =>
+                                            handleDeleteClickTaller(
+                                                taller.id as string
+                                            )
+                                        }
+                                        onEdit={() =>
+                                            openEditModalFunctionTaller(taller)
+                                        }
+                                    />
+                                ))
+                            )}
+                        </CardTalleresContainer>
+                    )}
+                </div>
             </Box>
         </Box>
     )
