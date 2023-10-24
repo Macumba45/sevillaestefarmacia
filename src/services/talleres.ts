@@ -74,9 +74,7 @@ export const updateTaller = async (
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${token}`,
             },
-            body: JSON.stringify({
-                taller,
-            }),
+            body: JSON.stringify(taller),
         })
         if (response.ok) {
             const data = await response.json()

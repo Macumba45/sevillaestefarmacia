@@ -14,6 +14,7 @@ export const ContainerTalleres = styled.div`
     flex-wrap: wrap;
     width: 100%;
     margin-top: 1rem;
+    margin-bottom: 5rem;
 `
 
 export const NavContainer = styled.nav`

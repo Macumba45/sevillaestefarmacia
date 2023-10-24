@@ -49,6 +49,9 @@ export const useLogicDashboard = () => {
     const [openModalTallerOrBlog, setOpenModalTallerOrBlog] = useState(false)
     const [talleres, setTalleres] = useState<Talleres[] | undefined>([])
     const [tallerToDelete, setTallerToDelete] = useState('')
+    const [tallerData, setTallerData] = useState<Talleres>()
+    const [isEditingTaller, setIsEditingTaller] = useState(false)
+    const [openEditTaller, setOpenEditTaller] = useState(false)
 
     const fetchAllUsers = useCallback(async () => {
         const users = await getAllUsers()
@@ -122,7 +125,8 @@ export const useLogicDashboard = () => {
     }
 
     const updateTallerById = async (taller: Talleres) => {
-        const updateItem = updateTaller(taller)
+        const updateItem = await updateTaller(taller)
+        console.log(updateItem)
         return updateItem
     }
 
@@ -192,6 +196,8 @@ export const useLogicDashboard = () => {
 
     const handleOpenModalTallerOrBlog = () => {
         setOpenModalTallerOrBlog(true)
+        setIsEditingTaller(false)
+        setTallerData(undefined)
     }
 
     const handleCloseModalTallerOrBlog = () => {
@@ -213,6 +219,13 @@ export const useLogicDashboard = () => {
         // Abre el modal de confirmación y establece el id del servicio a eliminar
         setTallerToDelete(id)
         setOpenDeleteModal(true)
+    }
+
+    const openEditModalFunctionTaller = async (taller: Talleres) => {
+        setTallerData(taller)
+        console.log(taller)
+        setOpenModalTallerOrBlog(true)
+        setIsEditingTaller(true)
     }
 
     return {
@@ -272,5 +285,8 @@ export const useLogicDashboard = () => {
         talleres,
         handleDeleteClickTaller,
         handleConfirmTaller,
+        tallerData,
+        openEditModalFunctionTaller,
+        isEditingTaller,
     }
 }

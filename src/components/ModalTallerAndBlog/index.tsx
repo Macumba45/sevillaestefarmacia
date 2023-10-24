@@ -1,17 +1,21 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Modal, TextField, Box } from '@mui/material'
 import { Talleres } from '../../../types/types'
 import { useLogicDashboard } from '@/app/dashboard/logic'
+import { on } from 'events'
 
 interface CreateTallerModalProps {
     taller?: Talleres
     open: boolean
     onClose: () => void
+    isEditing: boolean
 }
 
 const CreateTallerModal: React.FC<CreateTallerModalProps> = ({
     open,
     onClose,
+    isEditing,
+    taller,
 }) => {
     const { postNewTaller, updateTallerById } = useLogicDashboard()
 
@@ -30,7 +34,7 @@ const CreateTallerModal: React.FC<CreateTallerModalProps> = ({
         setTallerFormData({ ...tallerFormData, [name]: value })
     }
 
-    const handleCreateTaller = (tallerFormData: Talleres) => {
+    const handleCreateTaller = async (tallerFormData: Talleres) => {
         // Reemplaza los saltos de línea (line breaks) con '\n' antes de enviarlos a la base de datos.
         const descripcionConSaltosDeLinea = tallerFormData.descripcion.replace(
             /\n/g,
@@ -40,9 +44,22 @@ const CreateTallerModal: React.FC<CreateTallerModalProps> = ({
             ...tallerFormData,
             descripcion: descripcionConSaltosDeLinea,
         }
-        postNewTaller(taller)
+
+        if (isEditing && taller) {
+            console.log(taller)
+            await updateTallerById(taller)
+        } else {
+            await postNewTaller(taller)
+        }
         onClose()
     }
+    useEffect(() => {
+        if (isEditing && taller) {
+            setTallerFormData(taller)
+        }
+    }, [isEditing, taller])
+
+    console.log(isEditing)
 
     return (
         <Modal open={open} onClose={onClose}>
@@ -122,7 +139,7 @@ const CreateTallerModal: React.FC<CreateTallerModalProps> = ({
                         color="success"
                         sx={{ marginRight: '0.5rem' }}
                     >
-                        Crear Taller
+                        {isEditing ? 'Editar' : 'Crear'}
                     </Button>
                     <Button
                         onClick={() => onClose()}

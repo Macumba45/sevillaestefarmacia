@@ -94,9 +94,11 @@ const Dashboard: FC<Props> = () => {
         handleCloseModalTallerOrBlog,
         fetchTalleres,
         talleres,
-        deteleTallerById,
         handleDeleteClickTaller,
         handleConfirmTaller,
+        tallerData,
+        openEditModalFunctionTaller,
+        isEditingTaller,
     } = useLogicDashboard()
 
     useEffect(() => {
@@ -104,8 +106,6 @@ const Dashboard: FC<Props> = () => {
             getUserInfoData()
             getServiceData()
             getAllPayments()
-            fetchAllUsers()
-            fetchTalleres()
         } else {
             router.push('/')
         }
@@ -114,6 +114,8 @@ const Dashboard: FC<Props> = () => {
     useEffect(() => {
         if (route === 'talleres') {
             fetchTalleres()
+        } else if (route === 'clientes') {
+            fetchAllUsers()
         }
     }, [route])
 
@@ -442,20 +444,41 @@ const Dashboard: FC<Props> = () => {
                         )}
                         {route === 'talleres' && (
                             <CardTalleresContainer>
-                                {talleres?.map(taller => (
-                                    <CardDashboardTalleres
-                                        key={taller.id}
-                                        talleres={taller}
-                                        onDelete={() =>
-                                            handleDeleteClickTaller(
-                                                taller.id as string
-                                            )
-                                        }
-                                    />
-                                ))}
+                                {talleres?.length === 0 ? (
+                                    <Typography
+                                        sx={{
+                                            textAlign: 'center',
+                                            fontSize: '1.2rem',
+                                            fontWeight: 600,
+                                            marginTop: '1rem',
+                                        }}
+                                    >
+                                        No hay talleres disponibles
+                                    </Typography>
+                                ) : (
+                                    talleres?.map(taller => (
+                                        <CardDashboardTalleres
+                                            key={taller.id}
+                                            talleres={taller}
+                                            onDelete={() =>
+                                                handleDeleteClickTaller(
+                                                    taller.id as string
+                                                )
+                                            }
+                                            onEdit={() =>
+                                                openEditModalFunctionTaller(
+                                                    taller
+                                                )
+                                            }
+                                        />
+                                    ))
+                                )}
+
                                 <CreateTallerModal
                                     onClose={handleCloseModalTallerOrBlog}
                                     open={openModalTallerOrBlog}
+                                    isEditing={isEditingTaller}
+                                    taller={tallerData}
                                 />
                                 <FloatAddServices
                                     onClick={handleOpenModalTallerOrBlog}
