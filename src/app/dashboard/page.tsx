@@ -475,6 +475,13 @@ const Dashboard: FC<Props> = () => {
                                     />
                                 ))
                             )}
+                            {openDeleteModal && (
+                                <DeleteConfirmationModal
+                                    open={openDeleteModal}
+                                    onClose={closeModalDelete}
+                                    onDelete={handleConfirmTaller}
+                                />
+                            )}
                         </CardTalleresContainer>
                     )}
                 </div>

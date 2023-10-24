@@ -85,6 +85,8 @@ const ServiceFormModal: FC<Props> = ({
         }
     }
 
+    console.log('selectedDays', selectedDays)
+
     const handleHourChange = (dateIndex: number, hour: Hour) => {
         const updatedSelectedDays = [...selectedDays]
         const selectedDate = selectedDays[dateIndex].date.format('DD/MM/YYYY')
