@@ -83,7 +83,6 @@ model Talleres {
   id          String   @id @default(cuid())
   title       String
   subtitle    String
-  date        String
   descripcion String
   urlPicture  String   @map("url_picture")
   createdAt   DateTime @default(now())
@@ -94,7 +93,6 @@ model Blogs {
   id          String   @id @default(cuid())
   title       String
   subtitle    String
-  date        String
   descripcion String
   urlPicture  String   @map("url_picture")
   createdAt   DateTime @default(now())

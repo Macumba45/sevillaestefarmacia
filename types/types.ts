@@ -59,7 +59,6 @@ export type Talleres = {
     id?: string
     title: string
     subtitle: string
-    date: string
     descripcion: string
     urlPicture: string
 }
@@ -68,7 +67,6 @@ export type Blogs = {
     id: string
     title: string
     subtitle: string
-    date: string
     descripcion: string
     urlPicture: string
     createdAt: Date

@@ -21,7 +21,6 @@ const CreateTallerModal: React.FC<CreateTallerModalProps> = ({
     const [tallerFormData, setTallerFormData] = useState<Talleres>({
         title: '',
         subtitle: '',
-        date: '', // Establece la fecha actual en formato "dd/mm/yyyy"
         descripcion: '',
         urlPicture: '',
     })
@@ -105,16 +104,6 @@ const CreateTallerModal: React.FC<CreateTallerModalProps> = ({
                     fullWidth
                     margin="dense"
                     value={tallerFormData.subtitle}
-                    onChange={handleInputChange}
-                />
-                <TextField
-                    name="date"
-                    type="text"
-                    label="Fecha"
-                    variant="outlined"
-                    fullWidth
-                    margin="dense"
-                    value={tallerFormData.date}
                     onChange={handleInputChange}
                 />
                 <TextField

@@ -18,7 +18,6 @@ export const getTalleres = async (): Promise<Talleres[]> => {
 export const createTaller = async (
     title: string,
     subtitle: string,
-    date: string,
     descripcion: string,
     urlPicture: string
 ): Promise<Talleres> => {
@@ -26,7 +25,6 @@ export const createTaller = async (
         data: {
             title: title,
             subtitle: subtitle,
-            date: date,
             descripcion: descripcion,
             urlPicture: urlPicture,
         },
@@ -47,7 +45,6 @@ export const updateTaller = async (
     id: string,
     title: string,
     subtitle: string,
-    date: string,
     descripcion: string,
     urlPicture: string
 ): Promise<Talleres> => {
@@ -58,7 +55,6 @@ export const updateTaller = async (
         data: {
             title: title,
             subtitle: subtitle,
-            date: date,
             descripcion: descripcion,
             urlPicture: urlPicture,
         },

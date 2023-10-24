@@ -61,7 +61,7 @@ const CardDashboardTalleres: FC<Props> = ({ talleres, onEdit, onDelete }) => {
                             fontFamily: 'Roboto',
                         }}
                     >
-                        Fecha: {talleres.date}
+                        Fecha: {talleres.subtitle}
                     </span>
                 }
             />

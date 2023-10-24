@@ -12,13 +12,12 @@ export default async function handler(
     }
 
     try {
-        const { title, subtitle, date, descripcion, urlPicture } =
+        const { title, subtitle, descripcion, urlPicture } =
             req.body as Talleres
 
         const newTaller = await createTaller(
             title,
             subtitle,
-            date,
             descripcion,
             urlPicture
         )
