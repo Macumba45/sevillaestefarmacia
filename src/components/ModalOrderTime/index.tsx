@@ -148,15 +148,14 @@ const ModalOrderTime: FC<Props> = ({
         const newDate = event.target.value as string
         setSelectedDate({ date: newDate, id: dateIdMap[newDate] }) // Asumiendo que dateIdMap tiene el mapeo de IDs por fecha
         onDateIdChange(dateIdMap[newDate]) // Pasar la ID en lugar de la fecha
-    }
-
-    useEffect(() => {
         const loadPayments = async () => {
+            console.log('Cargando pagos...')
             const paymentsData = await fetchPaymentsData()
+            console.log(paymentsData)
             setPayments(paymentsData)
         }
         loadPayments()
-    }, [])
+    }
 
     useEffect(() => {
         if (dates) {
