@@ -429,15 +429,16 @@ const Dashboard: FC<Props> = () => {
                         )}
                         {route === 'blog' && (
                             <>
-                                {/* <FloatAddServices
-                                    onClick={handleOpenModaService}
-                                /> */}
-                                {/* {open && (
-                    <ServiceFormModal
-                        open={open}
-                        onClose={() => setOpen(false)}
-                    />
-                )} */}
+                                <FloatAddServices
+                                    onClick={handleOpenModalTallerOrBlog}
+                                />
+                                <CreateTallerModal
+                                    onClose={handleCloseModalTallerOrBlog}
+                                    open={openModalTallerOrBlog}
+                                    isEditing={isEditingTaller}
+                                    taller={tallerData}
+                                />
+
                             </>
                         )}
                         {route === 'talleres' && (

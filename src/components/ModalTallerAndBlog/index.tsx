@@ -131,7 +131,7 @@ const CreateTallerModal: React.FC<CreateTallerModalProps> = ({
                         color="success"
                         sx={{ marginRight: '0.5rem' }}
                     >
-                        {isEditing ? 'Editar' : 'Crear'}
+                        {isEditing ? 'Editar taller' : 'Crear taller'}
                     </Button>
                     <Button
                         onClick={() => onClose()}
