@@ -97,25 +97,22 @@ const Dashboard: FC<Props> = () => {
         tallerData,
         openEditModalFunctionTaller,
         isEditingTaller,
+        deleteDate,
     } = useLogicDashboard()
+
+    console.log(datesPaymentsPayed)
 
     useEffect(() => {
         if (getAuthenticatedToken()) {
             getUserInfoData()
             getServiceData()
             getAllPayments()
+            fetchTalleres()
+            fetchAllUsers()
         } else {
             router.push('/')
         }
     }, [getUserInfoData, getServiceData, router])
-
-    useEffect(() => {
-        if (route === 'talleres') {
-            fetchTalleres()
-        } else if (route === 'clientes') {
-            fetchAllUsers()
-        }
-    }, [route])
 
     useEffect(() => {
         if (currentUser?.role && userLoaded && getAuthenticatedToken()) {
@@ -292,7 +289,7 @@ const Dashboard: FC<Props> = () => {
                 {isLoading ? (
                     <LoadingContainer>
                         <LinearIndeterminate
-                            label="Cargando servicios..."
+                            label="Cargando datos en el sistema..."
                             width={400}
                         />
                     </LoadingContainer>
@@ -381,6 +378,9 @@ const Dashboard: FC<Props> = () => {
                                         openEditModalDateAndHour={() =>
                                             openEditModalDateAndHour(item)
                                         }
+                                        // unBookDate={() =>
+                                        //     deleteDate(item.dateId)
+                                        // }
                                     />
                                 ))}
 
@@ -414,18 +414,23 @@ const Dashboard: FC<Props> = () => {
                             </CitasContainer>
                         )}
                         {route === 'clientes' && (
-                            <div
-                                style={{
-                                    display: 'flex',
-                                    flexWrap: 'wrap',
-                                    justifyContent: 'center',
-                                }}
-                            >
-                                {allUsers &&
-                                    allUsers.map((item: any, index) => (
-                                        <UserAvatar user={item} key={index} />
-                                    ))}
-                            </div>
+                            <>
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        flexWrap: 'wrap',
+                                        justifyContent: 'center',
+                                    }}
+                                >
+                                    {allUsers &&
+                                        allUsers.map((item: any, index) => (
+                                            <UserAvatar
+                                                user={item}
+                                                key={index}
+                                            />
+                                        ))}
+                                </div>
+                            </>
                         )}
                         {route === 'blog' && (
                             <>
@@ -438,7 +443,6 @@ const Dashboard: FC<Props> = () => {
                                     isEditing={isEditingTaller}
                                     taller={tallerData}
                                 />
-
                             </>
                         )}
                         {route === 'talleres' && (

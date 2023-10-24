@@ -16,6 +16,7 @@ interface Props {
     phone?: string
     hour?: string
     openEditModalDateAndHour?: () => void
+    unBookDate?: () => void
 }
 
 const AlignItemsList: FC<Props> = ({
@@ -25,6 +26,7 @@ const AlignItemsList: FC<Props> = ({
     phone,
     hour,
     openEditModalDateAndHour,
+    unBookDate,
 }) => {
     function formatDateString(inputDate: any) {
         // Parsea la fecha en formato "dd/mm/yyyy" a un objeto Date
@@ -141,11 +143,6 @@ const AlignItemsList: FC<Props> = ({
                 <ButtonContainer>
                     <Button
                         variant="contained"
-                        // {...(phone && {
-                        //     onClick: () => {
-                        //         window.open(`tel:${phone}`)
-                        //     },
-                        // })}
                         sx={{
                             p: 0.5,
                             mt: 2,
@@ -163,13 +160,24 @@ const AlignItemsList: FC<Props> = ({
                         sx={{
                             p: 0.5,
                             mt: 2,
-                            ml: 2,
                             width: '140px',
                             backgroundColor: 'blue',
                         }}
                     >
                         Editar cita
                     </Button>
+                    {/* <Button
+                        onClick={unBookDate}
+                        variant="contained"
+                        sx={{
+                            p: 0.5,
+                            mt: 2,
+                            width: '140px',
+                            backgroundColor: 'red',
+                        }}
+                    >
+                        Liberar cita
+                    </Button> */}
                 </ButtonContainer>
             </ListItem>
             <Divider variant="inset" component="li" />

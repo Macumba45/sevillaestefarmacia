@@ -17,6 +17,7 @@ import {
     MainContainer,
     ServiciosDesktop,
 } from './styles'
+import { getAuthenticatedToken } from '../../../storage/storage'
 
 const Conocenos: FC = () => {
     const {
@@ -46,6 +47,12 @@ const Conocenos: FC = () => {
 
     useEffect(() => {
         document.title = 'Conócenos'
+    }, [])
+
+    useEffect(() => {
+        if (getAuthenticatedToken()) {
+            getUserInfoDetails()
+        }
     }, [])
 
     return (

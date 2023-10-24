@@ -1,7 +1,18 @@
+import { notification } from 'antd'
 import { getAuthenticatedToken } from '../../storage/storage'
 import { Talleres } from '../../types/types'
 
 const token = getAuthenticatedToken()
+
+const notificationSuccess = (serviceName: string) => {
+    notification.success({
+        message: `El servicio ${serviceName} se ha creado con éxito`,
+        description: 'El servicio se ha creado con éxito.',
+        style: {
+            marginTop: 50,
+        },
+    })
+}
 
 export const getTalleres = async (): Promise<Talleres[] | undefined> => {
     try {
@@ -38,6 +49,8 @@ export const createTaller = async (
         }
     } catch (error) {
         console.log(error)
+    } finally {
+        notificationSuccess(taller.title)
     }
 }
 
@@ -61,6 +74,8 @@ export const deleteTaller = async (
         }
     } catch (error) {
         console.log(error)
+    } finally {
+        notificationSuccess(id)
     }
 }
 
@@ -82,5 +97,7 @@ export const updateTaller = async (
         }
     } catch (error) {
         console.log(error)
+    } finally {
+        notificationSuccess(taller.title)
     }
 }

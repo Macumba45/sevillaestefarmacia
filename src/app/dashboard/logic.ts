@@ -18,6 +18,7 @@ import {
     getTalleres,
     updateTaller,
 } from '@/services/talleres'
+import { deleteDateById } from '@/services/dates'
 
 export const useLogicDashboard = () => {
     const [currentUser, setCurrentUser] = useState<User>()
@@ -53,8 +54,10 @@ export const useLogicDashboard = () => {
     const [isEditingTaller, setIsEditingTaller] = useState(false)
 
     const fetchAllUsers = useCallback(async () => {
+        setIsLoading(true)
         const users = await getAllUsers()
         setAllUsers(users as User[])
+        setIsLoading(false)
         return
     }, [])
 
@@ -127,6 +130,11 @@ export const useLogicDashboard = () => {
         const updateItem = await updateTaller(taller)
         console.log(updateItem)
         return updateItem
+    }
+
+    const deleteDate = async (dateId: string) => {
+        await deleteDateById(dateId)
+        return
     }
 
     const handleOpenModaService = () => {
@@ -287,5 +295,6 @@ export const useLogicDashboard = () => {
         tallerData,
         openEditModalFunctionTaller,
         isEditingTaller,
+        deleteDate,
     }
 }
