@@ -12,11 +12,9 @@ export default async function handler(
     }
 
     try {
-        const query = req.query as { id: string }
-        const { id } = query
-        const taller = await deleteTaller(id)
-
-        res.status(200).json(taller)
+        const { id } = req.body
+        await deleteTaller(id as string)
+        res.status(200).json({ message: 'Taller eliminado con  exito' })
     } catch (error) {
         res.status(500).json({ message: 'Error al eliminar el taller' })
     }

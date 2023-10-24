@@ -48,6 +48,7 @@ export const useLogicDashboard = () => {
     )
     const [openModalTallerOrBlog, setOpenModalTallerOrBlog] = useState(false)
     const [talleres, setTalleres] = useState<Talleres[] | undefined>([])
+    const [tallerToDelete, setTallerToDelete] = useState('')
 
     const fetchAllUsers = useCallback(async () => {
         const users = await getAllUsers()
@@ -197,6 +198,23 @@ export const useLogicDashboard = () => {
         setOpenModalTallerOrBlog(false)
     }
 
+    const handleConfirmTaller = () => {
+        // Realiza la eliminación del servicio con el id almacenado en serviceToDelete
+        deteleTallerById(tallerToDelete)
+        // Después de la eliminación, cierra el modal
+        const updatedTalleres = talleres!.filter(
+            talleres => talleres.id !== tallerToDelete
+        )
+        setTalleres(updatedTalleres)
+        setOpenDeleteModal(false)
+    }
+
+    const handleDeleteClickTaller = (id: string) => {
+        // Abre el modal de confirmación y establece el id del servicio a eliminar
+        setTallerToDelete(id)
+        setOpenDeleteModal(true)
+    }
+
     return {
         allPayments,
         changeRoute,
@@ -252,5 +270,7 @@ export const useLogicDashboard = () => {
         updateTallerById,
         fetchTalleres,
         talleres,
+        handleDeleteClickTaller,
+        handleConfirmTaller,
     }
 }

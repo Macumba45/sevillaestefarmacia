@@ -42,8 +42,9 @@ export const createTaller = async (
 }
 
 export const deleteTaller = async (
-    tallerId: string
+    id: string
 ): Promise<Talleres | undefined> => {
+    console.log(id)
     try {
         const response = await fetch('/api/talleres/deleteTaller', {
             method: 'DELETE',
@@ -51,8 +52,9 @@ export const deleteTaller = async (
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${token}`,
             },
-            body: JSON.stringify({ tallerId }),
+            body: JSON.stringify({ id }),
         })
+        console.log(response)
         if (response.ok) {
             const data = await response.json()
             return data

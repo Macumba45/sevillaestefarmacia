@@ -24,6 +24,13 @@ export const CardServicesContainer = styled.div`
     align-items: center;
 `
 
+export const CardTalleresContainer = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+`
+
 export const CitasContainer = styled.div`
     display: flex;
     flex-direction: column;

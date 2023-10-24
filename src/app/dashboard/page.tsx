@@ -36,12 +36,14 @@ import ServiceFormModal from '@/components/ModalServices'
 import DeleteConfirmationModal from '@/components/ModalConfirmationDelete'
 import {
     CardServicesContainer,
+    CardTalleresContainer,
     CitasContainer,
     LoadingContainer,
 } from './styles'
 import UserAvatar from '@/components/UserAvatar'
 import CreateTallerModal from '@/components/ModalTallerAndBlog'
 import CardTallerAndBlog from '@/components/CardTallerAndBlog'
+import CardDashboardTalleres from '@/components/CardDashboardTalleres'
 
 const drawerWidth = 240
 
@@ -73,7 +75,6 @@ const Dashboard: FC<Props> = () => {
         openEditModalDateAndHour,
         openEditModalFunction,
         openModalEditDateAndHour,
-        openModalEditDateAndHourFunction,
         paymentId,
         route,
         router,
@@ -93,6 +94,9 @@ const Dashboard: FC<Props> = () => {
         handleCloseModalTallerOrBlog,
         fetchTalleres,
         talleres,
+        deteleTallerById,
+        handleDeleteClickTaller,
+        handleConfirmTaller,
     } = useLogicDashboard()
 
     useEffect(() => {
@@ -437,12 +441,16 @@ const Dashboard: FC<Props> = () => {
                             </>
                         )}
                         {route === 'talleres' && (
-                            <>
+                            <CardTalleresContainer>
                                 {talleres?.map(taller => (
-                                    <CardTallerAndBlog
+                                    <CardDashboardTalleres
                                         key={taller.id}
-                                        mode="taller"
-                                        taller={taller}
+                                        talleres={taller}
+                                        onDelete={() =>
+                                            handleDeleteClickTaller(
+                                                taller.id as string
+                                            )
+                                        }
                                     />
                                 ))}
                                 <CreateTallerModal
@@ -452,7 +460,14 @@ const Dashboard: FC<Props> = () => {
                                 <FloatAddServices
                                     onClick={handleOpenModalTallerOrBlog}
                                 />
-                            </>
+                                {openDeleteModal && (
+                                    <DeleteConfirmationModal
+                                        open={openDeleteModal}
+                                        onClose={closeModalDelete}
+                                        onDelete={handleConfirmTaller}
+                                    />
+                                )}
+                            </CardTalleresContainer>
                         )}
                     </div>
                 )}

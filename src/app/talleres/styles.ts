@@ -49,12 +49,11 @@ export const TitleTalleres = styled.h1<{
 `
 
 export const SubtitleTalleres = styled.h2`
-    margin-left: 4rem;
+    margin-left: 2rem;
     padding: 0.5rem 3.5rem;
     border-radius: 30px;
     font-size: 1.5rem;
-    width: 10%;
-    min-width: 150px;
+    width: 100px;
     text-align: center;
     color: white;
     background-color: black;
@@ -64,5 +63,6 @@ export const SubtitleTalleres = styled.h2`
     @media screen and (min-width: 899px) {
         font-size: 1.5rem;
         line-height: 2rem;
+        margin-left: 4rem;
     }
 `
