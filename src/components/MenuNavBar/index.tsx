@@ -29,13 +29,10 @@ import {
 } from './styles'
 
 const ResponsiveAppBar: FC<Props> = ({
-    onLogOut,
     handleButtonClick,
     isDrawerOpen,
-    isDrawerOpenButton,
     handleOpenNavMenu,
     handleCloseNavMenu,
-    closeDrawerButton,
     buttonName,
     userRole,
 }) => {

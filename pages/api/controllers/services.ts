@@ -1,4 +1,4 @@
-import { Dates, Payment, Services } from '../../../types/types'
+import { Payment, Services } from '../../../types/types'
 import { prisma } from '../../../src/lib/client'
 
 export const getServices = async (): Promise<Services[]> => {

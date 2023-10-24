@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { Button, Modal, TextField, Box } from '@mui/material'
 import { Talleres } from '../../../types/types'
 import { useLogicDashboard } from '@/app/dashboard/logic'
-import { on } from 'events'
 
 interface CreateTallerModalProps {
     taller?: Talleres
@@ -59,10 +58,17 @@ const CreateTallerModal: React.FC<CreateTallerModalProps> = ({
         }
     }, [isEditing, taller])
 
-    console.log(isEditing)
-
     return (
-        <Modal open={open} onClose={onClose}>
+        <Modal
+            style={{
+                overflow: 'scroll',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+            }}
+            open={open}
+            onClose={onClose}
+        >
             <Box
                 sx={{
                     width: 400,
@@ -70,10 +76,8 @@ const CreateTallerModal: React.FC<CreateTallerModalProps> = ({
                     boxShadow: 24,
                     borderRadius: 1,
                     p: 2,
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
+                    marginTop: '30rem',
+                    marginBottom: '5rem',
                 }}
             >
                 <TextField

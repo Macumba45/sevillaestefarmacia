@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { editDateAndHour, getPaymentById } from '../controllers/payments'
-import { markHourAsBooked, markHourAsFree } from '../controllers/hours'
+import { markHourAsFree } from '../controllers/hours'
 
 export default async function handler(
     req: NextApiRequest,

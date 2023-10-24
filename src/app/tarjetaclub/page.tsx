@@ -11,7 +11,6 @@ const TarjetaClub: FC = () => {
         closeDrawer,
         closeDrawerButton,
         currentUser,
-        getUserInfoDetails,
         handleButtonClick,
         handleCloseNavMenu,
         handleOpenNavMenu,

@@ -41,7 +41,6 @@ const Page: FC<Props> = ({ params }) => {
         isDrawerOpen,
         isDrawerOpenButton,
         logOut,
-        router,
     } = useLogicHome()
 
     const {
@@ -54,7 +53,6 @@ const Page: FC<Props> = ({ params }) => {
         open,
         serviceData,
         setHourId,
-        setDateId,
         onDateIdChange,
     } = useLogicPageServicesDetail()
 

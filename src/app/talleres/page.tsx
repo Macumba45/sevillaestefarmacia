@@ -27,7 +27,6 @@ const Talleres: FC = () => {
         isDrawerOpen,
         isDrawerOpenButton,
         logOut,
-        router,
     } = useLogicHome()
 
     const { fetchTalleres, talleres } = useLogicTaller()

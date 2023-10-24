@@ -308,7 +308,7 @@ const ServiceFormModal: FC<Props> = ({
                                         }}
                                     >
                                         {generateAvailableHours().map(
-                                            (hour, hourIndex, hourId) => (
+                                            (hour, hourIndex) => (
                                                 <li key={hourIndex}>
                                                     <FormControlLabel
                                                         control={

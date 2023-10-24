@@ -1,9 +1,4 @@
-import {
-    createTaller,
-    deleteTaller,
-    getTalleres,
-    updateTaller,
-} from '@/services/talleres'
+import { getTalleres } from '@/services/talleres'
 import { useState } from 'react'
 import { Talleres } from '../../../types/types'
 

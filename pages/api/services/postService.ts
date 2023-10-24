@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import jwt, { JwtPayload } from 'jsonwebtoken'
 import { findUserById } from '../controllers/user'
 import { createService } from '../controllers/services'
-import { Hour, Services } from '../../../types/types'
+import { Services } from '../../../types/types'
 
 export default async function handler(
     req: NextApiRequest,

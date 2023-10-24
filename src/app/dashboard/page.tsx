@@ -34,22 +34,20 @@ import DatePickerComp from '@/components/InputDayPicker'
 import SearchInputComp from '@/components/InpuntSearch'
 import ServiceFormModal from '@/components/ModalServices'
 import DeleteConfirmationModal from '@/components/ModalConfirmationDelete'
+import UserAvatar from '@/components/UserAvatar'
+import CreateTallerModal from '@/components/ModalTallerAndBlog'
+import CardDashboardTalleres from '@/components/CardDashboardTalleres'
 import {
     CardServicesContainer,
     CardTalleresContainer,
     CitasContainer,
     LoadingContainer,
 } from './styles'
-import UserAvatar from '@/components/UserAvatar'
-import CreateTallerModal from '@/components/ModalTallerAndBlog'
-import CardTallerAndBlog from '@/components/CardTallerAndBlog'
-import CardDashboardTalleres from '@/components/CardDashboardTalleres'
 
 const drawerWidth = 240
 
 const Dashboard: FC<Props> = () => {
     const {
-        allPayments,
         changeRoute,
         closeModalDelete,
         closeModalEditDateAndHourFunction,

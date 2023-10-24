@@ -51,7 +51,6 @@ export const useLogicDashboard = () => {
     const [tallerToDelete, setTallerToDelete] = useState('')
     const [tallerData, setTallerData] = useState<Talleres>()
     const [isEditingTaller, setIsEditingTaller] = useState(false)
-    const [openEditTaller, setOpenEditTaller] = useState(false)
 
     const fetchAllUsers = useCallback(async () => {
         const users = await getAllUsers()
