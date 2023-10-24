@@ -59,14 +59,13 @@ const CreateTallerModal: React.FC<CreateTallerModalProps> = ({
 
     return (
         <Modal
-            style={{
-                overflow: 'scroll',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-            }}
             open={open}
             onClose={onClose}
+            style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+            }}
         >
             <Box
                 sx={{
@@ -75,8 +74,8 @@ const CreateTallerModal: React.FC<CreateTallerModalProps> = ({
                     boxShadow: 24,
                     borderRadius: 1,
                     p: 2,
-                    marginTop: '30rem',
-                    marginBottom: '5rem',
+                    maxHeight: '80vh', // Altura máxima para permitir el desplazamiento
+                    overflowY: 'auto', // Habilite el desplazamiento vertical
                 }}
             >
                 <TextField
