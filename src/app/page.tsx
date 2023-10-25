@@ -168,21 +168,23 @@ const Home: FC = () => {
                         widthTitleDesktop="500px"
                     />
                 </AnimatedView>
-                <Services
-                    id="clo0e1e3p0005xy04izx8uzqa"
-                    title="SUS PRIMEROS PENDIENTES"
-                    subtitle="Pendientes bebé"
-                    description="Nuestro servicio de pendientes cuenta
+                <AnimatedView>
+                    <Services
+                        id="clo0e1e3p0005xy04izx8uzqa"
+                        title="SUS PRIMEROS PENDIENTES"
+                        subtitle="Pendientes bebé"
+                        description="Nuestro servicio de pendientes cuenta
                 con un equipo sanitario de profesionales
                 farmacéuticos cualificado."
-                    buttonName="Más información"
-                    backGrodunColor="#ebf0f6"
-                    picture={pendientes.src}
-                    widthMobile="330px"
-                    widthDesktop="610px"
-                    widthTitle="330px"
-                    imagePosition="bottom"
-                />
+                        buttonName="Más información"
+                        backGrodunColor="#ebf0f6"
+                        picture={pendientes.src}
+                        widthMobile="330px"
+                        widthDesktop="610px"
+                        widthTitle="330px"
+                        imagePosition="bottom"
+                    />
+                </AnimatedView>
                 <AnimatedView>
                     <Services
                         id="clo0e1q180006xy04pu96nyml"
