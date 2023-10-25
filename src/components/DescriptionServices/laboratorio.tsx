@@ -5,19 +5,11 @@ interface Props {
     price: string
 }
 
-const Dermo: FC<Props> = ({ price }) => {
+const Laboratorio: FC<Props> = ({ price }) => {
     return (
         <Container>
-            <Title>
-                ¿Te gustaría conocer más sobre tu piel o tu salud capilar?
-            </Title>
-            <ParrafoServices>
-                El servicio de dermoanálisis de Farmacia Sta Bárbara (Sevilla
-                Este) está dirigido por las profesionales sanitarias Ana Lobo y
-                Celia Guerrero, y nace con el objetivo de proporcionar a sus
-                pacientes el más alto grado de satisfacción en la salud y en el
-                cuidado de tu piel y cabello.
-            </ParrafoServices>
+            <Title>LABORATORIO</Title>
+            <ParrafoServices>Formulación Magistral</ParrafoServices>
             <ParrafoServices>
                 Para lograrlo, disponemos de los conocimientos en constante
                 evolución, la experiencia y la cualificación necesaria para
@@ -68,4 +60,4 @@ const Dermo: FC<Props> = ({ price }) => {
     )
 }
 
-export default memo(Dermo)
+export default memo(Laboratorio)

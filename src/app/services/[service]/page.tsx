@@ -4,7 +4,12 @@ import { FC, memo, useEffect } from 'react'
 import { UserProvider } from '@/context/UserContext'
 import CircularIndeterminate from '@/components/Loader'
 import { Button, Fab } from '@mui/material'
-import DermoDescription from '@/components/DescriptionServices/dermo'
+import Dermo from '@/components/DescriptionServices/dermo'
+import Nutricion from '@/components/DescriptionServices/nutricion'
+import Laboratorio from '@/components/DescriptionServices/laboratorio'
+import Sistema from '@/components/DescriptionServices/sistema'
+import Pendientes from '@/components/DescriptionServices/pendientes'
+import Mascota from '@/components/DescriptionServices/mascota'
 import ModalOrderTime from '@/components/ModalOrderTime'
 import { useLogicPageServicesDetail } from './logic'
 import {
@@ -44,6 +49,25 @@ const Page: FC<Props> = ({ params }) => {
         fetchServiceDetails(params.service)
     }, [])
 
+    const getDescriptionByTitle = (serviceId: string) => {
+        switch (serviceId) {
+            case 'clo0dzomz0001xy04kzkxay49':
+                return <Dermo price={serviceData?.price as string} />
+            case 'clo0e0a200002xy04bwqml93h':
+                return <Nutricion price={serviceData?.price as string} />
+            case 'clo0e0mn50003xy040gwqse36':
+                return <Laboratorio price={serviceData?.price as string} />
+            case 'clo0e17d30004xy04cjklg2px':
+                return <Sistema price={serviceData?.price as string} />
+            case 'clo0e1e3p0005xy04izx8uzqa':
+                return <Pendientes price={serviceData?.price as string} />
+            case 'clo0e1q180006xy04pu96nyml':
+                return <Mascota price={serviceData?.price as string} />
+            default:
+                return null
+        }
+    }
+
     if (isLoading) {
         return (
             <LoadingContainer>
@@ -71,7 +95,7 @@ const Page: FC<Props> = ({ params }) => {
                         display: 'flex',
                     }}
                 >
-                    <DermoDescription price={serviceData?.price as string} />
+                    {getDescriptionByTitle(serviceData?.id as string)}
                     <PictureContainer>
                         <Picture src={serviceData?.urlPicture} />
                     </PictureContainer>
