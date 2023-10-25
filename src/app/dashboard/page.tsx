@@ -3,6 +3,8 @@ import { FC, memo, useEffect } from 'react'
 import { useLogicDashboard } from './logic'
 import { getAuthenticatedToken } from '../../../storage/storage'
 import { Props } from './types'
+import Link from 'next/link'
+import { Blogs, Talleres } from '../../../types/types'
 import ModalOrderTime from '@/components/ModalOrderTime'
 import LinearIndeterminate from '@/components/LoaderLinear/indx'
 import logo from '../../assets/logo/logo.png'
@@ -35,20 +37,24 @@ import SearchInputComp from '@/components/InpuntSearch'
 import ServiceFormModal from '@/components/ModalServices'
 import DeleteConfirmationModal from '@/components/ModalConfirmationDelete'
 import UserAvatar from '@/components/UserAvatar'
-import CreateTallerModal from '@/components/ModalTallerAndBlog'
+import CreateTallerModal from '@/components/ModalTaller'
 import CardDashboardTalleres from '@/components/CardDashboardTalleres'
+import CardDashboardblogs from '@/components/CardDashboardBlogs'
+import CreateBlogModal from '@/components/ModalBlog'
 import {
+    CardBlogsContainer,
     CardServicesContainer,
     CardTalleresContainer,
     CitasContainer,
     LoadingContainer,
 } from './styles'
-import Link from 'next/link'
 
 const drawerWidth = 240
 
 const Dashboard: FC<Props> = () => {
     const {
+        allUsers,
+        blogs,
         changeRoute,
         closeModalDelete,
         closeModalEditDateAndHourFunction,
@@ -56,15 +62,28 @@ const Dashboard: FC<Props> = () => {
         dateId,
         datesPaymentsPayed,
         editDateAndHour,
+        fetchAllUsers,
+        fetchBlogs,
+        fetchTalleres,
         getAllPayments,
         getServiceData,
         getUserInfoData,
+        handleCloseModalBlog,
+        handleCloseModalTaller,
         handleConfirmDelete,
+        handleConfirmDeleteBlog,
+        handleConfirmDeleteTaller,
         handleDeleteClick,
+        handleDeleteClickBlog,
+        handleDeleteClickTaller,
         handleDrawerToggle,
+        handleOpenModalBlog,
+        handleOpenModalTaller,
         handleOpenModaService,
         hourId,
         isEditing,
+        isEditingBlog,
+        isEditingTaller,
         isLoading,
         isLoadingButton,
         logOut,
@@ -73,7 +92,10 @@ const Dashboard: FC<Props> = () => {
         openDeleteModal,
         openEditModalDateAndHour,
         openEditModalFunction,
+        openEditModalFunctionBlog,
+        openEditModalFunctionTaller,
         openModalEditDateAndHour,
+        openModalTallerOrBlog,
         paymentId,
         route,
         router,
@@ -83,21 +105,12 @@ const Dashboard: FC<Props> = () => {
         setHourId,
         setOpen,
         setUserLoaded,
+        tallerData,
+        talleres,
         titleDrawer,
         titlePage,
         userLoaded,
-        fetchAllUsers,
-        allUsers,
-        openModalTallerOrBlog,
-        handleOpenModalTallerOrBlog,
-        handleCloseModalTallerOrBlog,
-        fetchTalleres,
-        talleres,
-        handleDeleteClickTaller,
-        handleConfirmTaller,
-        tallerData,
-        openEditModalFunctionTaller,
-        isEditingTaller,
+        blogData,
     } = useLogicDashboard()
 
     const itemsTop = [
@@ -181,7 +194,7 @@ const Dashboard: FC<Props> = () => {
         } else if (route === 'citas') {
             getAllPayments()
         } else if (route === 'blog') {
-            fetchTalleres()
+            fetchBlogs()
         }
     }, [route])
 
@@ -441,20 +454,55 @@ const Dashboard: FC<Props> = () => {
                     )}
 
                     {route === 'blog' && (
-                        <>
-                            <FloatAddServices
-                                onClick={handleOpenModalTallerOrBlog}
-                            />
-                            <CreateTallerModal
-                                onClose={handleCloseModalTallerOrBlog}
+                        <CardBlogsContainer>
+                            <FloatAddServices onClick={handleOpenModalBlog} />
+                            <CreateBlogModal
+                                onClose={handleCloseModalBlog}
                                 open={openModalTallerOrBlog}
-                                isEditing={isEditingTaller}
-                                taller={tallerData}
+                                isEditing={isEditingBlog}
+                                blog={blogData as Blogs}
                             />
-                        </>
+                            {isLoading ? (
+                                <LoadingContainer>
+                                    <LinearIndeterminate
+                                        label="Cargando datos en el sistema..."
+                                        width={400}
+                                    />
+                                </LoadingContainer>
+                            ) : (
+                                blogs?.map(blog => (
+                                    <CardDashboardblogs
+                                        key={blog.id}
+                                        blogs={blog}
+                                        onDelete={() =>
+                                            handleDeleteClickBlog(
+                                                blog.id as string
+                                            )
+                                        }
+                                        onEdit={() =>
+                                            openEditModalFunctionBlog(blog)
+                                        }
+                                    />
+                                ))
+                            )}
+                            {openDeleteModal && (
+                                <DeleteConfirmationModal
+                                    open={openDeleteModal}
+                                    onClose={closeModalDelete}
+                                    onDelete={handleConfirmDeleteBlog}
+                                />
+                            )}
+                        </CardBlogsContainer>
                     )}
                     {route === 'talleres' && (
                         <CardTalleresContainer>
+                            <FloatAddServices onClick={handleOpenModalTaller} />
+                            <CreateTallerModal
+                                onClose={handleCloseModalTaller}
+                                open={openModalTallerOrBlog}
+                                isEditing={isEditingTaller}
+                                taller={tallerData as Talleres}
+                            />
                             {isLoading ? (
                                 <LoadingContainer>
                                     <LinearIndeterminate
@@ -482,7 +530,7 @@ const Dashboard: FC<Props> = () => {
                                 <DeleteConfirmationModal
                                     open={openDeleteModal}
                                     onClose={closeModalDelete}
-                                    onDelete={handleConfirmTaller}
+                                    onDelete={handleConfirmDeleteTaller}
                                 />
                             )}
                         </CardTalleresContainer>

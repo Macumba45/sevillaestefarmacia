@@ -1,6 +1,6 @@
 import { notification } from 'antd'
 import { getAuthenticatedToken } from '../../storage/storage'
-import { Talleres } from '../../types/types'
+import { Blogs } from '../../types/types'
 
 const token = getAuthenticatedToken()
 
@@ -14,9 +14,9 @@ const notificationSuccess = (serviceName: string) => {
     })
 }
 
-export const getTalleres = async (): Promise<Talleres[] | undefined> => {
+export const getBlogs = async (): Promise<Blogs[] | undefined> => {
     try {
-        const response = await fetch('/api/talleres/getTalleres', {
+        const response = await fetch('/api/blogs/getBlogs', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -31,17 +31,15 @@ export const getTalleres = async (): Promise<Talleres[] | undefined> => {
     }
 }
 
-export const createTaller = async (
-    taller: Talleres
-): Promise<Talleres | undefined> => {
+export const createBlog = async (blog: Blogs): Promise<Blogs | undefined> => {
     try {
-        const response = await fetch('/api/talleres/postTaller', {
+        const response = await fetch('/api/blogs/postBlog', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${token}`,
             },
-            body: JSON.stringify(taller),
+            body: JSON.stringify(blog),
         })
         if (response.ok) {
             const data = await response.json()
@@ -50,15 +48,13 @@ export const createTaller = async (
     } catch (error) {
         console.log(error)
     } finally {
-        notificationSuccess(taller.title)
+        notificationSuccess(blog.title)
     }
 }
 
-export const deleteTaller = async (
-    id: string
-): Promise<Talleres | undefined> => {
+export const deleteBlog = async (id: string): Promise<Blogs | undefined> => {
     try {
-        const response = await fetch('/api/talleres/deleteTaller', {
+        const response = await fetch('/api/blogs/deleteBlog', {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -77,11 +73,9 @@ export const deleteTaller = async (
     }
 }
 
-export const updateTaller = async (
-    taller: Talleres
-): Promise<Talleres | undefined> => {
+export const updateBlog = async (taller: Blogs): Promise<Blogs | undefined> => {
     try {
-        const response = await fetch('/api/talleres/updateTaller', {
+        const response = await fetch('/api/blogs/updateBlog', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

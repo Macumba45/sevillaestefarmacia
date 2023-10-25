@@ -1,19 +1,10 @@
 'use client'
 
-import { FC, memo, useContext, useEffect } from 'react'
-import CardTallerAndBlog from '@/components/CardTallerAndBlog'
-import ResponsiveAppBar from '@/components/MenuNavBar'
-import { useLogicHome } from '../logic'
-import {
-    MainContainer,
-    NavContainer,
-    TitleTalleres,
-    SubtitleTalleres,
-    ContainerTalleres,
-} from './styles'
-import { getAuthenticatedToken } from '../../../storage/storage'
+import { FC, memo, useEffect } from 'react'
+import CardTallerOrBlog from '@/components/CardTallerOrBlog'
 import { useLogicTaller } from './logic'
-import { UserContext, UserProvider } from '@/context/UserContext'
+import { UserProvider } from '@/context/UserContext'
+import { MainContainer, Title, Subtitle, Container } from './styles'
 
 const Talleres: FC = () => {
     const { fetchTalleres, talleres } = useLogicTaller()
@@ -29,17 +20,17 @@ const Talleres: FC = () => {
     return (
         <UserProvider>
             <MainContainer>
-                <TitleTalleres>Talleres</TitleTalleres>
-                <SubtitleTalleres>¡No faltes!</SubtitleTalleres>
-                <ContainerTalleres>
+                <Title>Talleres</Title>
+                <Subtitle>¡No faltes!</Subtitle>
+                <Container>
                     {talleres?.map(taller => (
-                        <CardTallerAndBlog
+                        <CardTallerOrBlog
                             key={taller.id}
                             mode="taller"
                             taller={taller}
                         />
                     ))}
-                </ContainerTalleres>
+                </Container>
             </MainContainer>
         </UserProvider>
     )

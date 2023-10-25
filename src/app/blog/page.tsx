@@ -1,21 +1,39 @@
 'use client'
 
 import { FC, memo, useEffect } from 'react'
-import { MainContainer } from './styles'
+import { useLogicBlog } from './logic'
 import { UserProvider } from '@/context/UserContext'
+import { MainContainer, Title, Subtitle, Container } from './styles'
+import CardTallerOrBlog from '@/components/CardTallerOrBlog'
 
-const Blogs: FC = () => {
+const Talleres: FC = () => {
+    const { fetchBlogs, blogs } = useLogicBlog()
+
     useEffect(() => {
-        document.title = 'Blogs'
+        fetchBlogs()
+    }, [])
+
+    useEffect(() => {
+        document.title = 'Talleres'
     }, [])
 
     return (
         <UserProvider>
             <MainContainer>
-                <h1>Blogs</h1>
+                <Title>Blogs</Title>
+                <Subtitle>¡No faltes!</Subtitle>
+                <Container>
+                    {blogs?.map(blogs => (
+                        <CardTallerOrBlog
+                            key={blogs.id}
+                            mode="blog"
+                            blog={blogs}
+                        />
+                    ))}
+                </Container>
             </MainContainer>
         </UserProvider>
     )
 }
 
-export default memo(Blogs)
+export default memo(Talleres)

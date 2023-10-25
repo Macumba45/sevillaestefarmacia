@@ -64,13 +64,11 @@ export type Talleres = {
 }
 
 export type Blogs = {
-    id: string
+    id?: string
     title: string
     subtitle: string
     descripcion: string
     urlPicture: string
-    createdAt: Date
-    updatedAt: Date
 }
 
 export type LoginRequestBody = {

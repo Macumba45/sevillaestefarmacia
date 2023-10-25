@@ -13,7 +13,7 @@ interface Props {
     blog?: Blogs
 }
 
-const CardTallerAndBlog: FC<Props> = ({ mode, blog, taller }) => (
+const CardTallerOrBlog: FC<Props> = ({ mode, blog, taller }) => (
     <div
         style={{
             margin: '1.5rem',
@@ -76,4 +76,4 @@ const CardTallerAndBlog: FC<Props> = ({ mode, blog, taller }) => (
     </div>
 )
 
-export default CardTallerAndBlog
+export default CardTallerOrBlog

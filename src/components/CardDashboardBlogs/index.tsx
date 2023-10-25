@@ -10,7 +10,7 @@ const styleIconButtons = {
     marginRight: '10px',
 }
 
-const CardDashboardTalleres: FC<Props> = ({ talleres, onEdit, onDelete }) => {
+const CardDashboardblogs: FC<Props> = ({ blogs, onEdit, onDelete }) => {
     return (
         <Card
             hoverable
@@ -23,7 +23,7 @@ const CardDashboardTalleres: FC<Props> = ({ talleres, onEdit, onDelete }) => {
             cover={
                 <img
                     alt="example"
-                    src={talleres!.urlPicture}
+                    src={blogs!.urlPicture}
                     style={{
                         width: '100%',
                         height: 150,
@@ -51,7 +51,7 @@ const CardDashboardTalleres: FC<Props> = ({ talleres, onEdit, onDelete }) => {
                     display: 'flex',
                     justifyContent: 'center',
                 }}
-                title={talleres!.title}
+                title={blogs!.title}
                 description={
                     <span
                         style={{
@@ -61,7 +61,7 @@ const CardDashboardTalleres: FC<Props> = ({ talleres, onEdit, onDelete }) => {
                             fontFamily: 'Roboto',
                         }}
                     >
-                        Fecha: {talleres!.subtitle}
+                        Fecha: {blogs!.subtitle}
                     </span>
                 }
             />
@@ -69,4 +69,4 @@ const CardDashboardTalleres: FC<Props> = ({ talleres, onEdit, onDelete }) => {
     )
 }
 
-export default memo(CardDashboardTalleres)
+export default memo(CardDashboardblogs)

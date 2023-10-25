@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react'
 import { getAllUsers, getUserInfo } from '@/services/user'
 import { useRouter } from 'next/navigation'
-import { Services, Talleres, User } from '../../../types/types'
+import { Blogs, Services, Talleres, User } from '../../../types/types'
 import {
     createService,
     getServices,
@@ -19,6 +19,7 @@ import {
     updateTaller,
 } from '@/services/talleres'
 import { deleteDateById } from '@/services/dates'
+import { createBlog, deleteBlog, getBlogs, updateBlog } from '@/services/blogs'
 
 export const useLogicDashboard = () => {
     const [currentUser, setCurrentUser] = useState<User>()
@@ -50,8 +51,12 @@ export const useLogicDashboard = () => {
     const [openModalTallerOrBlog, setOpenModalTallerOrBlog] = useState(false)
     const [talleres, setTalleres] = useState<Talleres[] | undefined>([])
     const [tallerToDelete, setTallerToDelete] = useState('')
-    const [tallerData, setTallerData] = useState<Talleres>()
+    const [tallerData, setTallerData] = useState<Talleres | undefined>()
     const [isEditingTaller, setIsEditingTaller] = useState(false)
+    const [blogs, setBlogs] = useState<Blogs[] | undefined>([])
+    const [isEditingBlog, setIsEditingBlog] = useState(false)
+    const [blogToDelete, setBlogToDelete] = useState('')
+    const [blogData, setBlogData] = useState<Blogs | undefined>()
 
     const fetchAllUsers = useCallback(async () => {
         setIsLoading(true)
@@ -118,7 +123,7 @@ export const useLogicDashboard = () => {
     const fetchTalleres = async () => {
         setIsLoading(true)
         const talleres = await getTalleres()
-        setTalleres(talleres)
+        setTalleres(talleres as Talleres[])
         setIsLoading(false)
         return talleres
     }
@@ -135,6 +140,28 @@ export const useLogicDashboard = () => {
 
     const updateTallerById = async (taller: Talleres) => {
         const updateItem = await updateTaller(taller)
+        return updateItem
+    }
+    const fetchBlogs = async () => {
+        setIsLoading(true)
+        const blogs = await getBlogs()
+        setBlogs(blogs as Blogs[])
+        setIsLoading(false)
+        return blogs
+    }
+
+    const postNewBlog = async (blog: Blogs) => {
+        const newBlog = await createBlog(blog)
+        return newBlog
+    }
+
+    const deteleBlogById = async (id: string) => {
+        const deteleItem = deleteBlog(id)
+        return deteleItem
+    }
+
+    const updateBlogById = async (blog: Blogs) => {
+        const updateItem = await updateBlog(blog)
         return updateItem
     }
 
@@ -207,17 +234,28 @@ export const useLogicDashboard = () => {
         setOpenModalEditDateAndHour(false)
     }
 
-    const handleOpenModalTallerOrBlog = () => {
+    const handleOpenModalTaller = () => {
+        setTallerData(undefined)
         setOpenModalTallerOrBlog(true)
         setIsEditingTaller(false)
-        setTallerData(undefined)
     }
 
-    const handleCloseModalTallerOrBlog = () => {
+    const handleOpenModalBlog = () => {
+        setTallerData(undefined)
+        setOpenModalTallerOrBlog(true)
+        setIsEditingBlog(false)
+    }
+
+    const handleCloseModalTaller = () => {
+        setTallerData(undefined)
+        setOpenModalTallerOrBlog(false)
+    }
+    const handleCloseModalBlog = () => {
+        setTallerData(undefined)
         setOpenModalTallerOrBlog(false)
     }
 
-    const handleConfirmTaller = () => {
+    const handleConfirmDeleteTaller = () => {
         // Realiza la eliminación del servicio con el id almacenado en serviceToDelete
         deteleTallerById(tallerToDelete)
         // Después de la eliminación, cierra el modal
@@ -227,10 +265,23 @@ export const useLogicDashboard = () => {
         setTalleres(updatedTalleres)
         setOpenDeleteModal(false)
     }
+    const handleConfirmDeleteBlog = () => {
+        // Realiza la eliminación del servicio con el id almacenado en serviceToDelete
+        deteleBlogById(blogToDelete)
+        // Después de la eliminación, cierra el modal
+        const updatedBlogs = blogs!.filter(blogs => blogs.id !== blogToDelete)
+        setTalleres(updatedBlogs)
+        setOpenDeleteModal(false)
+    }
 
     const handleDeleteClickTaller = (id: string) => {
         // Abre el modal de confirmación y establece el id del servicio a eliminar
         setTallerToDelete(id)
+        setOpenDeleteModal(true)
+    }
+    const handleDeleteClickBlog = (id: string) => {
+        // Abre el modal de confirmación y establece el id del servicio a eliminar
+        setBlogToDelete(id)
         setOpenDeleteModal(true)
     }
 
@@ -240,8 +291,17 @@ export const useLogicDashboard = () => {
         setIsEditingTaller(true)
     }
 
+    const openEditModalFunctionBlog = async (blog: Blogs) => {
+        setBlogData(blog)
+        setOpenModalTallerOrBlog(true)
+        setIsEditingBlog(true)
+    }
+
     return {
         allPayments,
+        allUsers,
+        blogData,
+        blogs,
         changeRoute,
         closeEditModalFunction,
         closeModalDelete,
@@ -249,17 +309,34 @@ export const useLogicDashboard = () => {
         createNewService,
         currentUser,
         dateId,
+        datesPaymentsPayed,
+        deleteDate,
+        deteleTallerById,
         editDateAndHour,
+        fetchAllUsers,
+        fetchBlogs,
+        fetchTalleres,
         getAllPayments,
         getServiceData,
         getUserInfoData,
+        handleCloseModalBlog,
+        handleCloseModalTaller,
         handleConfirmDelete,
+        handleConfirmDeleteBlog,
+        handleConfirmDeleteTaller,
         handleDeleteClick,
+        handleDeleteClickBlog,
+        handleDeleteClickTaller,
         handleDrawerToggle,
+        handleOpenModalBlog,
+        handleOpenModalTaller,
         handleOpenModaService,
         hourId,
         isEditing,
+        isEditingBlog,
+        isEditingTaller,
         isLoading,
+        isLoadingButton,
         logOut,
         mobileOpen,
         open,
@@ -267,9 +344,13 @@ export const useLogicDashboard = () => {
         openEditModal,
         openEditModalDateAndHour,
         openEditModalFunction,
+        openEditModalFunctionBlog,
+        openEditModalFunctionTaller,
         openModalEditDateAndHour,
         openModalEditDateAndHourFunction,
+        openModalTallerOrBlog,
         paymentId,
+        postNewTaller,
         route,
         router,
         serviceData,
@@ -279,27 +360,14 @@ export const useLogicDashboard = () => {
         setOpen,
         setServices,
         setUserLoaded,
+        tallerData,
+        talleres,
         titleDrawer,
         titlePage,
         updateServiceData,
-        userLoaded,
-        isLoadingButton,
-        datesPaymentsPayed,
-        fetchAllUsers,
-        allUsers,
-        openModalTallerOrBlog,
-        handleOpenModalTallerOrBlog,
-        handleCloseModalTallerOrBlog,
-        postNewTaller,
-        deteleTallerById,
         updateTallerById,
-        fetchTalleres,
-        talleres,
-        handleDeleteClickTaller,
-        handleConfirmTaller,
-        tallerData,
-        openEditModalFunctionTaller,
-        isEditingTaller,
-        deleteDate,
+        userLoaded,
+        postNewBlog,
+        updateBlogById,
     }
 }

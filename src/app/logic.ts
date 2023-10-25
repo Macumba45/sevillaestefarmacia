@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Services, User } from '../../types/types'
+import { Services } from '../../types/types'
 import { useRouter } from 'next/navigation'
 import { getServiceDetails } from '@/services/service'
 

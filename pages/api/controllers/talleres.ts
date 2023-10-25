@@ -4,7 +4,7 @@ import { Talleres } from '../../../types/types'
 export const getTalleres = async (): Promise<Talleres[]> => {
     const prismaTalleres = await prisma.talleres.findMany({
         orderBy: {
-            createdAt: 'asc',
+            createdAt: 'desc',
         },
     })
 

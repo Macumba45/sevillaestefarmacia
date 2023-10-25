@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Modal, TextField, Box } from '@mui/material'
-import { Talleres } from '../../../types/types'
+import { Blogs } from '../../../types/types'
 import { useLogicDashboard } from '@/app/dashboard/logic'
 
-interface CreateTallerModalProps {
-    taller?: Talleres
+interface CreateBlogModalProps {
+    blog?: Blogs
     open: boolean
     onClose: () => void
     isEditing: boolean
 }
 
-const CreateTallerModal: React.FC<CreateTallerModalProps> = ({
+const CreateBlogModal: React.FC<CreateBlogModalProps> = ({
     open,
     onClose,
     isEditing,
-    taller,
+    blog,
 }) => {
-    const { postNewTaller, updateTallerById } = useLogicDashboard()
+    const { postNewBlog, updateBlogById } = useLogicDashboard()
 
-    const [tallerFormData, setTallerFormData] = useState<Talleres>({
+    const [formData, setFormData] = useState<Blogs>({
         title: '',
         subtitle: '',
         descripcion: '',
@@ -29,32 +29,40 @@ const CreateTallerModal: React.FC<CreateTallerModalProps> = ({
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
     ) => {
         const { name, value } = e.target
-        setTallerFormData({ ...tallerFormData, [name]: value })
+        setFormData({ ...formData, [name]: value })
     }
 
-    const handleCreateTaller = async (tallerFormData: Talleres) => {
+    const handleCreateBlog = async (formData: Blogs) => {
         // Reemplaza los saltos de línea (line breaks) con '\n' antes de enviarlos a la base de datos.
-        const descripcionConSaltosDeLinea = tallerFormData.descripcion.replace(
+        const descripcionConSaltosDeLinea = formData.descripcion.replace(
             /\n/g,
             '\n'
         )
-        const taller = {
-            ...tallerFormData,
+        const blog = {
+            ...formData,
             descripcion: descripcionConSaltosDeLinea,
         }
 
-        if (isEditing && taller) {
-            await updateTallerById(taller)
+        if (isEditing && blog) {
+            await updateBlogById(blog)
         } else {
-            await postNewTaller(taller)
+            await postNewBlog(blog)
         }
         onClose()
     }
+
     useEffect(() => {
-        if (isEditing && taller) {
-            setTallerFormData(taller)
+        if (isEditing && blog) {
+            setFormData(blog)
+        } else {
+            setFormData({
+                title: '',
+                subtitle: '',
+                descripcion: '',
+                urlPicture: '',
+            })
         }
-    }, [isEditing, taller])
+    }, [isEditing, blog])
 
     return (
         <Modal
@@ -83,7 +91,7 @@ const CreateTallerModal: React.FC<CreateTallerModalProps> = ({
                     variant="outlined"
                     fullWidth
                     margin="dense"
-                    value={tallerFormData.urlPicture}
+                    value={formData.urlPicture}
                     onChange={handleInputChange}
                 />
                 <TextField
@@ -92,7 +100,7 @@ const CreateTallerModal: React.FC<CreateTallerModalProps> = ({
                     variant="outlined"
                     fullWidth
                     margin="dense"
-                    value={tallerFormData.title}
+                    value={formData.title}
                     onChange={handleInputChange}
                 />
                 <TextField
@@ -101,7 +109,7 @@ const CreateTallerModal: React.FC<CreateTallerModalProps> = ({
                     variant="outlined"
                     fullWidth
                     margin="dense"
-                    value={tallerFormData.subtitle}
+                    value={formData.subtitle}
                     onChange={handleInputChange}
                 />
                 <TextField
@@ -110,7 +118,7 @@ const CreateTallerModal: React.FC<CreateTallerModalProps> = ({
                     aria-label="Descripción"
                     margin="dense"
                     fullWidth
-                    value={tallerFormData.descripcion}
+                    value={formData.descripcion}
                     onChange={handleInputChange}
                     minRows={5}
                     multiline
@@ -125,12 +133,12 @@ const CreateTallerModal: React.FC<CreateTallerModalProps> = ({
                     }}
                 >
                     <Button
-                        onClick={() => handleCreateTaller(tallerFormData)}
+                        onClick={() => handleCreateBlog(formData)}
                         variant="contained"
                         color="success"
                         sx={{ marginRight: '0.5rem' }}
                     >
-                        {isEditing ? 'Editar taller' : 'Crear taller'}
+                        {isEditing ? 'Editar blog' : 'Crear blog'}
                     </Button>
                     <Button
                         onClick={() => onClose()}
@@ -146,4 +154,4 @@ const CreateTallerModal: React.FC<CreateTallerModalProps> = ({
     )
 }
 
-export default CreateTallerModal
+export default CreateBlogModal

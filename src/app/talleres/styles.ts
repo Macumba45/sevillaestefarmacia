@@ -8,7 +8,7 @@ export const MainContainer = styled.div`
     background-color: #ebf0f6;
 `
 
-export const ContainerTalleres = styled.div`
+export const Container = styled.div`
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -28,7 +28,7 @@ export const NavContainer = styled.nav`
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     z-index: 9999;
 `
-export const TitleTalleres = styled.h1<{
+export const Title = styled.h1<{
     widthtitle?: string
     widthtitledesktop?: string
 }>`
@@ -49,7 +49,7 @@ export const TitleTalleres = styled.h1<{
     }
 `
 
-export const SubtitleTalleres = styled.h2`
+export const Subtitle = styled.h2`
     margin-left: 2rem;
     padding: 0.5rem 3.5rem;
     border-radius: 30px;
