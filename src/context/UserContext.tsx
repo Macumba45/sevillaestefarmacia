@@ -45,10 +45,6 @@ export const UserProvider = ({ children }: any) => {
         setIsDrawerOpen(false)
     }
 
-    const openDrawerButton = () => {
-        setIsDrawerOpenButton(true)
-    }
-
     const closeDrawerButton = () => {
         setIsDrawerOpenButton(false)
     }

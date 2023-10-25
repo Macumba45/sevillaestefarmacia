@@ -43,6 +43,7 @@ import {
     CitasContainer,
     LoadingContainer,
 } from './styles'
+import Link from 'next/link'
 
 const drawerWidth = 240
 
@@ -128,15 +129,17 @@ const Dashboard: FC<Props> = () => {
                         '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)',
                 }}
             >
-                <img
-                    src={logo.src}
-                    alt=""
-                    style={{
-                        width: 185,
-                        objectFit: 'cover',
-                        backgroundSize: 'cover',
-                    }}
-                />
+                <Link style={undefined} href="/">
+                    <img
+                        src={logo.src}
+                        alt="Farmacia Santa Bárbara"
+                        style={{
+                            width: 176,
+                            objectFit: 'cover',
+                            backgroundSize: 'cover',
+                        }}
+                    />
+                </Link>
             </div>
 
             <Divider />
