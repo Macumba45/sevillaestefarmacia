@@ -11,4 +11,5 @@ export type Props = {
     closeDrawerButton: () => void
     buttonName: string
     userRole: User | null
+    isLoading: boolean
 }

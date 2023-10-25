@@ -230,7 +230,6 @@ export const useLogicDashboard = () => {
 
     const handleDeleteClickTaller = (id: string) => {
         // Abre el modal de confirmación y establece el id del servicio a eliminar
-        console.log(id)
         setTallerToDelete(id)
         setOpenDeleteModal(true)
     }

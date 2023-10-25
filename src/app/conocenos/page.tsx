@@ -1,14 +1,12 @@
 'use client'
 
 import { FC, memo, useEffect } from 'react'
-import ResponsiveAppBar from '@/components/MenuNavBar'
-import { useLogicHome } from '../logic'
+import { UserProvider } from '@/context/UserContext'
 import mapa from '../../assets/CONOCENOS/mapa.png'
 import {
     ImgMap,
     ContainerData,
     MapContainer,
-    NavContainer,
     ParrafoServices,
     Title,
     VideoYoutube,
@@ -17,23 +15,8 @@ import {
     MainContainer,
     ServiciosDesktop,
 } from './styles'
-import { getAuthenticatedToken } from '../../../storage/storage'
 
 const Conocenos: FC = () => {
-    const {
-        buttonName,
-        closeDrawer,
-        closeDrawerButton,
-        currentUser,
-        getUserInfoDetails,
-        handleButtonClick,
-        handleCloseNavMenu,
-        handleOpenNavMenu,
-        isDrawerOpen,
-        isDrawerOpenButton,
-        logOut,
-    } = useLogicHome()
-
     const address = 'Calle Periodista Juan Tribuna, 8 (Local 2) 41019 Sevilla'
 
     const handleMapClick = () => {
@@ -49,28 +32,8 @@ const Conocenos: FC = () => {
         document.title = 'Conócenos'
     }, [])
 
-    useEffect(() => {
-        if (getAuthenticatedToken()) {
-            getUserInfoDetails()
-        }
-    }, [])
-
     return (
-        <>
-            <NavContainer>
-                <ResponsiveAppBar
-                    closeDrawer={() => closeDrawer()}
-                    handleButtonClick={() => handleButtonClick()}
-                    handleCloseNavMenu={() => handleCloseNavMenu()}
-                    handleOpenNavMenu={() => handleOpenNavMenu()}
-                    closeDrawerButton={() => closeDrawerButton()}
-                    isDrawerOpenButton={isDrawerOpenButton}
-                    isDrawerOpen={isDrawerOpen}
-                    buttonName={buttonName}
-                    onLogOut={() => logOut()}
-                    userRole={currentUser}
-                />
-            </NavContainer>
+        <UserProvider>
             <MainContainer>
                 <ContainerData>
                     <Title>
@@ -153,7 +116,7 @@ const Conocenos: FC = () => {
                     </VideoYoutubeContainer>
                 </ContainerData>
             </MainContainer>
-        </>
+        </UserProvider>
     )
 }
 

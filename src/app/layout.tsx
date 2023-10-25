@@ -3,7 +3,6 @@ import './reset.css'
 import './global.css'
 import StyledComponentsRegistryAntd from '@/lib/AntdRegistry'
 import StyledComponentsRegistry from '@/lib/StyledComponentsRegistry'
-import { UserProvider } from '@/context/UserContext'
 
 export const metadata = {
     title: 'Create Next App',
@@ -25,9 +24,7 @@ const RootLayout = ({ children }: React.PropsWithChildren) => (
 
         <body>
             <StyledComponentsRegistryAntd>
-                <StyledComponentsRegistry>
-                    <UserProvider>{children}</UserProvider>
-                </StyledComponentsRegistry>
+                <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
             </StyledComponentsRegistryAntd>
         </body>
     </html>

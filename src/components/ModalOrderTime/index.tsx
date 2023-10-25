@@ -74,8 +74,6 @@ const ModalOrderTime: FC<Props> = ({
         buttonName = 'Reservar cita'
         isEditing = false
     }
-    console.log(payments)
-
     const getAvailableHours = (selectedDate: string) => {
         if (!selectedDate) {
             return []
