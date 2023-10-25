@@ -1,6 +1,8 @@
 'use client'
 
-import { FC, memo, useEffect } from 'react'
+import { FC, memo, useContext, useEffect } from 'react'
+import Footer from '@/components/Footer'
+import Link from 'next/link'
 import { useLogicHome } from './logic'
 import { getAuthenticatedToken } from '../../storage/storage'
 import Services from '@/components/Services'
@@ -25,8 +27,7 @@ import {
     TitleHeaderServices,
     IconHeaderTitle,
 } from './styles'
-import Footer from '@/components/Footer'
-import Link from 'next/link'
+import { UserContext, UserProvider } from '@/context/UserContext'
 
 const Home: FC = () => {
     const {
@@ -43,6 +44,10 @@ const Home: FC = () => {
         isLoading,
         currentUser,
     } = useLogicHome()
+
+    const { user } = useContext(UserContext)
+
+    console.log(user)
 
     useEffect(() => {
         document.title = 'Farmacia Santa Bárbara'
@@ -75,7 +80,7 @@ const Home: FC = () => {
                     isDrawerOpen={isDrawerOpen}
                     buttonName={buttonName}
                     onLogOut={() => logOut()}
-                    userRole={currentUser}
+                    userRole={user}
                 />
             </NavContainer>
             <ContainerConocenos>

@@ -2,11 +2,11 @@
 import { createContext, useEffect, useState } from 'react'
 import { User } from '../../types/types'
 import { getAuthenticatedToken } from '../../storage/storage'
+import jwt from 'jsonwebtoken' // Importa la biblioteca jsonwebtoken
 
 // Define el valor inicial del contexto como un objeto con las propiedades correctas.
 const initialContextValue = {
     user: {} as any,
-    getUserInfo: async () => {},
 }
 
 export const UserContext = createContext(initialContextValue)
@@ -25,8 +25,10 @@ export const UserProvider = ({ children }: any) => {
                     Authorization: `Bearer ${token}`,
                 },
             })
-            const data = await response.json()
-            setUser(data)
+            if (response.ok) {
+                const data = await response.json()
+                setUser(data)
+            }
         } catch (error) {
             console.error('Error al obtener la información del usuario', error)
         }
@@ -36,11 +38,9 @@ export const UserProvider = ({ children }: any) => {
         if (getAuthenticatedToken()) {
             getUserInfo()
         }
-    }, [])
+    }, [getAuthenticatedToken()])
 
     return (
-        <UserContext.Provider value={{ user, getUserInfo }}>
-            {children}
-        </UserContext.Provider>
+        <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>
     )
 }

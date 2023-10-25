@@ -34,7 +34,6 @@ const Page: FC<Props> = ({ params }) => {
         closeDrawer,
         closeDrawerButton,
         currentUser,
-        getUserInfoDetails,
         handleButtonClick,
         handleCloseNavMenu,
         handleOpenNavMenu,
@@ -57,7 +56,6 @@ const Page: FC<Props> = ({ params }) => {
     } = useLogicPageServicesDetail()
 
     useEffect(() => {
-        getUserInfoDetails()
         fetchServiceDetails(params.service)
     }, [])
 

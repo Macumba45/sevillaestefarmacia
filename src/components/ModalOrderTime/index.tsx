@@ -308,35 +308,44 @@ const ModalOrderTime: FC<Props> = ({
                                     !selectedDate.date
                                 }
                             >
-                                {isLoadingPayments && (
+                                {isLoadingPayments ? (
                                     // Indicador de carga mientras se obtienen los datos
                                     <MenuItem disabled>
                                         <CircularProgress
                                             title="dddddd"
                                             size={20}
                                         />
-                                    </MenuItem>
-                                )}
-                                {getAvailableHours(selectedDate.date)
-                                    .sort((a, b) => {
-                                        // Ordenar las horas de más temprano a más tarde
-                                        return a.hour!.localeCompare(
-                                            b.hour as string
-                                        )
-                                    })
-                                    .map((hour, index) => (
-                                        <MenuItem
-                                            key={index}
-                                            value={hour.hour}
-                                            disabled={hour.isBooked}
+                                        <span
+                                            style={{
+                                                fontFamily: 'Roboto',
+                                                marginLeft: '10px',
+                                            }}
                                         >
-                                            {`${hour.hour} - ${
-                                                hour.isBooked
-                                                    ? 'Reservado'
-                                                    : 'Disponible'
-                                            }`}
-                                        </MenuItem>
-                                    ))}
+                                            Cargando horas...
+                                        </span>
+                                    </MenuItem>
+                                ) : (
+                                    getAvailableHours(selectedDate.date)
+                                        .sort((a, b) => {
+                                            // Ordenar las horas de más temprano a más tarde
+                                            return a.hour!.localeCompare(
+                                                b.hour as string
+                                            )
+                                        })
+                                        .map((hour, index) => (
+                                            <MenuItem
+                                                key={index}
+                                                value={hour.hour}
+                                                disabled={hour.isBooked}
+                                            >
+                                                {`${hour.hour} - ${
+                                                    hour.isBooked
+                                                        ? 'Reservado'
+                                                        : 'Disponible'
+                                                }`}
+                                            </MenuItem>
+                                        ))
+                                )}
                             </Select>
                         </FormControl>
                     </FormControl>

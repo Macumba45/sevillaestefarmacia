@@ -1,6 +1,6 @@
 'use client'
 
-import { FC, memo, useEffect } from 'react'
+import { FC, memo, useContext, useEffect } from 'react'
 import CardTallerAndBlog from '@/components/CardTallerAndBlog'
 import ResponsiveAppBar from '@/components/MenuNavBar'
 import { useLogicHome } from '../logic'
@@ -13,6 +13,7 @@ import {
 } from './styles'
 import { getAuthenticatedToken } from '../../../storage/storage'
 import { useLogicTaller } from './logic'
+import { UserContext } from '@/context/UserContext'
 
 const Talleres: FC = () => {
     const {
@@ -20,7 +21,6 @@ const Talleres: FC = () => {
         closeDrawer,
         closeDrawerButton,
         currentUser,
-        getUserInfoDetails,
         handleButtonClick,
         handleCloseNavMenu,
         handleOpenNavMenu,
@@ -31,9 +31,10 @@ const Talleres: FC = () => {
 
     const { fetchTalleres, talleres } = useLogicTaller()
 
+    const { user } = useContext(UserContext)
+
     useEffect(() => {
         if (getAuthenticatedToken()) {
-            getUserInfoDetails()
             fetchTalleres()
         }
     }, [])
@@ -55,7 +56,7 @@ const Talleres: FC = () => {
                     isDrawerOpen={isDrawerOpen}
                     buttonName={buttonName}
                     onLogOut={() => logOut()}
-                    userRole={currentUser}
+                    userRole={user}
                 />
             </NavContainer>
             <TitleTalleres>Talleres</TitleTalleres>
