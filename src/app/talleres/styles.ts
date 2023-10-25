@@ -59,7 +59,7 @@ export const SubtitleTalleres = styled.h2`
     color: white;
     background-color: black;
     margin-top: 1rem;
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
     line-height: 2rem;
     @media screen and (min-width: 899px) {
         font-size: 1.5rem;

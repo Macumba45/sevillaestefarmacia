@@ -13,6 +13,7 @@ import {
 import { Button } from '@mui/material'
 import React from 'react'
 import Link from 'next/link'
+import HoverMotion from '@/animations/hover'
 
 interface Props {
     id?: string
@@ -80,24 +81,26 @@ const Services: FC<Props> = ({
                             }}
                             href={`/services/${id}`}
                         >
-                            <Button
-                                variant="outlined"
-                                sx={{
-                                    color: 'black',
-                                    borderColor: 'black',
-                                    width: '200px',
-                                    borderRadius: '130px',
-                                    backgroundColor: 'white',
-                                    ':hover': {
-                                        backgroundColor: 'black',
-                                        color: 'white',
-                                        borderColor: 'transparent',
-                                    },
-                                    fontFamily: 'Cormorant Garamond',
-                                }}
-                            >
-                                {buttonName}
-                            </Button>
+                            <HoverMotion>
+                                <Button
+                                    variant="outlined"
+                                    sx={{
+                                        color: 'black',
+                                        borderColor: 'black',
+                                        width: '200px',
+                                        borderRadius: '130px',
+                                        backgroundColor: 'white',
+                                        ':hover': {
+                                            backgroundColor: 'black',
+                                            color: 'white',
+                                            borderColor: 'transparent',
+                                        },
+                                        fontFamily: 'Cormorant Garamond',
+                                    }}
+                                >
+                                    {buttonName}
+                                </Button>
+                            </HoverMotion>
                         </Link>
                     </ButtonContainerServices>
                 </ContainerServices>

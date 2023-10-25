@@ -26,6 +26,7 @@ import {
     IconHeaderTitle,
 } from './styles'
 import { UserProvider } from '@/context/UserContext'
+import HoverMotion from '@/animations/hover'
 
 const Home: FC = () => {
     const { isLoading, setIsLoading } = useLogicHome()
@@ -66,24 +67,26 @@ const Home: FC = () => {
                                 }}
                                 href={'/conocenos'}
                             >
-                                <Button
-                                    variant="outlined"
-                                    sx={{
-                                        color: 'black',
-                                        borderColor: 'black',
-                                        width: '200px',
-                                        borderRadius: '130px',
-                                        backgroundColor: 'white',
-                                        ':hover': {
-                                            backgroundColor: 'black',
-                                            color: 'white',
-                                            borderColor: 'transparent',
-                                        },
-                                        fontFamily: 'Cormorant Garamond',
-                                    }}
-                                >
-                                    Conócenos
-                                </Button>
+                                <HoverMotion>
+                                    <Button
+                                        variant="outlined"
+                                        sx={{
+                                            color: 'black',
+                                            borderColor: 'black',
+                                            width: '200px',
+                                            borderRadius: '130px',
+                                            backgroundColor: 'white',
+                                            ':hover': {
+                                                backgroundColor: 'black',
+                                                color: 'white',
+                                                borderColor: 'transparent',
+                                            },
+                                            fontFamily: 'Cormorant Garamond',
+                                        }}
+                                    >
+                                        Conócenos
+                                    </Button>
+                                </HoverMotion>
                             </Link>
                         </ButtonContainerConocenos>
                     </ContainerConocenos>

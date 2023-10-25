@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import { Card, Button } from 'antd'
 import { Blogs, Talleres } from '../../../types/types'
+import HoverMotion from '../../animations/hover'
 
 const { Meta } = Card
 
@@ -22,7 +23,7 @@ const CardTallerAndBlog: FC<Props> = ({ mode, blog, taller }) => (
     >
         <Card
             hoverable
-            style={{ width: 280 }}
+            style={{ width: 320 }}
             cover={
                 <img
                     alt={mode === 'blog' ? blog?.title : taller?.title}
@@ -55,19 +56,21 @@ const CardTallerAndBlog: FC<Props> = ({ mode, blog, taller }) => (
                     justifyContent: 'center',
                 }}
             >
-                <Button
-                    type="primary"
-                    style={{
-                        marginTop: '2rem',
-                        backgroundColor: 'transparent',
-                        color: 'black',
-                        boxShadow: 'none',
-                        fontFamily: 'Cormorant Garamond',
-                        border: '1px solid black',
-                    }}
-                >
-                    Más información
-                </Button>
+                <HoverMotion>
+                    <Button
+                        type="primary"
+                        style={{
+                            marginTop: '2rem',
+                            backgroundColor: 'transparent',
+                            color: 'black',
+                            boxShadow: 'none',
+                            fontFamily: 'Cormorant Garamond',
+                            border: '1px solid black',
+                        }}
+                    >
+                        Más información
+                    </Button>
+                </HoverMotion>
             </div>
         </Card>
     </div>
