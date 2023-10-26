@@ -61,3 +61,15 @@ export const updateTaller = async (
     })
     return taller
 }
+
+export const getTallerById = async (id: string): Promise<Talleres> => {
+    const taller = await prisma.talleres.findUnique({
+        where: {
+            id: id,
+        },
+    })
+    if (!taller) {
+        return {} as Talleres
+    }
+    return taller
+}

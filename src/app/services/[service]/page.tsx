@@ -72,6 +72,30 @@ const Page: FC<Props> = ({ params }) => {
         }
     }
 
+    let backgrouncolor: string
+    switch (serviceData?.id) {
+        case 'clo0dzomz0001xy04kzkxay49':
+            backgrouncolor = '#ebf0f6'
+            break
+        case 'clo0e0a200002xy04bwqml93h':
+            backgrouncolor = '#F6F6EB'
+            break
+        case 'clo0e0mn50003xy040gwqse36':
+            backgrouncolor = '#ebf0f6'
+            break
+        case 'clo0e17d30004xy04cjklg2px':
+            backgrouncolor = '#F6F6EB'
+            break
+        case 'clo0e1e3p0005xy04izx8uzqa':
+            backgrouncolor = '#ebf0f6'
+            break
+        case 'clo0e1q180006xy04pu96nyml':
+            backgrouncolor = '#F6F6EB'
+            break
+        default:
+            backgrouncolor = '#ebf0f6'
+    }
+
     if (!user && isLoading && !serviceData) {
         return (
             <LoadingContainer>
@@ -81,7 +105,7 @@ const Page: FC<Props> = ({ params }) => {
     }
     return (
         <UserProvider>
-            <Container backgrouncolor="#ebf0f6">
+            <Container backgrouncolor={backgrouncolor}>
                 <AnimatedView>
                     <TitleServices
                         widthtitle="320px"

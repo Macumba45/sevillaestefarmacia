@@ -99,3 +99,21 @@ export const updateTaller = async (
         notificationSuccess(taller.title)
     }
 }
+
+export const getTallerById = async (id: string): Promise<Talleres> => {
+    try {
+        const response = await fetch(`/api/talleres/getTallerById?id=${id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        if (response.ok) {
+            const data = await response.json()
+            return data
+        }
+    } catch (error: any) {
+        console.log(error)
+    }
+    return {} as Talleres
+}
