@@ -1,53 +1,29 @@
 'use client'
 
 import { FC, memo, useEffect } from 'react'
-import Footer from '@/components/Footer'
 import Link from 'next/link'
-import { useLogicHome } from './logic'
+import { UserProvider } from '@/context/UserContext'
+import HoverMotion from '@/animations/hover'
 import Services from '@/components/Services'
 import AnimatedView from '../animations/AnimatedContainer'
 import { Button } from '@mui/material'
-import dermo from '../assets/HOME/DERMO_FOTO.jpg'
-import nutricion from '../assets/HOME/NUTRICION_FOTO.jpg'
-import laboratorio from '../assets/HOME/LABORATORIO_FOTO.jpg'
-import spd from '../assets/HOME/SPD_FOTO.jpg'
-import pendientes from '../assets/HOME/PENDIENTES_BEBE_FOTO.png'
-import veterinaria from '../assets/HOME/VETERINARIA_FOTO_02.jpg'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import {
     ButtonContainerConocenos,
     ContainerConocenos,
     SubtitleConocenos,
     TitleConocenos,
-    LoadingContainer,
     HeaderServices,
     TitleHeaderServices,
     IconHeaderTitle,
 } from './styles'
-import { UserProvider } from '@/context/UserContext'
-import HoverMotion from '@/animations/hover'
 
 const Home: FC = () => {
-    const { isLoading, setIsLoading } = useLogicHome()
-
     useEffect(() => {
         document.title = 'Farmacia Santa Bárbara'
     }),
         []
 
-    setTimeout(() => {
-        setIsLoading(true)
-    }, 500)
-
-    // if (!isLoading) {
-    //     return (
-
-    //         <LoadingContainer>
-    //             <CircularIndeterminate />
-    //         </LoadingContainer>
-
-    //     )
-    // }
     return (
         <UserProvider>
             <div>
@@ -111,7 +87,7 @@ const Home: FC = () => {
                         description="¿Te gustaría conocer más sobre tu piel o tu salud capilar?"
                         buttonName="Más información"
                         backGrodunColor="#ebf0f6"
-                        picture={dermo.src}
+                        picture={'https://i.postimg.cc/mgcCxQyV/DERMO-FOTO.jpg'}
                         widthMobile="230px"
                         widthDesktop="330px"
                         widthTitle="330px"
@@ -126,7 +102,9 @@ const Home: FC = () => {
                         description="Nuestro propósito no es llegar lo antes posible, sino darte las herramientas para llegar al objetivo dando siempre prioridad a tu salud."
                         buttonName="Más información"
                         backGrodunColor="#f6f6eb"
-                        picture={nutricion.src}
+                        picture={
+                            'https://i.postimg.cc/Z52BRqJk/SEVILLA-ESTE-FARMACIA-STA-BARBARA-SERVICIO-NUTRICION-CLINICA-Y-DEPORTIVA-FOTO.jpg'
+                        }
                         widthDesktop="500px"
                         widthTitle="350px"
                         imagePosition="bottom"
@@ -145,7 +123,9 @@ const Home: FC = () => {
                 con más de 30 años de experiencia."
                         buttonName="Más información"
                         backGrodunColor="#ebf0f6"
-                        picture={laboratorio.src}
+                        picture={
+                            'https://i.postimg.cc/nchq28sy/LABORATORIO-FOTO.jpg'
+                        }
                         widthMobile="320px"
                         widthDesktop="470px"
                         imagePosition="bottom"
@@ -161,7 +141,7 @@ const Home: FC = () => {
                 dificultad para seguir su medicación."
                         buttonName="Más información"
                         backGrodunColor="#f6f6eb"
-                        picture={spd.src}
+                        picture={'https://i.postimg.cc/BZgx2Zv5/SPD-FOTO.jpg'}
                         widthMobile="350px"
                         widthDesktop="500px"
                         imagePosition="bottom"
@@ -180,7 +160,9 @@ const Home: FC = () => {
                 farmacéuticos cualificado."
                         buttonName="Más información"
                         backGrodunColor="#ebf0f6"
-                        picture={pendientes.src}
+                        picture={
+                            'https://i.postimg.cc/Z513JCfm/PENDIENTES-BEBE-FOTO.png'
+                        }
                         widthMobile="330px"
                         widthDesktop="610px"
                         widthTitle="330px"
@@ -196,7 +178,9 @@ const Home: FC = () => {
                 para tus mascotas y animales de granja."
                         buttonName="Más información"
                         backGrodunColor="#f6f6eb"
-                        picture={veterinaria.src}
+                        picture={
+                            'https://i.postimg.cc/6qJ9fD1T/VETERINARIA-FOTO-02.jpg'
+                        }
                         widthMobile="320px"
                         widthDesktop="430px"
                         widthTitle="330px"
