@@ -1,11 +1,11 @@
-import { getTallerById } from '../../../services/talleres'
+import { getBlogById } from '@/services/blogs'
 
-export const useLogicTallerDetail = () => {
-    const getTallerDetailsData = async (id: string) => {
-        const data = await getTallerById(id)
+export const useLogicBlogDetail = () => {
+    const getBlogDetailsData = async (id: string) => {
+        const data = await getBlogById(id)
         return data
     }
     return {
-        getTallerDetailsData,
+        getBlogDetailsData,
     }
 }

@@ -1,25 +1,25 @@
 'use client'
 
 import { FC, memo, useEffect } from 'react'
-import { useLogicTallerDetail } from './logic'
+import { useLogicBlogDetail } from './logic'
 
 interface Props {
     params: {
-        taller: string
+        blog: string
     }
 }
 
 const Page: FC<Props> = ({ params }) => {
-    const { getTallerDetailsData } = useLogicTallerDetail()
+    const { getBlogDetailsData } = useLogicBlogDetail()
 
     useEffect(() => {
-        getTallerDetailsData(params.taller)
+        getBlogDetailsData(params.blog)
         document.title = 'Taller'
     }, [])
 
     return (
         <div>
-            <h1>{params.taller}</h1>
+            <h1>{params.blog}</h1>
         </div>
     )
 }
