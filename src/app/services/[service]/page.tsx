@@ -49,7 +49,7 @@ const Page: FC<Props> = ({ params }) => {
         fetchServiceDetails(params.service)
     }, [])
 
-    const getDescriptionByTitle = (serviceId: string) => {
+    const getDescriptionById = (serviceId: string) => {
         switch (serviceId) {
             case 'clo0dzomz0001xy04kzkxay49':
                 return <Dermo price={serviceData?.price as string} />
@@ -89,7 +89,7 @@ const Page: FC<Props> = ({ params }) => {
                     }}
                 >
                     {
-                        getDescriptionByTitle(
+                        getDescriptionById(
                             serviceData?.id as string
                         ) as JSX.Element
                     }

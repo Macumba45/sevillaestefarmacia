@@ -87,3 +87,10 @@ export const CopyRight = styled.p`
     text-align: center;
     margin-bottom: 2rem;
 `
+
+export const DesignedBy = styled.a`
+    color: white;
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 0.8rem;
+`

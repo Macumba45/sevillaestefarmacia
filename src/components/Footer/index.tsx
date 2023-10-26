@@ -4,6 +4,7 @@ import {
     Container,
     ContainerLogos,
     CopyRight,
+    DesignedBy,
     EmailFooter,
     LogosSocialMedia,
     PhoneNumer,
@@ -28,6 +29,12 @@ const Footer: FC = () => {
             <PhoneNumer>682 734 237</PhoneNumer>
             <LogosSocialMedia>
                 <InstagramIcon
+                    onClick={() =>
+                        window.open(
+                            'https://www.instagram.com/sevillaestefarmacia/',
+                            '_blank'
+                        )
+                    }
                     sx={{
                         color: 'white',
                         cursor: 'pointer',
@@ -35,6 +42,12 @@ const Footer: FC = () => {
                     }}
                 />
                 <LocationOnIcon
+                    onClick={() =>
+                        window.open(
+                            'https://www.google.com/maps/search/?api=1&query=Calle Periodista Juan Tribuna, 8 (Local 2) 41019 Sevilla',
+                            '_blank'
+                        )
+                    }
                     sx={{
                         color: 'white',
                         cursor: 'pointer',
@@ -54,6 +67,9 @@ const Footer: FC = () => {
                 <PicturesLogos src={unionEuropea.src} />
             </ContainerLogos>
             <CopyRight>Copyright © 2023 Farmacia Sta Bárbara</CopyRight>
+            <DesignedBy href="https://gonzalolobocv.vercel.app/">
+                Designed by Macumba45
+            </DesignedBy>
         </Container>
     )
 }
