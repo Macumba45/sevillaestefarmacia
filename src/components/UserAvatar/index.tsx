@@ -25,16 +25,16 @@ const UserAvatar: FC<Props> = ({ user }) => {
                 margin: '1rem',
                 border: '1px solid black',
                 alignItems: 'center',
-                minWidth: '280px',
                 justifyContent: 'center',
                 backgroundColor: 'black',
-                borderRadius: '10px',
-                height: '100px',
                 boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.75)',
+                borderRadius: '10px',
+                width: '200px',
+                height: '100px',
             }}
         >
-            <Avatar alt={user.name} />
-            <div style={{ marginLeft: '16px' }}>
+            {/* <Avatar alt={user.name} /> */}
+            <div>
                 <p
                     style={{
                         textAlign: 'center',

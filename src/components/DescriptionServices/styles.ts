@@ -6,6 +6,12 @@ export const Container = styled.div`
         margin-left: 2rem;
     }
 `
+export const LoadingContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+`
 
 export const Title = styled.h1<{
     withtitlemobile?: string

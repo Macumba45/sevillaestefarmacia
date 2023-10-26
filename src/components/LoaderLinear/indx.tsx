@@ -19,7 +19,14 @@ const LinearIndeterminate: FC<Props> = ({ width, label }) => {
             >
                 {label}
             </Typography>
-            <LinearProgress />
+            <LinearProgress
+                sx={{
+                    backgroundColor: 'white',
+                    '& .MuiLinearProgress-bar': {
+                        backgroundColor: 'black',
+                    },
+                }}
+            />
         </Box>
     )
 }

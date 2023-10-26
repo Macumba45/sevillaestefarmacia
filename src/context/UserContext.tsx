@@ -6,6 +6,7 @@ import { getAuthenticatedToken } from '../../storage/storage'
 import ResponsiveAppBar from '@/components/MenuNavBar'
 import { LoadingContainer, NavContainer } from '@/app/styles'
 import CircularIndeterminate from '@/components/Loader'
+import AnimatedView from '../animations/AnimatedContainer'
 
 // Define el valor inicial del contexto como un objeto con las propiedades correctas.
 const initialContextValue = {
@@ -97,7 +98,7 @@ export const UserProvider = ({ children }: any) => {
         }
     }, [user])
 
-    if (isLoading) {
+    if (!user && isLoading) {
         return (
             <LoadingContainer>
                 <CircularIndeterminate />

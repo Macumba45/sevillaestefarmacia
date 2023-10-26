@@ -66,14 +66,13 @@ const ModalOrderTime: FC<Props> = ({
         return dateObject >= today
     })
 
-    let buttonName: string
-    if (document.location.pathname === '/dashboard') {
-        buttonName = 'Actualizar cita'
-        isEditing = true
-    } else {
-        buttonName = 'Reservar cita'
-        isEditing = false
-    }
+    const buttonName =
+        typeof window.document !== 'undefined' &&
+        document.location.pathname === '/dashboard'
+            ? 'Actualizar cita'
+            : 'Reservar cita'
+    isEditing = buttonName === 'Actualizar cita'
+
     const getAvailableHours = (selectedDate: string) => {
         if (!selectedDate) {
             return []

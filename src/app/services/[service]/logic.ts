@@ -1,10 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { getServiceDetails } from '@/services/service'
 import { stripePayment } from '@/services/stripe'
 import { stripePaymentInProgress } from '@/services/payments'
 import { useRouter } from 'next/navigation'
 import { Services, User } from '../../../../types/types'
-import { getUserInfo } from '@/services/user'
 
 export const useLogicPageServicesDetail = () => {
     const router = useRouter()
@@ -29,15 +28,6 @@ export const useLogicPageServicesDetail = () => {
         setDateId(newDateIr)
         setHourId('')
     }
-    const getUserInfoDetails = async () => {
-        setIsLoading(true)
-        const userInfo = await getUserInfo()
-        setCurrentUser(userInfo as User)
-    }
-
-    useEffect(() => {
-        getUserInfoDetails()
-    }, [])
 
     const contactWhatsApp = () => {
         let message = ''

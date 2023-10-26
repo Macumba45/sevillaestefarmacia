@@ -1,7 +1,8 @@
 'use client'
 
-import { FC, memo, useEffect } from 'react'
-import { UserProvider } from '@/context/UserContext'
+import { FC, memo, useContext, useEffect } from 'react'
+import { UserContext, UserProvider } from '@/context/UserContext'
+import CircularIndeterminate from '@/components/Loader'
 import { Button, Fab } from '@mui/material'
 import Dermo from '@/components/DescriptionServices/dermo'
 import Nutricion from '@/components/DescriptionServices/nutricion'
@@ -17,6 +18,7 @@ import {
     ButtonContainerServices,
     Container,
     FloatButtonContainer,
+    LoadingContainer,
     Picture,
     PictureContainer,
     SubtitleServices,
@@ -45,6 +47,8 @@ const Page: FC<Props> = ({ params }) => {
         onDateIdChange,
     } = useLogicPageServicesDetail()
 
+    const { user } = useContext(UserContext)
+
     useEffect(() => {
         fetchServiceDetails(params.service)
     }, [])
@@ -68,36 +72,49 @@ const Page: FC<Props> = ({ params }) => {
         }
     }
 
+    if (!user && isLoading && !serviceData) {
+        return (
+            <LoadingContainer>
+                <CircularIndeterminate />
+            </LoadingContainer>
+        )
+    }
     return (
         <UserProvider>
             <Container backgrouncolor="#ebf0f6">
-                <TitleServices
-                    widthtitle="320px"
-                    widthtitledesktop={
-                        serviceData?.title ===
-                        'SISTEMA PERSONALIZADO DE DOSIFICACIÓN'
-                            ? '600px'
-                            : '500px'
-                    }
-                >
-                    {serviceData?.title}
-                </TitleServices>
-                <SubtitleServices>{serviceData?.subtitle}</SubtitleServices>
-                <div
-                    style={{
-                        display: 'flex',
-                    }}
-                >
-                    {
-                        getDescriptionById(
-                            serviceData?.id as string
-                        ) as JSX.Element
-                    }
+                <AnimatedView>
+                    <TitleServices
+                        widthtitle="320px"
+                        widthtitledesktop={
+                            serviceData?.title ===
+                            'SISTEMA PERSONALIZADO DE DOSIFICACIÓN'
+                                ? '600px'
+                                : '500px'
+                        }
+                    >
+                        {serviceData?.title}
+                    </TitleServices>
+                </AnimatedView>
+                <AnimatedView>
+                    <SubtitleServices>{serviceData?.subtitle}</SubtitleServices>
+                </AnimatedView>
+                <AnimatedView>
+                    <div
+                        style={{
+                            display: 'flex',
+                        }}
+                    >
+                        {
+                            getDescriptionById(
+                                serviceData?.id as string
+                            ) as JSX.Element
+                        }
 
-                    <PictureContainer>
-                        <Picture src={serviceData?.urlPicture} />
-                    </PictureContainer>
-                </div>
+                        <PictureContainer>
+                            <Picture src={serviceData?.urlPicture} />
+                        </PictureContainer>
+                    </div>
+                </AnimatedView>
                 <AnimatedView>
                     <ButtonContainerServices>
                         {serviceData?.id === 'clo0dzomz0001xy04kzkxay49' ||
