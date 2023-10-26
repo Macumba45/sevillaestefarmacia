@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import Popover from '@mui/material/Popover'
 
 export const MainContainer = styled.div`
     width: 100%;
@@ -17,10 +18,13 @@ export const ContainerServices = styled.div`
     width: 100%;
     background-color: #f6f6eb;
     display: none;
-    flex-direction: column;
-    margin-left: 8rem;
+    margin-bottom: 2rem;
     @media screen and (min-width: 899px) {
         display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        flex-direction: column;
     }
 `
 

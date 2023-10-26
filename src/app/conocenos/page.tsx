@@ -1,8 +1,14 @@
 'use client'
 
-import { FC, memo, useEffect } from 'react'
+import { FC, memo, useEffect, useState } from 'react'
 import { UserProvider } from '@/context/UserContext'
 import mapa from '../../assets/CONOCENOS/mapa.png'
+import dermo from '../../assets/HOME/DERMO_FOTO.jpg'
+import nutricion from '../../assets/HOME/NUTRICION_FOTO.jpg'
+import laboratorio from '../../assets/HOME/LABORATORIO_FOTO.jpg'
+import spd from '../../assets/HOME/SPD_FOTO.jpg'
+import pendientes from '../../assets/HOME/PENDIENTES_BEBE_FOTO.png'
+import veterinaria from '../../assets/HOME/VETERINARIA_FOTO_02.jpg'
 import {
     ImgMap,
     ContainerData,
@@ -15,6 +21,8 @@ import {
     MainContainer,
     ServiciosDesktop,
 } from './styles'
+import { Button, Tooltip } from '@mui/material'
+import HoverMotion from '@/animations/hover'
 
 const Conocenos: FC = () => {
     const address = 'Calle Periodista Juan Tribuna, 8 (Local 2) 41019 Sevilla'
@@ -32,6 +40,44 @@ const Conocenos: FC = () => {
         document.title = 'Conócenos'
     }, [])
 
+    const services = [
+        {
+            name: 'Análisis de la piel',
+            img: dermo,
+            route: '/servicios/dermoanalisis',
+        },
+        {
+            name: 'Nutricion y clinica deportiva',
+            img: nutricion,
+            route: '/servicios/dermoanalisis',
+        },
+        {
+            name: 'Laboratorio de formulación magistral',
+            img: laboratorio,
+            route: '/servicios/dermoanalisis',
+        },
+        {
+            name: 'Sistema Personalizado de Dosificación',
+            img: spd,
+            route: '/servicios/dermoanalisis',
+        },
+        {
+            name: 'Pendientes Bebé',
+            img: pendientes,
+            route: '/servicios/dermoanalisis',
+        },
+        {
+            name: 'Farmacia Veterinaria',
+            img: veterinaria,
+            route: '/servicios/dermoanalisis',
+        },
+    ]
+
+    const handleServiceClick = (route: string) => {
+        window.location.href = route
+    }
+    const [hoveredService, setHoveredService] = useState(null)
+
     return (
         <UserProvider>
             <MainContainer>
@@ -45,11 +91,15 @@ const Conocenos: FC = () => {
                         style={{
                             display: 'flex',
                             justifyContent: 'space-between',
+                            marginBottom: '2rem',
+                            width: '100%',
                         }}
                     >
                         <div
                             style={{
                                 marginRight: '2rem',
+                                display: 'flex',
+                                flexDirection: 'column',
                             }}
                         >
                             <ParrafoServices>
@@ -62,43 +112,79 @@ const Conocenos: FC = () => {
                                 medicamentos como tratamiento y prevención en la
                                 localidad de Sevilla desde 1960.
                             </ParrafoServices>
+                            <ParrafoServices>
+                                Nos encontramos en:
+                                <br />
+                                Calle Periodista Juan Tribuna, 8 (Local 2) 41019
+                                Sevilla.
+                            </ParrafoServices>
                         </div>
                         <ContainerServices>
-                            <ServiciosDesktop
+                            <div>
+                                <ServiciosDesktop
+                                    style={{
+                                        textAlign: 'center',
+                                        marginBottom: '2rem',
+                                        fontWeight: 900,
+                                    }}
+                                >
+                                    NUESTROS SERVICIOS
+                                </ServiciosDesktop>
+                            </div>
+                            <div
                                 style={{
-                                    marginBottom: '1rem',
-                                    fontWeight: 800,
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    flexWrap: 'wrap',
+                                    width: '500px',
                                 }}
                             >
-                                NUESTROS SERVICIOS
-                            </ServiciosDesktop>
-                            <ServiciosDesktop>
-                                Análisis de la piel
-                            </ServiciosDesktop>
-                            <ServiciosDesktop>
-                                Farmacia Veterinaria
-                            </ServiciosDesktop>
-                            <ServiciosDesktop>
-                                Laboratorio de formulación magistral
-                            </ServiciosDesktop>
-                            <ServiciosDesktop>
-                                Nutrición y clínica deportiva
-                            </ServiciosDesktop>
-                            <ServiciosDesktop>Pendientes Bebé</ServiciosDesktop>
-                            <ServiciosDesktop>
-                                Profesionales expertos en medicamentos.
-                            </ServiciosDesktop>
-                            <ServiciosDesktop>
-                                Sistema Personalizado de Dosificación
-                            </ServiciosDesktop>
+                                {services.map((service, index) => (
+                                    <HoverMotion key={index}>
+                                        <div
+                                            key={index}
+                                            onMouseEnter={() =>
+                                                setHoveredService(
+                                                    service as any
+                                                )
+                                            }
+                                            onMouseLeave={() =>
+                                                setHoveredService(null)
+                                            }
+                                            onClick={() =>
+                                                handleServiceClick(
+                                                    service.route
+                                                )
+                                            }
+                                            style={{
+                                                position: 'relative', // Para que el "toolbar" esté posicionado en relación con este div
+                                                margin: '0.5rem',
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                flexDirection: 'column',
+                                            }}
+                                        >
+                                            <Tooltip title={service.name} arrow>
+                                                <img
+                                                    alt={service.name}
+                                                    src={service.img.src}
+                                                    style={{
+                                                        width: '120px',
+                                                        height: '120px',
+                                                        objectFit: 'cover',
+                                                        backgroundPosition:
+                                                            'center',
+                                                        cursor: 'pointer',
+                                                        borderRadius: '50%',
+                                                    }}
+                                                />
+                                            </Tooltip>
+                                        </div>
+                                    </HoverMotion>
+                                ))}
+                            </div>
                         </ContainerServices>
                     </div>
-                    <ParrafoServices>
-                        Nos encontramos en:
-                        <br />
-                        Calle Periodista Juan Tribuna, 8 (Local 2) 41019
-                        Sevilla.
-                    </ParrafoServices>
                     <MapContainer>
                         <a
                             style={{
