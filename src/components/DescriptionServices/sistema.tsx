@@ -153,7 +153,7 @@ const Sistema: FC<Props> = ({ price }) => {
             <Title>¿Cuál es el coste del servicio?</Title>
             <ParrafoServices>
                 El precio del servicio de SPD consiste en: una entrevista
-                personalizada + pack de 4 pastilleros a {price}.
+                personalizada + pack de 4 pastilleros a {price}€.
             </ParrafoServices>
             <Title>¿Necesitas más información?</Title>
             <ParrafoServices>

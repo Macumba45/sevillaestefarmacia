@@ -51,6 +51,7 @@ const Page: FC<Props> = ({ params }) => {
 
     useEffect(() => {
         fetchServiceDetails(params.service)
+
     }, [])
 
     const getDescriptionById = (serviceId: string) => {
@@ -111,7 +112,7 @@ const Page: FC<Props> = ({ params }) => {
                         widthtitle="320px"
                         widthtitledesktop={
                             serviceData?.title ===
-                            'SISTEMA PERSONALIZADO DE DOSIFICACIÓN'
+                                'SISTEMA PERSONALIZADO DE DOSIFICACIÓN'
                                 ? '600px'
                                 : '500px'
                         }
@@ -142,8 +143,8 @@ const Page: FC<Props> = ({ params }) => {
                 <AnimatedView>
                     <ButtonContainerServices>
                         {serviceData?.id === 'clo0dzomz0001xy04kzkxay49' ||
-                        serviceData?.id === 'clo0e0a200002xy04bwqml93h' ||
-                        serviceData?.id === 'clo0e1e3p0005xy04izx8uzqa' ? (
+                            serviceData?.id === 'clo0e0a200002xy04bwqml93h' ||
+                            serviceData?.id === 'clo0e1e3p0005xy04izx8uzqa' ? (
                             <HoverMotion>
                                 <Button
                                     onClick={handleOpen}
@@ -166,7 +167,7 @@ const Page: FC<Props> = ({ params }) => {
                                 </Button>
                             </HoverMotion>
                         ) : serviceData?.id === 'clo0e1q180006xy04pu96nyml' ||
-                          serviceData?.id === 'clo0e0mn50003xy040gwqse36' ? (
+                            serviceData?.id === 'clo0e0mn50003xy040gwqse36' ? (
                             <HoverMotion>
                                 <Button
                                     onClick={contactWhatsApp} // La función que maneja el chat de WhatsApp
