@@ -67,7 +67,10 @@ const Footer: FC = () => {
                 <PicturesLogos src={unionEuropea.src} />
             </ContainerLogos>
             <CopyRight>Copyright © 2023 Farmacia Sta Bárbara</CopyRight>
-            <DesignedBy href="https://gonzalolobocv.vercel.app/">
+            <DesignedBy
+                target="_blank"
+                href="https://gonzalolobocv.vercel.app/"
+            >
                 Designed by Macumba45
             </DesignedBy>
         </Container>

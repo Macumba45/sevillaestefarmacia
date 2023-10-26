@@ -124,7 +124,8 @@ const Conocenos: FC = () => {
                                     display: 'flex',
                                     justifyContent: 'center',
                                     flexWrap: 'wrap',
-                                    width: '500px',
+                                    maxWidth: '500px',
+                                    minWidth: '300px',
                                     margin: '0 auto',
                                     marginTop: '1rem',
                                 }}

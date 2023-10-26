@@ -7,6 +7,7 @@ import ResponsiveAppBar from '@/components/MenuNavBar'
 import { LoadingContainer, NavContainer } from '@/app/styles'
 import CircularIndeterminate from '@/components/Loader'
 import AnimatedView from '../animations/AnimatedContainer'
+import Footer from '@/components/Footer'
 
 // Define el valor inicial del contexto como un objeto con las propiedades correctas.
 const initialContextValue = {
@@ -124,6 +125,7 @@ export const UserProvider = ({ children }: any) => {
                 />
             </NavContainer>
             {children}
+            <Footer />
         </UserContext.Provider>
     )
 }

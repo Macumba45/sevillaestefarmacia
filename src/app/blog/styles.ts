@@ -54,7 +54,7 @@ export const Subtitle = styled.h2`
     padding: 0.5rem 3.5rem;
     border-radius: 30px;
     font-size: 1.5rem;
-    width: 100px;
+    width: 220px;
     text-align: center;
     color: white;
     background-color: black;

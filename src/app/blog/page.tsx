@@ -21,7 +21,7 @@ const Talleres: FC = () => {
         <UserProvider>
             <MainContainer>
                 <Title>Blogs</Title>
-                <Subtitle>¡No faltes!</Subtitle>
+                <Subtitle>Consejos farmacéuticos</Subtitle>
                 <Container>
                     {blogs?.map(blogs => (
                         <CardTallerOrBlog

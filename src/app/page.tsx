@@ -205,9 +205,9 @@ const Home: FC = () => {
                         widthTitleDesktop="378px"
                     />
                 </AnimatedView>
-                <AnimatedView>
+                {/* <AnimatedView>
                     <Footer />
-                </AnimatedView>
+                </AnimatedView> */}
             </div>
         </UserProvider>
     )

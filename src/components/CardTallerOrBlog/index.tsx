@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 import { Card, Button } from 'antd'
 import { Blogs, Talleres } from '../../../types/types'
 import HoverMotion from '../../animations/hover'
+import Link from 'next/link'
 
 const { Meta } = Card
 
@@ -11,6 +12,14 @@ interface Props {
     mode: ModalMode // Puedes usar 'talleres' o 'blogs' como valores
     taller?: Talleres
     blog?: Blogs
+}
+
+const route = (mode: ModalMode, id: string) => {
+    if (mode === 'taller') {
+        return `/talleres/${id}`
+    } else {
+        return `/blog/${id}`
+    }
 }
 
 const CardTallerOrBlog: FC<Props> = ({ mode, blog, taller }) => (
@@ -57,19 +66,28 @@ const CardTallerOrBlog: FC<Props> = ({ mode, blog, taller }) => (
                 }}
             >
                 <HoverMotion>
-                    <Button
-                        type="primary"
-                        style={{
-                            marginTop: '2rem',
-                            backgroundColor: 'transparent',
-                            color: 'black',
-                            boxShadow: 'none',
-                            fontFamily: 'Cormorant Garamond',
-                            border: '1px solid black',
-                        }}
+                    <Link
+                        href={route(
+                            mode,
+                            mode === 'blog'
+                                ? (blog?.id as string)
+                                : (taller?.id as string)
+                        )}
                     >
-                        Más información
-                    </Button>
+                        <Button
+                            type="primary"
+                            style={{
+                                marginTop: '2rem',
+                                backgroundColor: 'transparent',
+                                color: 'black',
+                                boxShadow: 'none',
+                                fontFamily: 'Cormorant Garamond',
+                                border: '1px solid black',
+                            }}
+                        >
+                            Más información
+                        </Button>
+                    </Link>
                 </HoverMotion>
             </div>
         </Card>
