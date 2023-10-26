@@ -11,50 +11,113 @@ const Sistema: FC<Props> = ({ price }) => {
             <Title>SISTEMA PERSONALIZADO DE DOSIFICACIÓN</Title>
             <ParrafoServices>SPD</ParrafoServices>
             <ParrafoServices>
-                Para lograrlo, disponemos de los conocimientos en constante
-                evolución, la experiencia y la cualificación necesaria para
-                analizar y valorar de forma personalizada todas las afecciones y
-                alteraciones de tu piel.
+                El Sistema Personalizado de Dosificación es un servicio que
+                tenemos disponible en Farmacia Sta. Bárbara (Sevilla Este) para
+                ayudar especialmente a nuestros familiares mayores que son
+                polimedicados o pacientes que tienen dificultad para seguir su
+                medicación.
             </ParrafoServices>
             <ParrafoServices>
-                Profesionales expertos en medicamentos. Farmacéuticos por
-                vocación y profesión, cosechamos con nuestros conocimientos la
-                mejora de la salud basándonos en la utilización medicamentos
-                como tratamiento y prevención en la localidad de Sevilla desde
-                1960.
+                Seguramente tengas en la familia o personas cercanas que se
+                quejan de &apos;tomo muchas pastillas y me hago un lío...&apos;.
+                Si es tu caso, te animamos a que sigas leyendo.
             </ParrafoServices>
-            <Title>Si tu piel está sana, tu piel lucirá bella.</Title>
-            <Title>¿Cómo lo hacemos?</Title>
+            <Title>¿Qué ventajas tiene este servicio?</Title>
             <ParrafoServices>
-                Las consultas se desarrollan en nuestro tranquilo y agradable
-                gabinete, además contamos con un equipo de dermoanálisis y
-                diversos materiales para valorar mejor los resultados obtenidos
-                y poder realizar una recomendación de una manera
-                individualizada.
+                - Mejora el control del paciente. - Facilita el cumplimiento del
+                tratamiento. - Reduce los errores en la toma de medicamentos. -
+                Evita problemas de manipulación y conservación. - Evita los
+                problemas de confusión e intoxicación involuntaria.
             </ParrafoServices>
-            <Title>¿Con qué marcas trabajamos?</Title>
+            <Title>¿ Para quién está indicado?</Title>
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                }}
+            >
+                <ParrafoServices
+                    style={{
+                        marginBottom: '0px',
+                        marginTop: '0px',
+                    }}
+                >
+                    - Pacientes con pautas de medicación complejas.
+                </ParrafoServices>
+                <ParrafoServices
+                    style={{
+                        marginBottom: '0px',
+                        marginTop: '0px',
+                    }}
+                >
+                    - Personas mayores polimedicadas que necesitan asesoramiento
+                    y/o viven solas.
+                </ParrafoServices>
+                <ParrafoServices
+                    style={{
+                        marginBottom: '0px',
+                        marginTop: '0px',
+                    }}
+                >
+                    - Pacientes en residencias de mayores.
+                </ParrafoServices>
+                <ParrafoServices
+                    style={{
+                        marginBottom: '0px',
+                        marginTop: '0px',
+                    }}
+                >
+                    - Pacientes que dependen de uno o varios cuidadores.
+                </ParrafoServices>
+            </div>
+            <Title>¿Qué encontrarás en este servicio?</Title>
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                }}
+            >
+                <ParrafoServices
+                    style={{
+                        marginBottom: '0px',
+                        marginTop: '0px',
+                    }}
+                >
+                    - Organización de la medicación en pastilleros desechables
+                    semanales (los pastilleros son de usar y tirar, no da lugar
+                    a equivocación, nos aseguramos que las dosis sean tomadas en
+                    el momento idóneo y de la forma correcta)
+                </ParrafoServices>
+                <ParrafoServices
+                    style={{
+                        marginBottom: '0px',
+                        marginTop: '0px',
+                    }}
+                >
+                    - Seguimiento de la medicación y comunicación con su
+                    médico/a de cabecera ante posibles cambios relacionados con
+                    su medicación.
+                </ParrafoServices>
+                <ParrafoServices
+                    style={{
+                        marginBottom: '0px',
+                        marginTop: '0px',
+                    }}
+                >
+                    - Realización del servicio bajo control farmacéutico y
+                    estrictos protocolos de seguridad.
+                </ParrafoServices>
+            </div>
+            <Title>¿Cuál es el coste del servicio?</Title>
             <ParrafoServices>
-                En Farmacia Sta. Bárbara trabajamos con las mejores marcas en
-                dermocosmética para el cuidado de la piel. Disponemos una amplia
-                variedad de productos para ofrecerte el que mejor se ajuste a
-                tus necesidades y presupuesto.
+                El precio del servicio de SPD consiste en: una entrevista
+                personalizada + pack de 4 pastilleros a {price}.
             </ParrafoServices>
+            <Title>¿Necesitas más información?</Title>
             <ParrafoServices>
-                Entre ellas se encuentran: Caudalie, Gema Herrerias, Bioderma,
-                Eucerin...
-            </ParrafoServices>
-            <ParrafoServices>
-                Además, con la tarjeta ‘CLUB’, conseguirás un 3% de descuento
-                acumulable en tus compras en parafarmacia.
-            </ParrafoServices>
-            <Title>¿Cuál es el coste del servicio? ¿Cómo pido cita?</Title>
-            <ParrafoServices>
-                Puedes pedir tu cita directamente en nuestra farmacia de manera
-                presencial, llamando al 682 73 42 37 o desde nuestra web previo
-                pago seleccionando día y hora de la cita.
-            </ParrafoServices>
-            <ParrafoServices>
-                El coste del servicio es de {price}€.
+                Puedes ponerte en contacto con Ana Lobo,farmacéutica adjunta
+                responsable del servicio, llamando al 682 73 42 37 o a través
+                del chat directo de la farmacia.
             </ParrafoServices>
         </Container>
     )

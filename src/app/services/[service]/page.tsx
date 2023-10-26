@@ -80,22 +80,18 @@ const Page: FC<Props> = ({ params }) => {
     return (
         <UserProvider>
             <Container backgrouncolor="#ebf0f6">
-                <AnimatedView>
-                    <TitleServices
-                        widthtitle="320px"
-                        widthtitledesktop={
-                            serviceData?.title ===
-                            'SISTEMA PERSONALIZADO DE DOSIFICACIÓN'
-                                ? '600px'
-                                : '500px'
-                        }
-                    >
-                        {serviceData?.title}
-                    </TitleServices>
-                </AnimatedView>
-                <AnimatedView>
-                    <SubtitleServices>{serviceData?.subtitle}</SubtitleServices>
-                </AnimatedView>
+                <TitleServices
+                    widthtitle="320px"
+                    widthtitledesktop={
+                        serviceData?.title ===
+                        'SISTEMA PERSONALIZADO DE DOSIFICACIÓN'
+                            ? '600px'
+                            : '500px'
+                    }
+                >
+                    {serviceData?.title}
+                </TitleServices>
+                <SubtitleServices>{serviceData?.subtitle}</SubtitleServices>
                 <div
                     style={{
                         display: 'flex',

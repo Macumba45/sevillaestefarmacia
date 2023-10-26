@@ -11,50 +11,44 @@ const Laboratorio: FC<Props> = ({ price }) => {
             <Title>LABORATORIO</Title>
             <ParrafoServices>Formulación Magistral</ParrafoServices>
             <ParrafoServices>
-                Para lograrlo, disponemos de los conocimientos en constante
-                evolución, la experiencia y la cualificación necesaria para
-                analizar y valorar de forma personalizada todas las afecciones y
-                alteraciones de tu piel.
+                ¿En Farmacia Sta. Bárbara (Sevilla Este) somos especialistas en
+                formulación magistral creando fórmulas y preparados oficiales
+                con más de 30 años de experiencia.
             </ParrafoServices>
             <ParrafoServices>
-                Profesionales expertos en medicamentos. Farmacéuticos por
-                vocación y profesión, cosechamos con nuestros conocimientos la
-                mejora de la salud basándonos en la utilización medicamentos
-                como tratamiento y prevención en la localidad de Sevilla desde
-                1960.
-            </ParrafoServices>
-            <Title>Si tu piel está sana, tu piel lucirá bella.</Title>
-            <Title>¿Cómo lo hacemos?</Title>
-            <ParrafoServices>
-                Las consultas se desarrollan en nuestro tranquilo y agradable
-                gabinete, además contamos con un equipo de dermoanálisis y
-                diversos materiales para valorar mejor los resultados obtenidos
-                y poder realizar una recomendación de una manera
-                individualizada.
-            </ParrafoServices>
-            <Title>¿Con qué marcas trabajamos?</Title>
-            <ParrafoServices>
-                En Farmacia Sta. Bárbara trabajamos con las mejores marcas en
-                dermocosmética para el cuidado de la piel. Disponemos una amplia
-                variedad de productos para ofrecerte el que mejor se ajuste a
-                tus necesidades y presupuesto.
+                Disponemos de laboratorio propio integrado en nuestra farmacia
+                para poder ofrecerte un servicio rápido, seguro y de calidad.
+                Formulamos todo tipo de medicamentos, tanto de uso humano como
+                veterinario.
             </ParrafoServices>
             <ParrafoServices>
-                Entre ellas se encuentran: Caudalie, Gema Herrerias, Bioderma,
-                Eucerin...
+                Rosario Acuña García,farmacéutica adjunta,formulista y
+                responsable de este servicio farmacéutico, estará a tu
+                disposición para cualquier duda que tengas con tu prescripción
+                del médico y/o para cualquier encargo de formulación.
+            </ParrafoServices>
+            <Title>¿Cuál es el coste y tiempos del servicio?</Title>
+            <Title>¿Cómo subo la receta?</Title>
+            <ParrafoServices>
+                Es importante dejar subida la receta a realizar donde podrás
+                incluir además comentarios adicionales. Nos pondremos en
+                contacto contigo una vez recibamos el pago e información de la
+                formula para concretar el coste final y plazos de entrega.
             </ParrafoServices>
             <ParrafoServices>
-                Además, con la tarjeta ‘CLUB’, conseguirás un 3% de descuento
-                acumulable en tus compras en parafarmacia.
-            </ParrafoServices>
-            <Title>¿Cuál es el coste del servicio? ¿Cómo pido cita?</Title>
-            <ParrafoServices>
-                Puedes pedir tu cita directamente en nuestra farmacia de manera
-                presencial, llamando al 682 73 42 37 o desde nuestra web previo
-                pago seleccionando día y hora de la cita.
+                El precio de la reserva del servicio es de {price}€.
             </ParrafoServices>
             <ParrafoServices>
-                El coste del servicio es de {price}€.
+                **El coste final de la formula y los tiempos de entrega
+                dependerá de la formula a preparar.
+            </ParrafoServices>
+            <ParrafoServices>
+                **En caso de disconformidad procederemos a la devolución del
+                coste de la reserva sin compromiso y al momento.
+            </ParrafoServices>
+            <ParrafoServices>
+                Si te surgen preguntas puedes ponerte en contacto con nosotros a
+                través de nuestro chat directo o llamando al 682 73 42 37.
             </ParrafoServices>
         </Container>
     )

@@ -24,7 +24,7 @@ export const Title = styled.h1<{
         font-size: 1.2rem;
         line-height: 1.5rem;
         margin-left: 2rem;
-        margin-bottom: 2rem;
+        margin-bottom: 1.5rem;
         margin-top: 2rem;
     }
 `
