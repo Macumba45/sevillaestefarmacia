@@ -40,15 +40,15 @@ const Home: FC = () => {
         setIsLoading(true)
     }, 500)
 
-    if (!isLoading) {
-        return (
-            <UserProvider>
-                <LoadingContainer>
-                    <CircularIndeterminate />
-                </LoadingContainer>
-            </UserProvider>
-        )
-    }
+    // if (!isLoading) {
+    //     return (
+
+    //         <LoadingContainer>
+    //             <CircularIndeterminate />
+    //         </LoadingContainer>
+
+    //     )
+    // }
     return (
         <UserProvider>
             <div>

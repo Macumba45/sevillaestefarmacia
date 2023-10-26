@@ -44,39 +44,38 @@ const Conocenos: FC = () => {
         {
             name: 'Análisis de la piel',
             img: dermo,
-            route: '/servicios/dermoanalisis',
+            route: `/services/clo0dzomz0001xy04kzkxay49`,
         },
         {
             name: 'Nutricion y clinica deportiva',
             img: nutricion,
-            route: '/servicios/dermoanalisis',
+            route: '/services/clo0e0a200002xy04bwqml93h',
         },
         {
             name: 'Laboratorio de formulación magistral',
             img: laboratorio,
-            route: '/servicios/dermoanalisis',
+            route: '/services/clo0e0mn50003xy040gwqse36',
         },
         {
             name: 'Sistema Personalizado de Dosificación',
             img: spd,
-            route: '/servicios/dermoanalisis',
+            route: '/services/clo0e17d30004xy04cjklg2px',
         },
         {
             name: 'Pendientes Bebé',
             img: pendientes,
-            route: '/servicios/dermoanalisis',
+            route: '/services/clo0e1e3p0005xy04izx8uzqa',
         },
         {
             name: 'Farmacia Veterinaria',
             img: veterinaria,
-            route: '/servicios/dermoanalisis',
+            route: '/services/clo0e1q180006xy04pu96nyml',
         },
     ]
 
     const handleServiceClick = (route: string) => {
         window.location.href = route
     }
-    const [hoveredService, setHoveredService] = useState(null)
 
     return (
         <UserProvider>
@@ -143,19 +142,6 @@ const Conocenos: FC = () => {
                                     <HoverMotion key={index}>
                                         <div
                                             key={index}
-                                            onMouseEnter={() =>
-                                                setHoveredService(
-                                                    service as any
-                                                )
-                                            }
-                                            onMouseLeave={() =>
-                                                setHoveredService(null)
-                                            }
-                                            onClick={() =>
-                                                handleServiceClick(
-                                                    service.route
-                                                )
-                                            }
                                             style={{
                                                 position: 'relative', // Para que el "toolbar" esté posicionado en relación con este div
                                                 margin: '0.5rem',
@@ -166,6 +152,11 @@ const Conocenos: FC = () => {
                                         >
                                             <Tooltip title={service.name} arrow>
                                                 <img
+                                                    onClick={() =>
+                                                        handleServiceClick(
+                                                            service.route
+                                                        )
+                                                    }
                                                     alt={service.name}
                                                     src={service.img.src}
                                                     style={{

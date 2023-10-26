@@ -70,13 +70,13 @@ const Page: FC<Props> = ({ params }) => {
         }
     }
 
-    if (isLoading) {
-        return (
-            <LoadingContainer>
-                <CircularIndeterminate />
-            </LoadingContainer>
-        )
-    }
+    // if (isLoading) {
+    //     return (
+    //         <LoadingContainer>
+    //             <CircularIndeterminate />
+    //         </LoadingContainer>
+    //     )
+    // }
     return (
         <UserProvider>
             <Container backgrouncolor="#ebf0f6">

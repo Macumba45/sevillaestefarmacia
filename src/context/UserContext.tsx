@@ -4,7 +4,8 @@ import { User } from '../../types/types'
 import { useRouter } from 'next/navigation'
 import { getAuthenticatedToken } from '../../storage/storage'
 import ResponsiveAppBar from '@/components/MenuNavBar'
-import { NavContainer } from '@/app/styles'
+import { LoadingContainer, NavContainer } from '@/app/styles'
+import CircularIndeterminate from '@/components/Loader'
 
 // Define el valor inicial del contexto como un objeto con las propiedades correctas.
 const initialContextValue = {
@@ -95,6 +96,14 @@ export const UserProvider = ({ children }: any) => {
             setButtonName('Iniciar sesión')
         }
     }, [user])
+
+    if (isLoading) {
+        return (
+            <LoadingContainer>
+                <CircularIndeterminate />
+            </LoadingContainer>
+        )
+    }
 
     return (
         <UserContext.Provider value={{ user }}>
