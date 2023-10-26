@@ -84,7 +84,7 @@ const Conocenos: FC = () => {
             <MainContainer>
                 <ContainerData>
                     <Title>
-                        FARMACIA SANTA BÁRBARA <br />
+                        FARMACIA STA. BÁRBARA <br />
                         SEVILLA ESTE
                     </Title>
 
