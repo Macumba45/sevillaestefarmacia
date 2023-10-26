@@ -9,7 +9,7 @@ const Sistema: FC<Props> = ({ price }) => {
     return (
         <Container>
             <Title>SISTEMA PERSONALIZADO DE DOSIFICACIÓN</Title>
-            <ParrafoServices>SPD</ParrafoServices>
+            <Title>SPD</Title>
             <ParrafoServices>
                 El Sistema Personalizado de Dosificación es un servicio que
                 tenemos disponible en Farmacia Sta. Bárbara (Sevilla Este) para
@@ -23,12 +23,54 @@ const Sistema: FC<Props> = ({ price }) => {
                 Si es tu caso, te animamos a que sigas leyendo.
             </ParrafoServices>
             <Title>¿Qué ventajas tiene este servicio?</Title>
-            <ParrafoServices>
-                - Mejora el control del paciente. - Facilita el cumplimiento del
-                tratamiento. - Reduce los errores en la toma de medicamentos. -
-                Evita problemas de manipulación y conservación. - Evita los
-                problemas de confusión e intoxicación involuntaria.
-            </ParrafoServices>
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                }}
+            >
+                <ParrafoServices
+                    style={{
+                        marginBottom: '0px',
+                        marginTop: '0px',
+                    }}
+                >
+                    - Mejora el control del paciente.
+                </ParrafoServices>
+                <ParrafoServices
+                    style={{
+                        marginBottom: '0px',
+                        marginTop: '0px',
+                    }}
+                >
+                    - Facilita el cumplimiento del tratamiento.
+                </ParrafoServices>
+                <ParrafoServices
+                    style={{
+                        marginBottom: '0px',
+                        marginTop: '0px',
+                    }}
+                >
+                    - Reduce los errores en la toma de medicamentos.
+                </ParrafoServices>
+                <ParrafoServices
+                    style={{
+                        marginBottom: '0px',
+                        marginTop: '0px',
+                    }}
+                >
+                    -Evita problemas de manipulación y conservación.
+                </ParrafoServices>
+                <ParrafoServices
+                    style={{
+                        marginBottom: '0px',
+                        marginTop: '0px',
+                    }}
+                >
+                    - Evita los problemas de confusión e intoxicación
+                    involuntaria.
+                </ParrafoServices>
+            </div>
             <Title>¿ Para quién está indicado?</Title>
             <div
                 style={{

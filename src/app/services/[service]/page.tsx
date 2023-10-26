@@ -2,7 +2,6 @@
 
 import { FC, memo, useEffect } from 'react'
 import { UserProvider } from '@/context/UserContext'
-import CircularIndeterminate from '@/components/Loader'
 import { Button, Fab } from '@mui/material'
 import Dermo from '@/components/DescriptionServices/dermo'
 import Nutricion from '@/components/DescriptionServices/nutricion'
@@ -18,7 +17,6 @@ import {
     ButtonContainerServices,
     Container,
     FloatButtonContainer,
-    LoadingContainer,
     Picture,
     PictureContainer,
     SubtitleServices,
@@ -70,13 +68,6 @@ const Page: FC<Props> = ({ params }) => {
         }
     }
 
-    // if (isLoading) {
-    //     return (
-    //         <LoadingContainer>
-    //             <CircularIndeterminate />
-    //         </LoadingContainer>
-    //     )
-    // }
     return (
         <UserProvider>
             <Container backgrouncolor="#ebf0f6">

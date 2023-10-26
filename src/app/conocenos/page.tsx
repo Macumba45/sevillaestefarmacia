@@ -9,6 +9,8 @@ import laboratorio from '../../assets/HOME/LABORATORIO_FOTO.jpg'
 import spd from '../../assets/HOME/SPD_FOTO.jpg'
 import pendientes from '../../assets/HOME/PENDIENTES_BEBE_FOTO.png'
 import veterinaria from '../../assets/HOME/VETERINARIA_FOTO_02.jpg'
+import { Tooltip } from '@mui/material'
+import HoverMotion from '@/animations/hover'
 import {
     ImgMap,
     ContainerData,
@@ -20,9 +22,9 @@ import {
     ContainerServices,
     MainContainer,
     ServiciosDesktop,
+    ContainerParrafos,
+    ContainerParrafosAndServices,
 } from './styles'
-import { Button, Tooltip } from '@mui/material'
-import HoverMotion from '@/animations/hover'
 
 const Conocenos: FC = () => {
     const address = 'Calle Periodista Juan Tribuna, 8 (Local 2) 41019 Sevilla'
@@ -82,29 +84,16 @@ const Conocenos: FC = () => {
             <MainContainer>
                 <ContainerData>
                     <Title>
-                        FARMACIA STA BÁRBARA <br />
+                        FARMACIA SANTA BÁRBARA <br />
                         SEVILLA ESTE
                     </Title>
 
-                    <div
-                        style={{
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            marginBottom: '2rem',
-                            width: '100%',
-                        }}
-                    >
-                        <div
-                            style={{
-                                marginRight: '2rem',
-                                display: 'flex',
-                                flexDirection: 'column',
-                            }}
-                        >
+                    <ContainerParrafosAndServices>
+                        <ContainerParrafos>
                             <ParrafoServices>
                                 Profesionales expertos en medicamentos.
-                                <br />
-                                <br />
+                            </ParrafoServices>
+                            <ParrafoServices>
                                 Farmacéuticos por vocación y profesión,
                                 cosechamos con nuestros conocimientos la mejora
                                 de la salud basándonos en la utilización
@@ -117,7 +106,7 @@ const Conocenos: FC = () => {
                                 Calle Periodista Juan Tribuna, 8 (Local 2) 41019
                                 Sevilla.
                             </ParrafoServices>
-                        </div>
+                        </ContainerParrafos>
                         <ContainerServices>
                             <div>
                                 <ServiciosDesktop
@@ -136,6 +125,8 @@ const Conocenos: FC = () => {
                                     justifyContent: 'center',
                                     flexWrap: 'wrap',
                                     width: '500px',
+                                    margin: '0 auto',
+                                    marginTop: '1rem',
                                 }}
                             >
                                 {services.map((service, index) => (
@@ -175,7 +166,7 @@ const Conocenos: FC = () => {
                                 ))}
                             </div>
                         </ContainerServices>
-                    </div>
+                    </ContainerParrafosAndServices>
                     <MapContainer>
                         <a
                             style={{

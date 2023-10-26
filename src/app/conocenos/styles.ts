@@ -6,6 +6,19 @@ export const MainContainer = styled.div`
     display: flex;
 `
 
+export const ContainerParrafosAndServices = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    flex-direction: column;
+
+    @media screen and (min-width: 899px) {
+        display: flex;
+        flex-direction: row;
+    }
+`
+
 export const ContainerData = styled.div`
     background-color: #f6f6eb;
     width: 100%;
@@ -14,17 +27,27 @@ export const ContainerData = styled.div`
     flex-direction: column;
 `
 
+export const ContainerParrafos = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin-right: 2rem;
+    justify-content: center;
+`
+
 export const ContainerServices = styled.div`
     width: 100%;
     background-color: #f6f6eb;
-    display: none;
+    display: flex;
+    flex-direction: column;
     margin-bottom: 2rem;
+    margin-top: 2rem;
     @media screen and (min-width: 899px) {
         display: flex;
         justify-content: center;
         align-items: center;
         flex-wrap: wrap;
         flex-direction: column;
+        margin-top: 0rem;
     }
 `
 
@@ -41,7 +64,7 @@ export const Title = styled.h1`
         font-size: 2rem;
         line-height: 3rem;
         margin-left: 4rem;
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
         margin-top: 3rem;
     }
 `
@@ -52,14 +75,14 @@ export const ParrafoServices = styled.p`
     text-align: left;
     line-height: 2rem;
     font-weight: 300;
-    margin: 0.5rem 1rem;
+    margin: 0.2rem 1rem;
     margin-left: 2rem;
     @media screen and (min-width: 899px) {
         font-size: 1.2rem;
         text-align: left;
         line-height: 2rem;
         margin-left: 4rem;
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
     }
 `
 
