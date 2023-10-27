@@ -1,19 +1,19 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { getServiceDetails } from '@/services/service'
 import { stripePayment } from '@/services/stripe'
 import { stripePaymentInProgress } from '@/services/payments'
 import { useRouter } from 'next/navigation'
 import { Services, User } from '../../../../types/types'
-import { getUserInfo } from '@/services/user'
+import { UserContext } from '../../../context/UserContext'
 
 export const useLogicPageServicesDetail = () => {
+    const { user } = useContext(UserContext)
     const router = useRouter()
     const [open, setOpen] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const [serviceData, setServiceData] = useState<Services>()
     const [hourId, setHourId] = useState<string>('')
     const [dateId, setDateId] = useState<string>('')
-    const [currentUser, setCurrentUser] = useState<User | null>(null)
     const handleOpen = () => setOpen(true)
     const handleClose = () => setOpen(false)
 
@@ -32,11 +32,11 @@ export const useLogicPageServicesDetail = () => {
         setHourId('')
     }
 
-    const getUserInfoDetails = async () => {
-        setIsLoading(true)
-        const userInfo = await getUserInfo()
-        setCurrentUser(userInfo as User)
-    }
+    // const getUserInfoDetails = async () => {
+    //     setIsLoading(true)
+    //     const userInfo = await getUserInfo()
+    //     setCurrentUser(userInfo as User)
+    // }
 
     const contactWhatsApp = () => {
         let message = ''
@@ -56,7 +56,7 @@ export const useLogicPageServicesDetail = () => {
 
     const handleReservarCita = async () => {
         try {
-            const userId = currentUser?.id as string
+            const userId = user?.id as string
             const serviceId = serviceData?.id as string
             const priceId = serviceData?.priceId as string
             const payment = await stripePaymentInProgress(
@@ -84,7 +84,5 @@ export const useLogicPageServicesDetail = () => {
         setHourId,
         setDateId,
         onDateIdChange,
-        getUserInfoDetails,
-        currentUser,
     }
 }

@@ -121,7 +121,8 @@ const ResponsiveAppBar: FC<Props> = ({
                                     }}
                                     href={page?.route as string}
                                     target={
-                                        page?.name === '' || 'Tarjeta CLUB'
+                                        page?.name === 'Tarjeta CLUB' ||
+                                        page?.name === ''
                                             ? '_blank'
                                             : ''
                                     }
@@ -295,10 +296,12 @@ const ResponsiveAppBar: FC<Props> = ({
                                                                 page.route as string
                                                             }
                                                             target={
-                                                                page.name ===
-                                                                    'Síguenos' ||
-                                                                '' ||
-                                                                'Tarjeta CLUB'
+                                                                page?.name ===
+                                                                    'Tarjeta CLUB' ||
+                                                                page?.name ===
+                                                                    '' ||
+                                                                page?.name ===
+                                                                    'Síguenos'
                                                                     ? '_blank'
                                                                     : ''
                                                             }

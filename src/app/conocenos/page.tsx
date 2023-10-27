@@ -1,7 +1,6 @@
 'use client'
 
-import { FC, memo, useContext, useEffect } from 'react'
-import { UserContext, UserProvider } from '../../context/UserContext'
+import { FC, memo, useEffect } from 'react'
 import mapa from '../../assets/CONOCENOS/mapa.png'
 import dermo from '../../assets/HOME/DERMO_FOTO.jpg'
 import nutricion from '../../assets/HOME/NUTRICION_FOTO.jpg'
@@ -82,117 +81,115 @@ const Conocenos: FC = () => {
     }
 
     return (
-        <UserProvider>
-            <MainContainer>
-                <ContainerData>
-                    <Title>
-                        FARMACIA STA. BÁRBARA <br />
-                        SEVILLA ESTE
-                    </Title>
-                    <SubtitleServices>Quiénes somos</SubtitleServices>
-                    <ContainerParrafosAndServices>
-                        <ContainerParrafos>
-                            <ParrafoServices>
-                                Profesionales expertos en medicamentos.
-                            </ParrafoServices>
-                            <ParrafoServices>
-                                Farmacéuticos por vocación y profesión,
-                                cosechamos con nuestros conocimientos la mejora
-                                de la salud basándonos en la utilización
-                                medicamentos como tratamiento y prevención en la
-                                localidad de Sevilla desde 1960.
-                            </ParrafoServices>
-                            <ParrafoServices>
-                                Nos encontramos en:
-                                <br />
-                                Calle Periodista Juan Tribuna, 8 (Local 2) 41019
-                                Sevilla.
-                            </ParrafoServices>
-                            <ParrafoServices>
-                                Horario: <br /> ·Lunes a viernes de 9:30h a
-                                21:30h <br /> ·Sábado de 9:30h a 14:.00h <br />{' '}
-                                ·Domingo de 10:00h a 14:00h
-                            </ParrafoServices>
-                        </ContainerParrafos>
-                        <ContainerServices>
-                            <div>
-                                <ServiciosDesktop
-                                    style={{
-                                        textAlign: 'center',
-                                        marginBottom: '2rem',
-                                        fontWeight: 900,
-                                    }}
-                                >
-                                    NUESTROS SERVICIOS
-                                </ServiciosDesktop>
-                            </div>
-                            <div
+        <MainContainer>
+            <ContainerData>
+                <Title>
+                    FARMACIA STA. BÁRBARA <br />
+                    SEVILLA ESTE
+                </Title>
+                <SubtitleServices>Quiénes somos</SubtitleServices>
+                <ContainerParrafosAndServices>
+                    <ContainerParrafos>
+                        <ParrafoServices>
+                            Profesionales expertos en medicamentos.
+                        </ParrafoServices>
+                        <ParrafoServices>
+                            Farmacéuticos por vocación y profesión, cosechamos
+                            con nuestros conocimientos la mejora de la salud
+                            basándonos en la utilización medicamentos como
+                            tratamiento y prevención en la localidad de Sevilla
+                            desde 1960.
+                        </ParrafoServices>
+                        <ParrafoServices>
+                            Nos encontramos en:
+                            <br />
+                            Calle Periodista Juan Tribuna, 8 (Local 2) 41019
+                            Sevilla.
+                        </ParrafoServices>
+                        <ParrafoServices>
+                            Horario: <br /> ·Lunes a viernes de 9:30h a 21:30h{' '}
+                            <br /> ·Sábado de 9:30h a 14:.00h <br /> ·Domingo de
+                            10:00h a 14:00h
+                        </ParrafoServices>
+                    </ContainerParrafos>
+                    <ContainerServices>
+                        <div>
+                            <ServiciosDesktop
                                 style={{
-                                    display: 'flex',
-                                    justifyContent: 'center',
-                                    flexWrap: 'wrap',
-                                    maxWidth: '500px',
-                                    minWidth: '300px',
-                                    margin: '0 auto',
-                                    marginTop: '1rem',
+                                    textAlign: 'center',
+                                    marginBottom: '2rem',
+                                    fontWeight: 900,
                                 }}
                             >
-                                {services.map((service, index) => (
-                                    <HoverMotion key={index}>
-                                        <div
-                                            key={index}
-                                            style={{
-                                                position: 'relative', // Para que el "toolbar" esté posicionado en relación con este div
-                                                margin: '0.5rem',
-                                                display: 'flex',
-                                                justifyContent: 'center',
-                                                flexDirection: 'column',
-                                            }}
-                                        >
-                                            <Tooltip title={service.name} arrow>
-                                                <img
-                                                    onClick={() =>
-                                                        handleServiceClick(
-                                                            service.route
-                                                        )
-                                                    }
-                                                    alt={service.name}
-                                                    src={service.img.src}
-                                                    style={{
-                                                        width: '120px',
-                                                        height: '120px',
-                                                        objectFit: 'cover',
-                                                        backgroundPosition:
-                                                            'center',
-                                                        cursor: 'pointer',
-                                                        borderRadius: '50%',
-                                                    }}
-                                                />
-                                            </Tooltip>
-                                        </div>
-                                    </HoverMotion>
-                                ))}
-                            </div>
-                        </ContainerServices>
-                    </ContainerParrafosAndServices>
-                    <MapContainer>
-                        <a
+                                NUESTROS SERVICIOS
+                            </ServiciosDesktop>
+                        </div>
+                        <div
                             style={{
-                                cursor: 'pointer',
                                 display: 'flex',
                                 justifyContent: 'center',
+                                flexWrap: 'wrap',
+                                maxWidth: '500px',
+                                minWidth: '300px',
+                                margin: '0 auto',
+                                marginTop: '1rem',
                             }}
-                            onClick={handleMapClick}
                         >
-                            <ImgMap src={mapa.src} />
-                        </a>
-                    </MapContainer>
-                    <VideoYoutubeContainer>
-                        <VideoYoutube src="https://www.youtube.com/embed/_06yXI-9Xa8?si=CQG2RMVU5dPU-U8h" />
-                    </VideoYoutubeContainer>
-                </ContainerData>
-            </MainContainer>
-        </UserProvider>
+                            {services.map((service, index) => (
+                                <HoverMotion key={index}>
+                                    <div
+                                        key={index}
+                                        style={{
+                                            position: 'relative', // Para que el "toolbar" esté posicionado en relación con este div
+                                            margin: '0.5rem',
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            flexDirection: 'column',
+                                        }}
+                                    >
+                                        <Tooltip title={service.name} arrow>
+                                            <img
+                                                onClick={() =>
+                                                    handleServiceClick(
+                                                        service.route
+                                                    )
+                                                }
+                                                alt={service.name}
+                                                src={service.img.src}
+                                                style={{
+                                                    width: '120px',
+                                                    height: '120px',
+                                                    objectFit: 'cover',
+                                                    backgroundPosition:
+                                                        'center',
+                                                    cursor: 'pointer',
+                                                    borderRadius: '50%',
+                                                }}
+                                            />
+                                        </Tooltip>
+                                    </div>
+                                </HoverMotion>
+                            ))}
+                        </div>
+                    </ContainerServices>
+                </ContainerParrafosAndServices>
+                <MapContainer>
+                    <a
+                        style={{
+                            cursor: 'pointer',
+                            display: 'flex',
+                            justifyContent: 'center',
+                        }}
+                        onClick={handleMapClick}
+                    >
+                        <ImgMap src={mapa.src} />
+                    </a>
+                </MapContainer>
+                <VideoYoutubeContainer>
+                    <VideoYoutube src="https://www.youtube.com/embed/_06yXI-9Xa8?si=CQG2RMVU5dPU-U8h" />
+                </VideoYoutubeContainer>
+            </ContainerData>
+        </MainContainer>
     )
 }
 

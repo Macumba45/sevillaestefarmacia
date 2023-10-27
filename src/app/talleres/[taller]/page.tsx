@@ -2,7 +2,6 @@
 
 import { FC, memo, useEffect } from 'react'
 import { useLogicTallerDetail } from './logic'
-import { UserProvider } from '@/context/UserContext'
 import {
     ButtonContainerServices,
     MainContainer,
@@ -53,43 +52,41 @@ const Page: FC<Props> = ({ params }) => {
         [document.title]
 
     return (
-        <UserProvider>
-            <MainContainer>
-                <Title>TALLERES</Title>
-                <Subtitle>¡No faltes!</Subtitle>
-                <PictureContainer>
-                    <Picture src={taller?.urlPicture} alt={taller?.title} />
-                </PictureContainer>
-                <TitleDetails>{taller?.title}</TitleDetails>
-                <SubtitleDetails>{taller?.subtitle}</SubtitleDetails>
-                <ParrafoServices>
-                    {formatTextWithLineBreaks(taller?.descripcion as string)}
-                </ParrafoServices>
-                <HoverMotion>
-                    <ButtonContainerServices>
-                        <Button
-                            onClick={contactWhatsApp}
-                            variant="outlined"
-                            sx={{
-                                color: 'white',
+        <MainContainer>
+            <Title>TALLERES</Title>
+            <Subtitle>¡No faltes!</Subtitle>
+            <PictureContainer>
+                <Picture src={taller?.urlPicture} alt={taller?.title} />
+            </PictureContainer>
+            <TitleDetails>{taller?.title}</TitleDetails>
+            <SubtitleDetails>{taller?.subtitle}</SubtitleDetails>
+            <ParrafoServices>
+                {formatTextWithLineBreaks(taller?.descripcion as string)}
+            </ParrafoServices>
+            <HoverMotion>
+                <ButtonContainerServices>
+                    <Button
+                        onClick={contactWhatsApp}
+                        variant="outlined"
+                        sx={{
+                            color: 'white',
+                            borderColor: 'black',
+                            width: '300px',
+                            borderRadius: '130px',
+                            backgroundColor: 'black',
+                            ':hover': {
+                                backgroundColor: 'white',
+                                color: 'black',
                                 borderColor: 'black',
-                                width: '300px',
-                                borderRadius: '130px',
-                                backgroundColor: 'black',
-                                ':hover': {
-                                    backgroundColor: 'white',
-                                    color: 'black',
-                                    borderColor: 'black',
-                                },
-                                fontFamily: 'Cormorant Garamond',
-                            }}
-                        >
-                            Reservar plaza
-                        </Button>
-                    </ButtonContainerServices>
-                </HoverMotion>
-            </MainContainer>
-        </UserProvider>
+                            },
+                            fontFamily: 'Cormorant Garamond',
+                        }}
+                    >
+                        Reservar plaza
+                    </Button>
+                </ButtonContainerServices>
+            </HoverMotion>
+        </MainContainer>
     )
 }
 

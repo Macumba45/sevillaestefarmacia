@@ -20,21 +20,19 @@ const Talleres: FC = () => {
     }, [])
 
     return (
-        <UserProvider>
-            <MainContainer>
-                <Title>TALLERES</Title>
-                <Subtitle>¡No faltes!</Subtitle>
-                <Container>
-                    {talleres?.map(taller => (
-                        <CardTallerOrBlog
-                            key={taller.id}
-                            mode="taller"
-                            taller={taller}
-                        />
-                    ))}
-                </Container>
-            </MainContainer>
-        </UserProvider>
+        <MainContainer>
+            <Title>TALLERES</Title>
+            <Subtitle>¡No faltes!</Subtitle>
+            <Container>
+                {talleres?.map(taller => (
+                    <CardTallerOrBlog
+                        key={taller.id}
+                        mode="taller"
+                        taller={taller}
+                    />
+                ))}
+            </Container>
+        </MainContainer>
     )
 }
 

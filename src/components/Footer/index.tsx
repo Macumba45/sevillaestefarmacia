@@ -74,7 +74,7 @@ const Footer: FC = () => {
                 target="_blank"
                 href="https://gonzalolobocv.vercel.app/"
             >
-                Designed by Macumba45
+                Developed by Macumba45
             </DesignedBy>
         </Container>
     )

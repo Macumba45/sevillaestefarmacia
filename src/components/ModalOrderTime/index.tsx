@@ -103,6 +103,8 @@ const ModalOrderTime: FC<Props> = ({
         return []
     }
 
+    console.log(isEditing)
+
     function formatDateString(inputDate: any) {
         // Parsea la fecha en formato "dd/mm/yyyy" a un objeto Date
         const parts = inputDate.split('/')

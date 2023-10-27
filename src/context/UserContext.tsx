@@ -22,6 +22,7 @@ export const UserProvider = ({ children }: any) => {
     const [isDrawerOpenButton, setIsDrawerOpenButton] = useState(false)
     const [buttonName, setButtonName] = useState('' as string)
     const router = useRouter()
+    const [isDashboardRoute, setIsDashboardRoute] = useState(false) // Variable para determinar si estás en la vista /dashboard
 
     const handleButtonClick = () => {
         if (user?.role === 'admin') {
@@ -57,6 +58,11 @@ export const UserProvider = ({ children }: any) => {
     const handleCloseNavMenu = () => {
         setIsDrawerOpen(false)
     }
+
+    useEffect(() => {
+        // Implementa la lógica para determinar si estás en la vista /dashboard
+        setIsDashboardRoute(window.location.pathname === '/dashboard')
+    }, [setIsDashboardRoute, isDashboardRoute])
 
     // Actualiza el valor del contexto con la información del usuario.
     const getUserInfo = async () => {
@@ -95,7 +101,7 @@ export const UserProvider = ({ children }: any) => {
         } else {
             setButtonName('Iniciar sesión')
         }
-    }, [user])
+    }, [user, isDashboardRoute, router])
 
     if (!user) {
         return (
@@ -107,23 +113,25 @@ export const UserProvider = ({ children }: any) => {
 
     return (
         <UserContext.Provider value={{ user }}>
-            <NavContainer>
-                <ResponsiveAppBar
-                    closeDrawer={() => closeDrawer()}
-                    handleButtonClick={() => handleButtonClick()}
-                    handleCloseNavMenu={() => handleCloseNavMenu()}
-                    handleOpenNavMenu={() => handleOpenNavMenu()}
-                    closeDrawerButton={() => closeDrawerButton()}
-                    isDrawerOpenButton={isDrawerOpenButton}
-                    isDrawerOpen={isDrawerOpen}
-                    buttonName={buttonName}
-                    onLogOut={() => logOut()}
-                    userRole={user as User}
-                    isLoading={isLoading}
-                />
-            </NavContainer>
+            {!isDashboardRoute && (
+                <NavContainer>
+                    <ResponsiveAppBar
+                        closeDrawer={() => closeDrawer()}
+                        handleButtonClick={() => handleButtonClick()}
+                        handleCloseNavMenu={() => handleCloseNavMenu()}
+                        handleOpenNavMenu={() => handleOpenNavMenu()}
+                        closeDrawerButton={() => closeDrawerButton()}
+                        isDrawerOpenButton={isDrawerOpenButton}
+                        isDrawerOpen={isDrawerOpen}
+                        buttonName={buttonName}
+                        onLogOut={() => logOut()}
+                        userRole={user as User}
+                        isLoading={isLoading}
+                    />
+                </NavContainer>
+            )}
             {children}
-            <Footer />
+            {!isDashboardRoute && <Footer />}
         </UserContext.Provider>
     )
 }

@@ -113,8 +113,6 @@ const Dashboard: FC<Props> = () => {
         blogData,
     } = useLogicDashboard()
 
-    const [selectedRoute, setSelectedRoute] = useState('')
-
     const itemsTop = [
         // { text: 'Dashboard', icon: <DashboardIcon />, route: 'dashboard' },
         {
@@ -155,12 +153,12 @@ const Dashboard: FC<Props> = () => {
                         '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)',
                 }}
             >
-                <Link style={undefined} href="/">
+                <Link href="" style={undefined}>
                     <img
                         src={logo.src}
                         alt="Farmacia Santa Bárbara"
                         style={{
-                            width: 176,
+                            width: 175,
                             objectFit: 'cover',
                             backgroundSize: 'cover',
                         }}
@@ -175,7 +173,6 @@ const Dashboard: FC<Props> = () => {
                         <ListItemButton
                             onClick={() => {
                                 changeRoute(item.route)
-                                setSelectedRoute(item.route) // Actualiza la opción seleccionada
                             }}
                         >
                             <ListItemIcon>{item.icon}</ListItemIcon>
@@ -425,6 +422,7 @@ const Dashboard: FC<Props> = () => {
                                 editDateAndHour={() =>
                                     editDateAndHour(paymentId, hourId, dateId)
                                 }
+                                isEditing={true}
                             />
                         </CitasContainer>
                     )}

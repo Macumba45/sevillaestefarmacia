@@ -108,7 +108,6 @@ export const getTallerById = async (id: string) => {
                 'Content-Type': 'application/json',
             },
         })
-        console.log(response)
         if (response.ok) {
             const data: Talleres = await response.json()
             return data
