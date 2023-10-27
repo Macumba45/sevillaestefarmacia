@@ -1,7 +1,8 @@
 'use client'
 
-import { FC, memo } from 'react'
+import { FC, memo, useContext, useEffect, useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { Props } from './types'
 import { pages, pagesMobile } from './utility'
 import Drawer from '@mui/material/Drawer'
@@ -14,6 +15,7 @@ import Container from '@mui/material/Container'
 import Button from '@mui/material/Button'
 import logo from '../../assets/logo/logo.png'
 import { ExpandMore as ExpandMoreIcon } from '@mui/icons-material'
+import { UserContext } from '@/context/UserContext'
 import {
     Accordion,
     AccordionDetails,
@@ -28,14 +30,32 @@ import {
     stylesNavBar,
 } from './styles'
 
-const ResponsiveAppBar: FC<Props> = ({
-    handleButtonClick,
-    isDrawerOpen,
-    handleOpenNavMenu,
-    handleCloseNavMenu,
-    buttonName,
-    userRole,
-}) => {
+const ResponsiveAppBar: FC<Props> = ({ userRole }) => {
+    const router = useRouter()
+    const { user } = useContext(UserContext)
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+
+    const handleButtonClick = () => {
+        if (user?.role === 'admin') {
+            // Redirigir directamente al dashboard
+            window.location.href = '/dashboard'
+        } else if (user) {
+            // Abrir el Drawer con las opciones de Perfil y Cerrar Sesión
+            window.location.href = '/perfil'
+        } else {
+            // Redirigir a la página de inicio de sesión
+            router.push('/auth/login')
+        }
+    }
+
+    const handleOpenNavMenu = () => {
+        setIsDrawerOpen(true)
+    }
+
+    const handleCloseNavMenu = () => {
+        setIsDrawerOpen(false)
+    }
+
     const logOut = () => {
         localStorage.removeItem('token')
         location.href = '/auth/login'
@@ -172,7 +192,9 @@ const ResponsiveAppBar: FC<Props> = ({
                                         variant="contained"
                                         onClick={handleButtonClick}
                                     >
-                                        {buttonName}
+                                        {userRole?.role === 'admin'
+                                            ? 'Ir al dashboard'
+                                            : 'Mi perfil'}
                                     </Button>
                                 )}
 

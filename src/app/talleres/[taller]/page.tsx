@@ -2,6 +2,10 @@
 
 import { FC, memo, useEffect } from 'react'
 import { useLogicTallerDetail } from './logic'
+import LayoutNavFooter from '@/layout/layout'
+import React from 'react'
+import { Button } from '@mui/material'
+import HoverMotion from '@/animations/hover'
 import {
     ButtonContainerServices,
     MainContainer,
@@ -13,9 +17,6 @@ import {
     Title,
     TitleDetails,
 } from './styles'
-import React from 'react'
-import { Button } from '@mui/material'
-import HoverMotion from '@/animations/hover'
 
 interface Props {
     params: {
@@ -52,41 +53,43 @@ const Page: FC<Props> = ({ params }) => {
         [document.title]
 
     return (
-        <MainContainer>
-            <Title>TALLERES</Title>
-            <Subtitle>¡No faltes!</Subtitle>
-            <PictureContainer>
-                <Picture src={taller?.urlPicture} alt={taller?.title} />
-            </PictureContainer>
-            <TitleDetails>{taller?.title}</TitleDetails>
-            <SubtitleDetails>{taller?.subtitle}</SubtitleDetails>
-            <ParrafoServices>
-                {formatTextWithLineBreaks(taller?.descripcion as string)}
-            </ParrafoServices>
-            <HoverMotion>
-                <ButtonContainerServices>
-                    <Button
-                        onClick={contactWhatsApp}
-                        variant="outlined"
-                        sx={{
-                            color: 'white',
-                            borderColor: 'black',
-                            width: '300px',
-                            borderRadius: '130px',
-                            backgroundColor: 'black',
-                            ':hover': {
-                                backgroundColor: 'white',
-                                color: 'black',
+        <LayoutNavFooter>
+            <MainContainer>
+                <Title>TALLERES</Title>
+                <Subtitle>¡No faltes!</Subtitle>
+                <PictureContainer>
+                    <Picture src={taller?.urlPicture} alt={taller?.title} />
+                </PictureContainer>
+                <TitleDetails>{taller?.title}</TitleDetails>
+                <SubtitleDetails>{taller?.subtitle}</SubtitleDetails>
+                <ParrafoServices>
+                    {formatTextWithLineBreaks(taller?.descripcion as string)}
+                </ParrafoServices>
+                <HoverMotion>
+                    <ButtonContainerServices>
+                        <Button
+                            onClick={contactWhatsApp}
+                            variant="outlined"
+                            sx={{
+                                color: 'white',
                                 borderColor: 'black',
-                            },
-                            fontFamily: 'Cormorant Garamond',
-                        }}
-                    >
-                        Reservar plaza
-                    </Button>
-                </ButtonContainerServices>
-            </HoverMotion>
-        </MainContainer>
+                                width: '300px',
+                                borderRadius: '130px',
+                                backgroundColor: 'black',
+                                ':hover': {
+                                    backgroundColor: 'white',
+                                    color: 'black',
+                                    borderColor: 'black',
+                                },
+                                fontFamily: 'Cormorant Garamond',
+                            }}
+                        >
+                            Reservar plaza
+                        </Button>
+                    </ButtonContainerServices>
+                </HoverMotion>
+            </MainContainer>
+        </LayoutNavFooter>
     )
 }
 

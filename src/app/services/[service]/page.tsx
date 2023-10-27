@@ -1,6 +1,6 @@
 'use client'
 
-import { FC, memo, useEffect } from 'react'
+import { FC, memo, useContext, useEffect } from 'react'
 import CircularIndeterminate from '@/components/Loader'
 import { Button, Fab } from '@mui/material'
 import Dermo from '@/components/DescriptionServices/dermo'
@@ -13,6 +13,7 @@ import ModalOrderTime from '@/components/ModalOrderTime'
 import { useLogicPageServicesDetail } from './logic'
 import HoverMotion from '@/animations/hover'
 import AnimatedView from '@/animations/AnimatedContainer'
+import LayoutNavFooter from '@/layout/layout'
 import {
     ButtonContainerServices,
     Container,
@@ -25,6 +26,7 @@ import {
     VideoYoutube,
     VideoYoutubeContainer,
 } from './styles'
+import { UserContext } from '@/context/UserContext'
 
 interface Props {
     params: {
@@ -33,6 +35,8 @@ interface Props {
 }
 
 const Page: FC<Props> = ({ params }) => {
+    const { user } = useContext(UserContext)
+
     const {
         contactWhatsApp,
         fetchServiceDetails,
@@ -110,62 +114,89 @@ const Page: FC<Props> = ({ params }) => {
     }
 
     return (
-        <Container backgrouncolor={backgrouncolor}>
-            <AnimatedView>
-                <TitleServices
-                    widthtitle="320px"
-                    widthtitledesktop={
-                        serviceData?.title ===
-                        'SISTEMA PERSONALIZADO DE DOSIFICACIÓN'
-                            ? '600px'
-                            : '500px'
-                    }
-                >
-                    {serviceData?.title}
-                </TitleServices>
-            </AnimatedView>
-            <AnimatedView>
-                <SubtitleServices>{serviceData?.subtitle}</SubtitleServices>
-            </AnimatedView>
-            <AnimatedView>
-                <div
-                    style={{
-                        display: 'flex',
-                    }}
-                >
-                    {
-                        getDescriptionById(
-                            serviceData?.id as string
-                        ) as JSX.Element
-                    }
+        <LayoutNavFooter>
+            <Container backgrouncolor={backgrouncolor}>
+                <AnimatedView>
+                    <TitleServices
+                        widthtitle="320px"
+                        widthtitledesktop={
+                            serviceData?.title ===
+                            'SISTEMA PERSONALIZADO DE DOSIFICACIÓN'
+                                ? '600px'
+                                : '500px'
+                        }
+                    >
+                        {serviceData?.title}
+                    </TitleServices>
+                </AnimatedView>
+                <AnimatedView>
+                    <SubtitleServices>{serviceData?.subtitle}</SubtitleServices>
+                </AnimatedView>
+                <AnimatedView>
+                    <div
+                        style={{
+                            display: 'flex',
+                        }}
+                    >
+                        {
+                            getDescriptionById(
+                                serviceData?.id as string
+                            ) as JSX.Element
+                        }
 
-                    <PictureContainer>
-                        <Picture src={serviceData?.urlPicture} />
-                    </PictureContainer>
-                </div>
-            </AnimatedView>
-            <AnimatedView>
-                <ButtonContainerServices>
+                        <PictureContainer>
+                            <Picture src={serviceData?.urlPicture} />
+                        </PictureContainer>
+                    </div>
+                </AnimatedView>
+                <AnimatedView>
+                    <ButtonContainerServices>
+                        <HoverMotion>
+                            <Button
+                                disabled={!user}
+                                onClick={() => {
+                                    if (buttonName === 'Reservar cita') {
+                                        handleOpen()
+                                    } else if (
+                                        buttonName === 'Pagar el servicio'
+                                    ) {
+                                        handleReservarCita()
+                                    } else if (buttonName === 'Contacta') {
+                                        contactWhatsApp()
+                                    } else if (
+                                        buttonName === 'Solcitar presupuesto'
+                                    ) {
+                                        contactWhatsApp()
+                                    }
+                                }}
+                                variant="outlined"
+                                sx={{
+                                    color: 'white',
+                                    borderColor: 'black',
+                                    width: '300px',
+                                    borderRadius: '130px',
+                                    backgroundColor: !user ? 'gray' : 'black',
+                                    ':hover': {
+                                        backgroundColor: 'white',
+                                        color: 'black',
+                                        borderColor: 'black',
+                                    },
+                                    fontFamily: 'Cormorant Garamond',
+                                }}
+                            >
+                                {buttonName}
+                            </Button>
+                        </HoverMotion>
+                    </ButtonContainerServices>
+                </AnimatedView>
+                <FloatButtonContainer>
                     <HoverMotion>
-                        <Button
-                            onClick={() => {
-                                if (buttonName === 'Reservar cita') {
-                                    handleOpen()
-                                } else if (buttonName === 'Pagar el servicio') {
-                                    handleReservarCita()
-                                } else if (buttonName === 'Contacta') {
-                                    contactWhatsApp()
-                                } else if (
-                                    buttonName === 'Solcitar presupuesto'
-                                ) {
-                                    contactWhatsApp()
-                                }
-                            }}
-                            variant="outlined"
+                        <Fab
+                            onClick={contactWhatsApp}
                             sx={{
                                 color: 'white',
                                 borderColor: 'black',
-                                width: '300px',
+                                width: '100%',
                                 borderRadius: '130px',
                                 backgroundColor: 'black',
                                 ':hover': {
@@ -175,62 +206,42 @@ const Page: FC<Props> = ({ params }) => {
                                 },
                                 fontFamily: 'Cormorant Garamond',
                             }}
+                            variant="extended"
                         >
-                            {buttonName}
-                        </Button>
+                            ¿Te asesoramos?
+                        </Fab>
                     </HoverMotion>
-                </ButtonContainerServices>
-            </AnimatedView>
-            <FloatButtonContainer>
-                <HoverMotion>
-                    <Fab
-                        onClick={contactWhatsApp}
-                        sx={{
-                            color: 'white',
-                            borderColor: 'black',
-                            width: '100%',
-                            borderRadius: '130px',
-                            backgroundColor: 'black',
-                            ':hover': {
-                                backgroundColor: 'white',
-                                color: 'black',
-                                borderColor: 'black',
-                            },
-                            fontFamily: 'Cormorant Garamond',
-                        }}
-                        variant="extended"
-                    >
-                        ¿Te asesoramos?
-                    </Fab>
-                </HoverMotion>
-            </FloatButtonContainer>
-            <ModalOrderTime
-                isLoading={isLoading}
-                dates={serviceData?.dates}
-                handleClose={handleClose}
-                open={open}
-                handleReservarCita={handleReservarCita}
-                onHourIdChange={newHourId => {
-                    setHourId(newHourId)
-                }}
-                onDateIdChange={onDateIdChange}
-                isEditing={false}
-            />
-            <AnimatedView>
-                <VideoYoutubeContainer>
-                    <VideoYoutube
-                        style={{
-                            display: serviceData?.urlVideo ? 'block' : 'none',
-                        }}
-                        width="560"
-                        height="315"
-                        src={serviceData?.urlVideo}
-                        title="YouTube video player"
-                        allowFullScreen
-                    ></VideoYoutube>
-                </VideoYoutubeContainer>
-            </AnimatedView>
-        </Container>
+                </FloatButtonContainer>
+                <ModalOrderTime
+                    isLoading={isLoading}
+                    dates={serviceData?.dates}
+                    handleClose={handleClose}
+                    open={open}
+                    handleReservarCita={handleReservarCita}
+                    onHourIdChange={newHourId => {
+                        setHourId(newHourId)
+                    }}
+                    onDateIdChange={onDateIdChange}
+                    isEditing={false}
+                />
+                <AnimatedView>
+                    <VideoYoutubeContainer>
+                        <VideoYoutube
+                            style={{
+                                display: serviceData?.urlVideo
+                                    ? 'block'
+                                    : 'none',
+                            }}
+                            width="560"
+                            height="315"
+                            src={serviceData?.urlVideo}
+                            title="YouTube video player"
+                            allowFullScreen
+                        ></VideoYoutube>
+                    </VideoYoutubeContainer>
+                </AnimatedView>
+            </Container>
+        </LayoutNavFooter>
     )
 }
 

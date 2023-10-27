@@ -3,7 +3,7 @@ import { getServiceDetails } from '@/services/service'
 import { stripePayment } from '@/services/stripe'
 import { stripePaymentInProgress } from '@/services/payments'
 import { useRouter } from 'next/navigation'
-import { Services, User } from '../../../../types/types'
+import { Services } from '../../../../types/types'
 import { UserContext } from '../../../context/UserContext'
 
 export const useLogicPageServicesDetail = () => {
@@ -31,12 +31,6 @@ export const useLogicPageServicesDetail = () => {
         setDateId(newDateIr)
         setHourId('')
     }
-
-    // const getUserInfoDetails = async () => {
-    //     setIsLoading(true)
-    //     const userInfo = await getUserInfo()
-    //     setCurrentUser(userInfo as User)
-    // }
 
     const contactWhatsApp = () => {
         let message = ''

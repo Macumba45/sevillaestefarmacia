@@ -2,8 +2,9 @@
 
 import { FC, memo, useEffect } from 'react'
 import { useLogicBlog } from './logic'
-import { MainContainer, Title, Subtitle, Container } from './styles'
+import LayoutNavFooter from '@/layout/layout'
 import CardTallerOrBlog from '@/components/CardTallerOrBlog'
+import { MainContainer, Title, Subtitle, Container } from './styles'
 
 const Talleres: FC = () => {
     const { fetchBlogs, blogs } = useLogicBlog()
@@ -19,15 +20,21 @@ const Talleres: FC = () => {
     }, [])
 
     return (
-        <MainContainer>
-            <Title>BLOG</Title>
-            <Subtitle>Consejos farmacéuticos</Subtitle>
-            <Container>
-                {blogs?.map(blogs => (
-                    <CardTallerOrBlog key={blogs.id} mode="blog" blog={blogs} />
-                ))}
-            </Container>
-        </MainContainer>
+        <LayoutNavFooter>
+            <MainContainer>
+                <Title>BLOG</Title>
+                <Subtitle>Consejos farmacéuticos</Subtitle>
+                <Container>
+                    {blogs?.map(blogs => (
+                        <CardTallerOrBlog
+                            key={blogs.id}
+                            mode="blog"
+                            blog={blogs}
+                        />
+                    ))}
+                </Container>
+            </MainContainer>
+        </LayoutNavFooter>
     )
 }
 

@@ -2,7 +2,10 @@
 
 import { FC, memo, useEffect } from 'react'
 import { useLogicBlogDetail } from './logic'
+import React from 'react'
+import { Button } from '@mui/material'
 import HoverMotion from '@/animations/hover'
+import LayoutNavFooter from '@/layout/layout'
 import { MainContainer, Title, Subtitle } from '../styles'
 import {
     PictureContainer,
@@ -12,8 +15,6 @@ import {
     ParrafoServices,
     ButtonContainerServices,
 } from './styles'
-import React from 'react'
-import { Button } from '@mui/material'
 
 interface Props {
     params: {
@@ -49,44 +50,48 @@ const Page: FC<Props> = ({ params }) => {
         [document.title]
 
     return (
-        <MainContainer>
-            <Title>Blog</Title>
-            <Subtitle>Consejos farmacéuticos</Subtitle>
-            <PictureContainer>
-                <Picture
-                    src={blogDetails?.urlPicture}
-                    alt={blogDetails?.title}
-                />
-            </PictureContainer>
-            <TitleDetails>{blogDetails?.title}</TitleDetails>
-            <SubtitleDetails>{blogDetails?.subtitle}</SubtitleDetails>
-            <ParrafoServices>
-                {formatTextWithLineBreaks(blogDetails?.descripcion as string)}
-            </ParrafoServices>
-            <HoverMotion>
-                <ButtonContainerServices>
-                    <Button
-                        onClick={contactWhatsApp}
-                        variant="outlined"
-                        sx={{
-                            color: 'white',
-                            borderColor: 'black',
-                            width: '300px',
-                            borderRadius: '130px',
-                            backgroundColor: 'black',
-                            ':hover': {
-                                backgroundColor: 'white',
-                                color: 'black',
+        <LayoutNavFooter>
+            <MainContainer>
+                <Title>Blog</Title>
+                <Subtitle>Consejos farmacéuticos</Subtitle>
+                <PictureContainer>
+                    <Picture
+                        src={blogDetails?.urlPicture}
+                        alt={blogDetails?.title}
+                    />
+                </PictureContainer>
+                <TitleDetails>{blogDetails?.title}</TitleDetails>
+                <SubtitleDetails>{blogDetails?.subtitle}</SubtitleDetails>
+                <ParrafoServices>
+                    {formatTextWithLineBreaks(
+                        blogDetails?.descripcion as string
+                    )}
+                </ParrafoServices>
+                <HoverMotion>
+                    <ButtonContainerServices>
+                        <Button
+                            onClick={contactWhatsApp}
+                            variant="outlined"
+                            sx={{
+                                color: 'white',
                                 borderColor: 'black',
-                            },
-                            fontFamily: 'Cormorant Garamond',
-                        }}
-                    >
-                        Reservar plaza
-                    </Button>
-                </ButtonContainerServices>
-            </HoverMotion>
-        </MainContainer>
+                                width: '300px',
+                                borderRadius: '130px',
+                                backgroundColor: 'black',
+                                ':hover': {
+                                    backgroundColor: 'white',
+                                    color: 'black',
+                                    borderColor: 'black',
+                                },
+                                fontFamily: 'Cormorant Garamond',
+                            }}
+                        >
+                            Reservar plaza
+                        </Button>
+                    </ButtonContainerServices>
+                </HoverMotion>
+            </MainContainer>
+        </LayoutNavFooter>
     )
 }
 
