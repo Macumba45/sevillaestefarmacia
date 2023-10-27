@@ -20,13 +20,16 @@ import InstagramIcon from '@mui/icons-material/Instagram'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
 
 const Footer: FC = () => {
+    const callNumber = () => {
+        window.open('tel:682734237')
+    }
     return (
         <Container>
             <ConocenosText>Contacto</ConocenosText>
             <EmailFooter href="mailto:hola@sevillaestefarmacia.com">
                 hola@sevillaestefarmacia.com
             </EmailFooter>
-            <PhoneNumer>682 734 237</PhoneNumer>
+            <PhoneNumer onClick={callNumber}>682 734 237</PhoneNumer>
             <LogosSocialMedia>
                 <InstagramIcon
                     onClick={() =>

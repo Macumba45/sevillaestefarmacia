@@ -29,6 +29,7 @@ interface Props {
     widthTitleDesktop?: string
     flexDirection?: string
     imagePosition?: 'top' | 'bottom' // Prop para controlar la posición de la imagen
+    alt: string
 }
 
 const Services: FC<Props> = ({
@@ -45,6 +46,7 @@ const Services: FC<Props> = ({
     widthTitleDesktop,
     flexDirection,
     imagePosition = 'bottom', // Valor predeterminado para imagePosition
+    alt,
 }) => {
     return (
         <div
@@ -55,7 +57,7 @@ const Services: FC<Props> = ({
             <ContainerDesktopServices flexdirection={flexDirection}>
                 {imagePosition === 'top' && ( // Renderiza la imagen arriba si imagePosition es 'top'
                     <ContainerImgServices>
-                        <ImgServices alt={picture} src={picture} />
+                        <ImgServices alt={alt} src={picture} />
                     </ContainerImgServices>
                 )}
                 <ContainerServices>

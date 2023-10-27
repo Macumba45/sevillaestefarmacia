@@ -8,8 +8,6 @@ interface Props {
 const Mascota: FC<Props> = ({ price }) => {
     return (
         <Container>
-            <Title>TU MASCOTA EN BUENAS MANOS</Title>
-            <ParrafoServices>Farmacia Veterinaria</ParrafoServices>
             <ParrafoServices>
                 En Farmacia Sta. Bárbara (Sevilla Este) Disponemos de productos
                 veterinarios para tus mascotas, perros, gatos, y animales como
@@ -30,6 +28,18 @@ const Mascota: FC<Props> = ({ price }) => {
             <ParrafoServices>
                 Consultas, encargos o pedidos, no dudes en escribirnos a través
                 del chat directo de la farmacia.
+            </ParrafoServices>
+            <Title>¿Tienes dudas?</Title>
+            <ParrafoServices>
+                Contacta con nosotros si tienes alguna pregunta sobre la
+                medicación que estés suministrándole a tu mascota o animal de
+                granja.
+            </ParrafoServices>
+            <Title>¿Quieres hacer un encargo?</Title>
+            <ParrafoServices>
+                Si necesitas hacer un encargo o pedido para ayudar a tu mascota,
+                no dudes en escribirnos a través del chat directo de la farmacia
+                haciendo click en ‘Contacta’.
             </ParrafoServices>
         </Container>
     )

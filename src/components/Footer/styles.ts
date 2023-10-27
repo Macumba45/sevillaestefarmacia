@@ -30,6 +30,8 @@ export const PhoneNumer = styled.p`
     color: white;
     text-align: center;
     margin-top: 1rem;
+    cursor: pointer;
+    text-decoration: none;
 `
 
 export const LogosSocialMedia = styled.div`

@@ -1,6 +1,6 @@
 'use client'
 
-import { FC, memo, useEffect, useState } from 'react'
+import { FC, memo, useEffect } from 'react'
 import { UserProvider } from '@/context/UserContext'
 import mapa from '../../assets/CONOCENOS/mapa.png'
 import dermo from '../../assets/HOME/DERMO_FOTO.jpg'
@@ -24,13 +24,13 @@ import {
     ServiciosDesktop,
     ContainerParrafos,
     ContainerParrafosAndServices,
+    SubtitleServices,
 } from './styles'
 
 const Conocenos: FC = () => {
     const address = 'Calle Periodista Juan Tribuna, 8 (Local 2) 41019 Sevilla'
 
     const handleMapClick = () => {
-        // Reemplaza "YOUR_API_KEY" con tu clave de API de Google Maps (si es necesario)
         const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
             address
         )}`
@@ -87,6 +87,7 @@ const Conocenos: FC = () => {
                         FARMACIA STA. BÁRBARA <br />
                         SEVILLA ESTE
                     </Title>
+                    <SubtitleServices>Quiénes somos</SubtitleServices>
 
                     <ContainerParrafosAndServices>
                         <ContainerParrafos>
@@ -105,6 +106,11 @@ const Conocenos: FC = () => {
                                 <br />
                                 Calle Periodista Juan Tribuna, 8 (Local 2) 41019
                                 Sevilla.
+                            </ParrafoServices>
+                            <ParrafoServices>
+                                Horario: <br /> ·Lunes a viernes de 9:30h a
+                                21:30h <br /> ·Sábado de 9:30h a 14:.00h <br />{' '}
+                                ·Domingo de 10:00h a 14:00h
                             </ParrafoServices>
                         </ContainerParrafos>
                         <ContainerServices>

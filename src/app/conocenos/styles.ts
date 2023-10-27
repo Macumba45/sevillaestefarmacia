@@ -52,14 +52,14 @@ export const ContainerServices = styled.div`
 `
 
 export const Title = styled.h1`
-    font-size: 1.5rem;
+    font-size: 2rem;
     margin-bottom: 1rem;
     color: black;
     line-height: 2.5rem;
     margin-left: 2rem;
     margin-right: 2rem;
     font-weight: 500;
-    margin-top: 2rem;
+    margin-top: 5rem;
     @media screen and (min-width: 899px) {
         font-size: 3rem;
         line-height: 3rem;
@@ -129,5 +129,24 @@ export const VideoYoutube = styled.iframe`
     @media screen and (min-width: 899px) {
         width: 800px;
         height: 500px;
+    }
+`
+
+export const SubtitleServices = styled.h2`
+    padding: 0.5rem 1rem;
+    border-radius: 30px;
+    font-size: 1.5rem;
+    width: 250px;
+    text-align: center;
+    margin: 3rem auto;
+    color: white;
+    background-color: black;
+    line-height: 2rem;
+    @media screen and (min-width: 899px) {
+        font-size: 2rem;
+        line-height: 2rem;
+        padding: 0.5rem 3rem;
+        margin-bottom: 5rem;
+        width: 300px;
     }
 `

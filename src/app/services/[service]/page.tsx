@@ -45,13 +45,14 @@ const Page: FC<Props> = ({ params }) => {
         serviceData,
         setHourId,
         onDateIdChange,
+        getUserInfoDetails,
     } = useLogicPageServicesDetail()
 
     const { user } = useContext(UserContext)
 
     useEffect(() => {
         fetchServiceDetails(params.service)
-
+        getUserInfoDetails()
     }, [])
 
     const getDescriptionById = (serviceId: string) => {
@@ -74,27 +75,35 @@ const Page: FC<Props> = ({ params }) => {
     }
 
     let backgrouncolor: string
+    let buttonName: string
     switch (serviceData?.id) {
         case 'clo0dzomz0001xy04kzkxay49':
             backgrouncolor = '#ebf0f6'
+            buttonName = 'Reservar cita'
             break
         case 'clo0e0a200002xy04bwqml93h':
             backgrouncolor = '#F6F6EB'
+            buttonName = 'Reservar cita'
             break
         case 'clo0e0mn50003xy040gwqse36':
             backgrouncolor = '#ebf0f6'
+            buttonName = 'Solcitar presupuesto'
             break
         case 'clo0e17d30004xy04cjklg2px':
             backgrouncolor = '#F6F6EB'
+            buttonName = 'Pagar el servicio'
             break
         case 'clo0e1e3p0005xy04izx8uzqa':
             backgrouncolor = '#ebf0f6'
+            buttonName = 'Reservar cita'
             break
         case 'clo0e1q180006xy04pu96nyml':
             backgrouncolor = '#F6F6EB'
+            buttonName = 'Contacta'
             break
         default:
             backgrouncolor = '#ebf0f6'
+            buttonName = 'Reservar cita'
     }
 
     if (!user && isLoading && !serviceData) {
@@ -112,7 +121,7 @@ const Page: FC<Props> = ({ params }) => {
                         widthtitle="320px"
                         widthtitledesktop={
                             serviceData?.title ===
-                                'SISTEMA PERSONALIZADO DE DOSIFICACIÓN'
+                            'SISTEMA PERSONALIZADO DE DOSIFICACIÓN'
                                 ? '600px'
                                 : '500px'
                         }
@@ -142,76 +151,37 @@ const Page: FC<Props> = ({ params }) => {
                 </AnimatedView>
                 <AnimatedView>
                     <ButtonContainerServices>
-                        {serviceData?.id === 'clo0dzomz0001xy04kzkxay49' ||
-                            serviceData?.id === 'clo0e0a200002xy04bwqml93h' ||
-                            serviceData?.id === 'clo0e1e3p0005xy04izx8uzqa' ? (
-                            <HoverMotion>
-                                <Button
-                                    onClick={handleOpen}
-                                    variant="outlined"
-                                    sx={{
-                                        color: 'white',
+                        <HoverMotion>
+                            <Button
+                                onClick={() => {
+                                    if (buttonName === 'Reservar cita') {
+                                        handleOpen()
+                                    } else if (
+                                        buttonName === 'Pagar el servicio'
+                                    ) {
+                                        handleReservarCita()
+                                    } else if (buttonName === 'Contacta') {
+                                        contactWhatsApp()
+                                    }
+                                }}
+                                variant="outlined"
+                                sx={{
+                                    color: 'white',
+                                    borderColor: 'black',
+                                    width: '300px',
+                                    borderRadius: '130px',
+                                    backgroundColor: 'black',
+                                    ':hover': {
+                                        backgroundColor: 'white',
+                                        color: 'black',
                                         borderColor: 'black',
-                                        width: '300px',
-                                        borderRadius: '130px',
-                                        backgroundColor: 'black',
-                                        ':hover': {
-                                            backgroundColor: 'white',
-                                            color: 'black',
-                                            borderColor: 'black',
-                                        },
-                                        fontFamily: 'Cormorant Garamond',
-                                    }}
-                                >
-                                    Reservar cita
-                                </Button>
-                            </HoverMotion>
-                        ) : serviceData?.id === 'clo0e1q180006xy04pu96nyml' ||
-                            serviceData?.id === 'clo0e0mn50003xy040gwqse36' ? (
-                            <HoverMotion>
-                                <Button
-                                    onClick={contactWhatsApp} // La función que maneja el chat de WhatsApp
-                                    variant="outlined"
-                                    sx={{
-                                        color: 'white',
-                                        borderColor: 'black',
-                                        width: '300px',
-                                        borderRadius: '130px',
-                                        backgroundColor: 'black',
-                                        ':hover': {
-                                            backgroundColor: 'white',
-                                            color: 'black',
-                                            borderColor: 'black',
-                                        },
-                                        fontFamily: 'Cormorant Garamond',
-                                    }}
-                                >
-                                    Solicitar presupuesto
-                                </Button>
-                            </HoverMotion>
-                        ) : (
-                            <HoverMotion>
-                                <Button
-                                    onClick={handleReservarCita}
-                                    variant="outlined"
-                                    sx={{
-                                        color: 'white',
-                                        borderColor: 'black',
-                                        width: '300px',
-                                        borderRadius: '130px',
-                                        backgroundColor: 'black',
-                                        ':hover': {
-                                            backgroundColor: 'white',
-                                            color: 'black',
-                                            borderColor: 'black',
-                                        },
-                                        fontFamily: 'Cormorant Garamond',
-                                    }}
-                                >
-                                    Pagar el servicio
-                                </Button>
-                            </HoverMotion>
-                        )}
+                                    },
+                                    fontFamily: 'Cormorant Garamond',
+                                }}
+                            >
+                                {buttonName}
+                            </Button>
+                        </HoverMotion>
                     </ButtonContainerServices>
                 </AnimatedView>
                 <FloatButtonContainer>
@@ -251,6 +221,11 @@ const Page: FC<Props> = ({ params }) => {
                 <AnimatedView>
                     <VideoYoutubeContainer>
                         <VideoYoutube
+                            style={{
+                                display: serviceData?.urlVideo
+                                    ? 'block'
+                                    : 'none',
+                            }}
                             width="560"
                             height="315"
                             src={serviceData?.urlVideo}

@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-import Avatar from '@mui/material/Avatar'
 import IconButton from '@mui/material/IconButton'
 import CallIcon from '@mui/icons-material/Call'
 import MailOutlineIcon from '@mui/icons-material/MailOutline'

@@ -8,10 +8,8 @@ interface Props {
 const Nutricion: FC<Props> = ({ price }) => {
     return (
         <Container>
-            <Title>NUTRICIÓN CLÍNICA Y DEPORTIVA</Title>
-            <ParrafoServices>Nutrición</ParrafoServices>
             <ParrafoServices>
-                ¿Elena Sánchez Ortiz responsable del Servicio de Nutrición
+                Elena Sánchez Ortiz responsable del Servicio de Nutrición
                 Clínica y Deportiva en Farmacia Sta. Bárbara (Sevilla Este),
                 define una filosofía de nutrición en dos conceptos:
             </ParrafoServices>

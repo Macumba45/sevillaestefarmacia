@@ -221,3 +221,10 @@ export const DescriptionNutricion = styled.p`
         width: 70%;
     }
 `
+
+export const FloatButtonContainer = styled.div`
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 9999;
+`

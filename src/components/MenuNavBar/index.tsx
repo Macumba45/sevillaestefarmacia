@@ -272,7 +272,13 @@ const ResponsiveAppBar: FC<Props> = ({
                                                         </AccordionDetails>
                                                     </Accordion>
                                                 ) : (
-                                                    <Button>
+                                                    <Button
+                                                        sx={{
+                                                            display: 'flex',
+                                                            justifyContent:
+                                                                'flex-start',
+                                                        }}
+                                                    >
                                                         <Link
                                                             style={{
                                                                 textDecoration:

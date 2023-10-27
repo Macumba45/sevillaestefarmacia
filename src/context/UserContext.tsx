@@ -6,7 +6,6 @@ import { getAuthenticatedToken } from '../../storage/storage'
 import ResponsiveAppBar from '@/components/MenuNavBar'
 import { LoadingContainer, NavContainer } from '@/app/styles'
 import CircularIndeterminate from '@/components/Loader'
-import AnimatedView from '../animations/AnimatedContainer'
 import Footer from '@/components/Footer'
 
 // Define el valor inicial del contexto como un objeto con las propiedades correctas.

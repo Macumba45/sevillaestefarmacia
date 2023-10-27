@@ -44,7 +44,7 @@ export const pagesMobile = [
         name: 'Servicios',
         subpages: [
             {
-                name: 'Analisis piel',
+                name: 'Análisis piel',
                 route: '/services/clo0dzomz0001xy04kzkxay49',
             },
             {
@@ -77,7 +77,7 @@ export const pagesMobile = [
         route: '/talleres',
     },
     {
-        name: 'Nuestro Blog',
+        name: 'Blog',
 
         route: '/blog',
     },

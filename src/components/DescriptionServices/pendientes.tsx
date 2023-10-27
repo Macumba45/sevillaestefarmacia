@@ -8,10 +8,8 @@ interface Props {
 const Pendientes: FC<Props> = ({ price }) => {
     return (
         <Container>
-            <Title>SUS PRIMEROS PENDIENTES</Title>
-            <ParrafoServices>Pendientes bebé</ParrafoServices>
             <ParrafoServices>
-                ¿Nuestro servicio de pendientes para bebés y también para
+                Nuestro servicio de pendientes para bebés y también para
                 adultos, cuenta con un equipo sanitario de profesionales
                 farmacéuticos cualificado.
             </ParrafoServices>
@@ -25,18 +23,12 @@ const Pendientes: FC<Props> = ({ price }) => {
                 Hay una gran variedad de pendientes para poder elegir a tu
                 gusto.
             </Title>
-            <Title>¿Cuál es el coste del servicio?</Title>
-            <Title>¿Cómo pido cita?</Title>
-
+            <Title>¿Cuál es el coste del servicio? ¿Cómo pido cita?</Title>
+            <Title></Title>
             <ParrafoServices>
                 El servicio de perforación de oreja es completamente gratuito.
                 Solo tendrás que elegir entre los dos tipos de materiales de
                 pendientes que tenemos disponibles.
-            </ParrafoServices>
-            <ParrafoServices>
-                Puedes pedir tu cita directamente en nuestra farmacia de manera
-                presencial, llamando al 682 73 42 37 o desde nuestra web previo
-                pago seleccionando día y hora de la cita.
             </ParrafoServices>
             <Title>¿Tienes dudas?</Title>
             <ParrafoServices>

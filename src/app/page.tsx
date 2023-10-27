@@ -6,7 +6,7 @@ import { UserProvider } from '@/context/UserContext'
 import HoverMotion from '@/animations/hover'
 import Services from '@/components/Services'
 import AnimatedView from '../animations/AnimatedContainer'
-import { Button } from '@mui/material'
+import { Button, Fab } from '@mui/material'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import {
     ButtonContainerConocenos,
@@ -16,6 +16,7 @@ import {
     HeaderServices,
     TitleHeaderServices,
     IconHeaderTitle,
+    FloatButtonContainer,
 } from './styles'
 
 const Home: FC = () => {
@@ -23,6 +24,18 @@ const Home: FC = () => {
         document.title = 'Farmacia Santa Bárbara'
     }),
         []
+
+    const contactWhatsApp = () => {
+        let message =
+            'Hola Farmacia Sta.Bárbara, me gustaría que me asesoraran sobre:'
+        const phoneNumber = '+34682296561'
+
+        const whatsappURL = `whatsapp://send?phone=${phoneNumber}&text=${encodeURIComponent(
+            message
+        )}`
+
+        window.open(whatsappURL)
+    }
 
     return (
         <UserProvider>
@@ -88,6 +101,7 @@ const Home: FC = () => {
                         buttonName="Más información"
                         backGrodunColor="#ebf0f6"
                         picture={'https://i.postimg.cc/mgcCxQyV/DERMO-FOTO.jpg'}
+                        alt="DERMOCOSMÉTICA FARMACÉUTICA"
                         widthMobile="230px"
                         widthDesktop="330px"
                         widthTitle="330px"
@@ -103,10 +117,11 @@ const Home: FC = () => {
                         buttonName="Más información"
                         backGrodunColor="#f6f6eb"
                         picture={
-                            'https://i.postimg.cc/Z52BRqJk/SEVILLA-ESTE-FARMACIA-STA-BARBARA-SERVICIO-NUTRICION-CLINICA-Y-DEPORTIVA-FOTO.jpg'
+                            'https://i.postimg.cc/pXxCPHbb/NUTRICION-FOTO.jpg'
                         }
+                        alt="NUTRICIÓN CLÍNICA Y DEPORTIVA"
                         widthDesktop="500px"
-                        widthTitle="350px"
+                        widthTitle="320px"
                         imagePosition="bottom"
                         widthMobile="350px"
                         flexDirection="row-reverse"
@@ -126,6 +141,7 @@ const Home: FC = () => {
                         picture={
                             'https://i.postimg.cc/nchq28sy/LABORATORIO-FOTO.jpg'
                         }
+                        alt="LABORATORIO"
                         widthMobile="320px"
                         widthDesktop="470px"
                         imagePosition="bottom"
@@ -142,6 +158,7 @@ const Home: FC = () => {
                         buttonName="Más información"
                         backGrodunColor="#f6f6eb"
                         picture={'https://i.postimg.cc/BZgx2Zv5/SPD-FOTO.jpg'}
+                        alt="SISTEMA PERSONALIZADO DE DOSIFICACIÓN"
                         widthMobile="350px"
                         widthDesktop="500px"
                         imagePosition="bottom"
@@ -163,6 +180,7 @@ const Home: FC = () => {
                         picture={
                             'https://i.postimg.cc/Z513JCfm/PENDIENTES-BEBE-FOTO.png'
                         }
+                        alt="SUS PRIMEROS PENDIENTES"
                         widthMobile="330px"
                         widthDesktop="610px"
                         widthTitle="330px"
@@ -181,6 +199,7 @@ const Home: FC = () => {
                         picture={
                             'https://i.postimg.cc/6qJ9fD1T/VETERINARIA-FOTO-02.jpg'
                         }
+                        alt="TU MASCOTA EN BUENAS MANOS"
                         widthMobile="320px"
                         widthDesktop="430px"
                         widthTitle="330px"
@@ -189,9 +208,29 @@ const Home: FC = () => {
                         widthTitleDesktop="378px"
                     />
                 </AnimatedView>
-                {/* <AnimatedView>
-                    <Footer />
-                </AnimatedView> */}
+                <FloatButtonContainer>
+                    <HoverMotion>
+                        <Fab
+                            onClick={contactWhatsApp}
+                            sx={{
+                                color: 'white',
+                                borderColor: 'black',
+                                width: '100%',
+                                borderRadius: '130px',
+                                backgroundColor: 'black',
+                                ':hover': {
+                                    backgroundColor: 'white',
+                                    color: 'black',
+                                    borderColor: 'black',
+                                },
+                                fontFamily: 'Cormorant Garamond',
+                            }}
+                            variant="extended"
+                        >
+                            ¿Te asesoramos?
+                        </Fab>
+                    </HoverMotion>
+                </FloatButtonContainer>
             </div>
         </UserProvider>
     )

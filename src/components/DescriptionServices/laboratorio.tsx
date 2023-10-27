@@ -8,10 +8,8 @@ interface Props {
 const Laboratorio: FC<Props> = ({ price }) => {
     return (
         <Container>
-            <Title>LABORATORIO</Title>
-            <ParrafoServices>Formulación Magistral</ParrafoServices>
             <ParrafoServices>
-                ¿En Farmacia Sta. Bárbara (Sevilla Este) somos especialistas en
+                En Farmacia Sta. Bárbara (Sevilla Este) somos especialistas en
                 formulación magistral creando fórmulas y preparados oficiales
                 con más de 30 años de experiencia.
             </ParrafoServices>
