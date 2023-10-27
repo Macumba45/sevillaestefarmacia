@@ -100,7 +100,7 @@ export const updateTaller = async (
     }
 }
 
-export const getTallerById = async (id: string): Promise<Talleres> => {
+export const getTallerById = async (id: string) => {
     try {
         const response = await fetch(`/api/talleres/getTallerById?id=${id}`, {
             method: 'GET',
@@ -108,12 +108,12 @@ export const getTallerById = async (id: string): Promise<Talleres> => {
                 'Content-Type': 'application/json',
             },
         })
+        console.log(response)
         if (response.ok) {
-            const data = await response.json()
+            const data: Talleres = await response.json()
             return data
         }
     } catch (error: any) {
         console.log(error)
     }
-    return {} as Talleres
 }

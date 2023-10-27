@@ -82,10 +82,18 @@ const CardTallerOrBlog: FC<Props> = ({ mode, blog, taller }) => (
                                 color: 'black',
                                 boxShadow: 'none',
                                 fontFamily: 'Cormorant Garamond',
-                                border: '1px solid black',
+                                padding: 0,
                             }}
                         >
-                            Más información
+                            <p
+                                style={{
+                                    textAlign: 'left',
+                                    textDecoration: 'underline',
+                                    fontSize: '1rem',
+                                }}
+                            >
+                                Más información
+                            </p>
                         </Button>
                     </Link>
                 </HoverMotion>

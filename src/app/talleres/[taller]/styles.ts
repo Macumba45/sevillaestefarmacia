@@ -77,8 +77,11 @@ export const PictureContainer = styled.div`
 `
 
 export const Picture = styled.img`
-    width: 80%;
+    width: 100%;
     object-fit: cover;
+    height: 100px;
+    margin-left: 2rem;
+    margin-right: 2rem;
     @media screen and (min-width: 899px) {
         width: 100%;
         margin-left: 4rem;
@@ -89,6 +92,8 @@ export const Picture = styled.img`
 
 export const TitleDetails = styled.h1`
     font-size: 2rem;
+    margin-top: 2rem;
+    margin-left: 2rem;
     margin-bottom: 1rem;
     color: black;
     text-align: left;
@@ -104,6 +109,7 @@ export const TitleDetails = styled.h1`
 export const SubtitleDetails = styled.h2`
     font-size: 2rem;
     margin-bottom: 1rem;
+    margin-left: 2rem;
     color: black;
     text-align: left;
     line-height: 2.5rem;
@@ -120,15 +126,27 @@ export const ParrafoServices = styled.p`
     color: black;
     text-align: left;
     line-height: 2rem;
+    margin-right: 2rem;
     font-weight: 300;
-    margin: 1rem 1rem;
     margin-left: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 4rem;
     @media screen and (min-width: 899px) {
         width: 70%;
         font-size: 1.2rem;
         text-align: left;
         line-height: 2rem;
-        margin-left: 2rem;
-        margin-bottom: 2rem;
+        margin-left: 4rem;
+        margin-bottom: 4rem;
+        margin-top: 2rem;
+    }
+`
+
+export const ButtonContainerServices = styled.div`
+    display: flex;
+    justify-content: center;
+    margin-bottom: 4rem;
+    @media screen and (min-width: 899px) {
+        margin-bottom: 4rem;
     }
 `

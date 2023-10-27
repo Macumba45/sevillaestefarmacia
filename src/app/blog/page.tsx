@@ -20,7 +20,7 @@ const Talleres: FC = () => {
     return (
         <UserProvider>
             <MainContainer>
-                <Title>Blogs</Title>
+                <Title>BLOG</Title>
                 <Subtitle>Consejos farmacéuticos</Subtitle>
                 <Container>
                     {blogs?.map(blogs => (
