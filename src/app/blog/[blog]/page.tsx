@@ -40,6 +40,13 @@ const Page: FC<Props> = ({ params }) => {
     const { getBlogDetailsData, blogDetails, contactWhatsApp } =
         useLogicBlogDetail()
 
+    useEffect(() => {
+        getBlogDetailsData(params.blog)
+    }, [])
+
+    useEffect(() => {
+        document.title = ` Blog | ${blogDetails?.title}`
+    }), [document.title]
 
     return (
         <UserProvider>

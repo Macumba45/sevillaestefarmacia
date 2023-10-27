@@ -47,6 +47,10 @@ const Page: FC<Props> = ({ params }) => {
         getTallerDetailsData(params.taller)
     }, [])
 
+    useEffect(() => {
+        document.title = ` Taller | ${taller?.title}`
+    }), [document.title]
+
     return (
         <UserProvider>
             <MainContainer>
