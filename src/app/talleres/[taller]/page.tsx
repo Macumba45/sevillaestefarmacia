@@ -42,16 +42,15 @@ function formatTextWithLineBreaks(text: string | undefined) {
 const Page: FC<Props> = ({ params }) => {
     const { getTallerDetailsData, taller, contactWhatsApp } =
         useLogicTallerDetail()
-    console.log(taller)
 
     useEffect(() => {
         getTallerDetailsData(params.taller)
     }, [])
 
     useEffect(() => {
-        if (document.title === undefined) {
-            document.title = `Taller de ${taller?.title}`
-        }
+
+        document.title = `Taller de ${taller?.title}`
+
     }, [document.title])
 
     return (
