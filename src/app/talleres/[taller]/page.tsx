@@ -49,7 +49,8 @@ const Page: FC<Props> = ({ params }) => {
 
     useEffect(() => {
         document.title = ` Taller | ${taller?.title}`
-    }), [document.title]
+    }),
+        [document.title]
 
     return (
         <UserProvider>

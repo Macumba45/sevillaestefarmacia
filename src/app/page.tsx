@@ -22,7 +22,8 @@ import {
 const Home: FC = () => {
     useEffect(() => {
         document.title = 'Farmacia Santa Bárbara -  Sevilla Este'
-    }), []
+    }),
+        []
 
     const contactWhatsApp = () => {
         let message =

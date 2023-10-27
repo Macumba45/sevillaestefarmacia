@@ -46,7 +46,8 @@ const Page: FC<Props> = ({ params }) => {
 
     useEffect(() => {
         document.title = ` Blog | ${blogDetails?.title}`
-    }), [document.title]
+    }),
+        [document.title]
 
     return (
         <UserProvider>

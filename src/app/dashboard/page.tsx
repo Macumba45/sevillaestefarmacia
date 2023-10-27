@@ -395,9 +395,9 @@ const Dashboard: FC<Props> = () => {
                                         openEditModalDateAndHour={() =>
                                             openEditModalDateAndHour(item)
                                         }
-                                    // unBookDate={() =>
-                                    //     deleteDate(item.dateId)
-                                    // }
+                                        // unBookDate={() =>
+                                        //     deleteDate(item.dateId)
+                                        // }
                                     />
                                 ))
                             )}

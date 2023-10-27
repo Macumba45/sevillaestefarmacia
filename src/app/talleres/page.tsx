@@ -15,9 +15,9 @@ const Talleres: FC = () => {
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
-            document.title = 'Talleres';
+            document.title = 'Talleres'
         }
-    }, []);
+    }, [])
 
     return (
         <UserProvider>

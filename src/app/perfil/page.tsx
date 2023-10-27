@@ -6,9 +6,9 @@ import { FC, memo, useEffect } from 'react'
 const Perfil: FC = () => {
     useEffect(() => {
         if (typeof window !== 'undefined') {
-            document.title = 'Mi perfil';
+            document.title = 'Mi perfil'
         }
-    }, []);
+    }, [])
 
     return (
         <UserProvider>

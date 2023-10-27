@@ -75,7 +75,7 @@ export const ParrafoServices = styled.p`
     text-align: left;
     line-height: 2rem;
     font-weight: 300;
-    margin: 0.2rem 1rem;
+    margin: 0.5rem 1rem;
     margin-left: 2rem;
     @media screen and (min-width: 899px) {
         font-size: 1.2rem;
@@ -138,15 +138,18 @@ export const SubtitleServices = styled.h2`
     font-size: 1.5rem;
     width: 250px;
     text-align: center;
-    margin: 3rem auto;
+    margin-left: 2rem;
+    margin-top: 2rem;
     color: white;
     background-color: black;
     line-height: 2rem;
+    margin-bottom: 3rem;
     @media screen and (min-width: 899px) {
         font-size: 2rem;
+        margin-left: 4rem;
         line-height: 2rem;
         padding: 0.5rem 3rem;
-        margin-bottom: 5rem;
+        margin-bottom: 3rem;
         width: 300px;
     }
 `
