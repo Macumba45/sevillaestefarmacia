@@ -4,7 +4,7 @@ import { stripePayment } from '@/services/stripe'
 import { stripePaymentInProgress } from '@/services/payments'
 import { useRouter } from 'next/navigation'
 import { Services, User } from '../../../../types/types'
-import { UserContext } from '@/context/UserContext'
+import { UserContext } from '../../../context/UserContext'
 import { getUserInfo } from '@/services/user'
 
 export const useLogicPageServicesDetail = () => {
@@ -84,5 +84,6 @@ export const useLogicPageServicesDetail = () => {
         setDateId,
         onDateIdChange,
         getUserInfoDetails,
+        currentUser,
     }
 }

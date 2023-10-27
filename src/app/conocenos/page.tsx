@@ -1,7 +1,7 @@
 'use client'
 
-import { FC, memo, useEffect } from 'react'
-import { UserProvider } from '@/context/UserContext'
+import { FC, memo, useContext, useEffect } from 'react'
+import { UserContext, UserProvider } from '../../context/UserContext'
 import mapa from '../../assets/CONOCENOS/mapa.png'
 import dermo from '../../assets/HOME/DERMO_FOTO.jpg'
 import nutricion from '../../assets/HOME/NUTRICION_FOTO.jpg'

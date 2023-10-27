@@ -35,7 +35,7 @@ export const UserProvider = ({ children }: any) => {
             router.push('/auth/login')
         }
     }
-
+    console.log('user', user)
     const logOut = () => {
         if (typeof window !== 'undefined') {
             localStorage.removeItem('token')

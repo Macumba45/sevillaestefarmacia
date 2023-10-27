@@ -2,7 +2,7 @@
 
 import { FC, memo, useEffect } from 'react'
 import { useLogicBlog } from './logic'
-import { UserProvider } from '@/context/UserContext'
+import { UserProvider } from '../../context/UserContext'
 import { MainContainer, Title, Subtitle, Container } from './styles'
 import CardTallerOrBlog from '@/components/CardTallerOrBlog'
 

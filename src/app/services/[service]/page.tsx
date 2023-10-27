@@ -1,7 +1,7 @@
 'use client'
 
 import { FC, memo, useContext, useEffect } from 'react'
-import { UserContext, UserProvider } from '@/context/UserContext'
+import { UserContext, UserProvider } from '../../../context/UserContext'
 import CircularIndeterminate from '@/components/Loader'
 import { Button, Fab } from '@mui/material'
 import Dermo from '@/components/DescriptionServices/dermo'
@@ -46,9 +46,8 @@ const Page: FC<Props> = ({ params }) => {
         setHourId,
         onDateIdChange,
         getUserInfoDetails,
+        currentUser,
     } = useLogicPageServicesDetail()
-
-    const { user } = useContext(UserContext)
 
     useEffect(() => {
         fetchServiceDetails(params.service)
@@ -106,13 +105,13 @@ const Page: FC<Props> = ({ params }) => {
             buttonName = 'Reservar cita'
     }
 
-    if (!user && isLoading && !serviceData) {
-        return (
-            <LoadingContainer>
-                <CircularIndeterminate />
-            </LoadingContainer>
-        )
-    }
+    // if (!serviceData) {
+    //     return (
+    //         <LoadingContainer>
+    //             <CircularIndeterminate />
+    //         </LoadingContainer>
+    //     )
+    // }
     return (
         <UserProvider>
             <Container backgrouncolor={backgrouncolor}>

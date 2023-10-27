@@ -3,7 +3,7 @@
 import { FC, memo, useEffect } from 'react'
 import CardTallerOrBlog from '@/components/CardTallerOrBlog'
 import { useLogicTaller } from './logic'
-import { UserProvider } from '@/context/UserContext'
+import { UserProvider } from '../../context/UserContext'
 import { MainContainer, Title, Subtitle, Container } from './styles'
 
 const Talleres: FC = () => {
