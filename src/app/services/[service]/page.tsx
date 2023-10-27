@@ -105,7 +105,7 @@ const Page: FC<Props> = ({ params }) => {
             buttonName = 'Reservar cita'
     }
 
-    // if (!serviceData) {
+    // if (!currentUser) {
     //     return (
     //         <LoadingContainer>
     //             <CircularIndeterminate />
