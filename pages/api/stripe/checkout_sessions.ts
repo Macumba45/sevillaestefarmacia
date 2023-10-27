@@ -24,7 +24,7 @@ export default async function handler(
                 mode: 'payment',
                 payment_method_types: ['card'],
                 success_url: `${req.headers.origin}/payment/${paymentId}`,
-                cancel_url: `${req.headers.origin}/?canceled=true`,
+                cancel_url: `${req.headers.origin}/payment/canceled`,
                 metadata: {
                     paymentId: paymentId,
                 },

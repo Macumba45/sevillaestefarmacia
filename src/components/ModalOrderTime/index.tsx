@@ -45,6 +45,8 @@ const ModalOrderTime: FC<Props> = ({
         hour: '',
         id: '',
     })
+    console.log('selectedHour', selectedHour)
+    console.log('selectedDate', selectedDate)
     const [dateIdMap, setDateIdMap] = useState<{ [date: string]: string }>({})
     const [payments, setPayments] = useState([])
     const today = new Date()
@@ -358,7 +360,10 @@ const ModalOrderTime: FC<Props> = ({
                         onClick={
                             isEditing ? editDateAndHour : handleReservarCita
                         }
-                        disabled={!selectedHour || !selectedDate}
+                        disabled={
+                            selectedDate.date.length === 0 ||
+                            selectedHour.hour!.length === 0
+                        }
                     >
                         {buttonName}
                     </LoadingButton>
