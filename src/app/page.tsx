@@ -1,8 +1,8 @@
 'use client'
 
-import { FC, memo, useContext, useEffect } from 'react'
+import { FC, memo, useEffect } from 'react'
 import Link from 'next/link'
-import { UserContext, UserProvider } from '../context/UserContext'
+import { UserProvider } from '../context/UserContext'
 import HoverMotion from '@/animations/hover'
 import Services from '@/components/Services'
 import AnimatedView from '../animations/AnimatedContainer'

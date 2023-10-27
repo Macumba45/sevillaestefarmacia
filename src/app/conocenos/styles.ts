@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import Popover from '@mui/material/Popover'
 
 export const MainContainer = styled.div`
     width: 100%;

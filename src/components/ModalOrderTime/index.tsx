@@ -45,8 +45,6 @@ const ModalOrderTime: FC<Props> = ({
         hour: '',
         id: '',
     })
-    console.log('selectedHour', selectedHour)
-    console.log('selectedDate', selectedDate)
     const [dateIdMap, setDateIdMap] = useState<{ [date: string]: string }>({})
     const [payments, setPayments] = useState([])
     const today = new Date()

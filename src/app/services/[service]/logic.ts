@@ -1,10 +1,9 @@
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { getServiceDetails } from '@/services/service'
 import { stripePayment } from '@/services/stripe'
 import { stripePaymentInProgress } from '@/services/payments'
 import { useRouter } from 'next/navigation'
 import { Services, User } from '../../../../types/types'
-import { UserContext } from '../../../context/UserContext'
 import { getUserInfo } from '@/services/user'
 
 export const useLogicPageServicesDetail = () => {

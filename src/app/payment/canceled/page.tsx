@@ -1,15 +1,9 @@
 'use client'
 
-import React, { FC, useEffect } from 'react'
+import React, { FC } from 'react'
 import { Box, Button } from '@mui/material'
 
-interface Props {
-    params: {
-        paymentId: string
-    }
-}
-
-const PaymentSuccessComponent: FC<Props> = ({ params }) => {
+const PaymentSuccessComponent: FC = () => {
     return (
         <Box
             display="flex"

@@ -1,5 +1,5 @@
 'use client'
-import { FC, memo, useEffect } from 'react'
+import { FC, memo, useEffect, useState } from 'react'
 import { useLogicDashboard } from './logic'
 import { getAuthenticatedToken } from '../../../storage/storage'
 import { Props } from './types'
@@ -113,22 +113,35 @@ const Dashboard: FC<Props> = () => {
         blogData,
     } = useLogicDashboard()
 
-    const itemsTop = [
-        { text: 'Dashboard', icon: <DashboardIcon />, route: 'dashboard' },
-        {
-            text: 'Mis clientes',
-            icon: <AccountCircleIcon />,
-            route: 'clientes',
-        },
+    const [selectedRoute, setSelectedRoute] = useState('')
 
+    const itemsTop = [
+        // { text: 'Dashboard', icon: <DashboardIcon />, route: 'dashboard' },
         {
             text: 'Servicios',
             icon: <MedicalServicesIcon />,
             route: 'servicios',
         },
-        { text: 'Próximas citas', icon: <DateRangeIcon />, route: 'citas' },
-        { text: 'Talleres', icon: <HubIcon />, route: 'talleres' },
-        { text: 'Blog', icon: <RssFeedIcon />, route: 'blog' },
+        {
+            text: 'Próximas citas',
+            icon: <DateRangeIcon />,
+            route: 'citas',
+        },
+        {
+            text: 'Talleres',
+            icon: <HubIcon />,
+            route: 'talleres',
+        },
+        {
+            text: 'Blog',
+            icon: <RssFeedIcon />,
+            route: 'blog',
+        },
+        {
+            text: 'Mis clientes',
+            icon: <AccountCircleIcon />,
+            route: 'clientes',
+        },
     ]
 
     const drawer = (
@@ -159,7 +172,12 @@ const Dashboard: FC<Props> = () => {
             <List>
                 {itemsTop.map(item => (
                     <ListItem key={item.text} disablePadding>
-                        <ListItemButton onClick={() => changeRoute(item.route)}>
+                        <ListItemButton
+                            onClick={() => {
+                                changeRoute(item.route)
+                                setSelectedRoute(item.route) // Actualiza la opción seleccionada
+                            }}
+                        >
                             <ListItemIcon>{item.icon}</ListItemIcon>
                             <ListItemText primary={item.text} />
                         </ListItemButton>
@@ -307,11 +325,11 @@ const Dashboard: FC<Props> = () => {
                 <Toolbar />
 
                 <div>
-                    {route === 'dashboard' && (
+                    {/* {route === 'dashboard' && (
                         <Typography paragraph>
                             Contenido del Dashboard
                         </Typography>
-                    )}
+                    )} */}
                     {route === 'servicios' && (
                         <>
                             {isLoading ? (
@@ -362,20 +380,6 @@ const Dashboard: FC<Props> = () => {
                     )}
                     {route === 'citas' && (
                         <CitasContainer>
-                            {/* <div
-                                    style={{
-                                        display: 'flex',
-                                        flexDirection: 'row',
-                                        alignItems: 'center',
-                                        width: '100%',
-                                        height: 80,
-                                        marginLeft: 40,
-                                    }}
-                                >
-                                    <DatePickerComp />
-                                    <SearchInputComp />
-                                </div> */}
-
                             {isLoading ? (
                                 <LoadingContainer>
                                     <LinearIndeterminate
