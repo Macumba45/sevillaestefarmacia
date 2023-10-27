@@ -25,8 +25,9 @@ const Laboratorio: FC<Props> = ({ price }) => {
                 disposición para cualquier duda que tengas con tu prescripción
                 del médico y/o para cualquier encargo de formulación.
             </ParrafoServices>
-            <Title>¿Cuál es el coste y tiempos del servicio?</Title>
-            <Title>¿Cómo subo la receta?</Title>
+            <Title>
+                ¿Cuál es el coste y tiempos del servicio? ¿Cómo subo la receta?
+            </Title>
             <ParrafoServices>
                 Es importante dejar subida la receta a realizar donde podrás
                 incluir además comentarios adicionales. Nos pondremos en

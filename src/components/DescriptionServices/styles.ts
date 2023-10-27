@@ -25,6 +25,7 @@ export const Title = styled.h1<{
     margin-left: 2rem;
     margin-right: 2rem;
     font-weight: 900;
+    margin-top: 1.5rem;
     @media screen and (min-width: 899px) {
         width: ${props => props.withtitledesktop};
         font-size: 1.2rem;

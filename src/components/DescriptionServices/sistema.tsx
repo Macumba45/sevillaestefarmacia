@@ -8,8 +8,6 @@ interface Props {
 const Sistema: FC<Props> = ({ price }) => {
     return (
         <Container>
-            <Title>SISTEMA PERSONALIZADO DE DOSIFICACIÓN</Title>
-            <Title>SPD</Title>
             <ParrafoServices>
                 El Sistema Personalizado de Dosificación es un servicio que
                 tenemos disponible en Farmacia Sta. Bárbara (Sevilla Este) para
@@ -31,40 +29,40 @@ const Sistema: FC<Props> = ({ price }) => {
             >
                 <ParrafoServices
                     style={{
-                        marginBottom: '0px',
-                        marginTop: '0px',
+                        marginBottom: '16px',
+                        marginTop: '16px',
                     }}
                 >
                     - Mejora el control del paciente.
                 </ParrafoServices>
                 <ParrafoServices
                     style={{
-                        marginBottom: '0px',
-                        marginTop: '0px',
+                        marginBottom: '16px',
+                        marginTop: '16px',
                     }}
                 >
                     - Facilita el cumplimiento del tratamiento.
                 </ParrafoServices>
                 <ParrafoServices
                     style={{
-                        marginBottom: '0px',
-                        marginTop: '0px',
+                        marginBottom: '16px',
+                        marginTop: '16px',
                     }}
                 >
                     - Reduce los errores en la toma de medicamentos.
                 </ParrafoServices>
                 <ParrafoServices
                     style={{
-                        marginBottom: '0px',
-                        marginTop: '0px',
+                        marginBottom: '16px',
+                        marginTop: '16px',
                     }}
                 >
                     -Evita problemas de manipulación y conservación.
                 </ParrafoServices>
                 <ParrafoServices
                     style={{
-                        marginBottom: '0px',
-                        marginTop: '0px',
+                        marginBottom: '16px',
+                        marginTop: '16px',
                     }}
                 >
                     - Evita los problemas de confusión e intoxicación
@@ -80,16 +78,16 @@ const Sistema: FC<Props> = ({ price }) => {
             >
                 <ParrafoServices
                     style={{
-                        marginBottom: '0px',
-                        marginTop: '0px',
+                        marginBottom: '16px',
+                        marginTop: '16px',
                     }}
                 >
                     - Pacientes con pautas de medicación complejas.
                 </ParrafoServices>
                 <ParrafoServices
                     style={{
-                        marginBottom: '0px',
-                        marginTop: '0px',
+                        marginBottom: '16px',
+                        marginTop: '16px',
                     }}
                 >
                     - Personas mayores polimedicadas que necesitan asesoramiento
@@ -97,16 +95,16 @@ const Sistema: FC<Props> = ({ price }) => {
                 </ParrafoServices>
                 <ParrafoServices
                     style={{
-                        marginBottom: '0px',
-                        marginTop: '0px',
+                        marginBottom: '16px',
+                        marginTop: '16px',
                     }}
                 >
                     - Pacientes en residencias de mayores.
                 </ParrafoServices>
                 <ParrafoServices
                     style={{
-                        marginBottom: '0px',
-                        marginTop: '0px',
+                        marginBottom: '16px',
+                        marginTop: '16px',
                     }}
                 >
                     - Pacientes que dependen de uno o varios cuidadores.
@@ -121,8 +119,8 @@ const Sistema: FC<Props> = ({ price }) => {
             >
                 <ParrafoServices
                     style={{
-                        marginBottom: '0px',
-                        marginTop: '0px',
+                        marginBottom: '16px',
+                        marginTop: '16px',
                     }}
                 >
                     - Organización de la medicación en pastilleros desechables
@@ -132,8 +130,8 @@ const Sistema: FC<Props> = ({ price }) => {
                 </ParrafoServices>
                 <ParrafoServices
                     style={{
-                        marginBottom: '0px',
-                        marginTop: '0px',
+                        marginBottom: '16px',
+                        marginTop: '16px',
                     }}
                 >
                     - Seguimiento de la medicación y comunicación con su
@@ -142,8 +140,8 @@ const Sistema: FC<Props> = ({ price }) => {
                 </ParrafoServices>
                 <ParrafoServices
                     style={{
-                        marginBottom: '0px',
-                        marginTop: '0px',
+                        marginBottom: '16px',
+                        marginTop: '16px',
                     }}
                 >
                     - Realización del servicio bajo control farmacéutico y
@@ -157,7 +155,7 @@ const Sistema: FC<Props> = ({ price }) => {
             </ParrafoServices>
             <Title>¿Necesitas más información?</Title>
             <ParrafoServices>
-                Puedes ponerte en contacto con Ana Lobo,farmacéutica adjunta
+                Puedes ponerte en contacto con Ana Lobo, farmacéutica adjunta
                 responsable del servicio, llamando al 682 73 42 37 o a través
                 del chat directo de la farmacia.
             </ParrafoServices>

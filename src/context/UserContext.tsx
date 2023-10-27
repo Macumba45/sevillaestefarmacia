@@ -97,7 +97,7 @@ export const UserProvider = ({ children }: any) => {
         }
     }, [user])
 
-    if (!user && isLoading) {
+    if (!user) {
         return (
             <LoadingContainer>
                 <CircularIndeterminate />

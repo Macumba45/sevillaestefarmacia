@@ -66,8 +66,11 @@ const ModalOrderTime: FC<Props> = ({
         return dateObject >= today
     })
 
-    let buttonName = ''
-    if (typeof window.document !== 'undefined') {
+    let buttonName: string = ''
+    if (
+        typeof window !== 'undefined' &&
+        typeof window.document !== 'undefined'
+    ) {
         buttonName =
             document.location.pathname === '/dashboard'
                 ? 'Actualizar cita'
