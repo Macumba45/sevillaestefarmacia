@@ -213,7 +213,7 @@ const Dashboard: FC<Props> = () => {
     }, [currentUser, setUserLoaded])
 
     useEffect(() => {
-        window.document.title = titlePage
+        document.title = titlePage
     }, [titlePage])
 
     return (

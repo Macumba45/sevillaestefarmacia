@@ -5,8 +5,10 @@ import { FC, memo, useEffect } from 'react'
 
 const Perfil: FC = () => {
     useEffect(() => {
-        window.document.title = 'Mi perfil'
-    }, [window.document.title])
+        if (typeof window !== 'undefined') {
+            document.title = 'Mi perfil';
+        }
+    }, []);
 
     return (
         <UserProvider>

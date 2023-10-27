@@ -21,9 +21,8 @@ import {
 
 const Home: FC = () => {
     useEffect(() => {
-        window.window.document.title = 'Farmacia Santa Bárbara'
-    }),
-        [window.window.document.title]
+        document.title = 'Farmacia Santa Bárbara'
+    }), []
 
     const contactWhatsApp = () => {
         let message =

@@ -39,8 +39,10 @@ const Conocenos: FC = () => {
     }
 
     useEffect(() => {
-        window.document.title = 'Conócenos'
-    }, [window.document.title])
+        if (typeof window !== 'undefined') {
+            document.title = 'Conócenos'
+        }
+    }, [])
 
     const services = [
         {
