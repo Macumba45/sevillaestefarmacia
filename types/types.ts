@@ -6,6 +6,7 @@ export type User = {
     name?: string
     role?: string
     phone?: string
+    payment?: Payment[]
     birthdate?: string
 }
 

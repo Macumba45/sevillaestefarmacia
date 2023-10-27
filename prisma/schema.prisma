@@ -32,7 +32,7 @@ model Services {
   priceId     String?
   dates       Dates[]
   payments    Payments[]
-  users       ServiceToUser[] // Relación muchos a muchos a través de ServiceToUser
+  users       ServiceToUser[]
   createdAt   DateTime        @default(now())
   updatedAt   DateTime        @updatedAt
 }

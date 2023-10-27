@@ -120,7 +120,11 @@ const ResponsiveAppBar: FC<Props> = ({
                                         fontFamily: 'Cormorant Garamond',
                                     }}
                                     href={page?.route as string}
-                                    target={page?.name === '' ? '_blank' : ''}
+                                    target={
+                                        page?.name === '' || 'Tarjeta CLUB'
+                                            ? '_blank'
+                                            : ''
+                                    }
                                 >
                                     <div
                                         style={{
@@ -292,7 +296,9 @@ const ResponsiveAppBar: FC<Props> = ({
                                                             }
                                                             target={
                                                                 page.name ===
-                                                                'Síguenos'
+                                                                    'Síguenos' ||
+                                                                '' ||
+                                                                'Tarjeta CLUB'
                                                                     ? '_blank'
                                                                     : ''
                                                             }

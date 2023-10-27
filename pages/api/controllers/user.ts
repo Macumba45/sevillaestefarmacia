@@ -26,6 +26,9 @@ export const findUserById = async (id: string): Promise<User | null> => {
         where: {
             id: id,
         },
+        include: {
+            Payments: true,
+        },
     })
 
     if (!prismaUser) {
@@ -37,6 +40,7 @@ export const findUserById = async (id: string): Promise<User | null> => {
         name: prismaUser.name as string,
         role: prismaUser.role,
         phone: prismaUser.phone as string,
+        payment: prismaUser.Payments,
     }
     return user
 }
