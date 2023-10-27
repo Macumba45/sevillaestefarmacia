@@ -63,7 +63,7 @@ export const updateBlog = async (
 }
 
 export const getBlogById = async (id: string): Promise<Blogs> => {
-    const blog = await prisma.talleres.findUnique({
+    const blog = await prisma.blogs.findUnique({
         where: {
             id: id,
         },

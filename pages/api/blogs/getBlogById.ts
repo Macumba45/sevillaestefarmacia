@@ -8,8 +8,8 @@ export default async function handler(
     if (req.method === 'GET') {
         try {
             const { id } = req.query
-            const taller = await getBlogById(id as string)
-            res.status(200).json(taller)
+            const blog = await getBlogById(id as string)
+            res.status(200).json(blog)
         } catch (error: any) {
             res.status(400).json({ message: error.message })
         }
