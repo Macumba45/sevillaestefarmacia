@@ -82,6 +82,7 @@ export const Picture = styled.img`
     height: 100px;
     margin-left: 2rem;
     margin-right: 2rem;
+    border-radius: 10px;
     @media screen and (min-width: 899px) {
         width: 100%;
         margin-left: 4rem;
