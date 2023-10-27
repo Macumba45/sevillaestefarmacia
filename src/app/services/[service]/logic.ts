@@ -44,7 +44,7 @@ export const useLogicPageServicesDetail = () => {
         const phoneNumber = '+34682296561'
         if (serviceData?.id === 'clo0e1q180006xy04pu96nyml') {
             message = `Hola Farmacia Santa Bárbara, me gustaría solicitar información sobre el servicio ${serviceData?.title}`
-        } else if (serviceData?.title === 'clo0e0mn50003xy040gwqse36') {
+        } else if (serviceData?.id === 'clo0e0mn50003xy040gwqse36') {
             message =
                 'Hola Farmacia Santa Bárbara, me gustaría solicitar presupuesto para realizar una fórmula magistral'
         }
