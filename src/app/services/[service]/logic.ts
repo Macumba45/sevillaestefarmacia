@@ -21,7 +21,7 @@ export const useLogicPageServicesDetail = () => {
     const fetchServiceDetails = async (id: string) => {
         setIsLoading(true)
         const serviceDetails = await getServiceDetails(id)
-        document.title = `Farmacia Santa Bárbara - ${serviceDetails?.title}`
+        window.document.title = `Farmacia Santa Bárbara - ${serviceDetails?.title}`
         setServiceData(serviceDetails)
         setIsLoading(false)
     }

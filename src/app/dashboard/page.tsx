@@ -213,7 +213,7 @@ const Dashboard: FC<Props> = () => {
     }, [currentUser, setUserLoaded])
 
     useEffect(() => {
-        document.title = titlePage
+        window.document.title = titlePage
     }, [titlePage])
 
     return (
@@ -395,9 +395,9 @@ const Dashboard: FC<Props> = () => {
                                         openEditModalDateAndHour={() =>
                                             openEditModalDateAndHour(item)
                                         }
-                                        // unBookDate={() =>
-                                        //     deleteDate(item.dateId)
-                                        // }
+                                    // unBookDate={() =>
+                                    //     deleteDate(item.dateId)
+                                    // }
                                     />
                                 ))
                             )}

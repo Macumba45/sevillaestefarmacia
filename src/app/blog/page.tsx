@@ -14,8 +14,8 @@ const Talleres: FC = () => {
     }, [])
 
     useEffect(() => {
-        document.title = 'Talleres'
-    }, [document.title])
+        window.document.title = 'Talleres'
+    }, [window.document.title])
 
     return (
         <UserProvider>

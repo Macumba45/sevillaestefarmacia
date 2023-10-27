@@ -42,7 +42,7 @@ const Page: FC<Props> = ({ params }) => {
 
     useEffect(() => {
         getBlogDetailsData(params.blog)
-        document.title = 'Blog'
+        window.document.title = 'Blog'
     }, [])
 
     return (

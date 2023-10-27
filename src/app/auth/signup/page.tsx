@@ -114,8 +114,8 @@ const SignUp: FC = () => {
 
     // Actualiza el título cuando el componente se monta
     useEffect(() => {
-        document.title = dynamicTitle
-    }, [document.title])
+        window.window.document.title = dynamicTitle
+    }, [window.window.document.title])
 
     return (
         <div

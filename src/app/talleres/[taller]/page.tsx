@@ -48,8 +48,8 @@ const Page: FC<Props> = ({ params }) => {
     }, [])
 
     useEffect(() => {
-        document.title = `Taller de ${taller?.title}`
-    }, [document.title])
+        window.document.title = `Taller de ${taller?.title}`
+    }, [window.document.title])
 
     return (
         <UserProvider>
