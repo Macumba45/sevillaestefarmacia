@@ -48,9 +48,7 @@ const Page: FC<Props> = ({ params }) => {
     }, [])
 
     useEffect(() => {
-
         document.title = `Taller de ${taller?.title}`
-
     }, [document.title])
 
     return (

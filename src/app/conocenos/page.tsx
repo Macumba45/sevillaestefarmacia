@@ -40,7 +40,7 @@ const Conocenos: FC = () => {
 
     useEffect(() => {
         document.title = 'Conócenos'
-    }, [])
+    }, [document.title])
 
     const services = [
         {

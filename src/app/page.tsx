@@ -23,7 +23,7 @@ const Home: FC = () => {
     useEffect(() => {
         document.title = 'Farmacia Santa Bárbara'
     }),
-        []
+        [document.title]
 
     const contactWhatsApp = () => {
         let message =
