@@ -96,6 +96,7 @@ export const TitleDetails = styled.h1`
     margin-top: 2rem;
     margin-left: 2rem;
     margin-bottom: 1rem;
+    margin-right: 1rem;
     color: black;
     text-align: left;
     line-height: 2.5rem;
@@ -111,6 +112,7 @@ export const SubtitleDetails = styled.h2`
     font-size: 2rem;
     margin-bottom: 1rem;
     margin-left: 2rem;
+    margin-right: 1rem;
     color: black;
     text-align: left;
     line-height: 2.5rem;
