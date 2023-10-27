@@ -6,6 +6,9 @@ export const useLogicTallerDetail = () => {
     const [taller, setTaller] = useState<Talleres | null>(null)
     const getTallerDetailsData = async (id: string) => {
         const data = await getTallerById(id)
+        if (typeof window !== 'undefined') {
+            document.title = `Taller de ${taller?.title}`
+        }
         setTaller(data as Talleres)
         return data
     }

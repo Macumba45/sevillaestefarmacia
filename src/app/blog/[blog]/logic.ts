@@ -6,6 +6,9 @@ export const useLogicBlogDetail = () => {
     const [blogDetails, setBlogDetails] = useState<Blogs | null>(null)
     const getBlogDetailsData = async (id: string) => {
         const data = await getBlogById(id)
+        if (typeof window !== 'undefined') {
+            document.title = 'Blog'
+        }
         setBlogDetails(data)
         return data
     }
