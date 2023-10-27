@@ -46,8 +46,13 @@ const Page: FC<Props> = ({ params }) => {
 
     useEffect(() => {
         getTallerDetailsData(params.taller)
-        document.title = `Taller ${taller?.title}`
     }, [])
+
+    useEffect(() => {
+        if (document.title === undefined) {
+            document.title = `Taller de ${taller?.title}`
+        }
+    }, [document.title])
 
     return (
         <UserProvider>
