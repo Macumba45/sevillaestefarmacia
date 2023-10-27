@@ -120,7 +120,7 @@ const Page: FC<Props> = ({ params }) => {
                         widthtitle="320px"
                         widthtitledesktop={
                             serviceData?.title ===
-                            'SISTEMA PERSONALIZADO DE DOSIFICACIÓN'
+                                'SISTEMA PERSONALIZADO DE DOSIFICACIÓN'
                                 ? '600px'
                                 : '500px'
                         }
@@ -160,6 +160,8 @@ const Page: FC<Props> = ({ params }) => {
                                     ) {
                                         handleReservarCita()
                                     } else if (buttonName === 'Contacta') {
+                                        contactWhatsApp()
+                                    } else if (buttonName === 'Solcitar presupuesto') {
                                         contactWhatsApp()
                                     }
                                 }}
