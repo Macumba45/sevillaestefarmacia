@@ -30,7 +30,7 @@ import {
     stylesNavBar,
 } from './styles'
 
-const ResponsiveAppBar: FC<Props> = ({ userRole }) => {
+const ResponsiveAppBar: FC<Props> = ({ userRole, isAuth }) => {
     const router = useRouter()
     const { user } = useContext(UserContext)
     const [isDrawerOpen, setIsDrawerOpen] = useState(false)
@@ -47,6 +47,11 @@ const ResponsiveAppBar: FC<Props> = ({ userRole }) => {
             router.push('/auth/login')
         }
     }
+
+    useEffect(() => {
+
+
+    }, [])
 
     const handleOpenNavMenu = () => {
         setIsDrawerOpen(true)
@@ -65,7 +70,7 @@ const ResponsiveAppBar: FC<Props> = ({ userRole }) => {
             name: userRole?.role === 'admin' ? 'Ir al dashboard' : 'Mi perfil',
 
             route: userRole?.role === 'admin' ? '/dashboard' : '/perfil',
-            void: () => {},
+            void: () => { },
         },
         {
             name: 'Cerrar sesión',
@@ -88,16 +93,20 @@ const ResponsiveAppBar: FC<Props> = ({ userRole }) => {
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <LogoContainer>
-                        <LogoImg
-                            style={{
-                                display: 'flex',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                            }}
-                            src={logo.src}
-                            alt="Farmacia Santa Bárbara"
-                            onClick={() => (location.href = '/')}
-                        />
+                        <Link
+                            href={'/'}
+                        >
+                            <LogoImg
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    cursor: 'pointer',
+                                }}
+                                src={logo.src}
+                                alt="Farmacia Santa Bárbara"
+                            />
+                        </Link>
                     </LogoContainer>
                     <Box
                         sx={{
@@ -142,7 +151,7 @@ const ResponsiveAppBar: FC<Props> = ({ userRole }) => {
                                     href={page?.route as string}
                                     target={
                                         page?.name === 'Tarjeta CLUB' ||
-                                        page?.name === ''
+                                            page?.name === ''
                                             ? '_blank'
                                             : ''
                                     }
@@ -320,9 +329,9 @@ const ResponsiveAppBar: FC<Props> = ({ userRole }) => {
                                                             target={
                                                                 page?.name ===
                                                                     'Tarjeta CLUB' ||
-                                                                page?.name ===
+                                                                    page?.name ===
                                                                     '' ||
-                                                                page?.name ===
+                                                                    page?.name ===
                                                                     'Síguenos'
                                                                     ? '_blank'
                                                                     : ''
@@ -355,68 +364,68 @@ const ResponsiveAppBar: FC<Props> = ({ userRole }) => {
                                         />
                                         {userRole
                                             ? settingsLogged.map(
-                                                  (page, index) => (
-                                                      <Button key={index}>
-                                                          <Link
-                                                              style={{
-                                                                  textDecoration:
-                                                                      'none',
-                                                                  color: 'white',
-                                                                  display:
-                                                                      'flex',
-                                                                  fontWeight: 900,
-                                                              }}
-                                                              href={
-                                                                  page?.route as string
-                                                              }
-                                                              onClick={
-                                                                  page.void
-                                                              }
-                                                          >
-                                                              <div
-                                                                  style={{
-                                                                      display:
-                                                                          'flex',
-                                                                      alignItems:
-                                                                          'center',
-                                                                  }}
-                                                              >
-                                                                  {page?.name}
-                                                              </div>
-                                                          </Link>
-                                                      </Button>
-                                                  )
-                                              )
+                                                (page, index) => (
+                                                    <Button key={index}>
+                                                        <Link
+                                                            style={{
+                                                                textDecoration:
+                                                                    'none',
+                                                                color: 'white',
+                                                                display:
+                                                                    'flex',
+                                                                fontWeight: 900,
+                                                            }}
+                                                            href={
+                                                                page?.route as string
+                                                            }
+                                                            onClick={
+                                                                page.void
+                                                            }
+                                                        >
+                                                            <div
+                                                                style={{
+                                                                    display:
+                                                                        'flex',
+                                                                    alignItems:
+                                                                        'center',
+                                                                }}
+                                                            >
+                                                                {page?.name}
+                                                            </div>
+                                                        </Link>
+                                                    </Button>
+                                                )
+                                            )
                                             : settingsNotLogged.map(
-                                                  (page, index) => (
-                                                      <Button key={index}>
-                                                          <Link
-                                                              style={{
-                                                                  textDecoration:
-                                                                      'none',
-                                                                  color: 'white',
-                                                                  display:
-                                                                      'flex',
-                                                                  fontWeight: 900,
-                                                              }}
-                                                              href={
-                                                                  page?.route as string
-                                                              }
-                                                          >
-                                                              <div
-                                                                  style={{
-                                                                      display:
-                                                                          'flex',
-                                                                      alignItems:
-                                                                          'center',
-                                                                  }}
-                                                              >
-                                                                  {page?.name}
-                                                              </div>
-                                                          </Link>
-                                                      </Button>
-                                                  )
-                                              )}
+                                                (page, index) => (
+                                                    <Button key={index}>
+                                                        <Link
+                                                            style={{
+                                                                textDecoration:
+                                                                    'none',
+                                                                color: 'white',
+                                                                display:
+                                                                    'flex',
+                                                                fontWeight: 900,
+                                                            }}
+                                                            href={
+                                                                page?.route as string
+                                                            }
+                                                        >
+                                                            <div
+                                                                style={{
+                                                                    display:
+                                                                        'flex',
+                                                                    alignItems:
+                                                                        'center',
+                                                                }}
+                                                            >
+                                                                {page?.name}
+                                                            </div>
+                                                        </Link>
+                                                    </Button>
+                                                )
+                                            )}
                                     </div>
                                 </Drawer>
                             </>

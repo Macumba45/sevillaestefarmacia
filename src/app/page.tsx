@@ -1,6 +1,7 @@
 'use client'
 
-import { FC, memo, useEffect } from 'react'
+import { FC, memo, useContext, useEffect } from 'react'
+import { UserContext } from '@/context/UserContext'
 import LayoutNavFooter from '@/layout/layout'
 import Link from 'next/link'
 import HoverMotion from '@/animations/hover'
@@ -20,6 +21,8 @@ import {
 } from './styles'
 
 const Home: FC = () => {
+    const { user, auth } = useContext(UserContext)
+
     useEffect(() => {
         document.title = 'Farmacia Santa Bárbara -  Sevilla Este'
     }),

@@ -1,6 +1,6 @@
 'use client'
 
-import { FC, useEffect, useState } from 'react'
+import { FC, useContext, useEffect, useState } from 'react'
 import { handleLoginUser } from '../../../services/auth'
 import { useRouter } from 'next/navigation'
 import { SpanError } from './styles'
@@ -15,8 +15,11 @@ import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import Stack from '@mui/material/Stack'
 import LoadingButton from '@mui/lab/LoadingButton'
+import { UserContext } from '@/context/UserContext'
 
 const Login: FC = () => {
+    const { getUserInfo } = useContext(UserContext)
+
     const router = useRouter()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
@@ -32,15 +35,15 @@ const Login: FC = () => {
                 const login = await handleLoginUser(email, password)
                 if (login) {
                     router.push('/')
-                    // Realiza alguna acción en respuesta al éxito
                 } else {
-                    // Error al hacer login de usuario
                     setLoading(false)
                     const errorMessage = 'Usuario o contraseña incorrectos'
                     setError(errorMessage)
                 }
             } catch (error) {
                 console.log('Error al realizar la solicitud:', error)
+            } finally {
+                getUserInfo()
             }
         }
     }
@@ -61,10 +64,8 @@ const Login: FC = () => {
         }
     }, [])
 
-    // Define el título dinámico
     const dynamicTitle = 'Farmarcia Santa Bárbara - Inicio de sesión'
 
-    // Actualiza el título cuando el componente se monta
     useEffect(() => {
         if (typeof window !== 'undefined') {
             document.title = dynamicTitle

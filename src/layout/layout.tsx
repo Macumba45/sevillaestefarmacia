@@ -10,12 +10,13 @@ interface Props {
 }
 
 const LayoutNavFooter: FC<Props> = ({ children }) => {
-    const { user } = useContext(UserContext)
+    const { user, auth } = useContext(UserContext)
+
 
     return (
         <>
             <NavContainer>
-                <ResponsiveAppBar userRole={user as User} />
+                <ResponsiveAppBar isAuth={auth} userRole={user} />
             </NavContainer>
             {children}
             <Footer />

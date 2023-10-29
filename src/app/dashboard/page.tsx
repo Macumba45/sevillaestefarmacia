@@ -153,7 +153,7 @@ const Dashboard: FC<Props> = () => {
                         '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)',
                 }}
             >
-                <Link href="" style={undefined}>
+                <Link href="/" style={undefined}>
                     <img
                         src={logo.src}
                         alt="Farmacia Santa Bárbara"
@@ -396,9 +396,9 @@ const Dashboard: FC<Props> = () => {
                                         openEditModalDateAndHour={() =>
                                             openEditModalDateAndHour(item)
                                         }
-                                        // unBookDate={() =>
-                                        //     deleteDate(item.dateId)
-                                        // }
+                                    // unBookDate={() =>
+                                    //     deleteDate(item.dateId)
+                                    // }
                                     />
                                 ))
                             )}

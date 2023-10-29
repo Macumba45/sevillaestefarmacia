@@ -1,6 +1,6 @@
 'use client'
 
-import { FC, useEffect, useState } from 'react'
+import { FC, useContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { setAuthenticatedToken } from '../../../../storage/storage'
 import { LoadingButton } from '@mui/lab'
@@ -23,11 +23,13 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import MuiAlert from '@mui/material/Alert'
+import { UserContext } from '@/context/UserContext'
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme()
 
 const SignUp: FC = () => {
+    const { getUserInfo } = useContext(UserContext)
     const router = useRouter()
     const [error, setError] = useState<string>('')
     const [loading, setLoading] = useState(false)
@@ -87,6 +89,8 @@ const SignUp: FC = () => {
                 console.error('Error al realizar la solicitud:', error)
                 setLoading(false)
                 // Realiza alguna acción en caso de error de red u otro error
+            } finally {
+                getUserInfo()
             }
         } else {
             setSnackbarOpen(true)

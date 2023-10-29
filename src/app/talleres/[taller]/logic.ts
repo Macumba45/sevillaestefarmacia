@@ -4,12 +4,15 @@ import { Talleres } from '../../../../types/types'
 
 export const useLogicTallerDetail = () => {
     const [taller, setTaller] = useState<Talleres | null>(null)
+    const [isLoading, setIsLoading] = useState(false)
     const getTallerDetailsData = async (id: string) => {
+        setIsLoading(true)
         const data = await getTallerById(id)
         if (typeof window !== 'undefined') {
             document.title = `Taller de ${taller?.title}`
         }
         setTaller(data as Talleres)
+        setIsLoading(false)
         return data
     }
 
@@ -27,5 +30,6 @@ export const useLogicTallerDetail = () => {
         getTallerDetailsData,
         taller,
         contactWhatsApp,
+        isLoading,
     }
 }

@@ -5,9 +5,10 @@ import CardTallerOrBlog from '@/components/CardTallerOrBlog'
 import { useLogicTaller } from './logic'
 import LayoutNavFooter from '@/layout/layout'
 import { MainContainer, Title, Subtitle, Container } from './styles'
+import CircularIndeterminate from '@/components/Loader'
 
 const Talleres: FC = () => {
-    const { fetchTalleres, talleres } = useLogicTaller()
+    const { fetchTalleres, talleres, isLoading } = useLogicTaller()
 
     useEffect(() => {
         fetchTalleres()
@@ -25,6 +26,12 @@ const Talleres: FC = () => {
                 <Title>TALLERES</Title>
                 <Subtitle>¡No faltes!</Subtitle>
                 <Container>
+                    {isLoading && (
+                        <>
+                            <CircularIndeterminate />
+                        </>
+                    )
+                    }
                     {talleres?.map(taller => (
                         <CardTallerOrBlog
                             key={taller.id}

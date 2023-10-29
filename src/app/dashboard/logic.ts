@@ -111,7 +111,6 @@ export const useLogicDashboard = () => {
 
     const editDateAndHour = useCallback(
         async (paymentId: string, dateId: string, hourId: string) => {
-            console.log(paymentId, dateId, hourId)
             setIsLoadingButton(true)
             await editDateAndHourFromPayments(paymentId, dateId, hourId)
             setIsLoadingButton(false)
