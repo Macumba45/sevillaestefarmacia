@@ -1,4 +1,9 @@
 import { FC, memo } from 'react'
+import { Button } from '@mui/material'
+import React from 'react'
+import Link from 'next/link'
+import HoverMotion from '@/animations/hover'
+import { useRouter } from 'next/navigation'
 import {
     ButtonContainerServices,
     ContainerDescriptionServices,
@@ -10,10 +15,6 @@ import {
     SubtitleServices,
     TitleServices,
 } from './styles'
-import { Button } from '@mui/material'
-import React from 'react'
-import Link from 'next/link'
-import HoverMotion from '@/animations/hover'
 
 interface Props {
     id?: string
@@ -48,6 +49,11 @@ const Services: FC<Props> = ({
     imagePosition = 'bottom', // Valor predeterminado para imagePosition
     alt,
 }) => {
+    const router = useRouter()
+
+    const handleClickSubtitle = () => {
+        router.push(`/services/${id}`)
+    }
     return (
         <div
             style={{
@@ -67,7 +73,9 @@ const Services: FC<Props> = ({
                     >
                         {title}
                     </TitleServices>
-                    <SubtitleServices>{subtitle}</SubtitleServices>
+                    <SubtitleServices onClick={handleClickSubtitle}>
+                        {subtitle}
+                    </SubtitleServices>
                     <ContainerDescriptionServices>
                         <DescriptionServices
                             widthmobile={widthMobile}

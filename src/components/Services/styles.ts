@@ -76,6 +76,7 @@ export const SubtitleServices = styled.h2`
     margin-top: 3rem;
     margin-bottom: 3rem;
     line-height: 2rem;
+    cursor: pointer;
     @media screen and (min-width: 899px) {
         font-size: 1.5rem;
         line-height: 2rem;

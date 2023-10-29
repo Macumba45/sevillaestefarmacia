@@ -7,8 +7,8 @@ export const LoadingContainer = styled.div`
     height: 100vh;
 `
 
-export const Container = styled.div<{ backgrouncolor?: string }>`
-    background-color: ${props => props.backgrouncolor};
+export const Container = styled.div<{ backgroundcolor?: string }>`
+    background-color: ${props => props.backgroundcolor};
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -100,12 +100,18 @@ export const FloatButtonContainer = styled.div`
     right: 2rem;
     z-index: 9999;
 `
+export const FloatButtonLoginContainer = styled.div`
+    position: fixed;
+    bottom: 6rem;
+    right: 2rem;
+    z-index: 9999;
+`
 
 export const VideoYoutubeContainer = styled.div`
     display: flex;
     justify-content: center;
     margin-top: 3rem;
-    margin-bottom: 3rem;
+    margin-bottom: 8rem;
 `
 
 export const VideoYoutube = styled.iframe`

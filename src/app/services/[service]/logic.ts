@@ -66,6 +66,10 @@ export const useLogicPageServicesDetail = () => {
         }
     }
 
+    const goToLogin = () => {
+        router.push('/auth/login')
+    }
+
     return {
         contactWhatsApp,
         fetchServiceDetails,
@@ -78,5 +82,6 @@ export const useLogicPageServicesDetail = () => {
         setHourId,
         setDateId,
         onDateIdChange,
+        goToLogin,
     }
 }

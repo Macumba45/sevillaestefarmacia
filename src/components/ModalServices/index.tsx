@@ -286,7 +286,16 @@ const ServiceFormModal: FC<Props> = ({
                                     key={index}
                                 >
                                     <Typography
-                                        sx={{ mt: 2, mb: 2, fontWeight: 700 }}
+                                        sx={{
+                                            mt: 2,
+                                            mb: 2,
+                                            fontWeight: 900,
+                                            backgroundColor: 'black',
+                                            color: 'white',
+                                            p: 0.5,
+                                            borderRadius: '5px',
+                                            width: 'fit-content',
+                                        }}
                                     >
                                         {selectedDay.date
                                             .toDate()

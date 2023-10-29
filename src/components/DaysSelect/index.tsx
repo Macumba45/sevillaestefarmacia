@@ -43,6 +43,7 @@ const DatePickerComponent: FC<Props> = ({
                 showOtherDays
                 disabled={new Date() < new Date()}
                 plugins={[<DatePanel key="datePanelKey" />]}
+                className={'CALENDARIOMODAL'}
             />
         </div>
     )

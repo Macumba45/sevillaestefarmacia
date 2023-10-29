@@ -18,6 +18,7 @@ import {
     ButtonContainerServices,
     Container,
     FloatButtonContainer,
+    FloatButtonLoginContainer,
     LoadingContainer,
     Picture,
     PictureContainer,
@@ -27,6 +28,7 @@ import {
     VideoYoutubeContainer,
 } from './styles'
 import { UserContext } from '@/context/UserContext'
+import FloatLoginButton from '@/components/FloatLoginButton'
 
 interface Props {
     params: {
@@ -48,6 +50,7 @@ const Page: FC<Props> = ({ params }) => {
         serviceData,
         setHourId,
         onDateIdChange,
+        goToLogin,
     } = useLogicPageServicesDetail()
 
     useEffect(() => {
@@ -73,36 +76,49 @@ const Page: FC<Props> = ({ params }) => {
         }
     }
 
-    let backgrouncolor: string
+    let backgroundcolor: string
     let buttonName: string
+    let isButtonDisabled = false
+
     switch (serviceData?.id) {
         case 'clo0dzomz0001xy04kzkxay49':
-            backgrouncolor = '#ebf0f6'
+            backgroundcolor = '#ebf0f6'
             buttonName = 'Reservar cita'
             break
         case 'clo0e0a200002xy04bwqml93h':
-            backgrouncolor = '#F6F6EB'
+            backgroundcolor = '#F6F6EB'
             buttonName = 'Reservar cita'
             break
         case 'clo0e0mn50003xy040gwqse36':
-            backgrouncolor = '#ebf0f6'
+            backgroundcolor = '#ebf0f6'
             buttonName = 'Solcitar presupuesto'
             break
         case 'clo0e17d30004xy04cjklg2px':
-            backgrouncolor = '#F6F6EB'
+            backgroundcolor = '#F6F6EB'
             buttonName = 'Pagar el servicio'
             break
         case 'clo0e1e3p0005xy04izx8uzqa':
-            backgrouncolor = '#ebf0f6'
+            backgroundcolor = '#ebf0f6'
             buttonName = 'Reservar cita'
             break
         case 'clo0e1q180006xy04pu96nyml':
-            backgrouncolor = '#F6F6EB'
+            backgroundcolor = '#F6F6EB'
             buttonName = 'Contacta'
             break
         default:
-            backgrouncolor = '#ebf0f6'
+            backgroundcolor = '#ebf0f6'
             buttonName = 'Reservar cita'
+    }
+
+    // Si no hay usuario y el servicio requiere una cita, deshabilita el botón.
+    if (
+        !user &&
+        (serviceData?.id === 'clo0dzomz0001xy04kzkxay49' ||
+            serviceData?.id === 'clo0e0a200002xy04bwqml93h' ||
+            serviceData?.id === 'clo0e1e3p0005xy04izx8uzqa')
+    ) {
+        isButtonDisabled = true
+        buttonName = 'Inicia sesión para reservar cita'
     }
 
     if (!serviceData) {
@@ -117,7 +133,7 @@ const Page: FC<Props> = ({ params }) => {
 
     return (
         <LayoutNavFooter>
-            <Container backgrouncolor={backgrouncolor}>
+            <Container backgroundcolor={backgroundcolor}>
                 <AnimatedView>
                     <TitleServices
                         widthtitle="320px"
@@ -151,46 +167,49 @@ const Page: FC<Props> = ({ params }) => {
                         </PictureContainer>
                     </div>
                 </AnimatedView>
-                <AnimatedView>
-                    <ButtonContainerServices>
-                        <HoverMotion>
-                            <Button
-                                disabled={!user}
-                                onClick={() => {
-                                    if (buttonName === 'Reservar cita') {
-                                        handleOpen()
-                                    } else if (
-                                        buttonName === 'Pagar el servicio'
-                                    ) {
-                                        handleReservarCita()
-                                    } else if (buttonName === 'Contacta') {
-                                        contactWhatsApp()
-                                    } else if (
-                                        buttonName === 'Solcitar presupuesto'
-                                    ) {
-                                        contactWhatsApp()
-                                    }
-                                }}
-                                variant="outlined"
-                                sx={{
-                                    color: 'white',
+                <ButtonContainerServices>
+                    <HoverMotion>
+                        <Button
+                            disabled={isButtonDisabled}
+                            onClick={() => {
+                                if (buttonName === 'Reservar cita') {
+                                    handleOpen()
+                                } else if (buttonName === 'Pagar el servicio') {
+                                    handleReservarCita()
+                                } else if (buttonName === 'Contacta') {
+                                    contactWhatsApp()
+                                } else if (
+                                    buttonName === 'Solcitar presupuesto'
+                                ) {
+                                    contactWhatsApp()
+                                } else if (
+                                    buttonName ===
+                                    'Inicia sesión para reservar cita'
+                                ) {
+                                    contactWhatsApp()
+                                }
+                            }}
+                            variant="outlined"
+                            sx={{
+                                color: 'white',
+                                borderColor: 'black',
+                                width: '300px',
+                                borderRadius: '130px',
+                                backgroundColor: isButtonDisabled
+                                    ? '#e0e0e0'
+                                    : 'black',
+                                ':hover': {
+                                    backgroundColor: 'white',
+                                    color: 'black',
                                     borderColor: 'black',
-                                    width: '300px',
-                                    borderRadius: '130px',
-                                    backgroundColor: !user ? 'gray' : 'black',
-                                    ':hover': {
-                                        backgroundColor: 'white',
-                                        color: 'black',
-                                        borderColor: 'black',
-                                    },
-                                    fontFamily: 'Cormorant Garamond',
-                                }}
-                            >
-                                {buttonName}
-                            </Button>
-                        </HoverMotion>
-                    </ButtonContainerServices>
-                </AnimatedView>
+                                },
+                                fontFamily: 'Cormorant Garamond',
+                            }}
+                        >
+                            {buttonName}
+                        </Button>
+                    </HoverMotion>
+                </ButtonContainerServices>
                 <FloatButtonContainer>
                     <HoverMotion>
                         <Fab
@@ -198,7 +217,7 @@ const Page: FC<Props> = ({ params }) => {
                             sx={{
                                 color: 'white',
                                 borderColor: 'black',
-                                width: '100%',
+                                width: '160px',
                                 borderRadius: '130px',
                                 backgroundColor: 'black',
                                 ':hover': {
@@ -226,22 +245,31 @@ const Page: FC<Props> = ({ params }) => {
                     onDateIdChange={onDateIdChange}
                     isEditing={false}
                 />
-                <AnimatedView>
-                    <VideoYoutubeContainer>
-                        <VideoYoutube
-                            style={{
-                                display: serviceData?.urlVideo
-                                    ? 'block'
-                                    : 'none',
+                <VideoYoutubeContainer>
+                    <VideoYoutube
+                        style={{
+                            display: serviceData?.urlVideo ? 'block' : 'none',
+                        }}
+                        width="560"
+                        height="315"
+                        src={serviceData?.urlVideo}
+                        title="YouTube video player"
+                        allowFullScreen
+                    ></VideoYoutube>
+                </VideoYoutubeContainer>
+                <FloatButtonLoginContainer>
+                    <HoverMotion>
+                        <FloatLoginButton
+                            title="Iniciar Sesión"
+                            onClick={() => {
+                                goToLogin()
                             }}
-                            width="560"
-                            height="315"
-                            src={serviceData?.urlVideo}
-                            title="YouTube video player"
-                            allowFullScreen
-                        ></VideoYoutube>
-                    </VideoYoutubeContainer>
-                </AnimatedView>
+                            style={{
+                                display: isButtonDisabled ? 'flex' : 'none',
+                            }}
+                        />
+                    </HoverMotion>
+                </FloatButtonLoginContainer>
             </Container>
         </LayoutNavFooter>
     )
