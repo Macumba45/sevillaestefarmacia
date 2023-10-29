@@ -58,7 +58,6 @@ const Dashboard: FC<Props> = () => {
         changeRoute,
         closeModalDelete,
         closeModalEditDateAndHourFunction,
-        currentUser,
         dateId,
         datesPaymentsPayed,
         editDateAndHour,
@@ -67,7 +66,6 @@ const Dashboard: FC<Props> = () => {
         fetchTalleres,
         getAllPayments,
         getServiceData,
-        getUserInfoData,
         handleCloseModalBlog,
         handleCloseModalTaller,
         handleConfirmDelete,
@@ -111,6 +109,7 @@ const Dashboard: FC<Props> = () => {
         titlePage,
         userLoaded,
         blogData,
+        user,
     } = useLogicDashboard()
 
     const itemsTop = [
@@ -196,10 +195,6 @@ const Dashboard: FC<Props> = () => {
     )
 
     useEffect(() => {
-        getUserInfoData()
-    }, [])
-
-    useEffect(() => {
         if (route === 'servicios') {
             getServiceData()
         } else if (route === 'talleres') {
@@ -214,18 +209,18 @@ const Dashboard: FC<Props> = () => {
     }, [route])
 
     useEffect(() => {
-        if (currentUser?.role && userLoaded && getAuthenticatedToken()) {
-            if (currentUser.role !== 'admin') {
+        if (user?.role && userLoaded && getAuthenticatedToken()) {
+            if (user.role !== 'admin') {
                 router.push('/')
             }
         }
-    }, [currentUser, userLoaded, router])
+    }, [user, userLoaded, router])
 
     useEffect(() => {
-        if (currentUser) {
+        if (user) {
             setUserLoaded(true)
         }
-    }, [currentUser, setUserLoaded])
+    }, [user, setUserLoaded])
 
     useEffect(() => {
         document.title = titlePage
@@ -268,7 +263,7 @@ const Dashboard: FC<Props> = () => {
                         noWrap
                         component="div"
                     >
-                        {currentUser?.email}
+                        {user?.email}
                     </Typography>
                 </Toolbar>
             </AppBar>

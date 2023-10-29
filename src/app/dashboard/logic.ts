@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useContext, useState } from 'react'
 import { getAllUsers, getUserInfo } from '@/services/user'
 import { useRouter } from 'next/navigation'
 import { Blogs, Services, Talleres, User } from '../../../types/types'
@@ -20,9 +20,10 @@ import {
 } from '@/services/talleres'
 import { deleteDateById } from '@/services/dates'
 import { createBlog, deleteBlog, getBlogs, updateBlog } from '@/services/blogs'
+import { UserContext } from '@/context/UserContext'
 
 export const useLogicDashboard = () => {
-    const [currentUser, setCurrentUser] = useState<User>()
+    const { user } = useContext(UserContext)
     const [allUsers, setAllUsers] = useState<User[]>([])
     const [allPayments, setAllPayments] = useState<Services[]>([])
     const [titleDrawer, setTitleDrawer] = useState<string>('servicios')
@@ -64,13 +65,6 @@ export const useLogicDashboard = () => {
         setAllUsers(users as User[])
         setIsLoading(false)
         return
-    }, [])
-
-    const getUserInfoData = useCallback(async () => {
-        setIsLoading(true)
-        const userInfo = await getUserInfo()
-        setCurrentUser(userInfo as User)
-        setIsLoading(false)
     }, [])
 
     const createNewService = useCallback(async (service: Services) => {
@@ -307,7 +301,6 @@ export const useLogicDashboard = () => {
         closeModalDelete,
         closeModalEditDateAndHourFunction,
         createNewService,
-        currentUser,
         dateId,
         datesPaymentsPayed,
         deleteDate,
@@ -318,7 +311,6 @@ export const useLogicDashboard = () => {
         fetchTalleres,
         getAllPayments,
         getServiceData,
-        getUserInfoData,
         handleCloseModalBlog,
         handleCloseModalTaller,
         handleConfirmDelete,
@@ -369,5 +361,6 @@ export const useLogicDashboard = () => {
         userLoaded,
         postNewBlog,
         updateBlogById,
+        user,
     }
 }
