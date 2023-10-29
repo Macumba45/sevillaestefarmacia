@@ -15,6 +15,7 @@ import {
     ParrafoServices,
     ButtonContainerServices,
 } from './styles'
+import CircularIndeterminate from '@/components/Loader'
 
 interface Props {
     params: {
@@ -37,7 +38,7 @@ function formatTextWithLineBreaks(text: string | undefined) {
 }
 
 const Page: FC<Props> = ({ params }) => {
-    const { getBlogDetailsData, blogDetails, contactWhatsApp } =
+    const { getBlogDetailsData, blogDetails, contactWhatsApp, isLoading } =
         useLogicBlogDetail()
 
     useEffect(() => {
@@ -54,42 +55,59 @@ const Page: FC<Props> = ({ params }) => {
             <MainContainer>
                 <Title>Blog</Title>
                 <Subtitle>Consejos farmacéuticos</Subtitle>
-                <PictureContainer>
-                    <Picture
-                        src={blogDetails?.urlPicture}
-                        alt={blogDetails?.title}
-                    />
-                </PictureContainer>
-                <TitleDetails>{blogDetails?.title}</TitleDetails>
-                <SubtitleDetails>{blogDetails?.subtitle}</SubtitleDetails>
-                <ParrafoServices>
-                    {formatTextWithLineBreaks(
-                        blogDetails?.descripcion as string
-                    )}
-                </ParrafoServices>
-                <HoverMotion>
-                    <ButtonContainerServices>
-                        <Button
-                            onClick={contactWhatsApp}
-                            variant="outlined"
-                            sx={{
-                                color: 'white',
-                                borderColor: 'black',
-                                width: '300px',
-                                borderRadius: '130px',
-                                backgroundColor: 'black',
-                                ':hover': {
-                                    backgroundColor: 'white',
-                                    color: 'black',
-                                    borderColor: 'black',
-                                },
-                                fontFamily: 'Cormorant Garamond',
-                            }}
-                        >
-                            Reservar plaza
-                        </Button>
-                    </ButtonContainerServices>
-                </HoverMotion>
+                {isLoading ? (
+                    <div
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            height: '40vh',
+                        }}
+                    >
+                        <CircularIndeterminate />
+                    </div>
+                ) : (
+                    <>
+                        <PictureContainer>
+                            <Picture
+                                src={blogDetails?.urlPicture}
+                                alt={blogDetails?.title}
+                            />
+                        </PictureContainer>
+                        <TitleDetails>{blogDetails?.title}</TitleDetails>
+                        <SubtitleDetails>
+                            {blogDetails?.subtitle}
+                        </SubtitleDetails>
+                        <ParrafoServices>
+                            {formatTextWithLineBreaks(
+                                blogDetails?.descripcion as string
+                            )}
+                        </ParrafoServices>
+                        <HoverMotion>
+                            <ButtonContainerServices>
+                                <Button
+                                    onClick={contactWhatsApp}
+                                    variant="outlined"
+                                    sx={{
+                                        color: 'white',
+                                        borderColor: 'black',
+                                        width: '300px',
+                                        borderRadius: '130px',
+                                        backgroundColor: 'black',
+                                        ':hover': {
+                                            backgroundColor: 'white',
+                                            color: 'black',
+                                            borderColor: 'black',
+                                        },
+                                        fontFamily: 'Cormorant Garamond',
+                                    }}
+                                >
+                                    Reservar plaza
+                                </Button>
+                            </ButtonContainerServices>
+                        </HoverMotion>
+                    </>
+                )}
             </MainContainer>
         </LayoutNavFooter>
     )

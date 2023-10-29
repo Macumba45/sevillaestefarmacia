@@ -4,9 +4,12 @@ import { Blogs } from '../../../../types/types'
 
 export const useLogicBlogDetail = () => {
     const [blogDetails, setBlogDetails] = useState<Blogs | null>(null)
+    const [isLoading, setIsLoading] = useState(false)
     const getBlogDetailsData = async (id: string) => {
+        setIsLoading(true)
         const data = await getBlogById(id)
         setBlogDetails(data)
+        setIsLoading(false)
         return data
     }
 
@@ -24,5 +27,6 @@ export const useLogicBlogDetail = () => {
         getBlogDetailsData,
         blogDetails,
         contactWhatsApp,
+        isLoading,
     }
 }
