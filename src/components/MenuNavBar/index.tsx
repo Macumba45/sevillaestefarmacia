@@ -99,7 +99,7 @@ const ResponsiveAppBar: FC<Props> = ({ userRole, isAuth }) => {
                                     cursor: 'pointer',
                                 }}
                                 src={logo.src}
-                                alt="Farmacia Santa Bárbara"
+                                alt="Farmacia Sta Bárbara"
                             />
                         </Link>
                     </LogoContainer>

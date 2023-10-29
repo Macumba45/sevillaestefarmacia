@@ -4,6 +4,8 @@ import React, { FC, useEffect } from 'react'
 import { Box, Button } from '@mui/material'
 import { useLogicPayment } from './logic'
 import LayoutNavFooter from '@/layout/layout'
+import { Typography } from '@mui/material'
+import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 
 interface Props {
     params: {
@@ -28,9 +30,43 @@ const PaymentSuccessComponent: FC<Props> = ({ params }) => {
                 justifyContent="center"
                 height="100vh"
             >
-                <h1>Pago Completado</h1>
-                <p>¡Gracias por tu compra!</p>
-                <Button href="/" variant="contained" color="primary">
+                <Typography
+                    variant="h5"
+                    sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: 'green',
+                        marginBottom: '20px',
+                    }}
+                >
+                    Pago Completado
+                </Typography>
+                <CheckCircleIcon
+                    sx={{
+                        marginLeft: '10px',
+                        color: 'green',
+                        marginBottom: '20px',
+                        fontSize: '50px',
+                    }}
+                />
+                {/* <Typography>
+                    ¡Gracias por tu compra :D!
+                </Typography> */}
+                <Button
+                    sx={{
+                        backgroundColor: 'black',
+                        color: 'white',
+                        marginTop: '20px',
+                        ':hover': {
+                            backgroundColor: 'white',
+                            color: 'black',
+                        },
+                    }}
+                    href="/"
+                    variant="contained"
+                    color="primary"
+                >
                     Volver a la página principal
                 </Button>
             </Box>

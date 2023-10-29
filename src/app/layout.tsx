@@ -6,7 +6,7 @@ import StyledComponentsRegistry from '@/lib/StyledComponentsRegistry'
 import { UserProvider } from '@/context/UserContext'
 
 export const metadata = {
-    title: 'Farmacia Santa Bárbara -  Sevilla Este',
+    title: 'Farmacia Sta Bárbara -  Sevilla Este',
     description: 'Ven a visitarnos a nuestra farmacia en Sevilla Este',
 }
 

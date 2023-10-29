@@ -8,12 +8,11 @@ import DialogTitle from '@mui/material/DialogTitle'
 import FormControl from '@mui/material/FormControl'
 import MenuItem from '@mui/material/MenuItem'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
-import { FC, useContext, useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { CircularProgress, InputLabel } from '@mui/material'
 import { Dates, Hour, Payment } from '../../../types/types'
 import { fetchPaymentsData } from '@/services/payments'
 import LoadingButton from '@mui/lab/LoadingButton'
-import { UserContext } from '@/context/UserContext'
 
 interface Props {
     dates?: Dates[]
@@ -38,7 +37,6 @@ const ModalOrderTime: FC<Props> = ({
     onDateIdChange,
     editDateAndHour,
 }) => {
-    const { user } = useContext(UserContext)
     const [selectedDate, setSelectedDate] = useState<{
         date: string
         id: string

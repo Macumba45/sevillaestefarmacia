@@ -1,5 +1,5 @@
 'use client'
-import { FC, memo, useEffect, useState } from 'react'
+import { FC, memo, useEffect } from 'react'
 import { useLogicDashboard } from './logic'
 import { getAuthenticatedToken } from '../../../storage/storage'
 import { Props } from './types'
@@ -156,7 +156,7 @@ const Dashboard: FC<Props> = () => {
                 <Link href="/" style={undefined}>
                     <img
                         src={logo.src}
-                        alt="Farmacia Santa Bárbara"
+                        alt="Farmacia Sta Bárbara"
                         style={{
                             width: 175,
                             objectFit: 'cover',
@@ -254,8 +254,7 @@ const Dashboard: FC<Props> = () => {
                         <MenuIcon sx={{ color: 'white' }} />
                     </IconButton>
                     <Typography variant="h6" noWrap component="div">
-                        {titleDrawer.toLocaleUpperCase()} - Farmacia Santa
-                        Bárbara
+                        {titleDrawer.toLocaleUpperCase()} - Farmacia Sta Bárbara
                     </Typography>
                     <Typography
                         fontSize={15}

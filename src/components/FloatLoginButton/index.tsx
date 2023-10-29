@@ -1,6 +1,5 @@
 import { FC, memo } from 'react'
 import { Fab } from '@mui/material'
-import LoginIcon from '@mui/icons-material/Login'
 
 interface Props {
     onClick?: () => void

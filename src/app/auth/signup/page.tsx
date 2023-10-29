@@ -114,7 +114,7 @@ const SignUp: FC = () => {
     }, [])
 
     // Define el título dinámico
-    const dynamicTitle = 'Farmacia Santa Bárbara - Registro'
+    const dynamicTitle = 'Farmacia Sta Bárbara - Registro'
 
     // Actualiza el título cuando el componente se monta
     useEffect(() => {

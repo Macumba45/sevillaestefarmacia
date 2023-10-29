@@ -1,6 +1,5 @@
 'use client'
 import { createContext, useEffect, useState } from 'react'
-import { User } from '../../types/types'
 import { getAuthenticatedToken } from '../../storage/storage'
 
 // Define el valor inicial del contexto como un objeto con las propiedades correctas.

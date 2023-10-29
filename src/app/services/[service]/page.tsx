@@ -103,7 +103,7 @@ const Page: FC<Props> = ({ params }) => {
             break
         case 'clo0e1q180006xy04pu96nyml':
             backgroundcolor = '#F6F6EB'
-            buttonName = 'Contacta'
+            buttonName = 'Contáctanos'
             break
         default:
             backgroundcolor = '#ebf0f6'
@@ -176,7 +176,7 @@ const Page: FC<Props> = ({ params }) => {
                                     handleOpen()
                                 } else if (buttonName === 'Pagar el servicio') {
                                     handleReservarCita()
-                                } else if (buttonName === 'Contacta') {
+                                } else if (buttonName === 'Contáctanos') {
                                     contactWhatsApp()
                                 } else if (
                                     buttonName === 'Solcitar presupuesto'
@@ -245,7 +245,11 @@ const Page: FC<Props> = ({ params }) => {
                     onDateIdChange={onDateIdChange}
                     isEditing={false}
                 />
-                <VideoYoutubeContainer>
+                <VideoYoutubeContainer
+                    style={{
+                        display: serviceData?.urlVideo ? 'flex' : 'none',
+                    }}
+                >
                     <VideoYoutube
                         style={{
                             display: serviceData?.urlVideo ? 'block' : 'none',

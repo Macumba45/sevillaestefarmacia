@@ -64,7 +64,7 @@ const Login: FC = () => {
         }
     }, [])
 
-    const dynamicTitle = 'Farmarcia Santa Bárbara - Inicio de sesión'
+    const dynamicTitle = 'Farmarcia Sta Bárbara - Inicio de sesión'
 
     useEffect(() => {
         if (typeof window !== 'undefined') {

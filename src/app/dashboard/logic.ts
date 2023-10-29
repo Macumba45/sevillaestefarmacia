@@ -1,7 +1,10 @@
 import { useCallback, useContext, useState } from 'react'
-import { getAllUsers, getUserInfo } from '@/services/user'
+import { getAllUsers } from '@/services/user'
 import { useRouter } from 'next/navigation'
 import { Blogs, Services, Talleres, User } from '../../../types/types'
+import { deleteDateById } from '@/services/dates'
+import { createBlog, deleteBlog, getBlogs, updateBlog } from '@/services/blogs'
+import { UserContext } from '@/context/UserContext'
 import {
     createService,
     getServices,
@@ -18,9 +21,7 @@ import {
     getTalleres,
     updateTaller,
 } from '@/services/talleres'
-import { deleteDateById } from '@/services/dates'
-import { createBlog, deleteBlog, getBlogs, updateBlog } from '@/services/blogs'
-import { UserContext } from '@/context/UserContext'
+
 
 export const useLogicDashboard = () => {
     const { user } = useContext(UserContext)
@@ -47,7 +48,7 @@ export const useLogicDashboard = () => {
     const [isLoadingButton, setIsLoadingButton] = useState(false)
     const titlePage = 'Dashboard'
     const datesPaymentsPayed = allPayments?.filter(
-        (payment: any) => payment.payed === true
+        (payment: any) => payment.payed === true && payment.dateId !== ''
     )
     const [openModalTallerOrBlog, setOpenModalTallerOrBlog] = useState(false)
     const [talleres, setTalleres] = useState<Talleres[] | undefined>([])

@@ -1,9 +1,8 @@
 import { NavContainer } from '@/app/styles'
-import { FC, memo, useContext, useEffect, useState } from 'react'
+import { FC, memo, useContext } from 'react'
 import ResponsiveAppBar from '@/components/MenuNavBar'
 import Footer from '@/components/Footer'
 import { UserContext } from '@/context/UserContext'
-import { User } from '../../types/types'
 
 interface Props {
     children: React.ReactNode
