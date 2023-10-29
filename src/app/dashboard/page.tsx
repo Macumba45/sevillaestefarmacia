@@ -148,6 +148,7 @@ const Dashboard: FC<Props> = () => {
                     backgroundColor: 'black',
                     display: 'flex',
                     justifyContent: 'center',
+                    height: '64px',
                     boxShadow:
                         '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)',
                 }}
@@ -391,9 +392,9 @@ const Dashboard: FC<Props> = () => {
                                         openEditModalDateAndHour={() =>
                                             openEditModalDateAndHour(item)
                                         }
-                                        // unBookDate={() =>
-                                        //     deleteDate(item.dateId)
-                                        // }
+                                    // unBookDate={() =>
+                                    //     deleteDate(item.dateId)
+                                    // }
                                     />
                                 ))
                             )}
