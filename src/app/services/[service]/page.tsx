@@ -107,9 +107,11 @@ const Page: FC<Props> = ({ params }) => {
 
     if (!serviceData) {
         return (
-            <LoadingContainer>
-                <CircularIndeterminate />
-            </LoadingContainer>
+            <LayoutNavFooter>
+                <LoadingContainer>
+                    <CircularIndeterminate />
+                </LoadingContainer>
+            </LayoutNavFooter>
         )
     }
 

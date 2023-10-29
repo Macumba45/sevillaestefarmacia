@@ -6,6 +6,7 @@ import { useLogicTaller } from './logic'
 import LayoutNavFooter from '@/layout/layout'
 import { MainContainer, Title, Subtitle, Container } from './styles'
 import CircularIndeterminate from '@/components/Loader'
+import AnimatedView from '@/animations/AnimatedContainer'
 
 const Talleres: FC = () => {
     const { fetchTalleres, talleres, isLoading } = useLogicTaller()
@@ -27,17 +28,25 @@ const Talleres: FC = () => {
                 <Subtitle>¡No faltes!</Subtitle>
                 <Container>
                     {isLoading && (
-                        <>
+                        <div
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                height: '40vh',
+                            }}
+                        >
                             <CircularIndeterminate />
-                        </>
-                    )
-                    }
+                        </div>
+                    )}
                     {talleres?.map(taller => (
-                        <CardTallerOrBlog
-                            key={taller.id}
-                            mode="taller"
-                            taller={taller}
-                        />
+                        <AnimatedView key={taller.id}>
+                            <CardTallerOrBlog
+                                key={taller.id}
+                                mode="taller"
+                                taller={taller}
+                            />
+                        </AnimatedView>
                     ))}
                 </Container>
             </MainContainer>

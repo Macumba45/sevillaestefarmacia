@@ -12,7 +12,6 @@ interface Props {
 const LayoutNavFooter: FC<Props> = ({ children }) => {
     const { user, auth } = useContext(UserContext)
 
-
     return (
         <>
             <NavContainer>

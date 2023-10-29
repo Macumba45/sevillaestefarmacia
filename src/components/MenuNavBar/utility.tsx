@@ -36,6 +36,10 @@ export const pages = [
 
 export const pagesMobile = [
     {
+        name: 'Home',
+        route: '/',
+    },
+    {
         name: 'Farmacia',
 
         route: '/conocenos',

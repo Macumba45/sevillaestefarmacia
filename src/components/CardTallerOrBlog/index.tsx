@@ -1,8 +1,9 @@
 import React, { FC } from 'react'
-import { Card, Button } from 'antd'
+import { Card } from 'antd'
 import { Blogs, Talleres } from '../../../types/types'
 import HoverMotion from '../../animations/hover'
 import Link from 'next/link'
+import { Button } from '@mui/material'
 
 const { Meta } = Card
 
@@ -75,21 +76,21 @@ const CardTallerOrBlog: FC<Props> = ({ mode, blog, taller }) => (
                         )}
                     >
                         <Button
-                            type="primary"
+                            size="small"
                             style={{
                                 marginTop: '2rem',
                                 backgroundColor: 'transparent',
                                 color: 'black',
                                 boxShadow: 'none',
-                                fontFamily: 'Cormorant Garamond',
-                                padding: 0,
                             }}
+                            variant="text"
                         >
                             <p
                                 style={{
                                     textAlign: 'left',
                                     textDecoration: 'underline',
-                                    fontSize: '1rem',
+                                    fontSize: '0.8rem',
+                                    fontFamily: 'Cormorant Garamond',
                                 }}
                             >
                                 Más información

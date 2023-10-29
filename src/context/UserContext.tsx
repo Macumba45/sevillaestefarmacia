@@ -7,15 +7,14 @@ import { getAuthenticatedToken } from '../../storage/storage'
 const initialContextValue = {
     user: {} as any,
     auth: false,
-    getUserInfo: () => { },
-
+    getUserInfo: () => {},
 }
 
 export const UserContext = createContext(initialContextValue)
 
 export const UserProvider = ({ children }: any) => {
     const [user, setUser] = useState(null)
-    const [auth, setAuth] = useState(Boolean);
+    const [auth, setAuth] = useState(Boolean)
 
     // Actualiza el valor del contexto con la información del usuario.
 
@@ -44,8 +43,9 @@ export const UserProvider = ({ children }: any) => {
         }
     }, [])
 
-
     return (
-        <UserContext.Provider value={{ user, auth, getUserInfo }}>{children}</UserContext.Provider>
+        <UserContext.Provider value={{ user, auth, getUserInfo }}>
+            {children}
+        </UserContext.Provider>
     )
 }

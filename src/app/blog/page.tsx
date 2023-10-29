@@ -5,9 +5,11 @@ import { useLogicBlog } from './logic'
 import LayoutNavFooter from '@/layout/layout'
 import CardTallerOrBlog from '@/components/CardTallerOrBlog'
 import { MainContainer, Title, Subtitle, Container } from './styles'
+import CircularIndeterminate from '@/components/Loader'
+import AnimatedView from '@/animations/AnimatedContainer'
 
-const Talleres: FC = () => {
-    const { fetchBlogs, blogs } = useLogicBlog()
+const Blog: FC = () => {
+    const { fetchBlogs, blogs, isLoading } = useLogicBlog()
 
     useEffect(() => {
         fetchBlogs()
@@ -15,7 +17,7 @@ const Talleres: FC = () => {
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
-            document.title = 'Talleres'
+            document.title = 'Blog'
         }
     }, [])
 
@@ -25,12 +27,26 @@ const Talleres: FC = () => {
                 <Title>BLOG</Title>
                 <Subtitle>Consejos farmacéuticos</Subtitle>
                 <Container>
+                    {isLoading && (
+                        <div
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                height: '40vh',
+                            }}
+                        >
+                            <CircularIndeterminate />
+                        </div>
+                    )}
                     {blogs?.map(blogs => (
-                        <CardTallerOrBlog
-                            key={blogs.id}
-                            mode="blog"
-                            blog={blogs}
-                        />
+                        <AnimatedView key={blogs.id}>
+                            <CardTallerOrBlog
+                                key={blogs.id}
+                                mode="blog"
+                                blog={blogs}
+                            />
+                        </AnimatedView>
                     ))}
                 </Container>
             </MainContainer>
@@ -38,4 +54,4 @@ const Talleres: FC = () => {
     )
 }
 
-export default memo(Talleres)
+export default memo(Blog)
