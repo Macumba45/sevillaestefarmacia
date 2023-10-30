@@ -8,13 +8,12 @@ import { Typography } from '@mui/material'
 
 const Perfil: FC = () => {
     const { user } = useContext(UserContext)
-    console.log(user)
+    // console.log(user)
 
     useEffect(() => {
-        if (typeof window !== 'undefined') {
-            document.title = `Mi perfil - ${user.name}`
-        }
-    }, [document.title])
+        document.title = `Mi perfil - ${user.name}`
+
+    }, [])
 
     return (
         <LayoutNavFooter>
