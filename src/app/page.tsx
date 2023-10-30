@@ -168,7 +168,7 @@ const Home: FC = () => {
                         flexDirection="row-reverse"
                         widthTitle="300px"
                         widthTitleDesktop="500px"
-                        objectposition="right"
+                        objectposition="center"
                     />
                 </AnimatedView>
                 <AnimatedView>

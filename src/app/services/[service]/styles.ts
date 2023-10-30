@@ -133,7 +133,7 @@ export const PictureContainer = styled.div`
 `
 export const Picture = styled.img`
     width: 400px;
-    height: 90%;
+    height: 70%;
     display: none;
     object-fit: cover;
     border-radius: 10px;
