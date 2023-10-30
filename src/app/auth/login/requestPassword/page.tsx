@@ -3,6 +3,7 @@ import { Avatar, Container, TextField, Typography } from '@mui/material'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import { useEffect, useState } from 'react'
 import { LoadingButton } from '@mui/lab'
+import HoverMotion from '@/animations/hover'
 
 function RecoveryRequest() {
     const [email, setEmail] = useState('')
@@ -51,17 +52,27 @@ function RecoveryRequest() {
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    marginTop: '8px',
+                    justifyContent: 'center',
+                    marginTop: '3rem',
                 }}
             >
-                <Avatar style={{ margin: '8px', backgroundColor: 'primary' }}>
+                <Avatar
+                    style={{
+                        margin: '8px',
+                        backgroundColor: 'black',
+                        color: 'white',
+                    }}
+                >
                     <LockOutlinedIcon />
                 </Avatar>
                 <Typography marginTop={2} component="h1" variant="h5">
                     Recuperación de contraseña
                 </Typography>
                 <form
-                    style={{ width: '100%', marginTop: '16px' }}
+                    style={{
+                        width: '100%',
+                        marginTop: '16px',
+                    }}
                     onSubmit={handleSubmit}
                 >
                     <TextField
@@ -78,17 +89,39 @@ function RecoveryRequest() {
                         value={email}
                         onChange={e => setEmail(e.target.value)}
                     />
-                    <LoadingButton
-                        loading={loading}
-                        disabled={emailSent}
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        style={{ margin: '16px 0' }}
+                    <div
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                        }}
                     >
-                        Enviar solicitud
-                    </LoadingButton>
+                        <HoverMotion>
+                            <LoadingButton
+                                loading={loading}
+                                disabled={emailSent}
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                color="primary"
+                                sx={{
+                                    color: 'black',
+                                    borderColor: 'black',
+                                    borderRadius: '130px',
+                                    mt: 2,
+                                    width: '170px',
+                                    backgroundColor: 'white',
+                                    ':hover': {
+                                        backgroundColor: 'black',
+                                        color: 'white',
+                                        borderColor: 'transparent',
+                                    },
+                                    fontFamily: 'Cormorant Garamond',
+                                }}
+                            >
+                                Enviar solicitud
+                            </LoadingButton>
+                        </HoverMotion>
+                    </div>
                 </form>
             </div>
             {emailSent && (

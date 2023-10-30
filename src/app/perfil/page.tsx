@@ -13,9 +13,7 @@ const Perfil: FC = () => {
 
     return (
         <LayoutNavFooter>
-            <MainContainer>
-                <h1>Mi perfil</h1>
-            </MainContainer>
+            <MainContainer></MainContainer>
         </LayoutNavFooter>
     )
 }

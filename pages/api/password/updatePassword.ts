@@ -6,7 +6,6 @@ import bcrypt from 'bcrypt'
 
 async function updatePassword(req: NextApiRequest, res: NextApiResponse) {
     const { token, password } = req.body
-    console.log(token, password)
 
     try {
         if (!token) {

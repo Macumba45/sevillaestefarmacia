@@ -3,6 +3,8 @@
 import React, { FC, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Container, Typography, TextField, Button, Box } from '@mui/material'
+import { LoadingButton } from '@mui/lab'
+import HoverMotion from '@/animations/hover'
 
 interface Props {
     params: {
@@ -14,12 +16,14 @@ const ResetPasswordForm: FC<Props> = ({ params }) => {
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [confirmed, setConfirmed] = useState(false)
+    const [loading, setLoading] = useState(false)
     const router = useRouter()
     const { token } = params
 
     const handleSubmit = async (e: any) => {
         try {
             e.preventDefault()
+            setLoading(true)
             if (password !== confirmPassword) {
                 alert('Las contraseñas no coinciden')
                 return
@@ -35,13 +39,13 @@ const ResetPasswordForm: FC<Props> = ({ params }) => {
                 },
             })
             if (response.ok) {
-                console.log('Contraseña restablecida')
                 setConfirmed(true)
+                setLoading(false)
             } else {
-                console.log('Error al restablecer la contraseña')
+                throw new Error('Error al restablecer la contraseña')
             }
         } catch (error: any) {
-            console.log('Error al restablecer la contraseña', error.message)
+            throw new Error(error.message)
         }
     }
     return (
@@ -83,16 +87,31 @@ const ResetPasswordForm: FC<Props> = ({ params }) => {
                         value={confirmPassword}
                         onChange={e => setConfirmPassword(e.target.value)}
                     />
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        disabled={confirmed}
-                        sx={{ mt: 2 }}
-                    >
-                        Restablecer Contraseña
-                    </Button>
+                    <HoverMotion>
+                        <LoadingButton
+                            type="submit"
+                            loading={loading}
+                            disabled={!password || !confirmPassword}
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            sx={{
+                                color: 'black',
+                                borderColor: 'black',
+                                borderRadius: '130px',
+                                mt: 2,
+                                backgroundColor: 'white',
+                                ':hover': {
+                                    backgroundColor: 'black',
+                                    color: 'white',
+                                    borderColor: 'transparent',
+                                },
+                                fontFamily: 'Cormorant Garamond',
+                            }}
+                        >
+                            Restablecer Contraseña
+                        </LoadingButton>
+                    </HoverMotion>
                 </form>
             </Box>
             {confirmed && (
