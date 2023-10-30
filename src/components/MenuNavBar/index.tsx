@@ -40,10 +40,10 @@ const ResponsiveAppBar: FC<Props> = ({ userRole, isAuth }) => {
     const handleButtonClick = () => {
         if (user?.role === 'admin') {
             // Redirigir directamente al dashboard
-            window.location.href = '/dashboard'
+            router.push('/dashboard')
         } else if (user) {
             // Abrir el Drawer con las opciones de Perfil y Cerrar Sesión
-            window.location.href = '/perfil'
+            router.push('/perfil')
         } else {
             // Redirigir a la página de inicio de sesión
             router.push('/auth/login')
