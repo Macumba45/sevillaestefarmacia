@@ -47,9 +47,6 @@ const ResponsiveAppBar: FC<Props> = ({ userRole, isAuth }) => {
             router.push('/auth/login')
         }
     }
-
-    useEffect(() => {}, [])
-
     const handleOpenNavMenu = () => {
         setIsDrawerOpen(true)
     }
@@ -371,7 +368,7 @@ const ResponsiveAppBar: FC<Props> = ({ userRole, isAuth }) => {
                                                                   fontWeight: 900,
                                                               }}
                                                               href={
-                                                                  page?.route as string
+                                                                  page.route as string
                                                               }
                                                               onClick={
                                                                   page.void

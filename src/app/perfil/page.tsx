@@ -2,6 +2,7 @@
 
 import { FC, memo, useEffect } from 'react'
 import LayoutNavFooter from '@/layout/layout'
+import { MainContainer } from './styles'
 
 const Perfil: FC = () => {
     useEffect(() => {
@@ -12,7 +13,9 @@ const Perfil: FC = () => {
 
     return (
         <LayoutNavFooter>
-            <h1>Mi perfil</h1>
+            <MainContainer>
+                <h1>Mi perfil</h1>
+            </MainContainer>
         </LayoutNavFooter>
     )
 }

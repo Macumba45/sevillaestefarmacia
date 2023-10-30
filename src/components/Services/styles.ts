@@ -31,11 +31,11 @@ export const ContainerServices = styled.div`
     }
 `
 
-export const ImgServices = styled.img`
+export const ImgServices = styled.img<{ objectposition?: string }>`
     width: 100%;
     height: 100vh;
     object-fit: cover;
-    object-position: center; /* Ajusta la posición de la imagen al centro */
+    object-position: ${props => props.objectposition};
 `
 
 export const ButtonContainerServices = styled.div`

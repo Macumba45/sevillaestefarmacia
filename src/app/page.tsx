@@ -106,6 +106,7 @@ const Home: FC = () => {
                         widthDesktop="330px"
                         widthTitle="330px"
                         imagePosition="bottom"
+                        objectposition="center"
                     />
                 </AnimatedView>
                 <AnimatedView>
@@ -126,6 +127,7 @@ const Home: FC = () => {
                         widthMobile="350px"
                         flexDirection="row-reverse"
                         widthTitleDesktop="400px"
+                        objectposition="center"
                     />
                 </AnimatedView>
                 <AnimatedView>
@@ -145,6 +147,7 @@ const Home: FC = () => {
                         widthMobile="320px"
                         widthDesktop="470px"
                         imagePosition="bottom"
+                        objectposition="center"
                     />
                 </AnimatedView>
                 <AnimatedView>
@@ -165,6 +168,7 @@ const Home: FC = () => {
                         flexDirection="row-reverse"
                         widthTitle="300px"
                         widthTitleDesktop="500px"
+                        objectposition="right"
                     />
                 </AnimatedView>
                 <AnimatedView>
@@ -185,6 +189,7 @@ const Home: FC = () => {
                         widthDesktop="610px"
                         widthTitle="330px"
                         imagePosition="bottom"
+                        objectposition="center"
                     />
                 </AnimatedView>
                 <AnimatedView>
@@ -206,6 +211,7 @@ const Home: FC = () => {
                         imagePosition="bottom"
                         flexDirection="row-reverse"
                         widthTitleDesktop="378px"
+                        objectposition="center"
                     />
                 </AnimatedView>
                 <FloatButtonContainer>

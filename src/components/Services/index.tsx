@@ -31,6 +31,7 @@ interface Props {
     flexDirection?: string
     imagePosition?: 'top' | 'bottom' // Prop para controlar la posición de la imagen
     alt: string
+    objectposition?: string
 }
 
 const Services: FC<Props> = ({
@@ -48,6 +49,7 @@ const Services: FC<Props> = ({
     flexDirection,
     imagePosition = 'bottom', // Valor predeterminado para imagePosition
     alt,
+    objectposition,
 }) => {
     const router = useRouter()
 
@@ -116,7 +118,10 @@ const Services: FC<Props> = ({
                 </ContainerServices>
                 {imagePosition === 'bottom' && ( // Renderiza la imagen abajo si imagePosition es 'bottom'
                     <ContainerImgServices>
-                        <ImgServices src={picture} />
+                        <ImgServices
+                            objectposition={objectposition}
+                            src={picture}
+                        />
                     </ContainerImgServices>
                 )}
             </ContainerDesktopServices>
