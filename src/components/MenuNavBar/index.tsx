@@ -29,11 +29,13 @@ import {
     LogoImg,
     stylesNavBar,
 } from './styles'
+import HoverMotion from '@/animations/hover'
 
 const ResponsiveAppBar: FC<Props> = ({ userRole, isAuth }) => {
     const router = useRouter()
     const { user } = useContext(UserContext)
     const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+    const [showSubmenu, setShowSubmenu] = useState(false)
 
     const handleButtonClick = () => {
         if (user?.role === 'admin') {
@@ -132,33 +134,138 @@ const ResponsiveAppBar: FC<Props> = ({ userRole, isAuth }) => {
                         }}
                     >
                         {pages.map((page, index) => (
-                            <Button key={index}>
-                                <Link
-                                    style={{
-                                        textDecoration: 'none',
-                                        color: 'white',
-                                        fontWeight: 500,
-                                        fontFamily: 'Cormorant Garamond',
-                                    }}
-                                    href={page?.route as string}
-                                    target={
-                                        page?.name === 'Tarjeta CLUB' ||
-                                        page?.name === ''
-                                            ? '_blank'
-                                            : ''
-                                    }
-                                >
-                                    <div
-                                        style={{
+                            <div key={index}>
+                                {page.name === 'Servicios' ? (
+                                    <>
+                                        <div
+                                            style={{
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                backgroundColor: 'black',
+                                                color: 'white',
+                                                alignItems: 'center',
+                                                width: '120px',
+                                            }}
+                                            onClick={() =>
+                                                setShowSubmenu(!showSubmenu)
+                                            }
+                                        >
+                                            <Typography
+                                                sx={{
+                                                    fontFamily:
+                                                        'Cormorant Garamond',
+                                                    fontSize: '0.875rem',
+                                                    fontWeight: 900,
+                                                    cursor: 'pointer',
+                                                }}
+                                            >
+                                                {page.name.toLocaleUpperCase()}
+                                            </Typography>
+                                            <ExpandMoreIcon
+                                                sx={{
+                                                    color: 'white',
+                                                    cursor: 'pointer',
+                                                }}
+                                            />
+                                        </div>
+                                        {showSubmenu &&
+                                            page.name === 'Servicios' && (
+                                                <div
+                                                    style={{
+                                                        position: 'absolute', // Para que esté fuera del flujo normal
+                                                        top: '65px', // Puedes ajustar esto según tu diseño
+                                                        left: '35%', // Puedes ajustar esto según tu diseño
+                                                        backgroundColor:
+                                                            'black',
+                                                        padding: '10px',
+                                                        zIndex: 1, // Asegura que esté por encima de otros elementos
+                                                        cursor: 'pointer',
+                                                        borderRadius: '10px',
+                                                        boxShadow:
+                                                            '0px 0px 10px 0px rgba(0,0,0,0.75)',
+                                                    }}
+                                                >
+                                                    {page.subpages?.map(
+                                                        (
+                                                            subpage,
+                                                            subpageIndex
+                                                        ) => (
+                                                            <HoverMotion
+                                                                key={
+                                                                    subpageIndex
+                                                                }
+                                                            >
+                                                                <Button
+                                                                    sx={{
+                                                                        fontFamily:
+                                                                            'Cormorant Garamond',
+                                                                        width: '200px',
+                                                                        fontWeight: 900,
+                                                                        marginTop: 1,
+                                                                        textAlign:
+                                                                            'left',
+                                                                    }}
+                                                                    key={
+                                                                        subpageIndex
+                                                                    }
+                                                                >
+                                                                    <Link
+                                                                        style={{
+                                                                            textDecoration:
+                                                                                'none',
+                                                                            color: 'white',
+                                                                        }}
+                                                                        href={
+                                                                            subpage.route as string
+                                                                        }
+                                                                    >
+                                                                        {
+                                                                            subpage.name
+                                                                        }
+                                                                    </Link>
+                                                                </Button>
+                                                            </HoverMotion>
+                                                        )
+                                                    )}
+                                                </div>
+                                            )}
+                                    </>
+                                ) : (
+                                    <Button
+                                        sx={{
                                             display: 'flex',
-                                            alignItems: 'center',
+                                            justifyContent: 'flex-start',
                                         }}
                                     >
-                                        {page?.icon}
-                                        {page?.name}
-                                    </div>
-                                </Link>
-                            </Button>
+                                        <Link
+                                            style={{
+                                                textDecoration: 'none',
+                                                color: 'white',
+                                                display: 'flex',
+                                                fontWeight: 900,
+                                            }}
+                                            href={page.route as string}
+                                            target={
+                                                page?.name === 'Tarjeta CLUB' ||
+                                                page?.name === '' ||
+                                                page?.name === 'Síguenos'
+                                                    ? '_blank'
+                                                    : ''
+                                            }
+                                        >
+                                            <div
+                                                style={{
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                }}
+                                            >
+                                                {page.name}
+                                                {page.icon}
+                                            </div>
+                                        </Link>
+                                    </Button>
+                                )}
+                            </div>
                         ))}
                     </Box>
 
