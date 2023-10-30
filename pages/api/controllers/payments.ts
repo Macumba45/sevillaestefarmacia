@@ -119,3 +119,24 @@ export const editDateAndHour = async (
 
     return
 }
+
+export const getPaymentsByUserId = async (userId: string) => {
+    const payments = await prisma.payments.findMany({
+        where: {
+            userId: userId,
+        },
+        include: {
+            service: {
+                include: {
+                    dates: {
+                        include: {
+                            hours: true,
+                        },
+                    },
+                },
+            },
+        },
+    })
+
+    return payments
+}

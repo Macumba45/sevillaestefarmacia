@@ -1,10 +1,11 @@
 'use client'
 import { createContext, useEffect, useState } from 'react'
 import { getAuthenticatedToken } from '../../storage/storage'
+import { User } from '../../types/types'
 
 // Define el valor inicial del contexto como un objeto con las propiedades correctas.
 const initialContextValue = {
-    user: {} as any,
+    user: {} as User,
     auth: false,
     getUserInfo: () => {},
 }
@@ -12,7 +13,7 @@ const initialContextValue = {
 export const UserContext = createContext(initialContextValue)
 
 export const UserProvider = ({ children }: any) => {
-    const [user, setUser] = useState(null)
+    const [user, setUser] = useState<User>({} as User)
     const [auth, setAuth] = useState(Boolean)
 
     // Actualiza el valor del contexto con la información del usuario.

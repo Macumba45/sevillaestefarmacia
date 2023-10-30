@@ -1,19 +1,33 @@
 'use client'
 
-import { FC, memo, useEffect } from 'react'
+import { FC, memo, useContext, useEffect } from 'react'
 import LayoutNavFooter from '@/layout/layout'
-import { MainContainer } from './styles'
+import { MainContainer, ProfileDataContainer } from './styles'
+import { UserContext } from '@/context/UserContext'
+import { Typography } from '@mui/material'
 
 const Perfil: FC = () => {
+    const { user } = useContext(UserContext)
+    console.log(user)
+
     useEffect(() => {
         if (typeof window !== 'undefined') {
-            document.title = 'Mi perfil'
+            document.title = `Mi perfil - ${user.name}`
         }
-    }, [])
+    }, [document.title])
 
     return (
         <LayoutNavFooter>
-            <MainContainer></MainContainer>
+            <MainContainer>
+                <ProfileDataContainer>
+                    <Typography variant="h5" component="h1">
+                        {user.name}
+                    </Typography>
+                    <Typography marginTop={2} component="p">
+                        {user.email}
+                    </Typography>
+                </ProfileDataContainer>
+            </MainContainer>
         </LayoutNavFooter>
     )
 }

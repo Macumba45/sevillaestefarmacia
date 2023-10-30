@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
+import { updateResetPasswordToken } from '../controllers/user'
 import { findEmailToRecover } from '../controllers/password'
 import jwt from 'jsonwebtoken'
-import { updateResetPasswordToken } from '../controllers/user'
 import nodemailer from 'nodemailer'
 
 async function forgotPassword(req: NextApiRequest, res: NextApiResponse) {
@@ -43,9 +43,9 @@ async function forgotPassword(req: NextApiRequest, res: NextApiResponse) {
         const mailOptions = {
             from: process.env.EMAIL,
             to: email,
-            subject: 'Reset Password',
+            subject: 'Solicitud de cambio de contraseña',
             html: `
-            <h2>Please click on the given link to reset your password</h2>
+            <h2>Porfavor, haz click en el enlace para cambiar la contraseña de tu cuenta en Farmacia Sta.Bárbara </h2>
             <p>${process.env.CLIENT_URL}/auth/login/resetPassword/${token}</p>
             `,
         }

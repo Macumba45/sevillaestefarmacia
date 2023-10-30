@@ -21,7 +21,7 @@ export const useLogicPageServicesDetail = () => {
         setIsLoading(true)
         const serviceDetails = await getServiceDetails(id)
         if (typeof window !== 'undefined') {
-            document.title = `Farmacia Sta Bárbara - ${serviceDetails?.title}`
+            document.title = `Farmacia Santa Bárbara - ${serviceDetails?.title}`
         }
         setServiceData(serviceDetails)
         setIsLoading(false)
@@ -36,10 +36,10 @@ export const useLogicPageServicesDetail = () => {
         let message = ''
         const phoneNumber = '+34682296561'
         if (serviceData?.id === 'clo0e1q180006xy04pu96nyml') {
-            message = `Hola Farmacia Sta Bárbara, me gustaría solicitar información sobre el servicio ${serviceData?.title}`
+            message = `Hola Farmacia Santa Bárbara, me gustaría solicitar información sobre el servicio ${serviceData?.title}`
         } else if (serviceData?.id === 'clo0e0mn50003xy040gwqse36') {
             message =
-                'Hola Farmacia Sta Bárbara, me gustaría solicitar presupuesto para realizar una fórmula magistral'
+                'Hola Farmacia Santa Bárbara, me gustaría solicitar presupuesto para realizar una fórmula magistral'
         }
         const whatsappURL = `whatsapp://send?phone=${phoneNumber}&text=${encodeURIComponent(
             message
