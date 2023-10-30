@@ -53,7 +53,7 @@ const Page: FC<Props> = ({ params }) => {
     return (
         <LayoutNavFooter>
             <MainContainer>
-                <Title>Blog</Title>
+                <Title>BLOG</Title>
                 <Subtitle>Consejos farmacéuticos</Subtitle>
                 {isLoading ? (
                     <div

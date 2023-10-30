@@ -22,7 +22,6 @@ import {
     updateTaller,
 } from '@/services/talleres'
 
-
 export const useLogicDashboard = () => {
     const { user } = useContext(UserContext)
     const [allUsers, setAllUsers] = useState<User[]>([])
@@ -343,6 +342,7 @@ export const useLogicDashboard = () => {
         openModalEditDateAndHourFunction,
         openModalTallerOrBlog,
         paymentId,
+        postNewBlog,
         postNewTaller,
         route,
         router,
@@ -357,11 +357,10 @@ export const useLogicDashboard = () => {
         talleres,
         titleDrawer,
         titlePage,
+        updateBlogById,
         updateServiceData,
         updateTallerById,
-        userLoaded,
-        postNewBlog,
-        updateBlogById,
         user,
+        userLoaded,
     }
 }

@@ -8,6 +8,7 @@ export type User = {
     phone?: string
     payment?: Payment[]
     birthdate?: string
+    resetLink?: string
 }
 
 export type Services = {

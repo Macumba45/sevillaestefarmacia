@@ -54,6 +54,7 @@ const drawerWidth = 240
 const Dashboard: FC<Props> = () => {
     const {
         allUsers,
+        blogData,
         blogs,
         changeRoute,
         closeModalDelete,
@@ -107,9 +108,8 @@ const Dashboard: FC<Props> = () => {
         talleres,
         titleDrawer,
         titlePage,
-        userLoaded,
-        blogData,
         user,
+        userLoaded,
     } = useLogicDashboard()
 
     const itemsTop = [

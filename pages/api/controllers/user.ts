@@ -17,6 +17,7 @@ export const findUserEmail = async (email: string): Promise<User | null> => {
         name: prismaUser.name,
         password: prismaUser.password,
         role: prismaUser.role,
+        phone: prismaUser.phone,
     }
     return user
 }
@@ -85,4 +86,30 @@ export const findAllUsers = async (): Promise<User[]> => {
     }))
 
     return users
+}
+
+export const updateResetPasswordToken = async (
+    email: string,
+    token: string
+): Promise<User | null> => {
+    const updatedUser = await prisma.user.update({
+        where: {
+            email: email,
+        },
+        data: {
+            resetLink: token,
+        },
+    })
+
+    if (!updatedUser) {
+        return null
+    }
+    const user: User = {
+        id: updatedUser.id,
+        email: updatedUser.email,
+        name: updatedUser.name as string,
+        role: updatedUser.role,
+        phone: updatedUser.phone as string,
+    }
+    return user
 }

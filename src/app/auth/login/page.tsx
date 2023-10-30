@@ -19,7 +19,6 @@ import { UserContext } from '@/context/UserContext'
 
 const Login: FC = () => {
     const { getUserInfo } = useContext(UserContext)
-
     const router = useRouter()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
@@ -146,15 +145,15 @@ const Login: FC = () => {
                                 </Link>
                             </Grid>
                         </Grid>
-                        {/* <Grid marginTop={2} item xs>
+                        <Grid marginTop={2} item xs>
                             <Link
                                 style={{ color: '#4675A6' }}
-                                href={`/${locale}/auth/login/requestPassword`}
+                                href={'/auth/login/requestPassword'}
                                 variant="body2"
                             >
                                 ¿Olvidaste la contraseña?
                             </Link>
-                        </Grid> */}
+                        </Grid>
                     </Box>
                 </Box>
             </Container>

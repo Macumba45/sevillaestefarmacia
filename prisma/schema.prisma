@@ -15,6 +15,7 @@ model User {
   password  String
   role      String          @default("user")
   phone     String
+  resetLink String?
   services  ServiceToUser[]
   createdAt DateTime        @default(now())
   updatedAt DateTime        @updatedAt
