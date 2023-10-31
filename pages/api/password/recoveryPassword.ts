@@ -13,7 +13,7 @@ async function forgotPassword(req: NextApiRequest, res: NextApiResponse) {
         }
         const token = jwt.sign(
             { id: user.id },
-            process.env.RESET_PASSWORD_KEY as string,
+            'test' as string,
             { expiresIn: '20m' }
         )
 
@@ -46,7 +46,7 @@ async function forgotPassword(req: NextApiRequest, res: NextApiResponse) {
             subject: 'Solicitud de cambio de contraseña',
             html: `
             <h2>Porfavor, haz click en el enlace para cambiar la contraseña de tu cuenta en Farmacia Sta.Bárbara </h2>
-            <p>${process.env.CLIENT_URL}/auth/login/resetPassword/${token}</p>
+            <p>https://sevillaestefarmacia.vercel.app/auth/login/resetPassword/${token}</p>
             `,
         }
 
