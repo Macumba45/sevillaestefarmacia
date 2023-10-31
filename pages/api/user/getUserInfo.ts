@@ -34,7 +34,7 @@ export default async function handler(
                     date: date ? [date.dates] : [], // Agregar la fecha si existe
                     hour: hour
                         .filter(item => item.id === payment.hourId)
-                        .map(item => item.hour), // Filtrar las horas que coincidan con el ID de la hora del pago
+                        .map(item => item.hour),
                     payed: payment.payed,
                 }
             })
@@ -50,7 +50,6 @@ export default async function handler(
                 name: user.name,
                 role: user.role,
                 phone: user.phone,
-
                 payments: formattedPayments,
             })
         } catch (error: any) {
