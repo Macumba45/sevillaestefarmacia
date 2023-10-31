@@ -41,7 +41,7 @@ async function forgotPassword(req: NextApiRequest, res: NextApiResponse) {
         })
 
         const mailOptions = {
-            from: process.env.EMAIL,
+            from: 'gonzalolovo@gmail.com',
             to: email,
             subject: 'Solicitud de cambio de contraseña',
             html: `
