@@ -11,25 +11,21 @@ async function forgotPassword(req: NextApiRequest, res: NextApiResponse) {
         if (!user) {
             return res.status(400).json({ message: 'User not found' })
         }
-        const token = jwt.sign({ id: user.id }, 'test' as string, {
-            expiresIn: '20m',
-        })
+        const token = jwt.sign(
+            { id: user.id },
+            process.env.RESET_PASSWORD_KEY as string,
+            { expiresIn: '20m' }
+        )
 
         const transporter = nodemailer.createTransport({
             // Configuración del servicio de correo electrónico (por ejemplo, Gmail)
-            host: "smtp.gmail.com",
-            port: 587,
-            secure: false, // upgrade later with STARTTLS
+            service: 'Gmail',
             auth: {
                 user: 'gonzalolovo@gmail.com',
-                pass: 'pftd mnby xmla yiug',
-
+                pass: process.env.EMAIL_PASSWORD,
             },
-            tls: {
-                rejectUnauthorized: false,
-            },
+            secure: true,
         })
-        console.log(transporter)
 
         await new Promise((resolve, reject) => {
             // verify connection configuration
@@ -50,22 +46,25 @@ async function forgotPassword(req: NextApiRequest, res: NextApiResponse) {
             subject: 'Solicitud de cambio de contraseña',
             html: `
             <h2>Porfavor, haz click en el enlace para cambiar la contraseña de tu cuenta en Farmacia Sta.Bárbara </h2>
-            <p>https://sevillaestefarmacia.vercel.app/auth/login/resetPassword/${token}</p>
+            <p>${process.env.CLIENT_URL}/auth/login/resetPassword/${token}</p>
             `,
         }
 
         await updateResetPasswordToken(email, token)
 
-        transporter.sendMail(mailOptions, (err: any, data: any) => {
-            if (err) {
-                return res
-                    .status(500)
-                    .json({ message: 'Internal Server Error' })
-            } else {
-                return res
-                    .status(200)
-                    .json({ message: 'Email sent successfully' })
-            }
+        // Enviar el correo electrónico
+        await new Promise((resolve, reject) => {
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    console.error(
+                        'Error al enviar el correo electrónico:',
+                        error
+                    )
+                    reject(error)
+                } else {
+                    resolve(info)
+                }
+            })
         })
     } catch (error) {
         console.error(error)
