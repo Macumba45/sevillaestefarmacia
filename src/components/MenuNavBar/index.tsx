@@ -15,7 +15,6 @@ import Container from '@mui/material/Container'
 import Button from '@mui/material/Button'
 import logo from '../../assets/logo/logo.png'
 import { ExpandMore as ExpandMoreIcon } from '@mui/icons-material'
-import { UserContext } from '@/context/UserContext'
 import {
     Accordion,
     AccordionDetails,
