@@ -18,13 +18,11 @@ async function forgotPassword(req: NextApiRequest, res: NextApiResponse) {
         const transporter = nodemailer.createTransport({
             // Configuración del servicio de correo electrónico (por ejemplo, Gmail)
             service: 'Gmail',
-            port: 587,
-            host: "smtp.gmail.com",
             auth: {
                 user: 'gonzalolovo@gmail.com',
                 pass: 'pftd mnby xmla yiug',
             },
-            secure: false,
+            secure: true,
 
         })
 
