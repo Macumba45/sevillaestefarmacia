@@ -1,6 +1,6 @@
 import { User } from '../../../types/types'
 
 export type Props = {
-    userRole: User | null
+    user: User | null
     isAuth: boolean
 }

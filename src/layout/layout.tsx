@@ -14,7 +14,7 @@ const LayoutNavFooter: FC<Props> = ({ children }) => {
     return (
         <>
             <NavContainer>
-                <ResponsiveAppBar isAuth={auth} userRole={user} />
+                <ResponsiveAppBar isAuth={auth} user={user} />
             </NavContainer>
             {children}
             <Footer />
