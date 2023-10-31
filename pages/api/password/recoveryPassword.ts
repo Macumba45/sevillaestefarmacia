@@ -22,7 +22,7 @@ async function forgotPassword(req: NextApiRequest, res: NextApiResponse) {
             service: 'Gmail',
             auth: {
                 user: 'gonzalolovo@gmail.com',
-                pass: process.env.EMAIL_PASSWORD,
+                pass: 'pftd mnby xmla yiug'
             },
             secure: true,
         })
