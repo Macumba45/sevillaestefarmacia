@@ -11,20 +11,21 @@ async function forgotPassword(req: NextApiRequest, res: NextApiResponse) {
         if (!user) {
             return res.status(400).json({ message: 'User not found' })
         }
-        const token = jwt.sign(
-            { id: user.id },
-            'test' as string,
-            { expiresIn: '20m' }
-        )
+        const token = jwt.sign({ id: user.id }, 'test' as string, {
+            expiresIn: '20m',
+        })
 
         const transporter = nodemailer.createTransport({
             // Configuración del servicio de correo electrónico (por ejemplo, Gmail)
-            service: 'Gmail',
+            service: 'gmail',
             auth: {
                 user: 'gonzalolovo@gmail.com',
-                pass: 'pftd mnby xmla yiug'
+                pass: 'pftdmnbyxmlayiug',
             },
-            secure: true,
+            secure: false,
+            tls: {
+                rejectUnauthorized: false,
+            },
         })
 
         await new Promise((resolve, reject) => {
