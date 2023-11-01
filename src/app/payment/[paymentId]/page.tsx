@@ -14,11 +14,21 @@ interface Props {
 }
 
 const PaymentSuccessComponent: FC<Props> = ({ params }) => {
-    const { paymentSuccess, getPaymentData } = useLogicPayment()
+    const {
+        paymentSuccess,
+        getPaymentData,
+        getChargeList,
+        paymentIdMetadata,
+        router,
+    } = useLogicPayment()
 
     useEffect(() => {
-        paymentSuccess(params.paymentId)
-        getPaymentData(params.paymentId)
+        getChargeList(params.paymentId)
+        if (paymentIdMetadata.includes(params.paymentId)) {
+            console.log('PaymentId encontrado')
+            paymentSuccess(params.paymentId)
+            getPaymentData(params.paymentId)
+        }
     }, [params])
 
     return (
@@ -50,9 +60,6 @@ const PaymentSuccessComponent: FC<Props> = ({ params }) => {
                         fontSize: '50px',
                     }}
                 />
-                {/* <Typography>
-                    ¡Gracias por tu compra :D!
-                </Typography> */}
                 <Button
                     sx={{
                         backgroundColor: 'black',

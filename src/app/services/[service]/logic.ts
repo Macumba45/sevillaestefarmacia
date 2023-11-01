@@ -59,7 +59,7 @@ export const useLogicPageServicesDetail = () => {
                 dateId,
                 hourId
             )
-            const sessionData = await stripePayment(1, priceId, payment.id) // Pasa el hourId a stripePayment
+            const sessionData = await stripePayment(1, priceId, payment.id)
             router.push(sessionData.url)
         } catch (error) {
             console.error('Error al crear la sesión de pago: ', error)
