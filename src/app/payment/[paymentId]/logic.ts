@@ -39,7 +39,7 @@ export const useLogicPayment = () => {
                         }
                     })
                     .filter((paymentId: string) => paymentId !== undefined)
-
+                console.log(findPaymentId)
                 setPaymentIdMetadata(findPaymentId)
             }
         } catch (error) {

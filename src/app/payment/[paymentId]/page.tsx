@@ -14,22 +14,19 @@ interface Props {
 }
 
 const PaymentSuccessComponent: FC<Props> = ({ params }) => {
-    const {
-        paymentSuccess,
-        getPaymentData,
-        getChargeList,
-        paymentIdMetadata,
-        router,
-    } = useLogicPayment()
+    const { paymentSuccess, getPaymentData, getChargeList, paymentIdMetadata } =
+        useLogicPayment()
 
     useEffect(() => {
         getChargeList(params.paymentId)
+    }, [params])
+
+    useEffect(() => {
         if (paymentIdMetadata.includes(params.paymentId)) {
-            console.log('PaymentId encontrado')
             paymentSuccess(params.paymentId)
             getPaymentData(params.paymentId)
         }
-    }, [params])
+    }, [params, paymentIdMetadata])
 
     return (
         <LayoutNavFooter>
