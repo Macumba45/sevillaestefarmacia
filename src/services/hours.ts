@@ -9,7 +9,7 @@ export const fetchIsBookedHour = async (selectedHourId: string) => {
             Authorization: `Bearer ${token}`,
         }
         const response = await fetch('/api/hours/isBooked', {
-            method: 'GET',
+            method: 'POST',
             headers,
             body: JSON.stringify({ selectedHourId }),
         })

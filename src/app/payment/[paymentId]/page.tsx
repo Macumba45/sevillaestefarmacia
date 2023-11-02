@@ -1,6 +1,6 @@
 'use client'
 
-import React, { FC, useEffect } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { Box, Button } from '@mui/material'
 import { useLogicPayment } from './logic'
 import LayoutNavFooter from '@/layout/layout'
@@ -24,7 +24,11 @@ const PaymentSuccessComponent: FC<Props> = ({ params }) => {
         fecha,
         hour,
         isLoading,
+        router,
+        user,
+        emailConfirmationPayment,
     } = useLogicPayment()
+    const [isPaymentProcessed, setIsPaymentProcessed] = useState(false)
 
     useEffect(() => {
         getChargeList(params.paymentId)
@@ -34,9 +38,16 @@ const PaymentSuccessComponent: FC<Props> = ({ params }) => {
     useEffect(() => {
         if (paymentIdMetadata.includes(params.paymentId)) {
             paymentSuccess(params.paymentId)
+            setIsPaymentProcessed(true)
             getPaymentData(params.paymentId)
         }
     }, [params, paymentIdMetadata])
+
+    useEffect(() => {
+        if (isPaymentProcessed && user?.email && fecha && hour) {
+            emailConfirmationPayment(user?.email as string, fecha, hour)
+        }
+    }, [isPaymentProcessed, fecha, hour])
 
     if (isLoading)
         return (
@@ -87,6 +98,21 @@ const PaymentSuccessComponent: FC<Props> = ({ params }) => {
                     />
                 </Typography>
                 <Typography
+                    variant="h5"
+                    sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: 'black',
+                        marginLeft: '2rem',
+                        marginRight: '2rem',
+                        textAlign: 'center',
+                    }}
+                >
+                    Tu reserva el día: {fecha} <br /> a las {hour} ha sido
+                    completada con éxito
+                </Typography>
+                <Typography
                     variant="h6"
                     sx={{
                         display: 'flex',
@@ -95,11 +121,11 @@ const PaymentSuccessComponent: FC<Props> = ({ params }) => {
                         color: 'black',
                         margin: '1rem',
                         textAlign: 'center',
+                        fontWeight: 300,
                     }}
                 >
-                    Tu reserva el día {fecha} a las {hour} ha sido completada
-                    con éxito. Si deseas cambiar la cita, porfavor, ponte en
-                    contacto con nosotros.
+                    Si deseas cambiar la cita, porfavor, ponte en contacto con
+                    nosotros.
                 </Typography>
 
                 <Button

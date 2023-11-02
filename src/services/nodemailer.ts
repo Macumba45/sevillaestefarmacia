@@ -1,0 +1,27 @@
+export const emailConfirmationPayment = async (
+    email: string,
+    date: string,
+    hour: string
+) => {
+    try {
+        const headers = {
+            'Content-Type': 'application/json',
+        }
+        const response = await fetch(
+            '/api/nodemailer/emailPaymentConfirmation',
+            {
+                method: 'POST',
+                headers,
+                body: JSON.stringify({ email, date, hour }),
+            }
+        )
+        if (response.ok) {
+            const data = await response.json()
+            return data
+        } else {
+            console.log('error al enviar el email')
+        }
+    } catch (error) {
+        console.error('Error al enviar el email:', error)
+    }
+}

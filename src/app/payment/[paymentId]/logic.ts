@@ -1,18 +1,21 @@
 import { fetchPaymentById, stripePaymentTrue } from '@/services/payments'
 import { fetchChargeListStripe, getPaymentById } from '@/services/stripe'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { getAuthenticatedToken } from '../../../../storage/storage'
 import { fetchDateById } from '@/services/dates'
 import { fetchHourById, fetchIsBookedHour } from '@/services/hours'
+import { emailConfirmationPayment } from '@/services/nodemailer'
+import { UserContext } from '@/context/UserContext'
 
 export const useLogicPayment = () => {
     const token = getAuthenticatedToken()
-    const router = useRouter()
+    const { user } = useContext(UserContext)
     const [paymentIdMetadata, setPaymentIdMetadata] = useState<string[]>([])
     const [fecha, setFecha] = useState<string>('')
     const [hour, setHour] = useState<string>('')
     const [isLoading, setIsLoading] = useState<boolean>(false)
+    const router = useRouter()
 
     const paymentSuccess = async (paymentId: string) => {
         const payment = await stripePaymentTrue(paymentId)
@@ -46,6 +49,7 @@ export const useLogicPayment = () => {
         setIsLoading(false)
         return
     }
+
     return {
         isBookedHour,
         paymentSuccess,
@@ -57,5 +61,7 @@ export const useLogicPayment = () => {
         fecha,
         hour,
         isLoading,
+        user,
+        emailConfirmationPayment,
     }
 }
