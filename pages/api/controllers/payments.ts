@@ -18,10 +18,12 @@ export const getPaymentById = async (paymentId: string): Promise<Payment> => {
 export const getPaymentsData = async (): Promise<Payment[]> => {
     const payments = await prisma.payments.findMany({
         orderBy: {
-            dateId: 'asc', // Esto asume que la propiedad se llama "date" en tu objeto "payment" y que a su vez contiene una propiedad llamada "date" que es una fecha.
+            dateId: 'asc',
         },
         select: {
             id: true,
+            dateId: true,
+            hourId: true,
             payed: true,
             user: {
                 select: {
@@ -31,23 +33,7 @@ export const getPaymentsData = async (): Promise<Payment[]> => {
                     phone: true,
                 },
             },
-            service: {
-                select: {
-                    dates: {
-                        include: {
-                            hours: true,
-                        },
-                    },
-                    id: true,
-                    title: true,
-                    subtitle: true,
-                    price: true,
-                    descripcion: true,
-                },
-            },
-            dateId: true,
-            hourId: true,
-            createdAt: true,
+            service: true,
         },
     })
 

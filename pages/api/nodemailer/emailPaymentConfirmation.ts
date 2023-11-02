@@ -7,7 +7,6 @@ export default async function handler(
 ) {
     try {
         const { email, date, hour } = req.body
-        console.log(req.body)
         if (!email && !date && !hour) {
             throw new Error('Faltan datos para enviar el email')
         }
