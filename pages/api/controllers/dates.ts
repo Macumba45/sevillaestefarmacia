@@ -9,3 +9,13 @@ export const deteleDateId = async (id: string) => {
 
     return date
 }
+
+export const getDateDataById = async (id: string) => {
+    const date = await prisma.dates.findUnique({
+        where: {
+            id: id,
+        },
+    })
+
+    return date
+}

@@ -6,6 +6,7 @@ import { useLogicPayment } from './logic'
 import LayoutNavFooter from '@/layout/layout'
 import { Typography } from '@mui/material'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
+import CircularIndeterminate from '@/components/Loader'
 
 interface Props {
     params: {
@@ -14,11 +15,20 @@ interface Props {
 }
 
 const PaymentSuccessComponent: FC<Props> = ({ params }) => {
-    const { paymentSuccess, getPaymentData, getChargeList, paymentIdMetadata } =
-        useLogicPayment()
+    const {
+        paymentSuccess,
+        getPaymentData,
+        getChargeList,
+        paymentIdMetadata,
+        getPyamentById,
+        fecha,
+        hour,
+        isLoading,
+    } = useLogicPayment()
 
     useEffect(() => {
         getChargeList(params.paymentId)
+        getPyamentById(params.paymentId)
     }, [params])
 
     useEffect(() => {
@@ -27,6 +37,22 @@ const PaymentSuccessComponent: FC<Props> = ({ params }) => {
             getPaymentData(params.paymentId)
         }
     }, [params, paymentIdMetadata])
+
+    if (isLoading)
+        return (
+            <LayoutNavFooter>
+                <div
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        height: '100vh',
+                    }}
+                >
+                    <CircularIndeterminate />
+                </div>
+            </LayoutNavFooter>
+        )
 
     return (
         <LayoutNavFooter>
@@ -48,15 +74,34 @@ const PaymentSuccessComponent: FC<Props> = ({ params }) => {
                     }}
                 >
                     Pago Completado
+                    <CheckCircleIcon
+                        sx={{
+                            marginLeft: '10px',
+                            color: 'green',
+                            marginBottom: '20px',
+                            fontSize: '50px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                        }}
+                    />
                 </Typography>
-                <CheckCircleIcon
+                <Typography
+                    variant="h6"
                     sx={{
-                        marginLeft: '10px',
-                        color: 'green',
-                        marginBottom: '20px',
-                        fontSize: '50px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: 'black',
+                        margin: '1rem',
+                        textAlign: 'center',
                     }}
-                />
+                >
+                    Tu reserva el día {fecha} a las {hour} ha sido completada
+                    con éxito. Si deseas cambiar la cita, porfavor, ponte en
+                    contacto con nosotros.
+                </Typography>
+
                 <Button
                     sx={{
                         backgroundColor: 'black',

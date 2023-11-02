@@ -2,7 +2,7 @@ import { getAuthenticatedToken } from '../../storage/storage'
 
 const token = getAuthenticatedToken()
 
-export const isBookedHour = async (selectedHourId: string) => {
+export const fetchIsBookedHour = async (selectedHourId: string) => {
     try {
         const headers = {
             'Content-Type': 'application/json',
@@ -21,5 +21,26 @@ export const isBookedHour = async (selectedHourId: string) => {
         }
     } catch (error) {
         console.error('Error al enviar el objeto:', error)
+    }
+}
+
+export const fetchHourById = async (id: string) => {
+    try {
+        const response = await fetch(
+            `/api/hours/getHourDataById?hourId=${id}`,
+            {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        )
+        if (response.ok) {
+            const data = await response.json()
+            return data
+        }
+    } catch (error) {
+        console.log(error)
     }
 }

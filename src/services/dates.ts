@@ -23,3 +23,24 @@ export const deleteDateById = async (
         console.log(error)
     }
 }
+
+export const fetchDateById = async (id: string) => {
+    try {
+        const response = await fetch(
+            `/api/dates/getDateDataById?dateId=${id}`,
+            {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        )
+        if (response.ok) {
+            const data = await response.json()
+            return data
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}

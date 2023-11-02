@@ -1,13 +1,19 @@
-import { stripePaymentTrue } from '@/services/payments'
-import { getPaymentById } from '@/services/stripe'
+import { fetchPaymentById, stripePaymentTrue } from '@/services/payments'
+import { fetchChargeListStripe, getPaymentById } from '@/services/stripe'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { getAuthenticatedToken } from '../../../../storage/storage'
+import { fetchDateById } from '@/services/dates'
+import { fetchHourById, fetchIsBookedHour } from '@/services/hours'
 
 export const useLogicPayment = () => {
     const token = getAuthenticatedToken()
     const router = useRouter()
     const [paymentIdMetadata, setPaymentIdMetadata] = useState<string[]>([])
+    const [fecha, setFecha] = useState<string>('')
+    const [hour, setHour] = useState<string>('')
+    const [isLoading, setIsLoading] = useState<boolean>(false)
+
     const paymentSuccess = async (paymentId: string) => {
         const payment = await stripePaymentTrue(paymentId)
         return payment
@@ -20,46 +26,26 @@ export const useLogicPayment = () => {
     }
 
     const getChargeList = async (paymentId: string) => {
-        try {
-            const response = await fetch('/api/stripe/charge_list', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`,
-                },
-            })
-            if (response.ok) {
-                const data = await response.json()
-                const findPaymentId = data
-                    .map((event: any) => {
-                        if (
-                            event.data.object.metadata.paymentId === paymentId
-                        ) {
-                            return event.data.object.metadata.paymentId
-                        }
-                    })
-                    .filter((paymentId: string) => paymentId !== undefined)
-                console.log(findPaymentId)
-                setPaymentIdMetadata(findPaymentId)
-            }
-        } catch (error) {
-            console.log(error)
-        }
+        setIsLoading(true)
+        const charList = await fetchChargeListStripe(paymentId)
+        setPaymentIdMetadata(charList)
+        return
     }
 
     const isBookedHour = async (selectedHourId: string) => {
-        const response = await fetch('/api/hours/isBooked', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ selectedHourId }),
-        })
-
-        const data = await response.json()
-        return data
+        const hourBooked = await fetchIsBookedHour(selectedHourId)
+        return hourBooked
     }
 
+    const getPyamentById = async (paymentId: string) => {
+        const paymentData = await fetchPaymentById(paymentId)
+        const dateById = await fetchDateById(paymentData.dateId)
+        const hourById = await fetchHourById(paymentData.hourId)
+        setFecha(dateById.dates)
+        setHour(hourById.hour)
+        setIsLoading(false)
+        return
+    }
     return {
         isBookedHour,
         paymentSuccess,
@@ -67,5 +53,9 @@ export const useLogicPayment = () => {
         getPaymentData,
         getChargeList,
         paymentIdMetadata,
+        getPyamentById,
+        fecha,
+        hour,
+        isLoading,
     }
 }

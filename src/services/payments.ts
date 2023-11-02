@@ -101,3 +101,24 @@ export const editDateAndHourFromPayments = async (
         notificationSuccess()
     }
 }
+
+export const fetchPaymentById = async (paymentId: string) => {
+    try {
+        const response = await fetch(
+            `/api/payments/getPaymentById?paymentId=${paymentId}`,
+            {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        )
+        if (response.ok) {
+            const data = await response.json()
+            return data
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}

@@ -24,3 +24,13 @@ export const markHourAsFree = async (hourId: string): Promise<void> => {
 
     return
 }
+
+export const getHourDataById = async (id: string) => {
+    const hour = await prisma.hours.findUnique({
+        where: {
+            id: id,
+        },
+    })
+
+    return hour
+}
