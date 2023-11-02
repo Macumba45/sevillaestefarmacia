@@ -379,6 +379,19 @@ const Dashboard: FC<Props> = () => {
                                         width={400}
                                     />
                                 </LoadingContainer>
+                            ) : datesPaymentsPayed.length === 0 ? (
+                                <Typography
+                                    variant="h6"
+                                    sx={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        marginBottom: '20px',
+                                        textAlign: 'center',
+                                    }}
+                                >
+                                    No hay citas reservadas
+                                </Typography>
                             ) : (
                                 datesPaymentsPayed.map((item: any, index) => (
                                     <AlignItemsList
@@ -391,9 +404,7 @@ const Dashboard: FC<Props> = () => {
                                         openEditModalDateAndHour={() =>
                                             openEditModalDateAndHour(item)
                                         }
-                                        // unBookDate={() =>
-                                        //     deleteDate(item.dateId)
-                                        // }
+                                        // unBookDate={() => deleteDate(item.dateId)}
                                     />
                                 ))
                             )}
