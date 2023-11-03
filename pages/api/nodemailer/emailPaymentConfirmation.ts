@@ -61,7 +61,6 @@ export default async function handler(
                             margin: 0 auto;
                             border-radius: 5px;
                             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-                            height: 100vh;
                             font-family: Cormorant Garamond;
                         "
                     >
@@ -96,33 +95,19 @@ export default async function handler(
                         >
                             <p>¡Muchas gracias por tu compra!</p>
                         </div>
-                        <div
-                            class="received"
-                            style="
-                                text-align: center;
-                                margin-top: 20px;
-                                font-size: 15px;
-                                color: black;
-                                font-family: Cormorant Garamond;
-                            "
-                        >
-                            <p>
-                                Gracias por elegir Farmacia Sta. Bárbara para tu cita.
-                                &#9829;
-                            </p>
-                        </div>
+                      
             
                         <div
                             class="data"
                             style="
                                 text-align: center;
-                                margin-top: 40px;
+                                margin-top: 30px;
                                 font-size: 20px;
                                 color: black;
                                 font-family: Cormorant Garamond;
                             "
                         >
-                            <p>Tu cita es para:</p>
+                            <p>Información de tu cita:</p>
                         </div>
                         <div class="icon" style="text-align: center; margin-top: 20px">
                             <div
@@ -169,6 +154,8 @@ export default async function handler(
                                     font-size: 1rem;
                                     color: black;
                                     font-family: Cormorant Garamond;
+                                    margin-top: 30px;
+                                    margin-bottom: 30px;
                                 "
                             >
                                 ¿Tienes alguna duda?
@@ -226,7 +213,6 @@ export default async function handler(
                             class="footer"
                             style="
                                 text-align: center;
-                                margin-bottom: 3rem;
                                 margin-top: 3rem;
                             "
                         >
@@ -247,9 +233,27 @@ export default async function handler(
                                 />
                             </a>
                         </div>
+                        <div
+                        class="received"
+                        style="
+                            text-align: center;
+                            margin-top: 20px;
+                            font-size: 15px;
+                            color: black;
+                            font-family: Cormorant Garamond;
+                            height: 50px;
+                        "
+                    >
+                        <p>
+                            Gracias por elegir Farmacia Sta. Bárbara.
+                            &#9829;
+                        </p>
                     </div>
+                    </div>
+                    
                 </body>
             </html>
+            
             
             
                 `,
