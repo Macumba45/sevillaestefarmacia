@@ -5,9 +5,9 @@ import { User } from '../../types/types'
 
 // Define el valor inicial del contexto como un objeto con las propiedades correctas.
 const initialContextValue = {
-    user: {} as User | null,
+    user: {} as User,
     auth: false,
-    getUserInfo: () => {},
+    getUserInfo: () => { },
 }
 
 export const UserContext = createContext(initialContextValue)
