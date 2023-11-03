@@ -5,7 +5,7 @@ import { User } from '../../types/types'
 
 // Define el valor inicial del contexto como un objeto con las propiedades correctas.
 const initialContextValue = {
-    user: {} as User,
+    user: {} as User | null,
     auth: false,
     getUserInfo: () => {},
 }

@@ -258,7 +258,7 @@ const Dashboard: FC<Props> = () => {
                     </Typography>
                     <Typography
                         fontSize={15}
-                        fontWeight={400}
+                        fontWeight={320}
                         variant="h6"
                         noWrap
                         component="div"
@@ -328,7 +328,7 @@ const Dashboard: FC<Props> = () => {
                                 <LoadingContainer>
                                     <LinearIndeterminate
                                         label="Cargando datos en el sistema..."
-                                        width={400}
+                                        width={320}
                                     />
                                 </LoadingContainer>
                             ) : (
@@ -376,7 +376,7 @@ const Dashboard: FC<Props> = () => {
                                 <LoadingContainer>
                                     <LinearIndeterminate
                                         label="Cargando datos en el sistema..."
-                                        width={400}
+                                        width={320}
                                     />
                                 </LoadingContainer>
                             ) : datesPaymentsPayed.length === 0 ? (
@@ -438,7 +438,7 @@ const Dashboard: FC<Props> = () => {
                                 <LoadingContainer>
                                     <LinearIndeterminate
                                         label="Cargando datos en el sistema..."
-                                        width={400}
+                                        width={320}
                                     />
                                 </LoadingContainer>
                             ) : (
@@ -474,7 +474,7 @@ const Dashboard: FC<Props> = () => {
                                 <LoadingContainer>
                                     <LinearIndeterminate
                                         label="Cargando datos en el sistema..."
-                                        width={400}
+                                        width={320}
                                     />
                                 </LoadingContainer>
                             ) : (
@@ -515,7 +515,7 @@ const Dashboard: FC<Props> = () => {
                                 <LoadingContainer>
                                     <LinearIndeterminate
                                         label="Cargando datos en el sistema..."
-                                        width={400}
+                                        width={320}
                                     />
                                 </LoadingContainer>
                             ) : (

@@ -18,7 +18,7 @@ export const getPaymentById = async (paymentId: string): Promise<Payment> => {
 export const getPaymentsData = async (): Promise<Payment[]> => {
     const payments = await prisma.payments.findMany({
         orderBy: {
-            createdAt: 'desc',
+            createdAt: 'asc',
         },
         select: {
             id: true,

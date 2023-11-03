@@ -29,6 +29,7 @@ import {
 } from './styles'
 import { UserContext } from '@/context/UserContext'
 import FloatLoginButton from '@/components/FloatLoginButton'
+import { getAuthenticatedToken } from '../../../../storage/storage'
 
 interface Props {
     params: {
@@ -78,36 +79,57 @@ const Page: FC<Props> = ({ params }) => {
 
     let backgroundcolor: string
     let buttonName: string
-    let isButtonDisabled = false
+    let isButtonDisabled: boolean
 
     switch (serviceData?.id) {
         case 'clo0dzomz0001xy04kzkxay49':
             backgroundcolor = '#ebf0f6'
-            buttonName = 'Reservar cita'
+            buttonName = getAuthenticatedToken()
+                ? 'Reservar cita'
+                : 'Inicia sesión para reservar cita'
+            isButtonDisabled = getAuthenticatedToken() ? false : true
             break
         case 'clo0e0a200002xy04bwqml93h':
             backgroundcolor = '#F6F6EB'
-            buttonName = 'Reservar cita'
+            buttonName = getAuthenticatedToken()
+                ? 'Reservar cita'
+                : 'Inicia sesión para reservar cita'
+            isButtonDisabled = getAuthenticatedToken() ? false : true
+
             break
         case 'clo0e0mn50003xy040gwqse36':
             backgroundcolor = '#ebf0f6'
             buttonName = 'Solcitar presupuesto'
+            isButtonDisabled = user ? false : true
+
             break
         case 'clo0e17d30004xy04cjklg2px':
             backgroundcolor = '#F6F6EB'
-            buttonName = 'Pagar el servicio'
+            buttonName = getAuthenticatedToken()
+                ? 'Pagar el servicio'
+                : 'Inicia sesión para pagar'
+            isButtonDisabled = getAuthenticatedToken() ? false : true
             break
         case 'clo0e1e3p0005xy04izx8uzqa':
             backgroundcolor = '#ebf0f6'
-            buttonName = 'Reservar cita'
+            buttonName = getAuthenticatedToken()
+                ? 'Reservar cita'
+                : 'Inicia sesión para reservar cita'
+            isButtonDisabled = getAuthenticatedToken() ? false : true
+
             break
         case 'clo0e1q180006xy04pu96nyml':
             backgroundcolor = '#F6F6EB'
             buttonName = 'Contáctanos'
+            isButtonDisabled = user ? false : true
+
             break
         default:
             backgroundcolor = '#ebf0f6'
-            buttonName = 'Reservar cita'
+            buttonName = getAuthenticatedToken()
+                ? 'Reservar cita'
+                : 'Inicia sesión para reservar cita'
+            isButtonDisabled = getAuthenticatedToken() ? false : true
     }
 
     // Si no hay usuario y el servicio requiere una cita, deshabilita el botón.
