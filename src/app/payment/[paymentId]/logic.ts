@@ -5,7 +5,7 @@ import { useContext, useState } from 'react'
 import { getAuthenticatedToken } from '../../../../storage/storage'
 import { fetchDateById } from '@/services/dates'
 import { fetchHourById, fetchIsBookedHour } from '@/services/hours'
-import { emailConfirmationPayment } from '@/services/nodemailer'
+import { emailConfirmationPaymentCitas } from '@/services/nodemailer'
 import { UserContext } from '@/context/UserContext'
 
 export const useLogicPayment = () => {
@@ -62,6 +62,6 @@ export const useLogicPayment = () => {
         hour,
         isLoading,
         user,
-        emailConfirmationPayment,
+        emailConfirmationPaymentCitas,
     }
 }

@@ -1,4 +1,4 @@
-export const emailConfirmationPayment = async (
+export const emailConfirmationPaymentCitas = async (
     email: string,
     date: string,
     hour: string
@@ -8,7 +8,7 @@ export const emailConfirmationPayment = async (
             'Content-Type': 'application/json',
         }
         const response = await fetch(
-            '/api/nodemailer/emailPaymentConfirmation',
+            '/api/nodemailer/emailPaymentConfirmationCitas',
             {
                 method: 'POST',
                 headers,

@@ -26,7 +26,7 @@ const PaymentSuccessComponent: FC<Props> = ({ params }) => {
         isLoading,
         router,
         user,
-        emailConfirmationPayment,
+        emailConfirmationPaymentCitas,
     } = useLogicPayment()
     const [isPaymentProcessed, setIsPaymentProcessed] = useState(false)
 
@@ -45,7 +45,7 @@ const PaymentSuccessComponent: FC<Props> = ({ params }) => {
 
     useEffect(() => {
         if (isPaymentProcessed && user?.email && fecha && hour) {
-            emailConfirmationPayment(user?.email as string, fecha, hour)
+            emailConfirmationPaymentCitas(user?.email as string, fecha, hour)
         }
     }, [isPaymentProcessed, fecha, hour])
 
