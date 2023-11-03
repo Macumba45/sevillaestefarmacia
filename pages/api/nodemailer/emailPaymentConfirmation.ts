@@ -184,6 +184,7 @@ export default async function handler(
                                     margin: 0.5rem;
                                     height: 40px;
                                     cursor: pointer;
+                                    font-size: 1rem;
                                 "
                             >
                                 <a
@@ -207,6 +208,7 @@ export default async function handler(
                                     margin: 0.5rem;
                                     height: 40px;
                                     cursor: pointer;
+                                    font-size: 1rem;
                                 "
                             >
                                 <a
@@ -248,6 +250,7 @@ export default async function handler(
                     </div>
                 </body>
             </html>
+            
             
                 `,
         }
