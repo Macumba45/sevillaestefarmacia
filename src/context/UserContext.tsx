@@ -7,7 +7,7 @@ import { User } from '../../types/types'
 const initialContextValue = {
     user: {} as User,
     auth: false,
-    getUserInfo: () => { },
+    getUserInfo: () => {},
 }
 
 export const UserContext = createContext(initialContextValue)

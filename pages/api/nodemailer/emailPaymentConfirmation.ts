@@ -7,6 +7,7 @@ export default async function handler(
 ) {
     try {
         const { email, date, hour } = req.body
+
         if (!email && !date && !hour) {
             throw new Error('Faltan datos para enviar el email')
         }
@@ -20,7 +21,7 @@ export default async function handler(
             },
             secure: true,
         })
-
+        console.log('Transporter created')
         await new Promise((resolve, reject) => {
             // verify connection configuration
             transporter.verify(function (error: any, success: any) {
@@ -39,65 +40,211 @@ export default async function handler(
             to: 'gonzalolovo@gmail.com',
             subject: 'Gracias por tu compra en Farmacia Sta.Bárbara',
             html: `
-            <!DOCTYPE html>
+            <!doctype html>
             <html lang="en">
+                <head>
+                    <meta charset="UTF-8" />
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                    <meta name="color-scheme" content="light" />
+                    <meta name="supported-color-schemes" content="light" />
+                    <link
+                        rel="stylesheet"
+                        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap"
+                    />
+                    <title>Confirmación de Pago</title>
+                </head>
             
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <link rel="stylesheet"
-                    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" />
-                <title>Confirmación de Pago</title>
-            </head>
-            
-            <body style="margin: 0px;font-family: Cormorant Garamond;">
-                <div class="container"
-                    style="margin: 0 auto; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); height: 100vh; background-color: black;">
-                    <div class="logo"
-                        style="text-align: center; background-color: black; width: 100%; height: 80px; display: flex; justify-content: center; align-items: center; object-fit: cover;">
-                        <img style="object-fit: cover; width: 200px;" src="https://i.postimg.cc/Wbq8HpKC/logo.png"
-                            alt="Farmacia Santa Bárbara">
-                    </div>
-                    <div class="message" style="text-align: center; margin-top: 20px; font-size: 25px; color: white;">
-                        <p>¡Muchas gracias por tu compra!</p>
-                    </div>
-                    <div class="received" style="text-align: center; margin-top: 20px; font-size: 15px;color: white;">
-                        <p>Gracias por elegir Farmacia Santa Bárbara para tu cita.</p>
-                    </div>
-                    <div class="data" style="text-align: center; margin-top: 70px; font-size: 20px;color: white;">
-                        <p>Tu cita es para:</p>
-                    </div>
-                    <div class="icon" style="text-align: center; margin-top: 20px; display: flex; justify-content: center;">
-                        <div style="display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
-                            <img style="width: 30px; height: 30px; margin-right: 8px;" src="/src/assets/icons8-calendar-80.png" />
-                            <p style="font-size: 20px;color: white;">${date}</p>
+                <body style="padding: 20px;">
+                    <div
+                        class="container"
+                        style="
+                            margin: 0 auto;
+                            border-radius: 5px;
+                            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                            height: 100vh;
+                            font-family: Cormorant Garamond;
+                        "
+                    >
+                        <div
+                            class="logo"
+                            style="
+                                text-align: center;
+                                background-color: black;
+                                width: 100%;
+                                height: 80px;
+                                display: flex;
+                                align-items: center;
+                                object-fit: cover;
+                                font-family: Cormorant Garamond;
+                            "
+                        >
+                            <img
+                                style="object-fit: cover; width: 200px; margin: 0 auto"
+                                src="https://i.postimg.cc/Wbq8HpKC/logo.png"
+                                alt="Farmacia Santa Bárbara"
+                            />
                         </div>
-                        <div style="display: flex; align-items: center; justify-content: center; margin-left: 1rem;">
-                            <img style="width: 30px; height: 30px;margin-right: 8px" src="/src/assets/icons8-time-100.png" />
-                            <p style="font-size: 20px;color: white;">${hour}</p>
+                        <div
+                            class="message"
+                            style="
+                                text-align: center;
+                                margin-top: 20px;
+                                font-size: 25px;
+                                color: black;
+                                font-family: Cormorant Garamond;
+                            "
+                        >
+                            <p>¡Muchas gracias por tu compra!</p>
+                        </div>
+                        <div
+                            class="received"
+                            style="
+                                text-align: center;
+                                margin-top: 20px;
+                                font-size: 15px;
+                                color: black;
+                                font-family: Cormorant Garamond;
+                            "
+                        >
+                            <p>
+                                Gracias por elegir Farmacia Santa Bárbara para tu cita.
+                                &#9829;
+                            </p>
+                        </div>
+            
+                        <div
+                            class="data"
+                            style="
+                                text-align: center;
+                                margin-top: 40px;
+                                font-size: 20px;
+                                color: black;
+                                font-family: Cormorant Garamond;
+                            "
+                        >
+                            <p>Tu cita es para:</p>
+                        </div>
+                        <div class="icon" style="text-align: center; margin-top: 20px">
+                            <div
+                                style="
+                                    align-items: center;
+                                    text-align: center;
+                                    font-family: Cormorant Garamond;
+                                "
+                            >
+                                <img
+                                    style="width: 30px; height: 30px"
+                                    src="https://i.postimg.cc/5NF1gfK7/icons8-calendar-100.png"
+                                />
+                                <p style="font-size: 20px; color: black">${date}</p>
+                            </div>
+                            <div style="align-items: center; text-align: center">
+                                <img
+                                    style="width: 30px; height: 30px"
+                                    src="https://i.postimg.cc/DwrhVBT1/icons8-time-100-1.png"
+                                />
+                                <p
+                                    style="
+                                        font-size: 20px;
+                                        color: black;
+                                        text-align: center;
+                                        font-family: Cormorant Garamond;
+                                    "
+                                >
+                                    ${hour}
+                                </p>
+                            </div>
+                        </div>
+                        <div
+                            class="button"
+                            style="
+                                text-align: center;
+                                margin-top: 20px;
+                                font-size: 15px;
+                                align-items: center;
+                            "
+                        >
+                            <p
+                                style="
+                                    font-size: 1rem;
+                                    color: black;
+                                    font-family: Cormorant Garamond;
+                                "
+                            >
+                                ¿Tienes alguna duda?
+                            </p>
+                            <button
+                                style="
+                                    font-family: Cormorant Garamond;
+                                    background-color: black;
+                                    border: 1px solid white;
+                                    color: white;
+                                    border-radius: 20px;
+                                    width: 200px;
+                                    margin: 0.5rem;
+                                    height: 40px;
+                                    cursor: pointer;
+                                "
+                            >
+                                <a
+                                    style="
+                                        text-decoration: none;
+                                        color: white;
+                                        font-family: Cormorant Garamond;
+                                    "
+                                    href="tel:+123456789"
+                                    >Llámanos</a
+                                >
+                            </button>
+                            <button
+                                style="
+                                    font-family: Cormorant Garamond;
+                                    background-color: black;
+                                    border: 1px solid white;
+                                    color: white;
+                                    border-radius: 20px;
+                                    width: 200px;
+                                    margin: 0.5rem;
+                                    height: 40px;
+                                    cursor: pointer;
+                                "
+                            >
+                                <a
+                                    style="
+                                        text-decoration: none;
+                                        color: white;
+                                        font-family: Cormorant Garamond;
+                                    "
+                                    href="mailto:correo@dominio.com"
+                                    >Envíanos un correo</a
+                                >
+                            </button>
+                        </div>
+                        <div
+                            class="footer"
+                            style="
+                                text-align: center;
+                                margin-bottom: 3rem;
+                                margin-top: 3rem;
+                            "
+                        >
+                            <img
+                                style="width: 30px; margin: 0 10px"
+                                src="https://i.postimg.cc/fRnsg16w/icons8-instagram-100-1.png"
+                                alt="Instagram"
+                            />
+                            <img
+                                style="width: 30px; margin: 0 10px"
+                                src="https://i.postimg.cc/hGKBKTD6/icons8-marker-100-1.png"
+                                alt="Marcador"
+                            />
                         </div>
                     </div>
-                    <div class="button"
-                        style="text-align: center; margin-top: 20px; font-size: 15px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                        <p style="font-size: 1rem;color: white;">¿Tienes alguna duda?</p>
-                        <button onclick=""
-                            style="font-family: Cormorant Garamond; background-color: black; border: 1px solid white; color: white; border-radius: 20px; width: 200px; margin: 0.5rem; height: 40px; cursor: pointer;">
-                            <a style="text-decoration: none; color: white;" href="tel:+123456789">Llámanos</a>
-                        </button>
-                        <button
-                            style="font-family: Cormorant Garamond; background-color: black; border: 1px solid white; color: white; border-radius: 20px; width: 200px; margin: 0.5rem; height: 40px; cursor: pointer;">
-                            <a style="text-decoration: none; color: white;" href="mailto:correo@dominio.com">Envíanos un correo</a>
-                        </button>
-                    </div>
-                    <div class="footer"
-                        style="text-align: center; position: absolute; bottom: 0; left: 0; right: 0; display: flex; justify-content: center; align-items: center; margin-bottom: 3rem;">
-                        <img style="width: 30px; margin: 0 10px;" src="../assets/icons8-instagram-100.png" alt="Instagram">
-                        <img style="width: 30px; margin: 0 10px;" src="../assets/icons8-marker-100.png" alt="Marcador">
-                    </div>
-                </div>
-            </body>
-            
+                </body>
             </html>
+            
+            
+            
             
                 `,
         }
