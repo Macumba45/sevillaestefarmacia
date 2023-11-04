@@ -15,7 +15,7 @@ export default async function handler(
             return
         }
         const events = await stripe.events.list({
-            limit: 20,
+            limit: 100,
             type: 'checkout.session.completed',
         })
         res.status(200).json(events.data)
