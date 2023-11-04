@@ -35,12 +35,10 @@ export const useLogicPayment = () => {
             serviceIdMetadata &&
             serviceIdMetadata === 'clo0e17d30004xy04cjklg2px'
         ) {
-            // Realizar el pago a true y enviar el correo
-            await paymentSuccess(paymentId)
+
             return null
         }
 
-        // Si no es el servicio especial, continúa con la consulta de fechas y horas
         return
     }
 
