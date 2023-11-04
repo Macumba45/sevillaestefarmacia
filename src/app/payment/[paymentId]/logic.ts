@@ -10,7 +10,6 @@ import { UserContext } from '@/context/UserContext'
 import { getServiceDetails } from '@/services/service'
 
 export const useLogicPayment = () => {
-    const token = getAuthenticatedToken()
     const { user } = useContext(UserContext)
     const [paymentIdMetadata, setPaymentIdMetadata] = useState<string[]>([])
     const [serviceIdMetadata, setServiceIdMetadata] = useState<string>('')
@@ -63,19 +62,14 @@ export const useLogicPayment = () => {
 
     const getPaymentData = async (paymentId: string) => {
         const hourId = await getPaymentById(paymentId)
-
-        // Verificar si es el servicio especial sin fecha ni hora
         if (
             serviceIdMetadata &&
             serviceIdMetadata === 'clo0e17d30004xy04cjklg2px'
         ) {
-            // Realizar el pago a true y enviar el correo
-            await paymentSuccess(paymentId)
             await getServiceDetails(serviceIdMetadata)
             return null
         }
 
-        // Si no es el servicio especial, realiza las acciones normales
         await isBookedHour(hourId as string)
         return
     }
