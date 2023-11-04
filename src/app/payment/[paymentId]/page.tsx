@@ -27,13 +27,30 @@ const PaymentSuccessComponent: FC<Props> = ({ params }) => {
         router,
         user,
         emailConfirmationPaymentCitas,
+        serviceIdMetadata,
+        setIsLoading,
     } = useLogicPayment()
     const [isPaymentProcessed, setIsPaymentProcessed] = useState(false)
 
     useEffect(() => {
+        setIsLoading(true)
         getChargeList(params.paymentId)
-        getPyamentById(params.paymentId)
     }, [params])
+
+    useEffect(() => {
+        // Verificar si es el servicio especial sin fecha ni hora
+        if (
+            serviceIdMetadata &&
+            serviceIdMetadata === 'clo0e17d30004xy04cjklg2px'
+        ) {
+            setIsPaymentProcessed(true)
+        } else if (
+            serviceIdMetadata &&
+            serviceIdMetadata !== 'clo0e17d30004xy04cjklg2px'
+        ) {
+            getPyamentById(params.paymentId)
+        }
+    }, [serviceIdMetadata])
 
     useEffect(() => {
         if (paymentIdMetadata.includes(params.paymentId)) {
@@ -44,10 +61,25 @@ const PaymentSuccessComponent: FC<Props> = ({ params }) => {
     }, [params, paymentIdMetadata])
 
     useEffect(() => {
-        if (isPaymentProcessed && user?.email && fecha && hour) {
-            emailConfirmationPaymentCitas(user?.email as string, fecha, hour)
+        if (isPaymentProcessed && user?.email) {
+            if (
+                serviceIdMetadata &&
+                serviceIdMetadata === 'clo0e17d30004xy04cjklg2px'
+            ) {
+                // Este es el servicio especial, envía el correo sin datos de fecha y hora
+                emailConfirmationPaymentCitas(user?.email as string, '', '')
+                setIsLoading(false)
+            } else if (fecha && hour) {
+                // Si no es el servicio especial y hay datos de fecha y hora, envía el correo con los datos
+                emailConfirmationPaymentCitas(
+                    user?.email as string,
+                    fecha,
+                    hour
+                )
+                setIsLoading(false)
+            }
         }
-    }, [isPaymentProcessed, fecha, hour])
+    }, [isPaymentProcessed, user?.email, serviceIdMetadata, fecha, hour])
 
     if (isLoading)
         return (
@@ -109,8 +141,15 @@ const PaymentSuccessComponent: FC<Props> = ({ params }) => {
                         textAlign: 'center',
                     }}
                 >
-                    Tu reserva el día: {fecha} <br /> a las {hour} ha sido
-                    completada con éxito
+                    {serviceIdMetadata &&
+                    serviceIdMetadata === 'clo0e17d30004xy04cjklg2px' ? (
+                        <>Tu reserva ha sido completada con éxito</>
+                    ) : (
+                        <>
+                            Tu reserva el día: {fecha} <br /> a las {hour} ha
+                            sido completada con éxito
+                        </>
+                    )}
                 </Typography>
                 <Typography
                     variant="h6"

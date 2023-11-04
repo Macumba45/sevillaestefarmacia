@@ -5,7 +5,8 @@ const token = getAuthenticatedToken()
 export const stripePayment = async (
     amount: number,
     priceId: string,
-    paymentId: string
+    paymentId: string,
+    serviceId: string
 ) => {
     try {
         const response = await fetch('/api/stripe/checkout_sessions', {
@@ -13,7 +14,7 @@ export const stripePayment = async (
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ amount, priceId, paymentId }),
+            body: JSON.stringify({ amount, priceId, paymentId, serviceId }),
         })
         if (response.ok) {
             const data = await response.json()
@@ -56,14 +57,21 @@ export const fetchChargeListStripe = async (paymentId: string) => {
         })
         if (response.ok) {
             const data = await response.json()
-            const findPaymentId = data
-                .map((event: any) => {
-                    if (event.data.object.metadata.paymentId === paymentId) {
-                        return event.data.object.metadata.paymentId
-                    }
-                })
-                .filter((paymentId: string) => paymentId !== undefined)
-            return findPaymentId
+
+            // Crear un objeto vacío para almacenar los datos
+            const resultObject: any = {}
+
+            // Iterar sobre los datos y agregar propiedades al objeto
+            data.forEach((event: any) => {
+                if (event.data.object.metadata.paymentId === paymentId) {
+                    resultObject.paymentId =
+                        event.data.object.metadata.paymentId
+                    resultObject.serviceId =
+                        event.data.object.metadata.serviceId
+                }
+            })
+
+            return resultObject
         }
     } catch (error) {
         console.log(error)

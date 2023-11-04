@@ -9,6 +9,7 @@ export default async function handler(
         try {
             const priceId = req.body.priceId
             const paymentId = req.body.paymentId
+            const serviceId = req.body.serviceId
             // Create Checkout Sessions from body params.
             const session = await stripe.checkout.sessions.create({
                 line_items: [
@@ -26,6 +27,7 @@ export default async function handler(
                 cancel_url: `${req.headers.origin}/payment/canceled`,
                 metadata: {
                     paymentId: paymentId,
+                    serviceId: serviceId,
                 },
             })
             res.status(200).json(session)

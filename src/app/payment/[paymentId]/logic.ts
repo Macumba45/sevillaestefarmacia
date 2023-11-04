@@ -12,6 +12,7 @@ export const useLogicPayment = () => {
     const token = getAuthenticatedToken()
     const { user } = useContext(UserContext)
     const [paymentIdMetadata, setPaymentIdMetadata] = useState<string[]>([])
+    const [serviceIdMetadata, setServiceIdMetadata] = useState<string>('')
     const [fecha, setFecha] = useState<string>('')
     const [hour, setHour] = useState<string>('')
     const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -22,32 +23,65 @@ export const useLogicPayment = () => {
         return payment
     }
 
-    const getPaymentData = async (paymentId: string) => {
-        const hourId = await getPaymentById(paymentId)
-        await isBookedHour(hourId)
+    const getChargeList = async (paymentId: string) => {
+        const charList = await fetchChargeListStripe(paymentId)
+        setPaymentIdMetadata(charList.paymentId)
+        setServiceIdMetadata(charList.serviceId)
+
+        // Verificar si es el servicio especial sin fecha ni hora
+        if (
+            serviceIdMetadata &&
+            serviceIdMetadata === 'clo0e17d30004xy04cjklg2px'
+        ) {
+            // Realizar el pago a true y enviar el correo
+            await paymentSuccess(paymentId)
+            return null
+        }
+
+        // Si no es el servicio especial, continúa con la consulta de fechas y horas
         return
     }
 
-    const getChargeList = async (paymentId: string) => {
-        setIsLoading(true)
-        const charList = await fetchChargeListStripe(paymentId)
-        setPaymentIdMetadata(charList)
+    const getPyamentById = async (paymentId: string) => {
+        const paymentData = await fetchPaymentById(paymentId)
+        if (
+            serviceIdMetadata &&
+            serviceIdMetadata === 'clo0e17d30004xy04cjklg2px'
+        ) {
+            return ''
+        } else if (
+            serviceIdMetadata &&
+            serviceIdMetadata !== 'clo0e17d30004xy04cjklg2px'
+        ) {
+            const dateById = await fetchDateById(paymentData.dateId)
+            const hourById = await fetchHourById(paymentData.hourId)
+            setFecha(dateById.dates)
+            setHour(hourById.hour)
+        }
+        return
+    }
+
+    const getPaymentData = async (paymentId: string) => {
+        const hourId = await getPaymentById(paymentId)
+
+        // Verificar si es el servicio especial sin fecha ni hora
+        if (
+            serviceIdMetadata &&
+            serviceIdMetadata === 'clo0e17d30004xy04cjklg2px'
+        ) {
+            // Realizar el pago a true y enviar el correo
+            await paymentSuccess(paymentId)
+            return null
+        }
+
+        // Si no es el servicio especial, realiza las acciones normales
+        await isBookedHour(hourId as string)
         return
     }
 
     const isBookedHour = async (selectedHourId: string) => {
         const hourBooked = await fetchIsBookedHour(selectedHourId)
         return hourBooked
-    }
-
-    const getPyamentById = async (paymentId: string) => {
-        const paymentData = await fetchPaymentById(paymentId)
-        const dateById = await fetchDateById(paymentData.dateId)
-        const hourById = await fetchHourById(paymentData.hourId)
-        setFecha(dateById.dates)
-        setHour(hourById.hour)
-        setIsLoading(false)
-        return
     }
 
     return {
@@ -63,5 +97,7 @@ export const useLogicPayment = () => {
         isLoading,
         user,
         emailConfirmationPaymentCitas,
+        serviceIdMetadata,
+        setIsLoading,
     }
 }
