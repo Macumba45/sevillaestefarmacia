@@ -28,7 +28,7 @@ export const emailConfirmationPaymentCitas = async (
 
 export const emailConfirmationPaymentService = async (
     email: string,
-   serviceId: string,
+    serviceId: string
 ) => {
     try {
         const headers = {
