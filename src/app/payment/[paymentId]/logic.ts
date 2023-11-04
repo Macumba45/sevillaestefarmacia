@@ -2,7 +2,6 @@ import { fetchPaymentById, stripePaymentTrue } from '@/services/payments'
 import { fetchChargeListStripe, getPaymentById } from '@/services/stripe'
 import { useRouter } from 'next/navigation'
 import { useContext, useState } from 'react'
-import { getAuthenticatedToken } from '../../../../storage/storage'
 import { fetchDateById } from '@/services/dates'
 import { fetchHourById, fetchIsBookedHour } from '@/services/hours'
 import { emailConfirmationPaymentCitas } from '@/services/nodemailer'
@@ -34,7 +33,6 @@ export const useLogicPayment = () => {
             serviceIdMetadata &&
             serviceIdMetadata === 'clo0e17d30004xy04cjklg2px'
         ) {
-
             return null
         }
 
