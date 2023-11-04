@@ -7,6 +7,7 @@ import LayoutNavFooter from '@/layout/layout'
 import { Typography } from '@mui/material'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import CircularIndeterminate from '@/components/Loader'
+import { emailConfirmationPaymentService } from '@/services/nodemailer'
 
 interface Props {
     params: {
@@ -29,6 +30,8 @@ const PaymentSuccessComponent: FC<Props> = ({ params }) => {
         emailConfirmationPaymentCitas,
         serviceIdMetadata,
         setIsLoading,
+        titleService,
+        getServiceTitle,
     } = useLogicPayment()
     const [isPaymentProcessed, setIsPaymentProcessed] = useState(false)
 
@@ -44,6 +47,7 @@ const PaymentSuccessComponent: FC<Props> = ({ params }) => {
             serviceIdMetadata === 'clo0e17d30004xy04cjklg2px'
         ) {
             setIsPaymentProcessed(true)
+            getServiceTitle(serviceIdMetadata)
         } else if (
             serviceIdMetadata &&
             serviceIdMetadata !== 'clo0e17d30004xy04cjklg2px'
@@ -64,10 +68,14 @@ const PaymentSuccessComponent: FC<Props> = ({ params }) => {
         if (isPaymentProcessed && user?.email) {
             if (
                 serviceIdMetadata &&
+                titleService &&
                 serviceIdMetadata === 'clo0e17d30004xy04cjklg2px'
             ) {
                 // Este es el servicio especial, envía el correo sin datos de fecha y hora
-                emailConfirmationPaymentCitas(user?.email as string, '', '')
+                emailConfirmationPaymentService(
+                    user?.email as string,
+                    titleService
+                )
                 setIsLoading(false)
             } else if (fecha && hour) {
                 // Si no es el servicio especial y hay datos de fecha y hora, envía el correo con los datos
@@ -79,7 +87,14 @@ const PaymentSuccessComponent: FC<Props> = ({ params }) => {
                 setIsLoading(false)
             }
         }
-    }, [isPaymentProcessed, user?.email, serviceIdMetadata, fecha, hour])
+    }, [
+        isPaymentProcessed,
+        user?.email,
+        serviceIdMetadata,
+        fecha,
+        hour,
+        titleService,
+    ])
 
     if (isLoading)
         return (

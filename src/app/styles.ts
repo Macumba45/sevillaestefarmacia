@@ -62,7 +62,7 @@ export const NavContainer = styled.nav`
     height: 5rem;
     background-color: black;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    z-index: 9999;
+    z-index: 9;
 `
 export const ContainerConocenos = styled.section`
     display: flex;

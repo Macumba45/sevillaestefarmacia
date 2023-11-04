@@ -7,6 +7,7 @@ import { fetchDateById } from '@/services/dates'
 import { fetchHourById, fetchIsBookedHour } from '@/services/hours'
 import { emailConfirmationPaymentCitas } from '@/services/nodemailer'
 import { UserContext } from '@/context/UserContext'
+import { getServiceDetails } from '@/services/service'
 
 export const useLogicPayment = () => {
     const token = getAuthenticatedToken()
@@ -16,6 +17,7 @@ export const useLogicPayment = () => {
     const [fecha, setFecha] = useState<string>('')
     const [hour, setHour] = useState<string>('')
     const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [titleService, setTitleService] = useState<string>('')
     const router = useRouter()
 
     const paymentSuccess = async (paymentId: string) => {
@@ -71,6 +73,7 @@ export const useLogicPayment = () => {
         ) {
             // Realizar el pago a true y enviar el correo
             await paymentSuccess(paymentId)
+            await getServiceDetails(serviceIdMetadata)
             return null
         }
 
@@ -82,6 +85,12 @@ export const useLogicPayment = () => {
     const isBookedHour = async (selectedHourId: string) => {
         const hourBooked = await fetchIsBookedHour(selectedHourId)
         return hourBooked
+    }
+
+    const getServiceTitle = async (serviceId: string) => {
+        const data = await getServiceDetails(serviceId)
+        setTitleService(data.title)
+        return data
     }
 
     return {
@@ -99,5 +108,7 @@ export const useLogicPayment = () => {
         emailConfirmationPaymentCitas,
         serviceIdMetadata,
         setIsLoading,
+        getServiceTitle,
+        titleService,
     }
 }

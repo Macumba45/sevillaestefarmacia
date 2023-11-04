@@ -15,11 +15,13 @@ import Container from '@mui/material/Container'
 import Button from '@mui/material/Button'
 import logo from '../../assets/logo/logo.png'
 import { ExpandMore as ExpandMoreIcon } from '@mui/icons-material'
+import LogoutIcon from '@mui/icons-material/Logout'
 import {
     Accordion,
     AccordionDetails,
     AccordionSummary,
     Divider,
+    Tooltip,
     Typography,
 } from '@mui/material'
 import {
@@ -83,7 +85,7 @@ const ResponsiveAppBar: FC<Props> = ({ user, isAuth }) => {
     ]
 
     return (
-        <AppBar style={stylesNavBar} position="sticky">
+        <AppBar className="nav" style={stylesNavBar} position="sticky">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <LogoContainer>
@@ -271,37 +273,61 @@ const ResponsiveAppBar: FC<Props> = ({ user, isAuth }) => {
                         <ButtonLoginContainer>
                             <>
                                 {!user?.role ? (
-                                    <Button
-                                        sx={{
-                                            color: 'black',
-                                            display: 'block',
-                                            backgroundColor: 'white',
-                                            ':hover': {
-                                                backgroundColor: '#d3d3d3',
-                                            },
-                                        }}
-                                        variant="contained"
-                                        onClick={handleButtonClick}
-                                    >
-                                        Iniciar sesión
-                                    </Button>
+                                    <>
+                                        <Button
+                                            sx={{
+                                                color: 'black',
+                                                display: 'block',
+                                                backgroundColor: 'white',
+                                                ':hover': {
+                                                    backgroundColor: '#d3d3d3',
+                                                },
+                                            }}
+                                            variant="contained"
+                                            onClick={handleButtonClick}
+                                        >
+                                            Iniciar sesión
+                                        </Button>
+                                    </>
                                 ) : (
-                                    <Button
-                                        sx={{
-                                            color: 'black',
-                                            display: 'block',
-                                            backgroundColor: 'white',
-                                            ':hover': {
-                                                backgroundColor: '#d3d3d3',
-                                            },
+                                    <div
+                                        style={{
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
                                         }}
-                                        variant="contained"
-                                        onClick={handleButtonClick}
                                     >
-                                        {user?.role === 'admin'
-                                            ? 'Ir al dashboard'
-                                            : 'Mi perfil'}
-                                    </Button>
+                                        <HoverMotion>
+                                            <Button
+                                                sx={{
+                                                    color: 'black',
+                                                    display: 'block',
+                                                    backgroundColor: 'white',
+                                                    ':hover': {
+                                                        backgroundColor:
+                                                            '#d3d3d3',
+                                                    },
+                                                }}
+                                                variant="contained"
+                                                onClick={handleButtonClick}
+                                            >
+                                                {user?.role === 'admin'
+                                                    ? 'Ir al dashboard'
+                                                    : 'Mi perfil'}
+                                            </Button>
+                                        </HoverMotion>
+                                        <Tooltip
+                                            title="Cerrar sesión"
+                                            placement="bottom"
+                                        >
+                                            <LogoutIcon
+                                                onClick={logOut}
+                                                sx={{
+                                                    ml: 2,
+                                                }}
+                                            />
+                                        </Tooltip>
+                                    </div>
                                 )}
 
                                 <Drawer

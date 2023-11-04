@@ -6,9 +6,9 @@ export default async function handler(
     res: NextApiResponse
 ) {
     try {
-        const { email, serviceId } = req.body
+        const { email, titleService } = req.body
 
-        if (!email && !serviceId) {
+        if (!email && !titleService) {
             throw new Error('Faltan datos para enviar el email')
         }
 
@@ -118,7 +118,7 @@ export default async function handler(
                                     style="width: 30px; height: 30px"
                                     src="https://i.postimg.cc/SRsGpytH/icons8-paid-100.png"
                                 />
-                                <p style="font-size: 20px; color: black">${serviceId}</p>
+                                <p style="font-size: 20px; color: black">${titleService}</p>
                             </div>
                         </div>
                         <div
