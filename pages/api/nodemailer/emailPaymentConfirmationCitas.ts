@@ -178,7 +178,7 @@ export default async function handler(
                                         color: white;
                                         font-family: Cormorant Garamond;
                                     "
-                                    href="tel:+123456789"
+                                    href="tel:682734237"
                                     >Llámanos</a
                                 >
                             </button>
@@ -202,7 +202,7 @@ export default async function handler(
                                         color: white;
                                         font-family: Cormorant Garamond;
                                     "
-                                    href="mailto:correo@dominio.com"
+                                    href="mailto:hola@sevillaestefarmacia.com"
                                     >Envíanos un correo</a
                                 >
                             </button>

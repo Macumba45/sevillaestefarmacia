@@ -38,7 +38,7 @@ const ModalOrderTime: FC<Props> = ({
     onHourIdChange,
     onDateIdChange,
     editDateAndHour,
-    services
+    services,
 }) => {
     const [selectedDate, setSelectedDate] = useState<{
         date: string
@@ -234,9 +234,9 @@ const ModalOrderTime: FC<Props> = ({
                                         borderColor: 'black',
                                     },
                                     '&.Mui-focused .MuiOutlinedInput-notchedOutline':
-                                    {
-                                        borderColor: 'black',
-                                    },
+                                        {
+                                            borderColor: 'black',
+                                        },
                                 }}
                             >
                                 <MenuItem value={''}>
@@ -275,9 +275,9 @@ const ModalOrderTime: FC<Props> = ({
                                         borderColor: 'black',
                                     },
                                     '&.Mui-focused .MuiOutlinedInput-notchedOutline':
-                                    {
-                                        borderColor: 'black',
-                                    },
+                                        {
+                                            borderColor: 'black',
+                                        },
                                 }}
                                 label="Elija una hora"
                                 value={selectedHour?.hour || ''}
@@ -342,10 +342,11 @@ const ModalOrderTime: FC<Props> = ({
                                                 value={hour.hour}
                                                 disabled={hour.isBooked}
                                             >
-                                                {`${hour.hour} - ${hour.isBooked
-                                                    ? 'Reservado'
-                                                    : 'Disponible'
-                                                    }`}
+                                                {`${hour.hour} - ${
+                                                    hour.isBooked
+                                                        ? 'Reservado'
+                                                        : 'Disponible'
+                                                }`}
                                             </MenuItem>
                                         ))
                                 )}

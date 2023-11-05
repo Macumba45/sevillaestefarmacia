@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { createUser, findUserEmail } from '../controllers/user'
 import { User } from '../../../types/types'
 import jwt from 'jsonwebtoken'
+import { sendEmailNewUser } from '../nodemailer/newUser'
 
 // import { sendEmailNewUser } from '../nodeMailer/newUser'
 // import { newUserNotification } from '../nodeMailer/newUserNotification'
@@ -45,11 +46,9 @@ const handleSubmitSignUp = async (
     } catch (error) {
         console.error(error)
         res.status(500).json({ message: 'Internal Server Error' })
+    } finally {
+        await sendEmailNewUser(email, name)
     }
-    // finally {
-    //     await newUserNotification(email)
-    //     await sendEmailNewUser(email)
-    // }
 }
 
 export default handleSubmitSignUp
