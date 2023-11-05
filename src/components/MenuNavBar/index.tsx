@@ -174,7 +174,7 @@ const ResponsiveAppBar: FC<Props> = ({ user, isAuth }) => {
                                                     style={{
                                                         position: 'absolute', // Para que esté fuera del flujo normal
                                                         top: '65px', // Puedes ajustar esto según tu diseño
-                                                        left: '35%', // Puedes ajustar esto según tu diseño
+                                                        left: '32%', // Puedes ajustar esto según tu diseño
                                                         backgroundColor:
                                                             'black',
                                                         padding: '10px',

@@ -65,7 +65,10 @@ const Services: FC<Props> = ({
             <ContainerDesktopServices flexdirection={flexDirection}>
                 {imagePosition === 'top' && ( // Renderiza la imagen arriba si imagePosition es 'top'
                     <ContainerImgServices>
-                        <ImgServices alt={alt} src={picture} objectposition={objectposition}
+                        <ImgServices
+                            alt={alt}
+                            src={picture}
+                            objectposition={objectposition}
                         />
                     </ContainerImgServices>
                 )}
