@@ -110,7 +110,6 @@ const Dashboard: FC<Props> = () => {
         titlePage,
         user,
         userLoaded,
-        serviceDataId,
         serviceDetails,
     } = useLogicDashboard()
 
@@ -411,7 +410,6 @@ const Dashboard: FC<Props> = () => {
                                 ))
                             )}
                             <ModalOrderTime
-                                serviceId={serviceDataId}
                                 isLoading={isLoadingButton}
                                 open={openModalEditDateAndHour}
                                 handleClose={closeModalEditDateAndHourFunction}
