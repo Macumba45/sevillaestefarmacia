@@ -6,7 +6,7 @@ export type User = {
     name?: string
     role?: string
     phone?: string
-    payment?: Payment[]
+    payments?: Payment[]
     birthdate?: string
     resetLink?: string
 }
@@ -38,6 +38,7 @@ export type Payment = {
     payed?: boolean
     createdAt?: Date
     service?: Services
+    title?: string
 }
 
 export type Dates = {
