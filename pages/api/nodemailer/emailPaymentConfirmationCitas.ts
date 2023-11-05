@@ -35,7 +35,7 @@ export default async function handler(
 
         const mailOptions = {
             from: 'gonzalolovo@gmail.com',
-            to: 'gonzalolovo@gmail.com',
+            to: email,
             subject: 'Gracias por tu compra en Farmacia Sta.Bárbara',
             html: `
             <!doctype html>

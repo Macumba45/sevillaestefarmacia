@@ -28,7 +28,7 @@ export const sendEmailNewUser = async (email: string, userName: string) => {
     // Configurar el contenido del correo electrónico
     const mailOptions = {
         from: 'gonzalolovo@gmail.com',
-        to: 'gonzalolovo@gmail.com',
+        to: email,
         subject: `Bienvenido a Farmacia Sta. Bárbara - ${userName}`,
         html: `
         <!doctype html>
