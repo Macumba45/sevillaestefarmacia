@@ -10,9 +10,10 @@ import MenuItem from '@mui/material/MenuItem'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 import { FC, useEffect, useState } from 'react'
 import { CircularProgress, InputLabel } from '@mui/material'
-import { Dates, Hour, Payment } from '../../../types/types'
+import { Dates, Hour, Payment, Services } from '../../../types/types'
 import { fetchPaymentsData } from '@/services/payments'
 import LoadingButton from '@mui/lab/LoadingButton'
+import { getServiceDetails } from '@/services/service'
 
 interface Props {
     dates?: Dates[]
@@ -24,6 +25,7 @@ interface Props {
     onHourIdChange: (newHourId: string) => void
     onDateIdChange: (newDateId: string) => void
     editDateAndHour?: () => void
+    serviceId?: string
 }
 
 const ModalOrderTime: FC<Props> = ({
@@ -36,6 +38,7 @@ const ModalOrderTime: FC<Props> = ({
     onHourIdChange,
     onDateIdChange,
     editDateAndHour,
+    serviceId,
 }) => {
     const [selectedDate, setSelectedDate] = useState<{
         date: string
@@ -49,6 +52,7 @@ const ModalOrderTime: FC<Props> = ({
     const [payments, setPayments] = useState([])
     const today = new Date()
     const [isLoadingPayments, setIsLoadingPayments] = useState(false)
+    const [availableDates, setAvailableDates] = useState<[]>([])
 
     const resetHour = () => {
         setSelectedHour({ hour: '', id: '' })
@@ -178,6 +182,33 @@ const ModalOrderTime: FC<Props> = ({
         }
     }, [dates])
 
+    useEffect(() => {
+        if (serviceId && isEditing) {
+            getServiceDetails(serviceId as string)
+                .then(serviceDetails => {
+                    if (serviceDetails && serviceDetails.dates) {
+                        // Filtrar las fechas y horas disponibles
+                        const availableDates = serviceDetails.dates.filter(
+                            (date: any) => {
+                                // Filtrar las horas no reservadas
+                                const availableHours = date.hours.filter(
+                                    (hour: any) => !hour.isBooked
+                                )
+                                return availableHours.length > 0 // Solo mostrar las fechas que tienen horas disponibles
+                            }
+                        )
+                        setAvailableDates(availableDates)
+                    }
+                })
+                .catch(error => {
+                    console.error(
+                        'Error al cargar los detalles del servicio:',
+                        error
+                    )
+                })
+        }
+    }, [serviceId])
+
     return (
         <React.Fragment>
             <Dialog fullWidth open={open} onClose={handleClose}>
@@ -239,11 +270,27 @@ const ModalOrderTime: FC<Props> = ({
                                 <MenuItem value={''}>
                                     Selecciona una fecha
                                 </MenuItem>
-                                {upcomingDates?.map((date, index) => (
-                                    <MenuItem key={index} value={date.date}>
-                                        {formatDateString(date.date)}{' '}
-                                    </MenuItem>
-                                ))}
+                                {isEditing
+                                    ? availableDates.map(
+                                          (date: any, index: number) => (
+                                              <MenuItem
+                                                  key={index}
+                                                  value={date.date}
+                                              >
+                                                  {formatDateString(date.date)}{' '}
+                                              </MenuItem>
+                                          )
+                                      )
+                                    : upcomingDates!.map(
+                                          (date: any, index: number) => (
+                                              <MenuItem
+                                                  key={index}
+                                                  value={date.date}
+                                              >
+                                                  {formatDateString(date.date)}{' '}
+                                              </MenuItem>
+                                          )
+                                      )}
                             </Select>
                         </FormControl>
 

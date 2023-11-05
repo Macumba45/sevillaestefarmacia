@@ -10,6 +10,7 @@ import {
     getServices,
     updateService,
     deleteService,
+    getServiceDetails,
 } from '@/services/service'
 import {
     editDateAndHourFromPayments,
@@ -58,6 +59,8 @@ export const useLogicDashboard = () => {
     const [isEditingBlog, setIsEditingBlog] = useState(false)
     const [blogToDelete, setBlogToDelete] = useState('')
     const [blogData, setBlogData] = useState<Blogs | undefined>()
+    const [serviceDataId, setServiceDataId] = useState<string>('')
+    const [serviceDetails, setServiceDetails] = useState<Services>()
 
     const fetchAllUsers = useCallback(async () => {
         setIsLoading(true)
@@ -215,6 +218,12 @@ export const useLogicDashboard = () => {
 
     const openEditModalDateAndHour = async (service: Services) => {
         setServiceData(service) // Almacena los datos en el estado
+        console.log(service)
+        setServiceDataId(service.service?.id as string)
+        const serviceDetails = await getServiceDetails(
+            service.service?.id as string
+        )
+        setServiceDetails(serviceDetails)
         setPaymentId(service.id as string)
         setOpenModalEditDateAndHour(true)
         setIsEditing(true)
@@ -362,5 +371,7 @@ export const useLogicDashboard = () => {
         updateTallerById,
         user,
         userLoaded,
+        serviceDataId,
+        serviceDetails,
     }
 }

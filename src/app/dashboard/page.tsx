@@ -110,6 +110,8 @@ const Dashboard: FC<Props> = () => {
         titlePage,
         user,
         userLoaded,
+        serviceDataId,
+        serviceDetails,
     } = useLogicDashboard()
 
     const itemsTop = [
@@ -409,15 +411,11 @@ const Dashboard: FC<Props> = () => {
                                 ))
                             )}
                             <ModalOrderTime
+                                serviceId={serviceDataId}
                                 isLoading={isLoadingButton}
                                 open={openModalEditDateAndHour}
                                 handleClose={closeModalEditDateAndHourFunction}
-                                dates={serviceData?.service?.dates?.map(
-                                    (item: any) => ({
-                                        ...item,
-                                        date: item.dates,
-                                    })
-                                )}
+                                dates={serviceDetails?.dates}
                                 handleReservarCita={handleOpenModaService}
                                 onHourIdChange={newHourId => {
                                     setHourId(newHourId)
