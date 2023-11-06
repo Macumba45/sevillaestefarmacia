@@ -43,12 +43,11 @@ const handleSubmitSignUp = async (
             user,
             token,
         })
+        await sendEmailNewUser(email, name)
+        console.log('Email sent')
     } catch (error) {
         console.error(error)
         res.status(500).json({ message: 'Internal Server Error' })
-    } finally {
-        await sendEmailNewUser(email, name)
-        console.log('Email sent')
     }
 }
 
