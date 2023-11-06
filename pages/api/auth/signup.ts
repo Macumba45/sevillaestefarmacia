@@ -39,7 +39,6 @@ const handleSubmitSignUp = async (
         const userId = user?.id // Obtén el ID del usuario recién creado
         const token = jwt.sign({ userId }, 'token') // Incluye el ID del usuario en el token
         await sendEmailNewUser(email, name)
-        console.log('Email sent')
         res.status(200).json({
             message: 'User created successfully',
             user,

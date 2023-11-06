@@ -210,7 +210,7 @@ export const useLogicDashboard = () => {
 
     const logOut = () => {
         localStorage.removeItem('token')
-        router.push('/dashboard/auth/login')
+        router.push('/auth/login')
     }
 
     const handleConfirmDelete = () => {
