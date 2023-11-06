@@ -50,6 +50,31 @@ export const useLogicDashboard = () => {
     const datesPaymentsPayed = allPayments?.filter(
         (payment: any) => payment.payed === true && payment.dateId !== ''
     )
+
+    console.log(datesPaymentsPayed)
+
+    // Función de comparación personalizada para ordenar por fecha y luego por hora
+    function comparePayments(a: any, b: any) {
+        // Comparar fechas
+        const dateA = a.date!.dates
+        const dateB = b.date!.dates
+        if (dateA < dateB) return -1
+        if (dateA > dateB) return 1
+
+        // Si las fechas son iguales, comparar horas
+        const hourA = a.hour!.hour
+        const hourB = b.hour!.hour
+        if (hourA < hourB) return -1
+        if (hourA > hourB) return 1
+
+        return 0
+    }
+
+    // Ordena los elementos por fecha y luego por hora
+    datesPaymentsPayed?.sort(comparePayments)
+
+    console.log(datesPaymentsPayed)
+
     const [openModalTallerOrBlog, setOpenModalTallerOrBlog] = useState(false)
     const [talleres, setTalleres] = useState<Talleres[] | undefined>([])
     const [tallerToDelete, setTallerToDelete] = useState('')

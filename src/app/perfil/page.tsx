@@ -175,9 +175,9 @@ const Perfil: FC = () => {
                                             item.title === titleSpd
                                                 ? 'Pago confirmado'
                                                 : `${formatDateString(
-                                                    item.date &&
-                                                    (item.date[0] as any)
-                                                )} a las ${item.hour}h`
+                                                      item.date &&
+                                                          (item.date[0] as any)
+                                                  )} a las ${item.hour}h`
                                         }
                                     />
                                 </ListItem>
