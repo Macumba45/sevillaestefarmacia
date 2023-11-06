@@ -47,11 +47,19 @@ export const useLogicDashboard = () => {
     const [paymentId, setPaymentId] = useState<string>('')
     const [isLoadingButton, setIsLoadingButton] = useState(false)
     const titlePage = 'Dashboard'
+    const [openModalTallerOrBlog, setOpenModalTallerOrBlog] = useState(false)
+    const [talleres, setTalleres] = useState<Talleres[] | undefined>([])
+    const [tallerToDelete, setTallerToDelete] = useState('')
+    const [tallerData, setTallerData] = useState<Talleres | undefined>()
+    const [isEditingTaller, setIsEditingTaller] = useState(false)
+    const [blogs, setBlogs] = useState<Blogs[] | undefined>([])
+    const [isEditingBlog, setIsEditingBlog] = useState(false)
+    const [blogToDelete, setBlogToDelete] = useState('')
+    const [blogData, setBlogData] = useState<Blogs | undefined>()
+    const [serviceDetails, setServiceDetails] = useState<Services>()
     const datesPaymentsPayed = allPayments?.filter(
         (payment: any) => payment.payed === true && payment.dateId !== ''
     )
-
-    console.log(datesPaymentsPayed)
 
     // Función de comparación personalizada para ordenar por fecha y luego por hora
     function comparePayments(a: any, b: any) {
@@ -72,19 +80,6 @@ export const useLogicDashboard = () => {
 
     // Ordena los elementos por fecha y luego por hora
     datesPaymentsPayed?.sort(comparePayments)
-
-    console.log(datesPaymentsPayed)
-
-    const [openModalTallerOrBlog, setOpenModalTallerOrBlog] = useState(false)
-    const [talleres, setTalleres] = useState<Talleres[] | undefined>([])
-    const [tallerToDelete, setTallerToDelete] = useState('')
-    const [tallerData, setTallerData] = useState<Talleres | undefined>()
-    const [isEditingTaller, setIsEditingTaller] = useState(false)
-    const [blogs, setBlogs] = useState<Blogs[] | undefined>([])
-    const [isEditingBlog, setIsEditingBlog] = useState(false)
-    const [blogToDelete, setBlogToDelete] = useState('')
-    const [blogData, setBlogData] = useState<Blogs | undefined>()
-    const [serviceDetails, setServiceDetails] = useState<Services>()
 
     const fetchAllUsers = useCallback(async () => {
         setIsLoading(true)
