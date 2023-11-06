@@ -1,13 +1,9 @@
 'use client'
 
 import { FC, memo, useContext, useEffect } from 'react'
-import LayoutNavFooter from '@/layout/layout'
-import {
-    BuyItemsContainer,
-    MainContainer,
-    ProfileDataContainer,
-} from './styles'
 import { UserContext } from '@/context/UserContext'
+import ShoppingBagIcon from '@mui/icons-material/ShoppingBag'
+import LayoutNavFooter from '@/layout/layout'
 import {
     Avatar,
     Divider,
@@ -16,8 +12,11 @@ import {
     ListItemText,
     Typography,
 } from '@mui/material'
-import ImageIcon from '@mui/icons-material/Image'
-import ShoppingBagIcon from '@mui/icons-material/ShoppingBag'
+import {
+    BuyItemsContainer,
+    MainContainer,
+    ProfileDataContainer,
+} from './styles'
 
 const Perfil: FC = () => {
     const { user } = useContext(UserContext)
