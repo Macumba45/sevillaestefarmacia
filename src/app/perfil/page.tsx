@@ -63,15 +63,12 @@ const Perfil: FC = () => {
 
             // Construye la fecha en el formato deseado
             const fechaFormateada = `${nombreDiaSemana}, ${dia} de ${nombresMeses[mes]}`
-            console.log(fechaFormateada)
             return fechaFormateada
         } else {
             console.error('Formato de fecha no válido:', fechaStr)
             return 'Fecha inválida'
         }
     }
-
-    formatDateString('[15/11/2023]') // Debería devolver 'lunes, 15 de noviembre'
 
     useEffect(() => {
         document.title = `Mi perfil - ${user.name}`
