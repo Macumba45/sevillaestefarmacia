@@ -9,6 +9,7 @@ export type User = {
     payments?: Payment[]
     birthdate?: string
     resetLink?: string
+    date?: Dates[]
 }
 
 export type Services = {
@@ -48,6 +49,7 @@ export type Dates = {
     serviceId?: string
     createdAt?: Date
     updatedAt?: Date
+    0?: any
 }
 
 export type Hour = {

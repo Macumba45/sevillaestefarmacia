@@ -23,13 +23,15 @@ const Perfil: FC = () => {
     const { user } = useContext(UserContext)
 
     function formatDateString(fechaStr: string) {
+        fechaStr = fechaStr.replace('[', '').replace(']', '')
         const partes = fechaStr.split('/') // Dividir la cadena en día, mes y año
+
         if (partes.length === 3) {
             const dia = parseInt(partes[0], 10)
             const mes = parseInt(partes[1], 10) - 1 // Restamos 1 al mes ya que en JavaScript los meses van de 0 a 11
             const año = parseInt(partes[2], 10)
 
-            const fecha = new Date(año, mes, dia) // Construimos la fecha
+            const fecha = new Date(año, mes, dia) // Constructor: new Date(año, mes, dia)
 
             // Mapea los nombres de los días de la semana
             const nombresDiasSemana = [
@@ -61,7 +63,7 @@ const Perfil: FC = () => {
 
             // Construye la fecha en el formato deseado
             const fechaFormateada = `${nombreDiaSemana}, ${dia} de ${nombresMeses[mes]}`
-
+            console.log(fechaFormateada)
             return fechaFormateada
         } else {
             console.error('Formato de fecha no válido:', fechaStr)
@@ -69,7 +71,8 @@ const Perfil: FC = () => {
         }
     }
 
-    formatDateString('15/11/2023')
+    formatDateString('[15/11/2023]') // Debería devolver 'lunes, 15 de noviembre'
+
     useEffect(() => {
         document.title = `Mi perfil - ${user.name}`
     }, [])
@@ -99,7 +102,7 @@ const Perfil: FC = () => {
                         {user.email}
                     </Typography>
                 </ProfileDataContainer>
-                <BuyItemsContainer>
+                {user.payments?.length !== 0 && (
                     <Typography
                         sx={{
                             color: 'black',
@@ -112,6 +115,8 @@ const Perfil: FC = () => {
                     >
                         Tus compras
                     </Typography>
+                )}
+                <BuyItemsContainer>
                     {user.payments?.length === 0 ? (
                         <Typography
                             sx={{
@@ -173,13 +178,10 @@ const Perfil: FC = () => {
                                         secondary={
                                             item.title === titleSpd
                                                 ? 'Pago confirmado'
-                                                : (((('El día:' +
-                                                      ' ' +
-                                                      item.date) as any) +
-                                                      ' ' +
-                                                      'a las:' +
-                                                      ' ' +
-                                                      item.hour) as string)
+                                                : `${formatDateString(
+                                                      item.date &&
+                                                          (item.date[0] as any)
+                                                  )} a las ${item.hour}`
                                         }
                                     />
                                 </ListItem>
