@@ -203,7 +203,7 @@ export const sendEmailNewUser = async (email: string, userName: string) => {
         </html>
         
         
-            `,
+            `,  
     }
 
     // Enviar el correo electrónico
@@ -213,6 +213,7 @@ export const sendEmailNewUser = async (email: string, userName: string) => {
                 console.error('Error al enviar el correo electrónico:', error)
                 reject(error)
             } else {
+                console.log('Correo electrónico enviado correctamente')
                 resolve(info)
             }
         })
