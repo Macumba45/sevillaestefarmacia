@@ -64,10 +64,10 @@ const Footer: FC = () => {
                 <PolicyLinks>Aviso Legal</PolicyLinks>
             </PolicyLinksContainer>
             <ContainerLogos>
-                <PicturesLogos style={{ width: '250px' }} src={junta.src} />
-                <PicturesLogos src={españa.src} />
-                <PicturesLogos src={recuperacion.src} />
-                <PicturesLogos src={unionEuropea.src} />
+                <PicturesLogos alt='Junta de Andalucía' style={{ width: '250px' }} src={junta.src} />
+                <PicturesLogos alt='Bandera de españa' src={españa.src} />
+                <PicturesLogos alt='Recuperacion UE' src={recuperacion.src} />
+                <PicturesLogos alt='Union Europea' src={unionEuropea.src} />
             </ContainerLogos>
             <CopyRight>Copyright © 2023 Farmacia Sta. Bárbara</CopyRight>
             <DesignedBy
