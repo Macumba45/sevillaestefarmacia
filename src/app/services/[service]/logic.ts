@@ -50,6 +50,7 @@ export const useLogicPageServicesDetail = () => {
 
     const handleReservarCita = async () => {
         try {
+            setIsLoading(true)
             const userId = user?.id as string
             const serviceId = serviceData?.id as string
             const priceId = serviceData?.priceId as string

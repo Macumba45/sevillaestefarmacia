@@ -13,7 +13,6 @@ import { CircularProgress, InputLabel } from '@mui/material'
 import { Dates, Hour, Payment, Services } from '../../../types/types'
 import { fetchPaymentsData } from '@/services/payments'
 import LoadingButton from '@mui/lab/LoadingButton'
-import { getServiceDetails } from '@/services/service'
 
 interface Props {
     dates?: Dates[]
@@ -25,7 +24,6 @@ interface Props {
     onHourIdChange: (newHourId: string) => void
     onDateIdChange: (newDateId: string) => void
     editDateAndHour?: () => void
-    services?: Services
 }
 
 const ModalOrderTime: FC<Props> = ({
@@ -38,7 +36,6 @@ const ModalOrderTime: FC<Props> = ({
     onHourIdChange,
     onDateIdChange,
     editDateAndHour,
-    services,
 }) => {
     const [selectedDate, setSelectedDate] = useState<{
         date: string
