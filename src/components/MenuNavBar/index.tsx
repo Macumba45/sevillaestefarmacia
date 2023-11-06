@@ -155,7 +155,7 @@ const ResponsiveAppBar: FC<Props> = ({ user, isAuth }) => {
                                                     fontFamily:
                                                         'Cormorant Garamond',
                                                     fontSize: '0.875rem',
-                                                    fontWeight: 900,
+
                                                     cursor: 'pointer',
                                                 }}
                                             >
@@ -200,7 +200,7 @@ const ResponsiveAppBar: FC<Props> = ({ user, isAuth }) => {
                                                                         fontFamily:
                                                                             'Cormorant Garamond',
                                                                         width: '200px',
-                                                                        fontWeight: 900,
+
                                                                         marginTop: 1,
                                                                         textAlign:
                                                                             'left',
@@ -242,7 +242,6 @@ const ResponsiveAppBar: FC<Props> = ({ user, isAuth }) => {
                                                 textDecoration: 'none',
                                                 color: 'white',
                                                 display: 'flex',
-                                                fontWeight: 900,
                                             }}
                                             href={page.route as string}
                                             target={
@@ -379,7 +378,6 @@ const ResponsiveAppBar: FC<Props> = ({ user, isAuth }) => {
                                                                         'Cormorant Garamond',
                                                                     fontSize:
                                                                         '0.875rem',
-                                                                    fontWeight: 900,
                                                                 }}
                                                             >
                                                                 {page.name.toLocaleUpperCase()}
@@ -405,7 +403,6 @@ const ResponsiveAppBar: FC<Props> = ({ user, isAuth }) => {
                                                                             justifyContent:
                                                                                 'flex-end',
                                                                             minWidth: 0,
-                                                                            fontWeight: 900,
                                                                         }}
                                                                         key={
                                                                             subpageIndex
@@ -444,7 +441,6 @@ const ResponsiveAppBar: FC<Props> = ({ user, isAuth }) => {
                                                                     'none',
                                                                 color: 'white',
                                                                 display: 'flex',
-                                                                fontWeight: 900,
                                                             }}
                                                             href={
                                                                 page.route as string
@@ -496,7 +492,6 @@ const ResponsiveAppBar: FC<Props> = ({ user, isAuth }) => {
                                                                   color: 'white',
                                                                   display:
                                                                       'flex',
-                                                                  fontWeight: 900,
                                                               }}
                                                               href={
                                                                   page.route as string
@@ -529,7 +524,6 @@ const ResponsiveAppBar: FC<Props> = ({ user, isAuth }) => {
                                                                   color: 'white',
                                                                   display:
                                                                       'flex',
-                                                                  fontWeight: 900,
                                                               }}
                                                               href={
                                                                   page?.route as string
