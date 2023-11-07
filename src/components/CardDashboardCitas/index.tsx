@@ -3,8 +3,9 @@
 import { FC, memo } from 'react'
 import { Card, Divider } from 'antd'
 import { Props } from './types'
-import { EditOutlined, PhoneOutlined } from '@mui/icons-material'
 import { Tooltip } from '@mui/material'
+import { PhoneOutlined, EditOutlined } from '@ant-design/icons'
+import Typography from 'antd/es/typography/Typography'
 
 const { Meta } = Card
 
@@ -61,11 +62,50 @@ const CardDashboardCitas: FC<Props> = ({ payments, onEdit, onDelete }) => {
         <Card
             hoverable
             style={{
-                width: 350,
+                width: 360,
                 margin: 10,
                 objectFit: 'cover',
                 objectPosition: 'center',
             }}
+            actions={[
+                <Tooltip
+                    key={1}
+                    sx={{
+                        fontSize: '30px', // Cambia el tamaño del texto dentro del Tooltip
+                        '& .MuiTooltip-tooltip': {
+                            maxWidth: '400px', // Cambia el tamaño del Tooltip en sí
+                            fontSize: '30px', // Cambia el tamaño del texto dentro del Tooltip
+                        },
+                    }}
+                    title={
+                        <h1
+                            style={{
+                                fontFamily: 'Roboto',
+                                fontSize: '20px',
+                            }}
+                        >
+                            Teléfono: {payments?.user?.phone}
+                        </h1>
+                    }
+                >
+                    <Typography>Ver telefono</Typography>
+                </Tooltip>,
+                <Tooltip
+                    key={2}
+                    title={
+                        <h1
+                            style={{
+                                fontFamily: 'Roboto',
+                                fontSize: '20px',
+                            }}
+                        >
+                            Editar cita
+                        </h1>
+                    }
+                >
+                    <Typography onClick={onEdit}>Editar cita</Typography>
+                </Tooltip>,
+            ]}
         >
             <Meta
                 style={{
@@ -108,53 +148,6 @@ const CardDashboardCitas: FC<Props> = ({ payments, onEdit, onDelete }) => {
                     </span>
                 }
             />
-            <Divider />
-            <div
-                style={{
-                    display: 'flex',
-                    justifyContent: 'space-around',
-                    alignItems: 'center',
-                }}
-            >
-                <div>
-                    <Tooltip
-                        title={
-                            'Telefono del cliente:' +
-                            ' ' +
-                            payments?.user?.phone
-                        }
-                    >
-                        <PhoneOutlined
-                            // onClick={onDelete}
-                            style={styleIconButtons}
-                            key="delete"
-                            sx={{
-                                ':hover': {
-                                    color: 'green',
-                                    transform: 'scale(1.2)',
-                                    transition: 'all 0.2s ease-in-out',
-                                },
-                            }}
-                        />
-                    </Tooltip>
-                </div>
-                <div>
-                    <Tooltip title={'Editar cita del cliente'}>
-                        <EditOutlined
-                            onClick={onEdit}
-                            style={styleIconButtons}
-                            key="edit"
-                            sx={{
-                                ':hover': {
-                                    color: 'green',
-                                    transform: 'scale(1.2)',
-                                    transition: 'all 0.2s ease-in-out',
-                                },
-                            }}
-                        />
-                    </Tooltip>
-                </div>
-            </div>
         </Card>
     )
 }
