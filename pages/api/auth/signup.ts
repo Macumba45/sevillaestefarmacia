@@ -44,7 +44,6 @@ const handleSubmitSignUp = async (
             user,
             token,
         })
-
     } catch (error) {
         console.error(error)
         res.status(500).json({ message: 'Internal Server Error' })

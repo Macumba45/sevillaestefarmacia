@@ -44,7 +44,7 @@ export type Payment = {
 
 export type Dates = {
     id?: string
-    date: string
+    date?: string
     hours: Hour[]
     serviceId?: string
     createdAt?: Date

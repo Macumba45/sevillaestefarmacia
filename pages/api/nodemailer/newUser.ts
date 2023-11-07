@@ -203,7 +203,7 @@ export const sendEmailNewUser = async (email: string, userName: string) => {
         </html>
         
         
-            `,  
+            `,
     }
 
     // Enviar el correo electrónico

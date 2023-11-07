@@ -48,6 +48,7 @@ import {
     CitasContainer,
     LoadingContainer,
 } from './styles'
+import CardDashboardCitas from '@/components/CardDashboardCitas'
 
 const drawerWidth = 240
 
@@ -259,7 +260,7 @@ const Dashboard: FC<Props> = () => {
                     </Typography>
                     <Typography
                         fontSize={15}
-                        fontWeight={320}
+                        fontWeight={520}
                         variant="h6"
                         noWrap
                         component="div"
@@ -394,18 +395,26 @@ const Dashboard: FC<Props> = () => {
                                     No hay citas reservadas
                                 </Typography>
                             ) : (
+                                // datesPaymentsPayed.map((item: any, index) => (
+                                //     <AlignItemsList
+                                //         key={index}
+                                //         serviceType={item.service.title}
+                                //         user={item.user.name}
+                                //         date={item.date ? item.date.dates : ''}
+                                //         hour={item.hour ? item.hour.hour : ''}
+                                //         phone={item.user.phone}
+                                //         openEditModalDateAndHour={() =>
+                                //             openEditModalDateAndHour(item)
+                                //         }
+                                //     // unBookDate={() => deleteDate(item.dateId)}
+                                //     />
                                 datesPaymentsPayed.map((item: any, index) => (
-                                    <AlignItemsList
+                                    <CardDashboardCitas
                                         key={index}
-                                        serviceType={item.service.title}
-                                        user={item.user.name}
-                                        date={item.date ? item.date.dates : ''}
-                                        hour={item.hour ? item.hour.hour : ''}
-                                        phone={item.user.phone}
-                                        openEditModalDateAndHour={() =>
+                                        payments={item}
+                                        onEdit={() =>
                                             openEditModalDateAndHour(item)
                                         }
-                                        // unBookDate={() => deleteDate(item.dateId)}
                                     />
                                 ))
                             )}

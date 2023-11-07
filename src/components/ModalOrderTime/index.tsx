@@ -56,15 +56,19 @@ const ModalOrderTime: FC<Props> = ({
 
     // Filtra las fechas que son iguales o posteriores a la fecha de hoy
     const upcomingDates = dates?.filter(date => {
-        const parts = date.date.split('/') // Divide la fecha en partes
-        const day = parseInt(parts[0], 10)
-        const month = parseInt(parts[1], 10) - 1 // Resta 1 al mes (0-indexado)
-        const year = parseInt(parts[2], 10)
-        const dateObject = new Date(year, month, day)
+        if (date.date) {
+            const parts = date.date.split('/') // Divide la fecha en partes
+            const day = parseInt(parts[0], 10)
+            const month = parseInt(parts[1], 10) - 1 // Resta 1 al mes (0-indexado)
+            const year = parseInt(parts[2], 10)
+            const dateObject = new Date(year, month, day)
 
-        // Compara la fecha con la fecha de hoy
-        return dateObject >= today
+            // Compara la fecha con la fecha de hoy
+            return dateObject >= today
+        }
+        return false; // Otra acción en caso de que date.date sea undefined
     })
+
 
     let buttonName: string = ''
     if (
@@ -231,9 +235,9 @@ const ModalOrderTime: FC<Props> = ({
                                         borderColor: 'black',
                                     },
                                     '&.Mui-focused .MuiOutlinedInput-notchedOutline':
-                                        {
-                                            borderColor: 'black',
-                                        },
+                                    {
+                                        borderColor: 'black',
+                                    },
                                 }}
                             >
                                 <MenuItem value={''}>
@@ -272,9 +276,9 @@ const ModalOrderTime: FC<Props> = ({
                                         borderColor: 'black',
                                     },
                                     '&.Mui-focused .MuiOutlinedInput-notchedOutline':
-                                        {
-                                            borderColor: 'black',
-                                        },
+                                    {
+                                        borderColor: 'black',
+                                    },
                                 }}
                                 label="Elija una hora"
                                 value={selectedHour?.hour || ''}
@@ -339,11 +343,10 @@ const ModalOrderTime: FC<Props> = ({
                                                 value={hour.hour}
                                                 disabled={hour.isBooked}
                                             >
-                                                {`${hour.hour} - ${
-                                                    hour.isBooked
+                                                {`${hour.hour} - ${hour.isBooked
                                                         ? 'Reservado'
                                                         : 'Disponible'
-                                                }`}
+                                                    }`}
                                             </MenuItem>
                                         ))
                                 )}
