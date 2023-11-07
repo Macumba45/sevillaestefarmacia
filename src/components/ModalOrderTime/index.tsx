@@ -66,9 +66,8 @@ const ModalOrderTime: FC<Props> = ({
             // Compara la fecha con la fecha de hoy
             return dateObject >= today
         }
-        return false; // Otra acción en caso de que date.date sea undefined
+        return false // Otra acción en caso de que date.date sea undefined
     })
-
 
     let buttonName: string = ''
     if (
@@ -235,9 +234,9 @@ const ModalOrderTime: FC<Props> = ({
                                         borderColor: 'black',
                                     },
                                     '&.Mui-focused .MuiOutlinedInput-notchedOutline':
-                                    {
-                                        borderColor: 'black',
-                                    },
+                                        {
+                                            borderColor: 'black',
+                                        },
                                 }}
                             >
                                 <MenuItem value={''}>
@@ -276,9 +275,9 @@ const ModalOrderTime: FC<Props> = ({
                                         borderColor: 'black',
                                     },
                                     '&.Mui-focused .MuiOutlinedInput-notchedOutline':
-                                    {
-                                        borderColor: 'black',
-                                    },
+                                        {
+                                            borderColor: 'black',
+                                        },
                                 }}
                                 label="Elija una hora"
                                 value={selectedHour?.hour || ''}
@@ -343,10 +342,11 @@ const ModalOrderTime: FC<Props> = ({
                                                 value={hour.hour}
                                                 disabled={hour.isBooked}
                                             >
-                                                {`${hour.hour} - ${hour.isBooked
+                                                {`${hour.hour} - ${
+                                                    hour.isBooked
                                                         ? 'Reservado'
                                                         : 'Disponible'
-                                                    }`}
+                                                }`}
                                             </MenuItem>
                                         ))
                                 )}
