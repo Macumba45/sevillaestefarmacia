@@ -260,7 +260,7 @@ const Dashboard: FC<Props> = () => {
                     </Typography>
                     <Typography
                         fontSize={15}
-                        fontWeight={520}
+                        fontWeight={400}
                         variant="h6"
                         noWrap
                         component="div"

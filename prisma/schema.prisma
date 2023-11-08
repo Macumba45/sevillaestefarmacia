@@ -16,10 +16,10 @@ model User {
   role      String          @default("user")
   phone     String
   resetLink String?
-  services  ServiceToUser[]
   createdAt DateTime        @default(now())
   updatedAt DateTime        @updatedAt
   Payments  Payments[]
+  services  Services[]
 }
 
 model Services {
@@ -33,7 +33,7 @@ model Services {
   priceId     String?
   dates       Dates[]
   payments    Payments[]
-  users       ServiceToUser[]
+  users       User[]
   createdAt   DateTime        @default(now())
   updatedAt   DateTime        @updatedAt
 }
@@ -51,14 +51,6 @@ model Payments {
   updatedAt DateTime @updatedAt
 }
 
-model ServiceToUser {
-  id        String   @id @default(cuid())
-  userId    String
-  serviceId String
-  user      User     @relation(fields: [userId], references: [id])
-  service   Services @relation(fields: [serviceId], references: [id])
-  createdAt DateTime @default(now())
-}
 
 model Dates {
   id        String   @id @default(cuid())

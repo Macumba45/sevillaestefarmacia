@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import nodemailer from 'nodemailer'
+require('dotenv').config()
 
 export default async function handler(
     req: NextApiRequest,
@@ -14,13 +15,19 @@ export default async function handler(
 
         const transporter = nodemailer.createTransport({
             // Configuración del servicio de correo electrónico (por ejemplo, Gmail)
-            service: 'Gmail',
+            host: 'smtp.sevillaestefarmacia.com',
+            port: 587,
             auth: {
-                user: 'gonzalolovo@gmail.com',
-                pass: process.env.EMAIL_PASSWORD,
+                user: 'info@sevillaestefarmacia.com',
+                pass: process.env.EMAIL_PASSWORD_FARMACIA,
             },
-            secure: true,
+            secure: false,
+            tls: {
+                // do not fail on invalid certs
+                rejectUnauthorized: false,
+            },
         })
+
         await new Promise((resolve, reject) => {
             // verify connection configuration
             transporter.verify(function (error: any, success: any) {
@@ -34,7 +41,7 @@ export default async function handler(
         })
 
         const mailOptions = {
-            from: 'gonzalolovo@gmail.com',
+            from: 'info@sevillaestefarmacia.com',
             to: email,
             subject: 'Gracias por tu compra en Farmacia Sta.Bárbara',
             html: `
@@ -118,7 +125,7 @@ export default async function handler(
                                     style="width: 30px; height: 30px"
                                     src="https://i.postimg.cc/SRsGpytH/icons8-paid-100.png"
                                 />
-                                <p style="font-size: 20px; color: black">${titleService}</p>
+                                <p style="font-size: 20px; color: black; font-weight:600;">${titleService}</p>
                             </div>
                         </div>
                         <div

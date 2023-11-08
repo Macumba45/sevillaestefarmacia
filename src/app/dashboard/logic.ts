@@ -46,7 +46,7 @@ export const useLogicDashboard = () => {
     const [dateId, setDateId] = useState<string>('')
     const [paymentId, setPaymentId] = useState<string>('')
     const [isLoadingButton, setIsLoadingButton] = useState(false)
-    const titlePage = 'Dashboard'
+    const titlePage = 'Farmacia Sevilla Este Sta.Bárbara - Dashboard'
     const [openModalTallerOrBlog, setOpenModalTallerOrBlog] = useState(false)
     const [talleres, setTalleres] = useState<Talleres[] | undefined>([])
     const [tallerToDelete, setTallerToDelete] = useState('')

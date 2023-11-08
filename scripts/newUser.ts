@@ -1,15 +1,21 @@
 const nodemailer = require('nodemailer')
+require('dotenv').config()
 
 const sendEmailNewUser = async (email: string, userName: string) => {
     // Configurar el transporte de nodemailer
     const transporter = nodemailer.createTransport({
         // Configuración del servicio de correo electrónico (por ejemplo, Gmail)
-        service: 'Gmail',
+        host: 'smtp.sevillaestefarmacia.com',
+        port: 587,
         auth: {
-            user: 'gonzalolovo@gmail.com',
-            pass: 'pftd mnby xmla yiug',
+            user: 'info@sevillaestefarmacia.com',
+            pass: process.env.EMAIL_PASSWORD_FARMACIA,
         },
-        secure: true,
+        secure: false,
+        tls: {
+            // do not fail on invalid certs
+            rejectUnauthorized: false,
+        },
     })
 
     await new Promise((resolve, reject) => {
@@ -27,8 +33,8 @@ const sendEmailNewUser = async (email: string, userName: string) => {
 
     // Configurar el contenido del correo electrónico
     const mailOptions = {
-        from: 'gonzalolovo@gmail.com',
-        to: 'gonzalolovo@gmail.com',
+        from: 'hola@sevillaestefarmacia.com',
+        to: email,
         subject: `Bienvenido a Farmacia Sta. Bárbara - ${userName}`,
         html: `
         <!doctype html>
@@ -213,6 +219,7 @@ const sendEmailNewUser = async (email: string, userName: string) => {
                 console.error('Error al enviar el correo electrónico:', error)
                 reject(error)
             } else {
+                console.log('Correo electrónico enviado correctamente')
                 resolve(info)
             }
         })
