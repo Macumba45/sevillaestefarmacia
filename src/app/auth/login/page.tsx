@@ -83,7 +83,7 @@ const Login: FC = () => {
                         alignItems: 'center',
                     }}
                 >
-                    <Avatar sx={{ m: 1, backgroundColor: '#4675A6' }}>
+                    <Avatar sx={{ m: 1, backgroundColor: 'black' }}>
                         <LockOutlinedIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
@@ -124,10 +124,10 @@ const Login: FC = () => {
                                 fullWidth
                                 loading={loading}
                                 sx={{
-                                    backgroundColor: '#4675A6',
+                                    backgroundColor: 'black',
                                     color: 'white',
                                     ':hover': {
-                                        backgroundColor: '#42ACE8',
+                                        backgroundColor: '#4b4b4b',
                                     },
                                 }}
                             >
@@ -139,7 +139,10 @@ const Login: FC = () => {
                                 <Link
                                     href={'/auth/signup'}
                                     variant="body2"
-                                    style={{ color: '#4675A6' }}
+                                    style={{
+                                        color: 'black',
+                                        textDecorationColor: '#000000',
+                                    }}
                                 >
                                     ¿No tienes una cuenta? Regístrate
                                 </Link>
@@ -147,7 +150,10 @@ const Login: FC = () => {
                         </Grid>
                         <Grid marginTop={2} item xs>
                             <Link
-                                style={{ color: '#4675A6' }}
+                                style={{
+                                    color: 'black',
+                                    textDecorationColor: '#000000',
+                                }}
                                 href={'/auth/login/requestPassword'}
                                 variant="body2"
                             >

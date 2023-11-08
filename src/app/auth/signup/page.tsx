@@ -1,18 +1,11 @@
 'use client'
 
 import { FC, useContext, useEffect, useState } from 'react'
+import { UserContext } from '@/context/UserContext'
 import { useRouter } from 'next/navigation'
 import { setAuthenticatedToken } from '../../../../storage/storage'
 import { LoadingButton } from '@mui/lab'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-import {
-    Checkbox,
-    FormControl,
-    FormControlLabel,
-    InputLabel,
-    Snackbar,
-    Stack,
-} from '@mui/material'
 import Avatar from '@mui/material/Avatar'
 import CssBaseline from '@mui/material/CssBaseline'
 import TextField from '@mui/material/TextField'
@@ -23,7 +16,14 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import MuiAlert from '@mui/material/Alert'
-import { UserContext } from '@/context/UserContext'
+import {
+    Checkbox,
+    FormControl,
+    FormControlLabel,
+    InputLabel,
+    Snackbar,
+    Stack,
+} from '@mui/material'
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme()
@@ -124,15 +124,7 @@ const SignUp: FC = () => {
     }, [])
 
     return (
-        <div
-
-        // style={{
-        //     display: 'flex',
-        //     justifyContent: 'center',
-        //     alignItems: 'center',
-        //     height: '80vh',
-        // }}
-        >
+        <div>
             <ThemeProvider theme={defaultTheme}>
                 <Container component="main" maxWidth="xs">
                     <CssBaseline />
@@ -144,7 +136,7 @@ const SignUp: FC = () => {
                             alignItems: 'center',
                         }}
                     >
-                        <Avatar sx={{ m: 1, bgcolor: '#4675A6' }}>
+                        <Avatar sx={{ m: 1, bgcolor: '#000000' }}>
                             <LockOutlinedIcon />
                         </Avatar>
                         <Typography component="h1" variant="h5">
@@ -164,7 +156,7 @@ const SignUp: FC = () => {
                                         required
                                         fullWidth
                                         id="firstName"
-                                        label="Nombre"
+                                        label="Nombre completo"
                                         autoFocus
                                         inputProps={{
                                             select: {
@@ -231,16 +223,6 @@ const SignUp: FC = () => {
                                         id="phone"
                                         label="Teléfono"
                                         autoFocus
-                                        inputProps={{
-                                            select: {
-                                                '&:before': {
-                                                    borderColor: 'black',
-                                                },
-                                                '&:after': {
-                                                    borderColor: 'black',
-                                                },
-                                            },
-                                        }}
                                     />
                                 </Grid>
 
@@ -303,10 +285,10 @@ const SignUp: FC = () => {
                                     fullWidth
                                     loading={loading}
                                     sx={{
-                                        backgroundColor: '#4675A6',
+                                        backgroundColor: '#000000',
                                         color: 'white',
                                         ':hover': {
-                                            backgroundColor: '#42ACE8',
+                                            backgroundColor: '#4b4b4b',
                                         },
                                     }}
                                 >
@@ -318,7 +300,10 @@ const SignUp: FC = () => {
                                     <Link
                                         href={'/auth/login'}
                                         variant="body2"
-                                        style={{ color: '#4675A6' }}
+                                        style={{
+                                            color: '#000000',
+                                            textDecorationColor: '#000000',
+                                        }}
                                     >
                                         ¿Ya tienes una cuenta? Inicia sesión
                                     </Link>
