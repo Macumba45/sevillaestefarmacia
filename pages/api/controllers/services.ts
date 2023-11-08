@@ -23,12 +23,10 @@ export const getServices = async (): Promise<Services[]> => {
                     },
                 },
             },
-            users: {
-                select: {
-                    id: true,
-                },
-            },
             dates: {
+                orderBy: {
+                    createdAt: 'asc',
+                },
                 include: {
                     hours: true,
                 },

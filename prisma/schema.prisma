@@ -19,7 +19,6 @@ model User {
   createdAt DateTime        @default(now())
   updatedAt DateTime        @updatedAt
   Payments  Payments[]
-  services  Services[]
 }
 
 model Services {
@@ -33,7 +32,6 @@ model Services {
   priceId     String?
   dates       Dates[]
   payments    Payments[]
-  users       User[]
   createdAt   DateTime        @default(now())
   updatedAt   DateTime        @updatedAt
 }
