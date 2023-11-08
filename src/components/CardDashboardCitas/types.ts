@@ -1,4 +1,4 @@
-import { Payment, Services } from '../../../types/types'
+import { Payment } from '../../../types/types'
 
 export type Props = {
     onDelete?: () => void

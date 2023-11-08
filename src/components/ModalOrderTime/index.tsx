@@ -10,7 +10,7 @@ import MenuItem from '@mui/material/MenuItem'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 import { FC, useEffect, useState } from 'react'
 import { CircularProgress, InputLabel } from '@mui/material'
-import { Dates, Hour, Payment, Services } from '../../../types/types'
+import { Dates, Hour, Payment } from '../../../types/types'
 import { fetchPaymentsData } from '@/services/payments'
 import LoadingButton from '@mui/lab/LoadingButton'
 

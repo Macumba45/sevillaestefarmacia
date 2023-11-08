@@ -26,7 +26,6 @@ const AlignItemsList: FC<Props> = ({
     phone,
     hour,
     openEditModalDateAndHour,
-    unBookDate,
 }) => {
     function formatDateString(inputDate: any) {
         // Parsea la fecha en formato "dd/mm/yyyy" a un objeto Date

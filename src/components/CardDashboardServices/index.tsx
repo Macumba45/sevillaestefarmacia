@@ -1,5 +1,5 @@
 import { FC, memo } from 'react'
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
+import { EditOutlined } from '@ant-design/icons'
 import { Card } from 'antd'
 import { Props } from './types'
 

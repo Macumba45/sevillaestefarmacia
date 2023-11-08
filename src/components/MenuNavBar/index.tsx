@@ -32,7 +32,7 @@ import {
 } from './styles'
 import HoverMotion from '@/animations/hover'
 
-const ResponsiveAppBar: FC<Props> = ({ user, isAuth }) => {
+const ResponsiveAppBar: FC<Props> = ({ user }) => {
     const router = useRouter()
     const [isDrawerOpen, setIsDrawerOpen] = useState(false)
     const [showSubmenu, setShowSubmenu] = useState(false)

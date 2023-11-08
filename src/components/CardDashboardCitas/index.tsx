@@ -1,20 +1,14 @@
 // @ts-nocheck
 
 import { FC, memo } from 'react'
-import { Card, Divider } from 'antd'
+import { Card } from 'antd'
 import { Props } from './types'
 import { Tooltip } from '@mui/material'
-import { PhoneOutlined, EditOutlined } from '@ant-design/icons'
 import Typography from 'antd/es/typography/Typography'
 
 const { Meta } = Card
 
-const styleIconButtons = {
-    fontSize: '20px',
-    marginRight: '10px',
-}
-
-const CardDashboardCitas: FC<Props> = ({ payments, onEdit, onDelete }) => {
+const CardDashboardCitas: FC<Props> = ({ payments, onEdit }) => {
     function formatDateString(inputDate: any) {
         // Parsea la fecha en formato "dd/mm/yyyy" a un objeto Date
         const parts = inputDate.split('/')
