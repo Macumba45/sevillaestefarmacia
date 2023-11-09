@@ -16,6 +16,7 @@ import Button from '@mui/material/Button'
 import logo from '../../assets/logo/logo.png'
 import { ExpandMore as ExpandMoreIcon } from '@mui/icons-material'
 import LogoutIcon from '@mui/icons-material/Logout'
+import HoverMotion from '@/animations/hover'
 import {
     Accordion,
     AccordionDetails,
@@ -30,7 +31,6 @@ import {
     LogoImg,
     stylesNavBar,
 } from './styles'
-import HoverMotion from '@/animations/hover'
 
 const ResponsiveAppBar: FC<Props> = ({ user }) => {
     const router = useRouter()
@@ -137,37 +137,20 @@ const ResponsiveAppBar: FC<Props> = ({ user }) => {
                             <div key={index}>
                                 {page.name === 'Servicios' ? (
                                     <>
-                                        <div
-                                            style={{
-                                                display: 'flex',
-                                                justifyContent: 'center',
-                                                backgroundColor: 'black',
-                                                color: 'white',
-                                                alignItems: 'center',
-                                                width: '120px',
-                                            }}
+                                        <Button
                                             onClick={() =>
                                                 setShowSubmenu(!showSubmenu)
                                             }
+                                            sx={{
+                                                fontFamily:
+                                                    'Cormorant Garamond',
+                                                fontSize: '0.875rem',
+                                                cursor: 'pointer',
+                                                color: 'white',
+                                            }}
                                         >
-                                            <Typography
-                                                sx={{
-                                                    fontFamily:
-                                                        'Cormorant Garamond',
-                                                    fontSize: '0.875rem',
-
-                                                    cursor: 'pointer',
-                                                }}
-                                            >
-                                                {page.name.toLocaleUpperCase()}
-                                            </Typography>
-                                            <ExpandMoreIcon
-                                                sx={{
-                                                    color: 'white',
-                                                    cursor: 'pointer',
-                                                }}
-                                            />
-                                        </div>
+                                            {page.name.toLocaleUpperCase()}
+                                        </Button>
                                         {showSubmenu &&
                                             page.name === 'Servicios' && (
                                                 <div
@@ -234,7 +217,6 @@ const ResponsiveAppBar: FC<Props> = ({ user }) => {
                                     <Button
                                         sx={{
                                             display: 'flex',
-                                            justifyContent: 'flex-start',
                                         }}
                                     >
                                         <Link

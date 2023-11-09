@@ -100,7 +100,9 @@ const Home: FC = () => {
                         description="¿Te gustaría conocer más sobre tu piel o tu salud capilar?"
                         buttonName="Más información"
                         backGrodunColor="#ebf0f6"
-                        picture={'https://i.postimg.cc/mgcCxQyV/DERMO-FOTO.jpg'}
+                        picture={
+                            'https://res.cloudinary.com/dinasxwdf/image/upload/v1699541341/farmacia/w7b68kakfryynbeu7uhj.webp'
+                        }
                         alt="DERMOCOSMÉTICA FARMACÉUTICA"
                         widthMobile="230px"
                         widthDesktop="330px"
@@ -118,7 +120,7 @@ const Home: FC = () => {
                         buttonName="Más información"
                         backGrodunColor="#f6f6eb"
                         picture={
-                            'https://i.postimg.cc/pXxCPHbb/NUTRICION-FOTO.jpg'
+                            'https://res.cloudinary.com/dinasxwdf/image/upload/v1699541341/farmacia/g9snbrhtr5lafx0gqdf3.webp'
                         }
                         alt="NUTRICIÓN CLÍNICA Y DEPORTIVA"
                         widthDesktop="500px"
@@ -141,7 +143,7 @@ const Home: FC = () => {
                         buttonName="Más información"
                         backGrodunColor="#ebf0f6"
                         picture={
-                            'https://i.postimg.cc/nchq28sy/LABORATORIO-FOTO.jpg'
+                            'https://res.cloudinary.com/dinasxwdf/image/upload/v1699541341/farmacia/qvuwsmdcgsxfy5tjsung.webp'
                         }
                         alt="LABORATORIO"
                         widthMobile="320px"
@@ -160,7 +162,9 @@ const Home: FC = () => {
                 dificultad para seguir su medicación."
                         buttonName="Más información"
                         backGrodunColor="#f6f6eb"
-                        picture={'https://i.postimg.cc/BZgx2Zv5/SPD-FOTO.jpg'}
+                        picture={
+                            'https://res.cloudinary.com/dinasxwdf/image/upload/v1699541341/farmacia/jfclhh12esrx9qxbuggh.webp'
+                        }
                         alt="SISTEMA PERSONALIZADO DE DOSIFICACIÓN"
                         widthMobile="350px"
                         widthDesktop="500px"
@@ -182,7 +186,7 @@ const Home: FC = () => {
                         buttonName="Más información"
                         backGrodunColor="#ebf0f6"
                         picture={
-                            'https://i.postimg.cc/Z513JCfm/PENDIENTES-BEBE-FOTO.png'
+                            'https://res.cloudinary.com/dinasxwdf/image/upload/v1699541341/farmacia/weue18gzliqlr2mba3uk.webp'
                         }
                         alt="SUS PRIMEROS PENDIENTES"
                         widthMobile="330px"
@@ -202,7 +206,7 @@ const Home: FC = () => {
                         buttonName="Más información"
                         backGrodunColor="#f6f6eb"
                         picture={
-                            'https://i.postimg.cc/6qJ9fD1T/VETERINARIA-FOTO-02.jpg'
+                            'https://res.cloudinary.com/dinasxwdf/image/upload/v1699541341/farmacia/j5x6zoorgtp4hwxi09me.webp'
                         }
                         alt="TU MASCOTA EN BUENAS MANOS"
                         widthMobile="320px"
