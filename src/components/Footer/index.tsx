@@ -67,11 +67,25 @@ const Footer: FC = () => {
                 <PicturesLogos
                     alt="Junta de Andalucía"
                     style={{ width: '250px' }}
+                    rel="preload"
+                    loading="lazy"
                     src={junta.src}
                 />
-                <PicturesLogos alt="Bandera de españa" src={españa.src} />
-                <PicturesLogos alt="Recuperacion UE" src={recuperacion.src} />
-                <PicturesLogos alt="Union Europea" src={unionEuropea.src} />
+                <PicturesLogos
+                    alt="Bandera de españa"
+                    rel="preload"
+                    loading="lazy"
+                    src={españa.src} />
+                <PicturesLogos
+                    alt="Recuperacion UE"
+                    rel="preload"
+                    loading="lazy"
+                    src={recuperacion.src} />
+                <PicturesLogos
+                    alt="Union Europea"
+                    rel="preload"
+                    loading="lazy"
+                    src={unionEuropea.src} />
             </ContainerLogos>
             <CopyRight>Copyright © 2023 Farmacia Sta. Bárbara</CopyRight>
             <DesignedBy
