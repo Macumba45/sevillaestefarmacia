@@ -37,7 +37,7 @@ export const TitleServices = styled.h1<{
     text-align: left;
     padding-left: 2rem;
     line-height: 2.5rem;
-    font-weight: 500;
+    font-weight: 400;
     width: ${props => props.widthtitle};
     @media screen and (min-width: 899px) {
         width: ${props => props.widthtitledesktop};

@@ -17,14 +17,14 @@ export const Title = styled.h1<{
     withtitlemobile?: string
     withtitledesktop?: string
 }>`
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     width: ${props => props.withtitlemobile};
     margin-bottom: 1rem;
     color: black;
     line-height: 2rem;
     margin-left: 2rem;
     margin-right: 2rem;
-    font-weight: 900;
+    font-weight: 700;
     margin-top: 1.5rem;
     @media screen and (min-width: 899px) {
         width: ${props => props.withtitledesktop};
@@ -41,7 +41,7 @@ export const ParrafoServices = styled.p`
     color: black;
     text-align: left;
     line-height: 2rem;
-    font-weight: 300;
+    font-weight: lighter;
     margin: 1rem 1rem;
     margin-left: 2rem;
     @media screen and (min-width: 899px) {

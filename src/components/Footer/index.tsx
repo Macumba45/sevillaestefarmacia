@@ -75,17 +75,20 @@ const Footer: FC = () => {
                     alt="Bandera de españa"
                     rel="preload"
                     loading="lazy"
-                    src={españa.src} />
+                    src={españa.src}
+                />
                 <PicturesLogos
                     alt="Recuperacion UE"
                     rel="preload"
                     loading="lazy"
-                    src={recuperacion.src} />
+                    src={recuperacion.src}
+                />
                 <PicturesLogos
                     alt="Union Europea"
                     rel="preload"
                     loading="lazy"
-                    src={unionEuropea.src} />
+                    src={unionEuropea.src}
+                />
             </ContainerLogos>
             <CopyRight>Copyright © 2023 Farmacia Sta. Bárbara</CopyRight>
             <DesignedBy

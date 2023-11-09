@@ -1,8 +1,16 @@
 /* global.css */
 
+@font-face {
+    font-family: 'Cormorant Garamond';
+    src: url(./fonts/cormorand/CormorantGaramond-Bold.ttf) format('truetype');
+    src: url(./fonts/cormorand/CormorantGaramond-Medium.ttf) format('truetype');
+    src: url(./fonts/cormorand/CormorantGaramond-Regular.ttf) format('truetype');
+    src: url(./fonts/cormorand/CormorantGaramond-Light.ttf) format('truetype');
+}
+
 /* Establecer Cormorant Garamond como la fuente predeterminada */
 body {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Cormorant Garamond';
 }
 
 /* Asegurarse de que todos los elementos de texto utilicen la fuente deseada */
@@ -12,5 +20,5 @@ h3,
 p,
 a,
 span {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Cormorant Garamond';
 }

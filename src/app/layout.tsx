@@ -25,15 +25,10 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: React.PropsWithChildren) => (
     <html lang="en">
         <head>
-            <link
+            {/* <link
                 rel="stylesheet"
                 href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Roboto+Condensed:wght@300;400;700&display=swap"
-            />
-
-            <link
-                rel="stylesheet"
-                href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap"
-            />
+            /> */}
         </head>
 
         <body>

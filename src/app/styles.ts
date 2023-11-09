@@ -127,6 +127,7 @@ export const TitleConocenos = styled.h1`
     color: black;
     margin-top: 2rem;
     text-align: center;
+    font-family: 'Cormorant Garamond', serif;
     @media screen and (min-width: 899px) {
         font-size: 3rem;
     }
@@ -160,7 +161,7 @@ export const TitleDermo = styled.h1`
     text-align: left;
     padding-left: 2rem;
     line-height: 2.5rem;
-    font-weight: 500;
+    font-weight: 400;
     @media screen and (min-width: 899px) {
         font-size: 3rem;
         line-height: 3rem;

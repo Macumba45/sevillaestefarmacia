@@ -39,7 +39,7 @@ export const Title = styled.h1<{
     text-align: left;
     padding-left: 2rem;
     line-height: 2.5rem;
-    font-weight: 500;
+    font-weight: 400;
     width: ${props => props.widthtitle};
     @media screen and (min-width: 899px) {
         width: ${props => props.widthtitledesktop};
@@ -100,7 +100,7 @@ export const TitleDetails = styled.h1`
     color: black;
     text-align: left;
     line-height: 2.5rem;
-    font-weight: 500;
+    font-weight: 400;
     @media screen and (min-width: 899px) {
         font-size: 2.5rem;
         line-height: 3rem;
@@ -116,7 +116,7 @@ export const SubtitleDetails = styled.h2`
     color: black;
     text-align: left;
     line-height: 2.5rem;
-    font-weight: 500;
+    font-weight: 400;
     @media screen and (min-width: 899px) {
         font-size: 2rem;
         line-height: 3rem;
