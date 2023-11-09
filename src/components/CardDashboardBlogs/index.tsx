@@ -50,6 +50,8 @@ const CardDashboardblogs: FC<Props> = ({ blogs, onEdit, onDelete }) => {
                     textAlign: 'center',
                     display: 'flex',
                     justifyContent: 'center',
+                    fontFamily: 'Roboto',
+
                 }}
                 title={blogs!.title}
                 description={

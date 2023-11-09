@@ -50,6 +50,7 @@ const CardDashboardServices: FC<Props> = ({ service, onEdit, onDelete }) => {
                     textAlign: 'center',
                     display: 'flex',
                     justifyContent: 'center',
+                    fontFamily: 'Roboto',
                 }}
                 title={service.title}
                 description={
