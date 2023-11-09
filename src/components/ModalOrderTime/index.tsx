@@ -47,27 +47,56 @@ const ModalOrderTime: FC<Props> = ({
     })
     const [dateIdMap, setDateIdMap] = useState<{ [date: string]: string }>({})
     const [payments, setPayments] = useState([])
-    const today = new Date()
     const [isLoadingPayments, setIsLoadingPayments] = useState(false)
 
-    const resetHour = () => {
-        setSelectedHour({ hour: '', id: '' })
-    }
+    const now = new Date()
+    const currentHour = now.getHours()
+    const currentMinutes = now.getMinutes()
 
-    // Filtra las fechas que son iguales o posteriores a la fecha de hoy
-    const upcomingDates = dates?.filter(date => {
-        if (date.date) {
-            const parts = date.date.split('/') // Divide la fecha en partes
-            const day = parseInt(parts[0], 10)
-            const month = parseInt(parts[1], 10) - 1 // Resta 1 al mes (0-indexado)
-            const year = parseInt(parts[2], 10)
-            const dateObject = new Date(year, month, day)
+    let upcomingDates = dates
+        ?.map(date => {
+            if (date.date) {
+                const parts = date.date.split('/')
+                const day = parseInt(parts[0], 10)
+                const month = parseInt(parts[1], 10) - 1
+                const year = parseInt(parts[2], 10)
+                const dateObject = new Date(year, month, day)
 
-            // Compara la fecha con la fecha de hoy
-            return dateObject >= today
-        }
-        return false // Otra acción en caso de que date.date sea undefined
-    })
+                if (dateObject.toDateString() === now.toDateString()) {
+                    // Si la fecha es hoy, filtra las horas que ya han pasado
+                    date.hours = date.hours.filter(hour => {
+                        const [hourPart, minutePart] = hour
+                            .hour!.split(':')
+                            .map(Number)
+                        return (
+                            hourPart > currentHour ||
+                            (hourPart === currentHour &&
+                                minutePart > currentMinutes)
+                        )
+                    })
+                }
+
+                // Si todas las horas de hoy han pasado, filtra el día completo
+                if (
+                    dateObject.toDateString() === now.toDateString() &&
+                    date.hours.length === 0
+                ) {
+                    return null
+                }
+
+                return date
+            }
+            return null
+        })
+        .filter(date => date !== null) // Elimina las fechas nulas
+
+    upcomingDates = upcomingDates?.sort((a, b) => {
+        const [dayA, monthA, yearA] = a!.date!.split('/').map(Number) as any;
+        const [dayB, monthB, yearB] = b!.date!.split('/').map(Number) as any;
+        const dateA = new Date(yearA, monthA - 1, dayA);
+        const dateB = new Date(yearB, monthB - 1, dayB);
+        return dateA.getTime() - dateB.getTime();
+    });
 
     let buttonName: string = ''
     if (
@@ -181,6 +210,10 @@ const ModalOrderTime: FC<Props> = ({
         }
     }, [dates])
 
+    const resetHour = () => {
+        setSelectedHour({ hour: '', id: '' })
+    }
+
     return (
         <React.Fragment>
             <Dialog fullWidth open={open} onClose={handleClose}>
@@ -234,17 +267,17 @@ const ModalOrderTime: FC<Props> = ({
                                         borderColor: 'black',
                                     },
                                     '&.Mui-focused .MuiOutlinedInput-notchedOutline':
-                                        {
-                                            borderColor: 'black',
-                                        },
+                                    {
+                                        borderColor: 'black',
+                                    },
                                 }}
                             >
                                 <MenuItem value={''}>
                                     Selecciona una fecha
                                 </MenuItem>
                                 {upcomingDates?.map((date, index) => (
-                                    <MenuItem key={index} value={date.date}>
-                                        {formatDateString(date.date)}{' '}
+                                    <MenuItem key={index} value={date!.date}>
+                                        {formatDateString(date!.date)}{' '}
                                     </MenuItem>
                                 ))}
                             </Select>
@@ -275,9 +308,9 @@ const ModalOrderTime: FC<Props> = ({
                                         borderColor: 'black',
                                     },
                                     '&.Mui-focused .MuiOutlinedInput-notchedOutline':
-                                        {
-                                            borderColor: 'black',
-                                        },
+                                    {
+                                        borderColor: 'black',
+                                    },
                                 }}
                                 label="Elija una hora"
                                 value={selectedHour?.hour || ''}
@@ -342,11 +375,10 @@ const ModalOrderTime: FC<Props> = ({
                                                 value={hour.hour}
                                                 disabled={hour.isBooked}
                                             >
-                                                {`${hour.hour} - ${
-                                                    hour.isBooked
-                                                        ? 'Reservado'
-                                                        : 'Disponible'
-                                                }`}
+                                                {`${hour.hour} - ${hour.isBooked
+                                                    ? 'Reservado'
+                                                    : 'Disponible'
+                                                    }`}
                                             </MenuItem>
                                         ))
                                 )}
