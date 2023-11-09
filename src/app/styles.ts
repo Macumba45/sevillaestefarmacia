@@ -23,7 +23,6 @@ export const TitleHeaderServices = styled.h1`
     text-align: center;
     font-weight: 700;
     padding: 1rem;
-    font-family: 'Cormorant Garamond', serif;
     border: 2px solid black; /* Personaliza el ancho y el color del borde */
     border-radius: 30px;
     width: 250px;
@@ -123,7 +122,6 @@ export const TitleConocenos = styled.h1`
     color: black;
     margin-top: 2rem;
     text-align: center;
-    font-family: 'Cormorant Garamond', serif;
     @media screen and (min-width: 899px) {
         font-size: 3rem;
     }
