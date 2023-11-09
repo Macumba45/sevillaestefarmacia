@@ -17,6 +17,7 @@ import {
     TitleHeaderServices,
     IconHeaderTitle,
     FloatButtonContainer,
+    ImgConocenos,
 } from './styles'
 
 const Home: FC = () => {
@@ -42,6 +43,11 @@ const Home: FC = () => {
             <LayoutNavFooter>
                 <AnimatedView>
                     <ContainerConocenos>
+                        <ImgConocenos
+                            rel="preload"
+                            src="https://res.cloudinary.com/dinasxwdf/image/upload/v1699541517/farmacia/kjct7lmkzhts60xnyzhj.webp"
+                            alt="Farmacia Sta Bárbara -  Sevilla Este"
+                        />
                         <TitleConocenos>
                             Salud + Vida + Emociones
                         </TitleConocenos>

@@ -71,9 +71,10 @@ export const ContainerConocenos = styled.section`
     width: 100%;
     height: 320px;
     margin-top: 5rem;
-    background-image: url('https://res.cloudinary.com/dinasxwdf/image/upload/v1699541517/farmacia/kjct7lmkzhts60xnyzhj.webp');
+    /* background-image: url('https://res.cloudinary.com/dinasxwdf/image/upload/v1699541517/farmacia/kjct7lmkzhts60xnyzhj.webp'); */
     background-repeat: no-repeat;
     background-size: cover;
+    z-index: 11111;
 `
 export const ContainerImgHome = styled.div`
     display: flex;
@@ -112,9 +113,13 @@ export const ContainerNutricion = styled.div`
 
 export const ImgConocenos = styled.img`
     width: 100%;
-    height: 100vh;
+    height: 100%;
     object-fit: cover;
     object-position: center; /* Ajusta la posición de la imagen al centro */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
 `
 
 export const TitleConocenos = styled.h1`

@@ -66,6 +66,7 @@ const Services: FC<Props> = ({
                 {imagePosition === 'top' && ( // Renderiza la imagen arriba si imagePosition es 'top'
                     <ContainerImgServices>
                         <ImgServices
+                            rel="preload"
                             alt={alt}
                             src={picture}
                             objectposition={objectposition}
@@ -123,6 +124,7 @@ const Services: FC<Props> = ({
                 {imagePosition === 'bottom' && ( // Renderiza la imagen abajo si imagePosition es 'bottom'
                     <ContainerImgServices>
                         <ImgServices
+                            rel="preload"
                             objectposition={objectposition}
                             src={picture}
                             alt={alt}
