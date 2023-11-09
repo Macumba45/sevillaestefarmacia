@@ -67,6 +67,7 @@ const Services: FC<Props> = ({
                     <ContainerImgServices>
                         <ImgServices
                             rel="preload"
+                            loading="lazy"
                             alt={alt}
                             src={picture}
                             objectposition={objectposition}
@@ -125,6 +126,7 @@ const Services: FC<Props> = ({
                     <ContainerImgServices>
                         <ImgServices
                             rel="preload"
+                            loading="lazy"
                             objectposition={objectposition}
                             src={picture}
                             alt={alt}
