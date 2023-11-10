@@ -16,6 +16,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import MuiAlert from '@mui/material/Alert'
+import { stylesTypography } from './styles'
 import {
     Checkbox,
     FormControl,
@@ -158,25 +159,7 @@ const SignUp: FC = () => {
                                         id="firstName"
                                         label="Nombre completo"
                                         autoFocus
-                                        sx={{
-                                            '& label.Mui-focused': {
-                                                color: 'white',
-                                            },
-                                            '& .MuiInput-underline:after': {
-                                                borderBottomColor: 'black',
-                                            },
-                                            '& .MuiOutlinedInput-root': {
-                                                '& fieldset': {
-                                                    borderColor: 'black',
-                                                },
-                                                '&:hover fieldset': {
-                                                    borderColor: 'black',
-                                                },
-                                                '&.Mui-focused fieldset': {
-                                                    borderColor: 'black',
-                                                },
-                                            },
-                                        }}
+                                        sx={stylesTypography}
                                         InputLabelProps={{
                                             style: {
                                                 color: 'black',
@@ -236,25 +219,7 @@ const SignUp: FC = () => {
                                         fullWidth
                                         id="phone"
                                         label="Teléfono"
-                                        sx={{
-                                            '& label.Mui-focused': {
-                                                color: 'white',
-                                            },
-                                            '& .MuiInput-underline:after': {
-                                                borderBottomColor: 'black',
-                                            },
-                                            '& .MuiOutlinedInput-root': {
-                                                '& fieldset': {
-                                                    borderColor: 'black',
-                                                },
-                                                '&:hover fieldset': {
-                                                    borderColor: 'black',
-                                                },
-                                                '&.Mui-focused fieldset': {
-                                                    borderColor: 'black',
-                                                },
-                                            },
-                                        }}
+                                        sx={stylesTypography}
                                         InputLabelProps={{
                                             style: {
                                                 color: 'black',
@@ -270,25 +235,7 @@ const SignUp: FC = () => {
                                         id="email"
                                         label="Email"
                                         name="email"
-                                        sx={{
-                                            '& label.Mui-focused': {
-                                                color: 'white',
-                                            },
-                                            '& .MuiInput-underline:after': {
-                                                borderBottomColor: 'black',
-                                            },
-                                            '& .MuiOutlinedInput-root': {
-                                                '& fieldset': {
-                                                    borderColor: 'black',
-                                                },
-                                                '&:hover fieldset': {
-                                                    borderColor: 'black',
-                                                },
-                                                '&.Mui-focused fieldset': {
-                                                    borderColor: 'black',
-                                                },
-                                            },
-                                        }}
+                                        sx={stylesTypography}
                                         InputLabelProps={{
                                             style: {
                                                 color: 'black',
@@ -304,25 +251,7 @@ const SignUp: FC = () => {
                                         label="Contraseña"
                                         type="password"
                                         id="password"
-                                        sx={{
-                                            '& label.Mui-focused': {
-                                                color: 'white',
-                                            },
-                                            '& .MuiInput-underline:after': {
-                                                borderBottomColor: 'black',
-                                            },
-                                            '& .MuiOutlinedInput-root': {
-                                                '& fieldset': {
-                                                    borderColor: 'black',
-                                                },
-                                                '&:hover fieldset': {
-                                                    borderColor: 'black',
-                                                },
-                                                '&.Mui-focused fieldset': {
-                                                    borderColor: 'black',
-                                                },
-                                            },
-                                        }}
+                                        sx={stylesTypography}
                                         InputLabelProps={{
                                             style: {
                                                 color: 'black',

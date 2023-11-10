@@ -3,7 +3,7 @@
 import { FC, useContext, useEffect, useState } from 'react'
 import { handleLoginUser } from '../../../services/auth'
 import { useRouter } from 'next/navigation'
-import { SpanError } from './styles'
+import { SpanError, stylesTypography } from './styles'
 import Avatar from '@mui/material/Avatar'
 import CssBaseline from '@mui/material/CssBaseline'
 import TextField from '@mui/material/TextField'
@@ -102,25 +102,8 @@ const Login: FC = () => {
                             id="email"
                             label="Email"
                             name="email"
-                            sx={{
-                                '& label.Mui-focused': {
-                                    color: 'white',
-                                },
-                                '& .MuiInput-underline:after': {
-                                    borderBottomColor: 'black',
-                                },
-                                '& .MuiOutlinedInput-root': {
-                                    '& fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&:hover fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&.Mui-focused fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                },
-                            }}
+                            sx={stylesTypography}
+
                             InputLabelProps={{
                                 style: {
                                     color: 'black',
@@ -135,25 +118,8 @@ const Login: FC = () => {
                             label="Contraseña"
                             type="password"
                             id="password"
-                            sx={{
-                                '& label.Mui-focused': {
-                                    color: 'white',
-                                },
-                                '& .MuiInput-underline:after': {
-                                    borderBottomColor: 'black',
-                                },
-                                '& .MuiOutlinedInput-root': {
-                                    '& fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&:hover fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                    '&.Mui-focused fieldset': {
-                                        borderColor: 'black',
-                                    },
-                                },
-                            }}
+                            sx={stylesTypography}
+
                             InputLabelProps={{
                                 style: {
                                     color: 'black',
