@@ -53,7 +53,7 @@ const ServiceFormModal: FC<Props> = ({
     const hasDatePickerComponent =
         serviceData?.id === 'clo0dzomz0001xy04kzkxay49' ||
         serviceData?.id === 'clo0e0a200002xy04bwqml93h' ||
-        serviceData?.id === 'clo0e0mn50003xy040gwqse36'
+        serviceData?.id === 'clo0e1e3p0005xy04izx8uzqa'
     const handleUrlPictureChange = (event: any) => {
         setUrlPicture(event.target.value)
     }
