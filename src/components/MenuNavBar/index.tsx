@@ -372,6 +372,7 @@ const ResponsiveAppBar: FC<Props> = ({ user }) => {
                                                                         'Cormorant Garamond',
                                                                     fontSize:
                                                                         '0.875rem',
+                                                                    fontWeight: 700,
                                                                 }}
                                                             >
                                                                 {page.name.toLocaleUpperCase()}
@@ -407,6 +408,7 @@ const ResponsiveAppBar: FC<Props> = ({ user }) => {
                                                                                 textDecoration:
                                                                                     'none',
                                                                                 color: 'white', // Puedes personalizar el color
+                                                                                fontWeight: 700,
                                                                             }}
                                                                             href={
                                                                                 subpage.route as string
@@ -456,6 +458,7 @@ const ResponsiveAppBar: FC<Props> = ({ user }) => {
                                                                         'flex',
                                                                     alignItems:
                                                                         'center',
+                                                                    fontWeight: 700,
                                                                 }}
                                                             >
                                                                 {page.name}
@@ -500,6 +503,7 @@ const ResponsiveAppBar: FC<Props> = ({ user }) => {
                                                                           'flex',
                                                                       alignItems:
                                                                           'center',
+                                                                      fontWeight: 700,
                                                                   }}
                                                               >
                                                                   {page?.name}
@@ -518,6 +522,7 @@ const ResponsiveAppBar: FC<Props> = ({ user }) => {
                                                                   color: 'white',
                                                                   display:
                                                                       'flex',
+                                                                  fontWeight: 700,
                                                               }}
                                                               href={
                                                                   page?.route as string

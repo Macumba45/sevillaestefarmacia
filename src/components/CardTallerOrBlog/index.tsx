@@ -40,7 +40,7 @@ const CardTallerOrBlog: FC<Props> = ({ mode, blog, taller }) => (
                     src={
                         mode === 'blog' ? blog?.urlPicture : taller?.urlPicture
                     }
-                // Asegúrate de usar el título correspondiente según el modo.
+                    // Asegúrate de usar el título correspondiente según el modo.
                 />
             }
         >
@@ -52,7 +52,6 @@ const CardTallerOrBlog: FC<Props> = ({ mode, blog, taller }) => (
                             overflow: 'hidden', // Oculta el contenido que no cabe
                             textOverflow: 'ellipsis', // Agrega puntos suspensivos cuando el texto se recorta
                             fontFamily: 'Roboto',
-
                         }}
                     >
                         {mode === 'blog' ? blog?.title : taller?.title}
