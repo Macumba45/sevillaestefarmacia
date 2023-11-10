@@ -50,7 +50,10 @@ const ServiceFormModal: FC<Props> = ({
     >([])
     const [selectedHours, setSelectedHours] = useState<Hour>({})
     const [hoursFromDatabase, sethoursFromDatabase] = useState<Hour[][]>([])
-
+    const hasDatePickerComponent =
+        serviceData?.id === 'clo0dzomz0001xy04kzkxay49' ||
+        serviceData?.id === 'clo0e0a200002xy04bwqml93h' ||
+        serviceData?.id === 'clo0e0mn50003xy040gwqse36'
     const handleUrlPictureChange = (event: any) => {
         setUrlPicture(event.target.value)
     }
@@ -258,12 +261,13 @@ const ServiceFormModal: FC<Props> = ({
                 </div>
                 <div
                     style={{
-                        display: 'flex',
+                        display: hasDatePickerComponent ? 'flex' : 'none',
                         justifyContent: 'center',
                         alignItems: 'center',
                         flexDirection: 'column',
                         marginBottom: '2rem',
                         marginTop: '2rem',
+                        fontFamily: 'Roboto',
                     }}
                 >
                     <DatePickerComponent
@@ -271,7 +275,11 @@ const ServiceFormModal: FC<Props> = ({
                         initialDates={selectedDays.map(
                             selectedDay => selectedDay.date
                         )}
+                        style={{
+                            display: hasDatePickerComponent ? 'flex' : 'none',
+                        }}
                     />
+
                     {selectedDays.length > 0 && (
                         <div>
                             <Typography variant="h6" sx={{ mt: 4, mb: 2 }}>
@@ -325,24 +333,24 @@ const ServiceFormModal: FC<Props> = ({
                                                                 checked={
                                                                     !isEditing
                                                                         ? selectedDay.hours.includes(
-                                                                              hour
-                                                                          )
+                                                                            hour
+                                                                        )
                                                                         : selectedDay.hours.includes(
-                                                                              hour
-                                                                          ) ||
-                                                                          (hoursFromDatabase[
-                                                                              index
-                                                                          ] &&
-                                                                              hoursFromDatabase[
-                                                                                  index
-                                                                              ].some(
-                                                                                  (
-                                                                                      item: Hour
-                                                                                  ) =>
-                                                                                      item.hour ===
-                                                                                      hour
-                                                                              )) ||
-                                                                          false
+                                                                            hour
+                                                                        ) ||
+                                                                        (hoursFromDatabase[
+                                                                            index
+                                                                        ] &&
+                                                                            hoursFromDatabase[
+                                                                                index
+                                                                            ].some(
+                                                                                (
+                                                                                    item: Hour
+                                                                                ) =>
+                                                                                    item.hour ===
+                                                                                    hour
+                                                                            )) ||
+                                                                        false
                                                                 }
                                                                 onChange={() =>
                                                                     handleHourChange(
@@ -353,22 +361,22 @@ const ServiceFormModal: FC<Props> = ({
                                                                 disabled={
                                                                     !isEditing
                                                                         ? selectedDay.hours.includes(
-                                                                              hour
-                                                                          )
+                                                                            hour
+                                                                        )
                                                                         : hoursFromDatabase[
-                                                                              index
-                                                                          ] &&
-                                                                          hoursFromDatabase[
-                                                                              index
-                                                                          ].some(
-                                                                              (
-                                                                                  item: Hour
-                                                                              ) =>
-                                                                                  item.hour ===
-                                                                                      hour &&
-                                                                                  item.isBooked ===
-                                                                                      true
-                                                                          )
+                                                                        index
+                                                                        ] &&
+                                                                        hoursFromDatabase[
+                                                                            index
+                                                                        ].some(
+                                                                            (
+                                                                                item: Hour
+                                                                            ) =>
+                                                                                item.hour ===
+                                                                                hour &&
+                                                                                item.isBooked ===
+                                                                                true
+                                                                        )
                                                                 }
                                                             />
                                                         }

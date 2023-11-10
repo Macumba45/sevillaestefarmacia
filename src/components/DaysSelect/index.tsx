@@ -7,11 +7,13 @@ interface Props {
         selectedDates: DateObject[] | DateObject | null
     ) => void
     initialDates: DateObject[]
+    style?: React.CSSProperties
 }
 
 const DatePickerComponent: FC<Props> = ({
     onDateSelectionChange,
     initialDates,
+    style,
 }) => {
     const [selectedDays, setSelectedDays] = useState<DateObject[]>([])
     const selectedDates = selectedDays.map(day => day.format('DD/MM/YYYY'))
@@ -32,7 +34,7 @@ const DatePickerComponent: FC<Props> = ({
     }, [initialDates])
 
     return (
-        <div>
+        <div style={style}>
             <Calendar
                 weekStartDayIndex={1}
                 format="DD/MM/YYYY"
