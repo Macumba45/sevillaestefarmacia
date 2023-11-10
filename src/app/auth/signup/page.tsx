@@ -158,14 +158,28 @@ const SignUp: FC = () => {
                                         id="firstName"
                                         label="Nombre completo"
                                         autoFocus
-                                        inputProps={{
-                                            select: {
-                                                '&:before': {
+                                        sx={{
+                                            '& label.Mui-focused': {
+                                                color: 'white',
+                                            },
+                                            '& .MuiInput-underline:after': {
+                                                borderBottomColor: 'black',
+                                            },
+                                            '& .MuiOutlinedInput-root': {
+                                                '& fieldset': {
                                                     borderColor: 'black',
                                                 },
-                                                '&:after': {
+                                                '&:hover fieldset': {
                                                     borderColor: 'black',
                                                 },
+                                                '&.Mui-focused fieldset': {
+                                                    borderColor: 'black',
+                                                },
+                                            },
+                                        }}
+                                        InputLabelProps={{
+                                            style: {
+                                                color: 'black',
                                             },
                                         }}
                                     />
@@ -222,7 +236,30 @@ const SignUp: FC = () => {
                                         fullWidth
                                         id="phone"
                                         label="Teléfono"
-                                        autoFocus
+                                        sx={{
+                                            '& label.Mui-focused': {
+                                                color: 'white',
+                                            },
+                                            '& .MuiInput-underline:after': {
+                                                borderBottomColor: 'black',
+                                            },
+                                            '& .MuiOutlinedInput-root': {
+                                                '& fieldset': {
+                                                    borderColor: 'black',
+                                                },
+                                                '&:hover fieldset': {
+                                                    borderColor: 'black',
+                                                },
+                                                '&.Mui-focused fieldset': {
+                                                    borderColor: 'black',
+                                                },
+                                            },
+                                        }}
+                                        InputLabelProps={{
+                                            style: {
+                                                color: 'black',
+                                            },
+                                        }}
                                     />
                                 </Grid>
 
@@ -233,6 +270,30 @@ const SignUp: FC = () => {
                                         id="email"
                                         label="Email"
                                         name="email"
+                                        sx={{
+                                            '& label.Mui-focused': {
+                                                color: 'white',
+                                            },
+                                            '& .MuiInput-underline:after': {
+                                                borderBottomColor: 'black',
+                                            },
+                                            '& .MuiOutlinedInput-root': {
+                                                '& fieldset': {
+                                                    borderColor: 'black',
+                                                },
+                                                '&:hover fieldset': {
+                                                    borderColor: 'black',
+                                                },
+                                                '&.Mui-focused fieldset': {
+                                                    borderColor: 'black',
+                                                },
+                                            },
+                                        }}
+                                        InputLabelProps={{
+                                            style: {
+                                                color: 'black',
+                                            },
+                                        }}
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
@@ -243,6 +304,30 @@ const SignUp: FC = () => {
                                         label="Contraseña"
                                         type="password"
                                         id="password"
+                                        sx={{
+                                            '& label.Mui-focused': {
+                                                color: 'white',
+                                            },
+                                            '& .MuiInput-underline:after': {
+                                                borderBottomColor: 'black',
+                                            },
+                                            '& .MuiOutlinedInput-root': {
+                                                '& fieldset': {
+                                                    borderColor: 'black',
+                                                },
+                                                '&:hover fieldset': {
+                                                    borderColor: 'black',
+                                                },
+                                                '&.Mui-focused fieldset': {
+                                                    borderColor: 'black',
+                                                },
+                                            },
+                                        }}
+                                        InputLabelProps={{
+                                            style: {
+                                                color: 'black',
+                                            },
+                                        }}
                                     />
                                 </Grid>
                                 {/* <Grid item xs={12}>

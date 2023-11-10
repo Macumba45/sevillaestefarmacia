@@ -369,7 +369,7 @@ const ResponsiveAppBar: FC<Props> = ({ user }) => {
                                                             <Typography
                                                                 sx={{
                                                                     fontFamily:
-                                                                        'Cormorant Garamond',
+                                                                        'Roboto',
                                                                     fontSize:
                                                                         '0.875rem',
                                                                     fontWeight: 700,
@@ -409,6 +409,8 @@ const ResponsiveAppBar: FC<Props> = ({ user }) => {
                                                                                     'none',
                                                                                 color: 'white', // Puedes personalizar el color
                                                                                 fontWeight: 700,
+                                                                                fontFamily:
+                                                                                    'Roboto',
                                                                             }}
                                                                             href={
                                                                                 subpage.route as string
@@ -459,6 +461,8 @@ const ResponsiveAppBar: FC<Props> = ({ user }) => {
                                                                     alignItems:
                                                                         'center',
                                                                     fontWeight: 700,
+                                                                    fontFamily:
+                                                                        'Roboto',
                                                                 }}
                                                             >
                                                                 {page.name}
@@ -523,6 +527,8 @@ const ResponsiveAppBar: FC<Props> = ({ user }) => {
                                                                   display:
                                                                       'flex',
                                                                   fontWeight: 700,
+                                                                  fontFamily:
+                                                                      'Roboto',
                                                               }}
                                                               href={
                                                                   page?.route as string

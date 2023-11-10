@@ -102,7 +102,30 @@ const Login: FC = () => {
                             id="email"
                             label="Email"
                             name="email"
-                            autoFocus
+                            sx={{
+                                '& label.Mui-focused': {
+                                    color: 'white',
+                                },
+                                '& .MuiInput-underline:after': {
+                                    borderBottomColor: 'black',
+                                },
+                                '& .MuiOutlinedInput-root': {
+                                    '& fieldset': {
+                                        borderColor: 'black',
+                                    },
+                                    '&:hover fieldset': {
+                                        borderColor: 'black',
+                                    },
+                                    '&.Mui-focused fieldset': {
+                                        borderColor: 'black',
+                                    },
+                                },
+                            }}
+                            InputLabelProps={{
+                                style: {
+                                    color: 'black',
+                                },
+                            }}
                         />
                         <TextField
                             margin="normal"
@@ -112,6 +135,30 @@ const Login: FC = () => {
                             label="Contraseña"
                             type="password"
                             id="password"
+                            sx={{
+                                '& label.Mui-focused': {
+                                    color: 'white',
+                                },
+                                '& .MuiInput-underline:after': {
+                                    borderBottomColor: 'black',
+                                },
+                                '& .MuiOutlinedInput-root': {
+                                    '& fieldset': {
+                                        borderColor: 'black',
+                                    },
+                                    '&:hover fieldset': {
+                                        borderColor: 'black',
+                                    },
+                                    '&.Mui-focused fieldset': {
+                                        borderColor: 'black',
+                                    },
+                                },
+                            }}
+                            InputLabelProps={{
+                                style: {
+                                    color: 'black',
+                                },
+                            }}
                         />
                         {error && <SpanError>{error}</SpanError>}
 

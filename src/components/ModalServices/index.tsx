@@ -333,24 +333,24 @@ const ServiceFormModal: FC<Props> = ({
                                                                 checked={
                                                                     !isEditing
                                                                         ? selectedDay.hours.includes(
-                                                                            hour
-                                                                        )
+                                                                              hour
+                                                                          )
                                                                         : selectedDay.hours.includes(
-                                                                            hour
-                                                                        ) ||
-                                                                        (hoursFromDatabase[
-                                                                            index
-                                                                        ] &&
-                                                                            hoursFromDatabase[
-                                                                                index
-                                                                            ].some(
-                                                                                (
-                                                                                    item: Hour
-                                                                                ) =>
-                                                                                    item.hour ===
-                                                                                    hour
-                                                                            )) ||
-                                                                        false
+                                                                              hour
+                                                                          ) ||
+                                                                          (hoursFromDatabase[
+                                                                              index
+                                                                          ] &&
+                                                                              hoursFromDatabase[
+                                                                                  index
+                                                                              ].some(
+                                                                                  (
+                                                                                      item: Hour
+                                                                                  ) =>
+                                                                                      item.hour ===
+                                                                                      hour
+                                                                              )) ||
+                                                                          false
                                                                 }
                                                                 onChange={() =>
                                                                     handleHourChange(
@@ -361,22 +361,22 @@ const ServiceFormModal: FC<Props> = ({
                                                                 disabled={
                                                                     !isEditing
                                                                         ? selectedDay.hours.includes(
-                                                                            hour
-                                                                        )
+                                                                              hour
+                                                                          )
                                                                         : hoursFromDatabase[
-                                                                        index
-                                                                        ] &&
-                                                                        hoursFromDatabase[
-                                                                            index
-                                                                        ].some(
-                                                                            (
-                                                                                item: Hour
-                                                                            ) =>
-                                                                                item.hour ===
-                                                                                hour &&
-                                                                                item.isBooked ===
-                                                                                true
-                                                                        )
+                                                                              index
+                                                                          ] &&
+                                                                          hoursFromDatabase[
+                                                                              index
+                                                                          ].some(
+                                                                              (
+                                                                                  item: Hour
+                                                                              ) =>
+                                                                                  item.hour ===
+                                                                                      hour &&
+                                                                                  item.isBooked ===
+                                                                                      true
+                                                                          )
                                                                 }
                                                             />
                                                         }
