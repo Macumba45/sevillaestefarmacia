@@ -84,11 +84,9 @@ const CardDashboardCitas: FC<Props> = ({ payments, onEdit, disabled }) => {
                 >
                     <Typography>Ver telefono</Typography>
                 </Tooltip>,
-                <Tooltip key={2}>
-                    <Typography onClick={disabled ? () => {} : onEdit}>
-                        {disabled ? 'No se puede editar' : 'Editar cita'}
-                    </Typography>
-                </Tooltip>,
+                <Typography onClick={disabled ? () => { } : onEdit}>
+                    {disabled ? 'Cita pasada' : 'Editar cita'}
+                </Typography>
             ]}
         >
             <Meta
