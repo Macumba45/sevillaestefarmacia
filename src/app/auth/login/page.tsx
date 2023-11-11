@@ -103,7 +103,6 @@ const Login: FC = () => {
                             label="Email"
                             name="email"
                             sx={stylesTypography}
-
                             InputLabelProps={{
                                 style: {
                                     color: 'black',
@@ -119,7 +118,6 @@ const Login: FC = () => {
                             type="password"
                             id="password"
                             sx={stylesTypography}
-
                             InputLabelProps={{
                                 style: {
                                     color: 'black',

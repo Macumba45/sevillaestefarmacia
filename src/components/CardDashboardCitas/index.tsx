@@ -107,7 +107,7 @@ const CardDashboardCitas: FC<Props> = ({ payments, onEdit }) => {
                     display: 'flex',
                     justifyContent: 'center',
                     fontFamily: 'Roboto',
-                    fontWeight: 'bold'
+                    fontWeight: 'bold',
                 }}
                 title={payments!.service?.title}
                 description={

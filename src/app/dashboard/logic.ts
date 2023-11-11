@@ -1,7 +1,7 @@
 import { useCallback, useContext, useState } from 'react'
 import { getAllUsers } from '@/services/user'
 import { useRouter } from 'next/navigation'
-import { Blogs, Services, Talleres, User } from '../../../types/types'
+import { Blogs, Payment, Services, Talleres, User } from '../../../types/types'
 import { deleteDateById } from '@/services/dates'
 import { createBlog, deleteBlog, getBlogs, updateBlog } from '@/services/blogs'
 import { UserContext } from '@/context/UserContext'
@@ -58,9 +58,16 @@ export const useLogicDashboard = () => {
     const [blogData, setBlogData] = useState<Blogs | undefined>()
     const [serviceDetails, setServiceDetails] = useState<Services>()
     const datesPaymentsPayed = allPayments?.filter(
-        (payment: any) => payment.payed === true && payment.dateId !== ''
+        (payment: any) =>
+            payment.payed === true &&
+            payment.dateId !== '' &&
+            payment.date.dates > new Date().toLocaleDateString()
+    )
+    const datesPaymentsPassed = allPayments?.filter(
+        (payment: any) => payment.date.dates < new Date().toLocaleDateString()
     )
 
+    console.log(datesPaymentsPassed)
     // Función de comparación personalizada para ordenar por fecha y luego por hora
     function comparePayments(a: any, b: any) {
         // Comparar fechas
@@ -389,5 +396,6 @@ export const useLogicDashboard = () => {
         user,
         userLoaded,
         serviceDetails,
+        datesPaymentsPassed,
     }
 }
