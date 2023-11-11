@@ -38,9 +38,14 @@ export const CardBlogsContainer = styled.div`
     align-items: center;
 `
 
-export const CitasContainer = styled.div`
+export const CitasContainer = styled.div``
+
+export const CitasContainerActivas = styled.div`
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
+`
+
+export const CitasContainerPasadas = styled.div`
+    display: flex;
+    flex-wrap: wrap;
 `

@@ -3,12 +3,12 @@
 import { FC, memo } from 'react'
 import { Card } from 'antd'
 import { Props } from './types'
-import { Tooltip } from '@mui/material'
+import { Button, Tooltip } from '@mui/material'
 import Typography from 'antd/es/typography/Typography'
 
 const { Meta } = Card
 
-const CardDashboardCitas: FC<Props> = ({ payments, onEdit }) => {
+const CardDashboardCitas: FC<Props> = ({ payments, onEdit, disabled }) => {
     function formatDateString(inputDate: any) {
         // Parsea la fecha en formato "dd/mm/yyyy" a un objeto Date
         const parts = inputDate.split('/')
@@ -84,20 +84,10 @@ const CardDashboardCitas: FC<Props> = ({ payments, onEdit }) => {
                 >
                     <Typography>Ver telefono</Typography>
                 </Tooltip>,
-                <Tooltip
-                    key={2}
-                    title={
-                        <h1
-                            style={{
-                                fontFamily: 'Roboto',
-                                fontSize: '20px',
-                            }}
-                        >
-                            Editar cita
-                        </h1>
-                    }
-                >
-                    <Typography onClick={onEdit}>Editar cita</Typography>
+                <Tooltip key={2}>
+                    <Typography onClick={disabled ? () => {} : onEdit}>
+                        {disabled ? 'No se puede editar' : 'Editar cita'}
+                    </Typography>
                 </Tooltip>,
             ]}
         >
