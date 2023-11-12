@@ -441,7 +441,7 @@ const Dashboard: FC<Props> = () => {
                                             >
                                                 CITAS PASADAS
                                             </Typography>
-                                            {datesPaymentsPassed.length > 0 && (
+                                            {datesPaymentsPassed.length > 0 ? (
                                                 <CitasContainerPasadas>
                                                     {datesPaymentsPassed.map(
                                                         (item: any, index) => (
@@ -458,6 +458,12 @@ const Dashboard: FC<Props> = () => {
                                                         )
                                                     )}
                                                 </CitasContainerPasadas>
+                                            ) : (
+                                                <>
+                                                    <Typography>
+                                                        No hay citas
+                                                    </Typography>
+                                                </>
                                             )}
                                         </>
                                     )}

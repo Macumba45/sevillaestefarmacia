@@ -493,6 +493,9 @@ const ResponsiveAppBar: FC<Props> = ({ user }) => {
                                                                   color: 'white',
                                                                   display:
                                                                       'flex',
+                                                                  fontWeight: 700,
+                                                                  fontFamily:
+                                                                      'Roboto',
                                                               }}
                                                               href={
                                                                   page.route as string
