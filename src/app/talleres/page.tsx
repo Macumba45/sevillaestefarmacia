@@ -10,7 +10,6 @@ import AnimatedView from '@/animations/AnimatedContainer'
 
 const Talleres: FC = () => {
     const { fetchTalleres, talleres, isLoading } = useLogicTaller()
-    console.log(talleres)
 
     useEffect(() => {
         fetchTalleres()

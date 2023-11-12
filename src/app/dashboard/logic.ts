@@ -57,18 +57,16 @@ export const useLogicDashboard = () => {
     const [blogToDelete, setBlogToDelete] = useState('')
     const [blogData, setBlogData] = useState<Blogs | undefined>()
     const [serviceDetails, setServiceDetails] = useState<Services>()
-    console.log(serviceDetails)
     const datesPaymentsPayed = allPayments?.filter(
         (payment: any) =>
             payment.payed === true &&
             payment.dateId !== '' &&
-            payment.date.dates > new Date().toLocaleDateString()
+            payment.date.dates >= new Date().toLocaleDateString()
     )
     const datesPaymentsPassed = allPayments?.filter(
         (payment: any) => payment.date.dates < new Date().toLocaleDateString()
     )
 
-    console.log(datesPaymentsPassed)
     // Función de comparación personalizada para ordenar por fecha y luego por hora
     function comparePayments(a: any, b: any) {
         // Comparar fechas
