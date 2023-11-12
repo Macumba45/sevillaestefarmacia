@@ -57,6 +57,7 @@ export const useLogicDashboard = () => {
     const [blogToDelete, setBlogToDelete] = useState('')
     const [blogData, setBlogData] = useState<Blogs | undefined>()
     const [serviceDetails, setServiceDetails] = useState<Services>()
+    console.log(serviceDetails)
     const datesPaymentsPayed = allPayments?.filter(
         (payment: any) =>
             payment.payed === true &&

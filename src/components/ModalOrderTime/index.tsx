@@ -88,7 +88,12 @@ const ModalOrderTime: FC<Props> = ({
             }
             return null
         })
-        .filter(date => date !== null) // Elimina las fechas nulas
+        .filter(
+            date =>
+                date !== null &&
+                date.date &&
+                date.date >= now.toLocaleDateString()
+        ) // Elimina las fechas nulas
 
     upcomingDates = upcomingDates?.sort((a, b) => {
         const [dayA, monthA, yearA] = a!.date!.split('/').map(Number) as any
