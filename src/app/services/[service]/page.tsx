@@ -1,7 +1,11 @@
 'use client'
 
 import { FC, memo, useContext, useEffect } from 'react'
+import { UserContext } from '@/context/UserContext'
+import FloatLoginButton from '@/components/FloatLoginButton'
+import { getAuthenticatedToken } from '../../../../storage/storage'
 import CircularIndeterminate from '@/components/Loader'
+import { useLogicPageServicesDetail } from './logic'
 import { Button, Fab } from '@mui/material'
 import Dermo from '@/components/DescriptionServices/dermo'
 import Nutricion from '@/components/DescriptionServices/nutricion'
@@ -10,9 +14,7 @@ import Sistema from '@/components/DescriptionServices/sistema'
 import Pendientes from '@/components/DescriptionServices/pendientes'
 import Mascota from '@/components/DescriptionServices/mascota'
 import ModalOrderTime from '@/components/ModalOrderTime'
-import { useLogicPageServicesDetail } from './logic'
 import HoverMotion from '@/animations/hover'
-import AnimatedView from '@/animations/AnimatedContainer'
 import LayoutNavFooter from '@/layout/layout'
 import {
     ButtonContainerServices,
@@ -27,9 +29,7 @@ import {
     VideoYoutube,
     VideoYoutubeContainer,
 } from './styles'
-import { UserContext } from '@/context/UserContext'
-import FloatLoginButton from '@/components/FloatLoginButton'
-import { getAuthenticatedToken } from '../../../../storage/storage'
+
 
 interface Props {
     params: {
@@ -156,39 +156,33 @@ const Page: FC<Props> = ({ params }) => {
     return (
         <LayoutNavFooter>
             <Container backgroundcolor={backgroundcolor}>
-                <AnimatedView>
-                    <TitleServices
-                        widthtitle="320px"
-                        widthtitledesktop={
-                            serviceData?.title ===
+                <TitleServices
+                    widthtitle="320px"
+                    widthtitledesktop={
+                        serviceData?.title ===
                             'SISTEMA PERSONALIZADO DE DOSIFICACIÓN'
-                                ? '600px'
-                                : '500px'
-                        }
-                    >
-                        {serviceData?.title}
-                    </TitleServices>
-                </AnimatedView>
-                <AnimatedView>
-                    <SubtitleServices>{serviceData?.subtitle}</SubtitleServices>
-                </AnimatedView>
-                <AnimatedView>
-                    <div
-                        style={{
-                            display: 'flex',
-                        }}
-                    >
-                        {
-                            getDescriptionById(
-                                serviceData?.id as string
-                            ) as JSX.Element
-                        }
+                            ? '600px'
+                            : '500px'
+                    }
+                >
+                    {serviceData?.title}
+                </TitleServices>
+                <SubtitleServices>{serviceData?.subtitle}</SubtitleServices>
+                <div
+                    style={{
+                        display: 'flex',
+                    }}
+                >
+                    {
+                        getDescriptionById(
+                            serviceData?.id as string
+                        ) as JSX.Element
+                    }
 
-                        <PictureContainer>
-                            <Picture src={serviceData?.urlPicture} />
-                        </PictureContainer>
-                    </div>
-                </AnimatedView>
+                    <PictureContainer>
+                        <Picture src={serviceData?.urlPicture} />
+                    </PictureContainer>
+                </div>
                 <ButtonContainerServices>
                     <HoverMotion>
                         <Button
