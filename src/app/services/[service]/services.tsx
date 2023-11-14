@@ -159,7 +159,7 @@ const Page: FC<Props> = ({ params }) => {
                     widthtitle="320px"
                     widthtitledesktop={
                         serviceData?.title ===
-                            'SISTEMA PERSONALIZADO DE DOSIFICACIÓN'
+                        'SISTEMA PERSONALIZADO DE DOSIFICACIÓN'
                             ? '600px'
                             : '500px'
                     }

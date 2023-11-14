@@ -1,37 +1,15 @@
-import { getServices } from '@/services/service'
-import { getAuthenticatedToken } from '../../../../storage/storage'
 import Page from './services'
 import { Services } from '../../../../types/types'
 import { FC } from 'react'
+import { getServices } from '@/services/service'
 
-const token = getAuthenticatedToken()
-
-export async function generateStaticParams() {
-
-    try {
-        const headers = {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-        }
-        const response = await fetch(`${process.env.CLIENT_URL}/api/services/getService`, {
-            method: 'GET',
-            headers,
-        })
-        if (response.ok) {
-            const data: Services[] = await response.json()
-            return data
-        } else {
-            console.error('Error al obtener los servicios')
-            throw new Error('Error al obtener los servicios')
-        }
-    } catch (error) {
-        console.error('Error al enviar el objeto:', error)
-        throw error
-    }
-
-
+export async function generateStaticPaths() {
+    const services = (await getServices()) as Services[]
+    const paths = services!.map(service => ({
+        params: { service: service!.id },
+    }))
+    return paths
 }
-
 
 interface Props {
     params: {
@@ -39,15 +17,8 @@ interface Props {
     }
 }
 
-
-
 const ServicePage: FC<Props> = ({ params }) => {
-    return (
-        <Page
-            params={params}
-        />
-    )
+    return <Page params={params} />
 }
 
 export default ServicePage
-
