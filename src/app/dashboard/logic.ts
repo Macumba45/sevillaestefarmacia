@@ -120,6 +120,7 @@ export const useLogicDashboard = () => {
         setIsLoadingButton(true)
         await updateService(service)
         setIsLoadingButton(false)
+        window.location.reload()
         return
     }, [])
 
