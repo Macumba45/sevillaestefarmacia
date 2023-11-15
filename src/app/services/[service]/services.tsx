@@ -29,16 +29,14 @@ import {
     VideoYoutube,
     VideoYoutubeContainer,
 } from './styles'
+import { Services } from '../../../../types/types'
 
 interface Props {
-    params: {
-        service: string
-    }
+    serviceData: Services
 }
 
-const Page: FC<Props> = ({ params }) => {
+const Page: FC<Props> = ({ serviceData }) => {
     const { user } = useContext(UserContext)
-
     const {
         contactWhatsApp,
         fetchServiceDetails,
@@ -47,15 +45,14 @@ const Page: FC<Props> = ({ params }) => {
         handleReservarCita,
         isLoading,
         open,
-        serviceData,
         setHourId,
         onDateIdChange,
         goToLogin,
     } = useLogicPageServicesDetail()
 
-    useEffect(() => {
-        fetchServiceDetails(params?.service)
-    }, [params])
+    // useEffect(() => {
+    //     fetchServiceDetails(serviceData.id as string)
+    // }, [])
 
     const getDescriptionById = (serviceId: string) => {
         switch (serviceId) {
