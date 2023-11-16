@@ -53,55 +53,62 @@ const ModalOrderTime: FC<Props> = ({
     const currentHour = now.getHours()
     const currentMinutes = now.getMinutes()
 
-    let upcomingDates = dates
-        ?.map(date => {
-            if (date.date) {
+    let upcomingDates = dates?.map(date => {
+        if (date.date) {
+            console.log(date.date)
+            const parts = date.date.split('/')
+            const day = parseInt(parts[0], 10)
+            const month = parseInt(parts[1], 10) - 1
+            const year = parseInt(parts[2], 10)
+            const dateObject = new Date(year, month, day)
+
+            if (dateObject.toDateString() === now.toDateString()) {
+                // Si la fecha es hoy, filtra las horas que ya han pasado
+                date.hours = date.hours.filter(hour => {
+                    const [hourPart, minutePart] = hour
+                        .hour!.split(':')
+                        .map(Number)
+                    return (
+                        hourPart > currentHour ||
+                        (hourPart === currentHour &&
+                            minutePart > currentMinutes)
+                    )
+                })
+            }
+
+            // Si todas las horas de hoy han pasado, filtra el día completo
+            if (
+                dateObject.toDateString() === now.toDateString() &&
+                date.hours.length === 0
+            ) {
+                return null
+            }
+
+            return date
+        }
+        return null
+    })
+
+    upcomingDates = upcomingDates
+        ?.filter(date => {
+            if (date && date.date) {
                 const parts = date.date.split('/')
                 const day = parseInt(parts[0], 10)
                 const month = parseInt(parts[1], 10) - 1
                 const year = parseInt(parts[2], 10)
                 const dateObject = new Date(year, month, day)
 
-                if (dateObject.toDateString() === now.toDateString()) {
-                    // Si la fecha es hoy, filtra las horas que ya han pasado
-                    date.hours = date.hours.filter(hour => {
-                        const [hourPart, minutePart] = hour
-                            .hour!.split(':')
-                            .map(Number)
-                        return (
-                            hourPart > currentHour ||
-                            (hourPart === currentHour &&
-                                minutePart > currentMinutes)
-                        )
-                    })
-                }
-
-                // Si todas las horas de hoy han pasado, filtra el día completo
-                if (
-                    dateObject.toDateString() === now.toDateString() &&
-                    date.hours.length === 0
-                ) {
-                    return null
-                }
-
-                return date
+                return dateObject >= now
             }
-            return null
+            return false
         })
-        .filter(
-            date =>
-                date !== null &&
-                date.date &&
-                date.date >= now.toLocaleDateString()
-        ) // Elimina las fechas nulas
-
-    upcomingDates = upcomingDates?.sort((a, b) => {
-        const [dayA, monthA, yearA] = a!.date!.split('/').map(Number) as any
-        const [dayB, monthB, yearB] = b!.date!.split('/').map(Number) as any
-        const dateA = new Date(yearA, monthA - 1, dayA)
-        const dateB = new Date(yearB, monthB - 1, dayB)
-        return dateA.getTime() - dateB.getTime()
-    })
+        .sort((a, b) => {
+            const [dayA, monthA, yearA] = a!.date!.split('/').map(Number) as any
+            const [dayB, monthB, yearB] = b!.date!.split('/').map(Number) as any
+            const dateA = new Date(yearA, monthA - 1, dayA)
+            const dateB = new Date(yearB, monthB - 1, dayB)
+            return dateA.getTime() - dateB.getTime()
+        })
 
     let buttonName: string = ''
     if (
