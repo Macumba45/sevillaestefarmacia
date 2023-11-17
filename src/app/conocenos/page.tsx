@@ -2,12 +2,6 @@
 
 import { FC, memo, useEffect } from 'react'
 import mapa from '../../assets/CONOCENOS/mapa.png'
-import dermo from '../../assets/HOME/DERMO_FOTO.jpg'
-import nutricion from '../../assets/HOME/NUTRICION_FOTO.jpg'
-import laboratorio from '../../assets/HOME/LABORATORIO_FOTO.jpg'
-import spd from '../../assets/HOME/SPD_FOTO.jpg'
-import pendientes from '../../assets/HOME/PENDIENTES_BEBE_FOTO.png'
-import veterinaria from '../../assets/HOME/VETERINARIA_FOTO_02.jpg'
 import { Tooltip } from '@mui/material'
 import HoverMotion from '@/animations/hover'
 import LayoutNavFooter from '@/layout/layout'
@@ -48,32 +42,32 @@ const Conocenos: FC = () => {
     const services = [
         {
             name: 'Análisis de la piel',
-            img: dermo,
+            img: 'https://res.cloudinary.com/dinasxwdf/image/upload/v1699541341/farmacia/w7b68kakfryynbeu7uhj.webp',
             route: `/services/clo0dzomz0001xy04kzkxay49`,
         },
         {
             name: 'Nutricion y clinica deportiva',
-            img: nutricion,
+            img: 'https://res.cloudinary.com/dinasxwdf/image/upload/v1699541341/farmacia/g9snbrhtr5lafx0gqdf3.webp',
             route: '/services/clo0e0a200002xy04bwqml93h',
         },
         {
             name: 'Laboratorio de formulación magistral',
-            img: laboratorio,
+            img: 'https://res.cloudinary.com/dinasxwdf/image/upload/v1699541341/farmacia/qvuwsmdcgsxfy5tjsung.webp',
             route: '/services/clo0e0mn50003xy040gwqse36',
         },
         {
             name: 'Sistema Personalizado de Dosificación',
-            img: spd,
+            img: 'https://res.cloudinary.com/dinasxwdf/image/upload/v1699541341/farmacia/jfclhh12esrx9qxbuggh.webp',
             route: '/services/clo0e17d30004xy04cjklg2px',
         },
         {
             name: 'Pendientes Bebé',
-            img: pendientes,
+            img: 'https://res.cloudinary.com/dinasxwdf/image/upload/v1699541341/farmacia/weue18gzliqlr2mba3uk.webp',
             route: '/services/clo0e1e3p0005xy04izx8uzqa',
         },
         {
             name: 'Farmacia Veterinaria',
-            img: veterinaria,
+            img: 'https://res.cloudinary.com/dinasxwdf/image/upload/v1699541341/farmacia/j5x6zoorgtp4hwxi09me.webp',
             route: '/services/clo0e1q180006xy04pu96nyml',
         },
     ]
@@ -163,7 +157,9 @@ const Conocenos: FC = () => {
                                                             )
                                                         }
                                                         alt={service.name}
-                                                        src={service.img.src}
+                                                        src={
+                                                            service.img as string
+                                                        }
                                                         style={{
                                                             width: '120px',
                                                             height: '120px',
