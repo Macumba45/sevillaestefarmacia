@@ -37,22 +37,14 @@ export const getHourDataById = async (id: string) => {
 
 export const eliminarHorasPasadas = async () => {
     const today = new Date()
+    today.setHours(0, 0, 0, 0) // Asegúrate de que la hora sea medianoche para comparar correctamente las fechas
 
-    function formatDate(date: Date) {
-        const day = String(date.getDate()).padStart(2, '0')
-        const month = String(date.getMonth() + 1).padStart(2, '0')
-        const year = date.getFullYear()
-        return `${day}/${month}/${year}`
+    const convertDateStringToDateObject = (dateString: string) => {
+        const [day, month, year] = dateString.split('/')
+        return new Date(Number(year), Number(month) - 1, Number(day))
     }
 
-    const formattedToday = formatDate(today)
-
-    const fechasPasadasConHoras = await prisma.dates.findMany({
-        where: {
-            dates: {
-                lt: formattedToday,
-            },
-        },
+    const allDates = await prisma.dates.findMany({
         include: {
             hours: {
                 where: {
@@ -60,6 +52,11 @@ export const eliminarHorasPasadas = async () => {
                 },
             },
         },
+    })
+
+    const fechasPasadasConHoras = allDates.filter(fecha => {
+        const fechaDate = convertDateStringToDateObject(fecha.dates)
+        return fechaDate <= today
     })
 
     for (const fecha of fechasPasadasConHoras) {
