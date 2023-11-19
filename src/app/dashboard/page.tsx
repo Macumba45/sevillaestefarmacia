@@ -25,15 +25,13 @@ import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
+import ShoppingBagIcon from '@mui/icons-material/ShoppingBag'
 import MenuIcon from '@mui/icons-material/Menu'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import FloatAddServices from '@/components/FloatButtonServices'
 import CardDashboardServices from '@/components/CardDashboardServices'
 import DateRangeIcon from '@mui/icons-material/DateRange'
-import AlignItemsList from '@/components/ListDateAvatar'
-import DatePickerComp from '@/components/InputDayPicker'
-import SearchInputComp from '@/components/InpuntSearch'
 import ServiceFormModal from '@/components/ModalServices'
 import DeleteConfirmationModal from '@/components/ModalConfirmationDelete'
 import UserAvatar from '@/components/UserAvatar'
@@ -41,6 +39,7 @@ import CreateTallerModal from '@/components/ModalTaller'
 import CardDashboardTalleres from '@/components/CardDashboardTalleres'
 import CardDashboardblogs from '@/components/CardDashboardBlogs'
 import CreateBlogModal from '@/components/ModalBlog'
+import CardDashboardCitas from '@/components/CardDashboardCitas'
 import {
     CardBlogsContainer,
     CardServicesContainer,
@@ -50,7 +49,6 @@ import {
     CitasContainerPasadas,
     LoadingContainer,
 } from './styles'
-import CardDashboardCitas from '@/components/CardDashboardCitas'
 
 const drawerWidth = 240
 
@@ -118,7 +116,6 @@ const Dashboard: FC<Props> = () => {
     } = useLogicDashboard()
 
     const itemsTop = [
-        // { text: 'Dashboard', icon: <DashboardIcon />, route: 'dashboard' },
         {
             text: 'Servicios',
             icon: <MedicalServicesIcon />,
@@ -143,6 +140,11 @@ const Dashboard: FC<Props> = () => {
             text: 'Mis clientes',
             icon: <AccountCircleIcon />,
             route: 'clientes',
+        },
+        {
+            text: 'Mis pedidos',
+            icon: <ShoppingBagIcon />,
+            route: 'pedidos',
         },
     ]
 
@@ -599,6 +601,7 @@ const Dashboard: FC<Props> = () => {
                             )}
                         </CardTalleresContainer>
                     )}
+                    {route === 'pedidos' && <p>En desarrollo...</p>}
                 </div>
             </Box>
         </Box>

@@ -64,7 +64,10 @@ export const useLogicDashboard = () => {
             payment.date.dates >= new Date().toLocaleDateString()
     )
     const datesPaymentsPassed = allPayments?.filter(
-        (payment: any) => payment.date.dates < new Date().toLocaleDateString()
+        (payment: any) =>
+            payment.payed === true &&
+            payment.dateId !== '' &&
+            payment.date.dates < new Date().toLocaleDateString()
     )
 
     // Función de comparación personalizada para ordenar por fecha y luego por hora

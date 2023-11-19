@@ -225,6 +225,15 @@ const SignUp: FC = () => {
                                                 color: 'black',
                                             },
                                         }}
+                                        onChange={event => {
+                                            if (event.target.value.length > 9) {
+                                                event.target.value =
+                                                    event.target.value.slice(
+                                                        0,
+                                                        9
+                                                    )
+                                            }
+                                        }}
                                     />
                                 </Grid>
 

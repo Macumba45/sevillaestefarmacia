@@ -360,10 +360,7 @@ const ModalOrderTime: FC<Props> = ({
                                 {isLoadingPayments ? (
                                     // Indicador de carga mientras se obtienen los datos
                                     <MenuItem disabled>
-                                        <CircularProgress
-                                            title="dddddd"
-                                            size={20}
-                                        />
+                                        <CircularProgress size={20} />
                                         <span
                                             style={{
                                                 fontFamily: 'Roboto',
