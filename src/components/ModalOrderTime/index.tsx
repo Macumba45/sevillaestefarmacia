@@ -55,7 +55,6 @@ const ModalOrderTime: FC<Props> = ({
 
     let upcomingDates = dates?.map(date => {
         if (date.date) {
-            console.log(date.date)
             const parts = date.date.split('/')
             const day = parseInt(parts[0], 10)
             const month = parseInt(parts[1], 10) - 1

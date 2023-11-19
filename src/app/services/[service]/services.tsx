@@ -138,7 +138,6 @@ const Page: FC<Props> = ({ params }) => {
             serviceData?.id === 'clo0e0a200002xy04bwqml93h' ||
             serviceData?.id === 'clo0e1e3p0005xy04izx8uzqa')
     ) {
-        isButtonDisabled = true
         buttonName = 'Inicia sesión para reservar cita'
     }
 
@@ -159,7 +158,7 @@ const Page: FC<Props> = ({ params }) => {
                     widthtitle="320px"
                     widthtitledesktop={
                         serviceData?.title ===
-                        'SISTEMA PERSONALIZADO DE DOSIFICACIÓN'
+                            'SISTEMA PERSONALIZADO DE DOSIFICACIÓN'
                             ? '600px'
                             : '500px'
                     }
@@ -185,7 +184,7 @@ const Page: FC<Props> = ({ params }) => {
                 <ButtonContainerServices>
                     <HoverMotion>
                         <Button
-                            disabled={isButtonDisabled}
+                            // disabled={isButtonDisabled}
                             onClick={() => {
                                 if (buttonName === 'Reservar cita') {
                                     handleOpen()
@@ -197,6 +196,8 @@ const Page: FC<Props> = ({ params }) => {
                                     buttonName === 'Solcitar presupuesto'
                                 ) {
                                     contactWhatsApp()
+                                } else {
+                                    goToLogin()
                                 }
                             }}
                             variant="outlined"
@@ -205,9 +206,7 @@ const Page: FC<Props> = ({ params }) => {
                                 borderColor: 'black',
                                 width: '300px',
                                 borderRadius: '130px',
-                                backgroundColor: isButtonDisabled
-                                    ? '#e0e0e0'
-                                    : 'black',
+                                backgroundColor: 'black',
                                 ':hover': {
                                     backgroundColor: 'white',
                                     color: 'black',

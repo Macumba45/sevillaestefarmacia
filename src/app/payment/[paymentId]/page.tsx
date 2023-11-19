@@ -158,7 +158,7 @@ const PaymentSuccessComponent: FC<Props> = ({ params }) => {
                 >
                     {serviceIdMetadata &&
                     serviceIdMetadata === 'clo0e17d30004xy04cjklg2px' ? (
-                        <>Tu reserva ha sido completada con éxito</>
+                        <p>Tu compra ha sido completada con éxito</p>
                     ) : (
                         <>
                             Tu reserva el día: {fecha} <br /> a las {hour} ha
@@ -178,8 +178,18 @@ const PaymentSuccessComponent: FC<Props> = ({ params }) => {
                         fontWeight: 300,
                     }}
                 >
-                    Si deseas cambiar la cita, porfavor, ponte en contacto con
-                    nosotros.
+                    {serviceIdMetadata &&
+                    serviceIdMetadata === 'clo0e17d30004xy04cjklg2px' ? (
+                        <p>
+                            Porfavor, presenta el email de confirmación de
+                            compra en el mostrador
+                        </p>
+                    ) : (
+                        <p>
+                            Si deseas cambiar la cita, porfavor, ponte en
+                            contacto con nosotros.
+                        </p>
+                    )}
                 </Typography>
 
                 <Button
