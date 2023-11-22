@@ -49,3 +49,8 @@ export const CitasContainerPasadas = styled.div`
     display: flex;
     flex-wrap: wrap;
 `
+
+export const ContainerPedidos = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+`

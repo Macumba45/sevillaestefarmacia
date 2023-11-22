@@ -47,8 +47,10 @@ import {
     CitasContainer,
     CitasContainerActivas,
     CitasContainerPasadas,
+    ContainerPedidos,
     LoadingContainer,
 } from './styles'
+import CardDashboardPedidos from '@/components/CardDashboardPedidos'
 
 const drawerWidth = 240
 
@@ -98,6 +100,7 @@ const Dashboard: FC<Props> = () => {
         openModalEditDateAndHour,
         openModalTallerOrBlog,
         paymentId,
+        paymentsNoDate,
         route,
         router,
         serviceData,
@@ -213,6 +216,8 @@ const Dashboard: FC<Props> = () => {
             getAllPayments()
         } else if (route === 'blog') {
             fetchBlogs()
+        } else if (route === 'pedidos') {
+            getAllPayments()
         }
     }, [route])
 
@@ -601,7 +606,19 @@ const Dashboard: FC<Props> = () => {
                             )}
                         </CardTalleresContainer>
                     )}
-                    {route === 'pedidos' && <p>En desarrollo...</p>}
+                    {route === 'pedidos' && (
+                        <ContainerPedidos>
+                            {paymentsNoDate.map((item: any, index) => (
+                                <CardDashboardPedidos
+                                    key={index}
+                                    payments={item}
+                                    onEdit={() =>
+                                        openEditModalDateAndHour(item)
+                                    }
+                                />
+                            ))}
+                        </ContainerPedidos>
+                    )}
                 </div>
             </Box>
         </Box>

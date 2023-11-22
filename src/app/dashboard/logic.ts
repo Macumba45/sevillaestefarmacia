@@ -98,6 +98,12 @@ export const useLogicDashboard = () => {
         )
     })
 
+    const paymentsNoDate = allPayments?.filter((payment: any) => {
+        return payment.payed === true && payment.dateId === ''
+    })
+
+    console.log(paymentsNoDate)
+
     // Función de comparación personalizada para ordenar por fecha y luego por hora
     function comparePayments(a: any, b: any) {
         // Comparar fechas
@@ -158,6 +164,7 @@ export const useLogicDashboard = () => {
     const getAllPayments = useCallback(async () => {
         setIsLoading(true)
         const payments = await fetchPaymentsData()
+        console.log(payments)
         setAllPayments(payments)
         setIsLoading(false)
         return payments
@@ -407,6 +414,7 @@ export const useLogicDashboard = () => {
         openModalEditDateAndHourFunction,
         openModalTallerOrBlog,
         paymentId,
+        paymentsNoDate,
         postNewBlog,
         postNewTaller,
         route,
