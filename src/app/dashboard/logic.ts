@@ -57,18 +57,46 @@ export const useLogicDashboard = () => {
     const [blogToDelete, setBlogToDelete] = useState('')
     const [blogData, setBlogData] = useState<Blogs | undefined>()
     const [serviceDetails, setServiceDetails] = useState<Services>()
-    const datesPaymentsPayed = allPayments?.filter(
-        (payment: any) =>
+
+    const datesPaymentsComing = allPayments?.filter((payment: any) => {
+        if (!payment.date) {
+            return false
+        }
+
+        let dateString = payment.date.dates // "30/11/2023"
+        let dateParts = dateString.split('/')
+        let paymentDate = new Date(
+            +dateParts[2],
+            dateParts[1] - 1,
+            +dateParts[0]
+        ) // Los meses son 0-indexados en JavaScript
+
+        return (
             payment.payed === true &&
             payment.dateId !== '' &&
-            payment.date.dates >= new Date().toLocaleDateString()
-    )
-    const datesPaymentsPassed = allPayments?.filter(
-        (payment: any) =>
+            paymentDate >= new Date()
+        )
+    })
+
+    const datesPaymentsPassed = allPayments?.filter((payment: any) => {
+        if (!payment.date) {
+            return false
+        }
+
+        let dateString = payment.date.dates // "30/11/2023"
+        let dateParts = dateString.split('/')
+        let paymentDate = new Date(
+            +dateParts[2],
+            dateParts[1] - 1,
+            +dateParts[0]
+        ) // Los meses son 0-indexados en JavaScript
+
+        return (
             payment.payed === true &&
             payment.dateId !== '' &&
-            payment.date.dates < new Date().toLocaleDateString()
-    )
+            paymentDate < new Date()
+        )
+    })
 
     // Función de comparación personalizada para ordenar por fecha y luego por hora
     function comparePayments(a: any, b: any) {
@@ -88,7 +116,7 @@ export const useLogicDashboard = () => {
     }
 
     // Ordena los elementos por fecha y luego por hora
-    datesPaymentsPayed?.sort(comparePayments)
+    // datesPaymentsComing?.sort(comparePayments)
 
     const fetchAllUsers = useCallback(async () => {
         setIsLoading(true)
@@ -338,7 +366,8 @@ export const useLogicDashboard = () => {
         closeModalEditDateAndHourFunction,
         createNewService,
         dateId,
-        datesPaymentsPayed,
+        datesPaymentsComing,
+        datesPaymentsPassed,
         deleteDate,
         deteleTallerById,
         editDateAndHour,
@@ -383,6 +412,7 @@ export const useLogicDashboard = () => {
         route,
         router,
         serviceData,
+        serviceDetails,
         services,
         setDateId,
         setHourId,
@@ -398,7 +428,5 @@ export const useLogicDashboard = () => {
         updateTallerById,
         user,
         userLoaded,
-        serviceDetails,
-        datesPaymentsPassed,
     }
 }

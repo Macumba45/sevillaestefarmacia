@@ -18,7 +18,7 @@ export const useLogicTallerDetail = () => {
 
     const contactWhatsApp = () => {
         let message = `Hola, me gustaría saber más sobre el taller ${taller?.title}`
-        const phoneNumber = '+34682296561'
+        const phoneNumber = '+34682734237'
 
         const whatsappURL = `whatsapp://send?phone=${phoneNumber}&text=${encodeURIComponent(
             message

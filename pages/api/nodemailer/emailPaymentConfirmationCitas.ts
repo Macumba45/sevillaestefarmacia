@@ -42,7 +42,7 @@ export default async function handler(
 
         const mailOptions = {
             from: 'info@sevillaestefarmacia.com',
-            to: email,
+            to: email + ',' + 'info@sevillaestefarmacia.com',
             subject: 'Gracias por tu compra en Farmacia Sta.Bárbara',
             html: `
             <!doctype html>

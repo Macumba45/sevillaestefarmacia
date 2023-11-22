@@ -29,7 +29,7 @@ const Home: FC = () => {
     const contactWhatsApp = () => {
         let message =
             'Hola Farmacia Sta.Bárbara, me gustaría que me asesoraran sobre:'
-        const phoneNumber = '+34682296561'
+        const phoneNumber = '+34682734237'
 
         const whatsappURL = `whatsapp://send?phone=${phoneNumber}&text=${encodeURIComponent(
             message

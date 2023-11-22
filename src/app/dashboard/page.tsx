@@ -61,7 +61,8 @@ const Dashboard: FC<Props> = () => {
         closeModalDelete,
         closeModalEditDateAndHourFunction,
         dateId,
-        datesPaymentsPayed,
+        datesPaymentsComing,
+        datesPaymentsPassed,
         editDateAndHour,
         fetchAllUsers,
         fetchBlogs,
@@ -100,6 +101,7 @@ const Dashboard: FC<Props> = () => {
         route,
         router,
         serviceData,
+        serviceDetails,
         services,
         setDateId,
         setHourId,
@@ -111,8 +113,6 @@ const Dashboard: FC<Props> = () => {
         titlePage,
         user,
         userLoaded,
-        serviceDetails,
-        datesPaymentsPassed,
     } = useLogicDashboard()
 
     const itemsTop = [
@@ -388,7 +388,7 @@ const Dashboard: FC<Props> = () => {
                                 </LoadingContainer>
                             ) : (
                                 <>
-                                    {datesPaymentsPayed.length === 0 &&
+                                    {datesPaymentsComing.length === 0 &&
                                     datesPaymentsPassed.length === 0 ? (
                                         <Typography
                                             variant="h6"
@@ -412,9 +412,9 @@ const Dashboard: FC<Props> = () => {
                                             >
                                                 PRÓXIMAS CITAS
                                             </Typography>
-                                            {datesPaymentsPayed.length > 0 && (
+                                            {datesPaymentsComing.length > 0 && (
                                                 <CitasContainerActivas>
-                                                    {datesPaymentsPayed.map(
+                                                    {datesPaymentsComing.map(
                                                         (item: any, index) => (
                                                             <CardDashboardCitas
                                                                 key={index}
