@@ -5,10 +5,35 @@ import { Card } from 'antd'
 import { Props } from './types'
 import { Button, Tooltip } from '@mui/material'
 import Typography from 'antd/es/typography/Typography'
+import { Payment } from '../../../types/types'
 
 const { Meta } = Card
 
 const CardDashboardPedidos: FC<Props> = ({ payments, onEdit, disabled }) => {
+    const formatDate = (dateString: string): string => {
+        const options = {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+        }
+        const formattedDate = new Date(dateString).toLocaleDateString(
+            'es-ES',
+            options
+        )
+
+        // Extraer el día de la semana y aplicar la mayúscula a la primera letra
+        const dayOfWeekIndex = formattedDate.indexOf(',') + 2
+        const formattedDateWithUppercase =
+            formattedDate.substr(0, dayOfWeekIndex) +
+            formattedDate.charAt(dayOfWeekIndex).toUpperCase() +
+            formattedDate.slice(dayOfWeekIndex + 1)
+
+        return formattedDateWithUppercase
+    }
+
     return (
         <Card
             hoverable
@@ -62,7 +87,9 @@ const CardDashboardPedidos: FC<Props> = ({ payments, onEdit, disabled }) => {
                             fontWeight: 600,
                             fontFamily: 'Roboto',
                         }}
-                    ></span>
+                    >
+                        {formatDate(payments?.createdAt as Payment)}
+                    </span>
                 }
             />
             <Meta

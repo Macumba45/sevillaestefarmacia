@@ -61,8 +61,9 @@ export const SubtitleServices = styled.h2`
         font-size: 2rem;
         line-height: 2rem;
         padding: 0.5rem 3rem;
-
-        width: 300px;
+        width: 100%;
+        max-width: 320px;
+        margin: 3rem 4rem;
     }
 `
 

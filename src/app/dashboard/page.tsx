@@ -606,19 +606,27 @@ const Dashboard: FC<Props> = () => {
                             )}
                         </CardTalleresContainer>
                     )}
-                    {route === 'pedidos' && (
-                        <ContainerPedidos>
-                            {paymentsNoDate.map((item: any, index) => (
-                                <CardDashboardPedidos
-                                    key={index}
-                                    payments={item}
-                                    onEdit={() =>
-                                        openEditModalDateAndHour(item)
-                                    }
+                    {route === 'pedidos' &&
+                        (isLoading ? (
+                            <LoadingContainer>
+                                <LinearIndeterminate
+                                    label="Cargando datos en el sistema..."
+                                    width={320}
                                 />
-                            ))}
-                        </ContainerPedidos>
-                    )}
+                            </LoadingContainer>
+                        ) : (
+                            <ContainerPedidos>
+                                {paymentsNoDate.map((item: any, index) => (
+                                    <CardDashboardPedidos
+                                        key={index}
+                                        payments={item}
+                                        onEdit={() =>
+                                            openEditModalDateAndHour(item)
+                                        }
+                                    />
+                                ))}
+                            </ContainerPedidos>
+                        ))}
                 </div>
             </Box>
         </Box>

@@ -1,7 +1,7 @@
 'use client'
 
 import { FC, memo, useEffect } from 'react'
-import { Tooltip } from '@mui/material'
+import { Fab, Tooltip } from '@mui/material'
 import HoverMotion from '@/animations/hover'
 import LayoutNavFooter from '@/layout/layout'
 import AnimatedView from '@/animations/AnimatedContainer'
@@ -20,6 +20,7 @@ import {
     ContainerParrafos,
     ContainerParrafosAndServices,
     SubtitleServices,
+    FloatButtonContainer,
 } from './styles'
 
 const Conocenos: FC = () => {
@@ -76,8 +77,43 @@ const Conocenos: FC = () => {
         window.location.href = route
     }
 
+    const contactWhatsApp = () => {
+        let message =
+            'Hola Farmacia Sta.Bárbara, me gustaría que me asesoraran sobre:'
+        const phoneNumber = '+34682734237'
+
+        const whatsappURL = `whatsapp://send?phone=${phoneNumber}&text=${encodeURIComponent(
+            message
+        )}`
+
+        window.open(whatsappURL)
+    }
+
     return (
         <LayoutNavFooter>
+            <FloatButtonContainer>
+                <HoverMotion>
+                    <Fab
+                        onClick={contactWhatsApp}
+                        sx={{
+                            color: 'white',
+                            borderColor: 'black',
+                            width: '100%',
+                            borderRadius: '130px',
+                            backgroundColor: 'black',
+                            ':hover': {
+                                backgroundColor: 'white',
+                                color: 'black',
+                                borderColor: 'black',
+                            },
+                            fontFamily: 'Cormorant Garamond',
+                        }}
+                        variant="extended"
+                    >
+                        ¿Te asesoramos?
+                    </Fab>
+                </HoverMotion>
+            </FloatButtonContainer>
             <AnimatedView>
                 <MainContainer>
                     <ContainerData>
@@ -85,7 +121,7 @@ const Conocenos: FC = () => {
                             FARMACIA STA. BÁRBARA <br />
                             SEVILLA ESTE
                         </Title>
-                        <SubtitleServices>Quiénes somos</SubtitleServices>
+                        {/* <SubtitleServices>Quiénes somos</SubtitleServices> */}
                         <ContainerParrafosAndServices>
                             <ContainerParrafos>
                                 <ParrafoServices>

@@ -102,13 +102,17 @@ export const useLogicDashboard = () => {
         return payment.payed === true && payment.dateId === ''
     })
 
-    console.log(paymentsNoDate)
-
     // Función de comparación personalizada para ordenar por fecha y luego por hora
     function comparePayments(a: any, b: any) {
+        // Convertir las fechas a objetos Date
+        const dateA = new Date(
+            a.date!.dates.split('/').reverse().join('-') + 'T00:00:00'
+        )
+        const dateB = new Date(
+            b.date!.dates.split('/').reverse().join('-') + 'T00:00:00'
+        )
+
         // Comparar fechas
-        const dateA = a.date!.dates
-        const dateB = b.date!.dates
         if (dateA < dateB) return -1
         if (dateA > dateB) return 1
 
@@ -122,7 +126,7 @@ export const useLogicDashboard = () => {
     }
 
     // Ordena los elementos por fecha y luego por hora
-    // datesPaymentsComing?.sort(comparePayments)
+    datesPaymentsComing?.sort(comparePayments)
 
     const fetchAllUsers = useCallback(async () => {
         setIsLoading(true)
@@ -164,7 +168,6 @@ export const useLogicDashboard = () => {
     const getAllPayments = useCallback(async () => {
         setIsLoading(true)
         const payments = await fetchPaymentsData()
-        console.log(payments)
         setAllPayments(payments)
         setIsLoading(false)
         return payments

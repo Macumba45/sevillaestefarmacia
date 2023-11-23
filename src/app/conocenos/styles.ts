@@ -151,3 +151,10 @@ export const SubtitleServices = styled.h2`
         width: 300px;
     }
 `
+
+export const FloatButtonContainer = styled.div`
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 9999;
+`
