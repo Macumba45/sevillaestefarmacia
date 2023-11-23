@@ -3,7 +3,7 @@
 import { FC, memo } from 'react'
 import { Card } from 'antd'
 import { Props } from './types'
-import { Button, Tooltip } from '@mui/material'
+import { Tooltip } from '@mui/material'
 import Typography from 'antd/es/typography/Typography'
 
 const { Meta } = Card
@@ -84,7 +84,7 @@ const CardDashboardCitas: FC<Props> = ({ payments, onEdit, disabled }) => {
                 >
                     <Typography>Ver telefono</Typography>
                 </Tooltip>,
-                <Typography key={2} onClick={disabled ? () => {} : onEdit}>
+                <Typography key={2} onClick={disabled ? () => { } : onEdit}>
                     {disabled ? 'Cita pasada' : 'Editar cita'}
                 </Typography>,
             ]}
