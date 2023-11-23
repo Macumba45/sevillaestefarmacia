@@ -19,12 +19,17 @@ async function forgotPassword(req: NextApiRequest, res: NextApiResponse) {
 
         const transporter = nodemailer.createTransport({
             // Configuración del servicio de correo electrónico (por ejemplo, Gmail)
-            service: 'Gmail',
+            host: 'smtp.sevillaestefarmacia.com',
+            port: 587,
             auth: {
-                user: 'gonzalolovo@gmail.com',
-                pass: process.env.EMAIL_PASSWORD,
+                user: 'info@sevillaestefarmacia.com',
+                pass: process.env.EMAIL_PASSWORD_FARMACIA,
             },
-            secure: true,
+            secure: false,
+            tls: {
+                // do not fail on invalid certs
+                rejectUnauthorized: false,
+            },
         })
 
         await new Promise((resolve, reject) => {
@@ -41,7 +46,7 @@ async function forgotPassword(req: NextApiRequest, res: NextApiResponse) {
         })
 
         const mailOptions = {
-            from: 'gonzalolovo@gmail.com',
+            from: 'info@sevillaestefarmacia.com',
             to: email,
             subject: 'Solicitud de cambio de contraseña',
             html: `
