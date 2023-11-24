@@ -71,7 +71,7 @@ const Perfil: FC = () => {
 
     useEffect(() => {
         document.title = `Mi perfil - ${user.name}`
-    }, [])
+    }, [user])
 
     const titleSpd = 'SISTEMA PERSONALIZADO DE DOSIFICACIÓN'
 

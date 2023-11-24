@@ -3,7 +3,7 @@
 import { FC, memo } from 'react'
 import { Card } from 'antd'
 import { Props } from './types'
-import { Button, Tooltip } from '@mui/material'
+import { Tooltip } from '@mui/material'
 import Typography from 'antd/es/typography/Typography'
 import { Payment } from '../../../types/types'
 
@@ -39,7 +39,7 @@ const CardDashboardPedidos: FC<Props> = ({ payments, onEdit, disabled }) => {
             hoverable
             style={{
                 width: '100%',
-                maxWidth: '400px',
+                maxWidth: '363px',
                 minWidth: '300px',
                 margin: 10,
                 objectFit: 'cover',

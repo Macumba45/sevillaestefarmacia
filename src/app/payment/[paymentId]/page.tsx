@@ -77,7 +77,9 @@ const PaymentSuccessComponent: FC<Props> = ({ params }) => {
                 // Este es el servicio especial, envía el correo sin datos de fecha y hora
                 emailConfirmationPaymentService(
                     user?.email as string,
-                    titleService
+                    titleService,
+                    priceServiceMetaData,
+                    userNameMetaData
                 )
                 setIsLoading(false)
             } else if (fecha && hour) {

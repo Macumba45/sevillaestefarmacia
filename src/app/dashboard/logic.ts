@@ -98,9 +98,23 @@ export const useLogicDashboard = () => {
         )
     })
 
-    const paymentsNoDate = allPayments?.filter((payment: any) => {
-        return payment.payed === true && payment.dateId === ''
-    })
+    const paymentsNoDate = allPayments
+        ?.filter((payment: any) => {
+            return payment.payed === true && payment.dateId === ''
+        })
+        .sort(compareDatesCreatedAt)
+
+    function compareDatesCreatedAt(a: any, b: any) {
+        // Convertir las fechas a objetos Date
+        const dateA = new Date(a.createdAt)
+        const dateB = new Date(b.createdAt)
+
+        // Comparar fechas
+        if (dateA > dateB) return -1
+        if (dateA < dateB) return 1
+
+        return 0
+    }
 
     // Función de comparación personalizada para ordenar por fecha y luego por hora
     function comparePayments(a: any, b: any) {

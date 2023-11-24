@@ -39,7 +39,9 @@ export const emailConfirmationPaymentCitas = async (
 
 export const emailConfirmationPaymentService = async (
     email: string,
-    titleService: string
+    titleService: string,
+    priceService: string,
+    userName: string
 ) => {
     try {
         const headers = {
@@ -50,7 +52,12 @@ export const emailConfirmationPaymentService = async (
             {
                 method: 'POST',
                 headers,
-                body: JSON.stringify({ email, titleService }),
+                body: JSON.stringify({
+                    email,
+                    titleService,
+                    priceService,
+                    userName,
+                }),
             }
         )
         if (response.ok) {
