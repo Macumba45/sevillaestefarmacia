@@ -6,7 +6,9 @@ export const stripePayment = async (
     amount: number,
     priceId: string,
     paymentId: string,
-    serviceId: string
+    serviceId: string,
+    userName: string,
+    priceService: string
 ) => {
     try {
         const response = await fetch('/api/stripe/checkout_sessions', {
@@ -14,7 +16,14 @@ export const stripePayment = async (
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ amount, priceId, paymentId, serviceId }),
+            body: JSON.stringify({
+                amount,
+                priceId,
+                paymentId,
+                serviceId,
+                userName,
+                priceService,
+            }),
         })
         if (response.ok) {
             const data = await response.json()
@@ -68,6 +77,9 @@ export const fetchChargeListStripe = async (paymentId: string) => {
                         event.data.object.metadata.paymentId
                     resultObject.serviceId =
                         event.data.object.metadata.serviceId
+                    resultObject.userName = event.data.object.metadata.userName
+                    resultObject.priceService =
+                        event.data.object.metadata.priceService
                 }
             })
 

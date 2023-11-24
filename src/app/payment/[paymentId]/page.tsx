@@ -32,6 +32,8 @@ const PaymentSuccessComponent: FC<Props> = ({ params }) => {
         setIsLoading,
         titleService,
         getServiceTitle,
+        userNameMetaData,
+        priceServiceMetaData,
     } = useLogicPayment()
     const [isPaymentProcessed, setIsPaymentProcessed] = useState(false)
 
@@ -53,6 +55,7 @@ const PaymentSuccessComponent: FC<Props> = ({ params }) => {
             serviceIdMetadata !== 'clo0e17d30004xy04cjklg2px'
         ) {
             getPyamentById(params.paymentId)
+            getServiceTitle(serviceIdMetadata)
         }
     }, [serviceIdMetadata])
 
@@ -82,7 +85,10 @@ const PaymentSuccessComponent: FC<Props> = ({ params }) => {
                 emailConfirmationPaymentCitas(
                     user?.email as string,
                     fecha,
-                    hour
+                    hour,
+                    userNameMetaData,
+                    priceServiceMetaData,
+                    titleService
                 )
                 setIsLoading(false)
             }
@@ -94,6 +100,8 @@ const PaymentSuccessComponent: FC<Props> = ({ params }) => {
         fecha,
         hour,
         titleService,
+        userNameMetaData,
+        priceServiceMetaData,
     ])
 
     if (isLoading)
@@ -181,12 +189,12 @@ const PaymentSuccessComponent: FC<Props> = ({ params }) => {
                     {serviceIdMetadata &&
                     serviceIdMetadata === 'clo0e17d30004xy04cjklg2px' ? (
                         <p>
-                            Porfavor, presenta el email de confirmación de
+                            Por favor, presenta el email de confirmación de
                             compra en el mostrador
                         </p>
                     ) : (
                         <p>
-                            Si deseas cambiar la cita, porfavor, ponte en
+                            Si deseas cambiar la cita, por favor, ponte en
                             contacto con nosotros.
                         </p>
                     )}

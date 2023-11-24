@@ -51,6 +51,9 @@ export const useLogicPageServicesDetail = () => {
     const handleReservarCita = async () => {
         try {
             setIsLoading(true)
+            const userName = user?.name as string
+            const priceService = serviceData?.price as string
+            console.log(priceService)
             const userId = user?.id as string
             const serviceId = serviceData?.id as string
             const priceId = serviceData?.priceId as string
@@ -64,8 +67,11 @@ export const useLogicPageServicesDetail = () => {
                 1,
                 priceId,
                 payment.id,
-                serviceId
+                serviceId,
+                userName,
+                priceService
             )
+            console.log(sessionData)
             router.push(sessionData.url)
         } catch (error) {
             console.error('Error al crear la sesión de pago: ', error)

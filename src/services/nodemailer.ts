@@ -1,8 +1,12 @@
 export const emailConfirmationPaymentCitas = async (
     email: string,
     date: string,
-    hour: string
+    hour: string,
+    userName: string,
+    priceService: string,
+    titleService: string
 ) => {
+    console.log(email, date, hour, userName, priceService)
     try {
         const headers = {
             'Content-Type': 'application/json',
@@ -12,7 +16,14 @@ export const emailConfirmationPaymentCitas = async (
             {
                 method: 'POST',
                 headers,
-                body: JSON.stringify({ email, date, hour }),
+                body: JSON.stringify({
+                    email,
+                    date,
+                    hour,
+                    userName,
+                    priceService,
+                    titleService,
+                }),
             }
         )
         if (response.ok) {

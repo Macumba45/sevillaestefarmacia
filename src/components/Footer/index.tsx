@@ -47,7 +47,7 @@ const Footer: FC = () => {
                 <LocationOnIcon
                     onClick={() =>
                         window.open(
-                            'https://www.google.com/maps/search/?api=1&query=Calle Periodista Juan Tribuna, 8 (Local 2) 41019 Sevilla',
+                            'https://www.google.com/maps/place/Farmacia+Sta.+B%C3%A1rbara.+Sevilla+Este/@37.4041118,-5.9139216,18.68z/data=!4m6!3m5!1s0xd126f4c90bf07e7:0xfb6e4b26534ae22a!8m2!3d37.4040896!4d-5.9138217!16s%2Fg%2F11gd3bskf2?entry=ttu',
                             '_blank'
                         )
                     }

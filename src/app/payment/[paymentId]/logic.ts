@@ -12,6 +12,8 @@ export const useLogicPayment = () => {
     const { user } = useContext(UserContext)
     const [paymentIdMetadata, setPaymentIdMetadata] = useState<string[]>([])
     const [serviceIdMetadata, setServiceIdMetadata] = useState<string>('')
+    const [userNameMetaData, setUserNameMetaData] = useState<string>('')
+    const [priceServiceMetaData, setPriceServiceMetaData] = useState<string>('')
     const [fecha, setFecha] = useState<string>('')
     const [hour, setHour] = useState<string>('')
     const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -25,8 +27,11 @@ export const useLogicPayment = () => {
 
     const getChargeList = async (paymentId: string) => {
         const charList = await fetchChargeListStripe(paymentId)
+        console.log(charList)
         setPaymentIdMetadata(charList.paymentId)
         setServiceIdMetadata(charList.serviceId)
+        setUserNameMetaData(charList.userName)
+        setPriceServiceMetaData(charList.priceService)
 
         // Verificar si es el servicio especial sin fecha ni hora
         if (
@@ -100,5 +105,7 @@ export const useLogicPayment = () => {
         setIsLoading,
         getServiceTitle,
         titleService,
+        userNameMetaData,
+        priceServiceMetaData,
     }
 }
