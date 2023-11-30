@@ -17,7 +17,7 @@ export const useLogicBlogDetail = () => {
         let message = `Hola, me gustaría saber más sobre el taller ${blogDetails?.title}`
         const phoneNumber = '+34682734237'
 
-        const whatsappURL = `whatsapp://send?phone=${phoneNumber}&text=${encodeURIComponent(
+        const whatsappURL = `https://wa.me/${phoneNumber}&text=${encodeURIComponent(
             message
         )}`
 

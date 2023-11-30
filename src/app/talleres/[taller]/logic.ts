@@ -20,7 +20,7 @@ export const useLogicTallerDetail = () => {
         let message = `Hola, me gustaría saber más sobre el taller ${taller?.title}`
         const phoneNumber = '+34682734237'
 
-        const whatsappURL = `whatsapp://send?phone=${phoneNumber}&text=${encodeURIComponent(
+        const whatsappURL = `https://wa.me/${phoneNumber}&text=${encodeURIComponent(
             message
         )}`
 

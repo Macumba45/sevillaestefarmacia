@@ -98,7 +98,7 @@ const Page: FC<Props> = ({ params }) => {
             break
         case 'clo0e0mn50003xy040gwqse36':
             backgroundcolor = '#ebf0f6'
-            buttonName = 'Solcitar presupuesto'
+            buttonName = 'Solicitar presupuesto'
             isButtonDisabled = user ? false : true
 
             break
@@ -193,7 +193,7 @@ const Page: FC<Props> = ({ params }) => {
                                 } else if (buttonName === 'Contáctanos') {
                                     contactWhatsApp()
                                 } else if (
-                                    buttonName === 'Solcitar presupuesto'
+                                    buttonName === 'Solicitar presupuesto'
                                 ) {
                                     contactWhatsApp()
                                 } else {

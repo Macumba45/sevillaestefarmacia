@@ -72,15 +72,10 @@ const Conocenos: FC = () => {
     const handleServiceClick = (route: string) => {
         window.location.href = route
     }
-
     const contactWhatsApp = () => {
-        let message =
-            'Hola Farmacia Sta.Bárbara, me gustaría que me asesoraran sobre:'
         const phoneNumber = '+34682734237'
 
-        const whatsappURL = `whatsapp://send?phone=${phoneNumber}&text=${encodeURIComponent(
-            message
-        )}`
+        const whatsappURL = `https://wa.me/${phoneNumber}`
 
         window.open(whatsappURL)
     }

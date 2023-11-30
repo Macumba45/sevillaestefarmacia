@@ -157,7 +157,7 @@ const SignUp: FC = () => {
                                         required
                                         fullWidth
                                         id="firstName"
-                                        label="Nombre completo"
+                                        label="Nombre y apellidos"
                                         autoFocus
                                         sx={stylesTypography}
                                         InputLabelProps={{

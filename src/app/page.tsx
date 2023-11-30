@@ -19,6 +19,7 @@ import {
     FloatButtonContainer,
     ImgConocenos,
 } from './styles'
+import CookieBanner from '@/components/Cookies'
 
 const Home: FC = () => {
     useEffect(() => {
@@ -27,13 +28,9 @@ const Home: FC = () => {
         []
 
     const contactWhatsApp = () => {
-        let message =
-            'Hola Farmacia Sta.Bárbara, me gustaría que me asesoraran sobre:'
         const phoneNumber = '+34682734237'
 
-        const whatsappURL = `whatsapp://send?phone=${phoneNumber}&text=${encodeURIComponent(
-            message
-        )}`
+        const whatsappURL = `https://wa.me/${phoneNumber}`
 
         window.open(whatsappURL)
     }
@@ -224,6 +221,9 @@ const Home: FC = () => {
                         objectposition="center"
                     />
                 </AnimatedView>
+                <>
+                    <CookieBanner />
+                </>
                 <FloatButtonContainer>
                     <HoverMotion>
                         <Fab
