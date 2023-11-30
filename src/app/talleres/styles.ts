@@ -132,10 +132,9 @@ export const ParrafoServices = styled.p`
         margin-bottom: 2rem;
     }
 `
-
 export const FloatButtonContainer = styled.div`
     position: fixed;
     bottom: 2rem;
-    right: 2rem;
+    right: 1rem;
     z-index: 9999;
 `

@@ -26,19 +26,20 @@ const CookieBanner = () => {
                     bottom: 0,
                     left: 0,
                     width: '100%',
-                    backgroundColor: '#f1f1f1',
+                    backgroundColor: '#000000',
                     padding: '10px',
                     textAlign: 'center',
+                    color: 'white',
                 }}
             >
-                <p style={{ margin: 0, display: 'inline' }}>
+                <p style={{ margin: '1rem', display: 'inline' }}>
                     Este sitio web utiliza cookies. Al continuar navegando,
                     aceptas el uso de cookies.
                 </p>
                 <button
                     style={{
-                        backgroundColor: '#4caf50',
-                        color: 'white',
+                        backgroundColor: '#ffffff',
+                        color: 'black',
                         padding: '5px 10px',
                         border: 'none',
                         borderRadius: '5px',

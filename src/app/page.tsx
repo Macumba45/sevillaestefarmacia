@@ -222,7 +222,6 @@ const Home: FC = () => {
                         objectposition="center"
                     />
                 </AnimatedView>
-                <CookieBanner />
                 <FloatButtonContainer>
                     <HoverMotion>
                         <Fab
@@ -230,7 +229,6 @@ const Home: FC = () => {
                             sx={{
                                 color: 'white',
                                 backgroundColor: 'black',
-
                                 backgroundRepeat: 'no-repeat',
                                 borderColor: 'black',
                                 width: '100%',
