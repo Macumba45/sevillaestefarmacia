@@ -4,12 +4,29 @@ import { FC, memo, useEffect } from 'react'
 import CardTallerOrBlog from '@/components/CardTallerOrBlog'
 import { useLogicTaller } from './logic'
 import LayoutNavFooter from '@/layout/layout'
-import { MainContainer, Title, Subtitle, Container } from './styles'
 import CircularIndeterminate from '@/components/Loader'
 import AnimatedView from '@/animations/AnimatedContainer'
+import { Fab } from '@mui/material'
+import HoverMotion from '@/animations/hover'
+import WhatsAppIcon from '@mui/icons-material/WhatsApp'
+import {
+    MainContainer,
+    Title,
+    Subtitle,
+    Container,
+    FloatButtonContainer,
+} from './styles'
 
 const Talleres: FC = () => {
     const { fetchTalleres, talleres, isLoading } = useLogicTaller()
+
+    const contactWhatsApp = () => {
+        const phoneNumber = '+34682734237'
+
+        const whatsappURL = `https://wa.me/${phoneNumber}`
+
+        window.open(whatsappURL)
+    }
 
     useEffect(() => {
         fetchTalleres()
@@ -50,6 +67,31 @@ const Talleres: FC = () => {
                     ))}
                 </Container>
             </MainContainer>
+            <FloatButtonContainer>
+                <HoverMotion>
+                    <Fab
+                        onClick={contactWhatsApp}
+                        sx={{
+                            color: 'white',
+                            backgroundColor: 'black',
+
+                            backgroundRepeat: 'no-repeat',
+                            borderColor: 'black',
+                            width: '100%',
+                            borderRadius: '130px',
+                            ':hover': {
+                                backgroundColor: 'white',
+                                color: 'black',
+                                borderColor: 'black',
+                            },
+                            fontFamily: 'Cormorant Garamond',
+                        }}
+                        variant="extended"
+                    >
+                        <WhatsAppIcon sx={{ marginRight: 1 }} /> ¿Te asesoramos?
+                    </Fab>
+                </HoverMotion>
+            </FloatButtonContainer>
         </LayoutNavFooter>
     )
 }

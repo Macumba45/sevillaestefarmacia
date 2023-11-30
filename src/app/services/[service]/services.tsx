@@ -2,6 +2,7 @@
 
 import { FC, memo, useContext, useEffect } from 'react'
 import { UserContext } from '@/context/UserContext'
+import WhatsAppIcon from '@mui/icons-material/WhatsApp'
 import { getAuthenticatedToken } from '../../../../storage/storage'
 import { useLogicPageServicesDetail } from './logic'
 import { Button, Fab } from '@mui/material'
@@ -225,10 +226,12 @@ const Page: FC<Props> = ({ params }) => {
                             onClick={contactWhatsApp}
                             sx={{
                                 color: 'white',
-                                borderColor: 'black',
-                                width: '160px',
-                                borderRadius: '130px',
                                 backgroundColor: 'black',
+
+                                backgroundRepeat: 'no-repeat',
+                                borderColor: 'black',
+                                width: '100%',
+                                borderRadius: '130px',
                                 ':hover': {
                                     backgroundColor: 'white',
                                     color: 'black',
@@ -238,7 +241,8 @@ const Page: FC<Props> = ({ params }) => {
                             }}
                             variant="extended"
                         >
-                            ¿Te asesoramos?
+                            <WhatsAppIcon sx={{ marginRight: 1 }} /> ¿Te
+                            asesoramos?
                         </Fab>
                     </HoverMotion>
                 </FloatButtonContainer>

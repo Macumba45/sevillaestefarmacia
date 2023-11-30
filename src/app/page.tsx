@@ -8,6 +8,8 @@ import Services from '@/components/Services'
 import AnimatedView from '../animations/AnimatedContainer'
 import { Button, Fab } from '@mui/material'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
+import WhatsAppIcon from '@mui/icons-material/WhatsApp'
+import CookieBanner from '@/components/Cookies'
 import {
     ButtonContainerConocenos,
     ContainerConocenos,
@@ -19,7 +21,6 @@ import {
     FloatButtonContainer,
     ImgConocenos,
 } from './styles'
-import CookieBanner from '@/components/Cookies'
 
 const Home: FC = () => {
     useEffect(() => {
@@ -221,19 +222,19 @@ const Home: FC = () => {
                         objectposition="center"
                     />
                 </AnimatedView>
-                <>
-                    <CookieBanner />
-                </>
+                <CookieBanner />
                 <FloatButtonContainer>
                     <HoverMotion>
                         <Fab
                             onClick={contactWhatsApp}
                             sx={{
                                 color: 'white',
+                                backgroundColor: 'black',
+
+                                backgroundRepeat: 'no-repeat',
                                 borderColor: 'black',
                                 width: '100%',
                                 borderRadius: '130px',
-                                backgroundColor: 'black',
                                 ':hover': {
                                     backgroundColor: 'white',
                                     color: 'black',
@@ -243,7 +244,8 @@ const Home: FC = () => {
                             }}
                             variant="extended"
                         >
-                            ¿Te asesoramos?
+                            <WhatsAppIcon sx={{ marginRight: 1 }} /> ¿Te
+                            asesoramos?
                         </Fab>
                     </HoverMotion>
                 </FloatButtonContainer>

@@ -6,6 +6,8 @@ import HoverMotion from '@/animations/hover'
 import LayoutNavFooter from '@/layout/layout'
 import AnimatedView from '@/animations/AnimatedContainer'
 import mapa from '../../assets/CONOCENOS/mapa.png'
+import WhatsAppIcon from '@mui/icons-material/WhatsApp'
+
 import {
     ImgMap,
     ContainerData,
@@ -88,10 +90,12 @@ const Conocenos: FC = () => {
                         onClick={contactWhatsApp}
                         sx={{
                             color: 'white',
+                            backgroundColor: 'black',
+
+                            backgroundRepeat: 'no-repeat',
                             borderColor: 'black',
                             width: '100%',
                             borderRadius: '130px',
-                            backgroundColor: 'black',
                             ':hover': {
                                 backgroundColor: 'white',
                                 color: 'black',
@@ -101,7 +105,7 @@ const Conocenos: FC = () => {
                         }}
                         variant="extended"
                     >
-                        ¿Te asesoramos?
+                        <WhatsAppIcon sx={{ marginRight: 1 }} /> ¿Te asesoramos?
                     </Fab>
                 </HoverMotion>
             </FloatButtonContainer>
