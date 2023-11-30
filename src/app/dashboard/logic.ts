@@ -97,7 +97,7 @@ export const useLogicDashboard = () => {
             paymentDate < new Date()
         )
     })
-    datesPaymentsPassed?.sort(comparePayments)
+    datesPaymentsPassed?.sort(comparePaymentsReverse)
 
     const paymentsNoDate = allPayments
         ?.filter((payment: any) => {
@@ -136,6 +136,28 @@ export const useLogicDashboard = () => {
         const hourB = b.hour!.hour
         if (hourA < hourB) return -1
         if (hourA > hourB) return 1
+
+        return 0
+    }
+
+    function comparePaymentsReverse(a: any, b: any) {
+        // Convertir las fechas a objetos Date
+        const dateA = new Date(
+            a.date!.dates.split('/').reverse().join('-') + 'T00:00:00'
+        )
+        const dateB = new Date(
+            b.date!.dates.split('/').reverse().join('-') + 'T00:00:00'
+        )
+
+        // Comparar fechas
+        if (dateA > dateB) return -1
+        if (dateA < dateB) return 1
+
+        // Si las fechas son iguales, comparar horas
+        const hourA = a.hour!.hour
+        const hourB = b.hour!.hour
+        if (hourA > hourB) return -1
+        if (hourA < hourB) return 1
 
         return 0
     }
