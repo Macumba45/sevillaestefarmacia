@@ -97,6 +97,7 @@ export const useLogicDashboard = () => {
             paymentDate < new Date()
         )
     })
+    datesPaymentsPassed?.sort(comparePayments)
 
     const paymentsNoDate = allPayments
         ?.filter((payment: any) => {
