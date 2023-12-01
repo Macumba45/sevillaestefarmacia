@@ -4,8 +4,9 @@ import { FC, memo, useEffect } from 'react'
 import { useLogicTallerDetail } from './logic'
 import LayoutNavFooter from '@/layout/layout'
 import React from 'react'
-import { Button } from '@mui/material'
+import { Button, Divider, Fab } from '@mui/material'
 import HoverMotion from '@/animations/hover'
+import WhatsAppIcon from '@mui/icons-material/WhatsApp'
 import {
     ButtonContainerServices,
     MainContainer,
@@ -18,6 +19,7 @@ import {
     TitleDetails,
 } from './styles'
 import CircularIndeterminate from '@/components/Loader'
+import { FloatButtonContainer } from '../styles'
 
 interface Props {
     params: {
@@ -56,7 +58,17 @@ const Page: FC<Props> = ({ params }) => {
     return (
         <LayoutNavFooter>
             <MainContainer>
-                <Title>TALLERES</Title>
+                <Title>
+                    TALLERES
+                    <Divider
+                        sx={{
+                            width: '30%',
+                            height: '3px',
+                            backgroundColor: 'black',
+                            marginTop: '3rem',
+                        }}
+                    />
+                </Title>
                 <Subtitle>¡No faltes!</Subtitle>
                 {isLoading ? (
                     <div
@@ -109,6 +121,32 @@ const Page: FC<Props> = ({ params }) => {
                         </HoverMotion>
                     </>
                 )}
+                <FloatButtonContainer>
+                    <HoverMotion>
+                        <Fab
+                            onClick={contactWhatsApp}
+                            sx={{
+                                color: 'white',
+                                backgroundColor: 'black',
+
+                                backgroundRepeat: 'no-repeat',
+                                borderColor: 'black',
+                                width: '100%',
+                                borderRadius: '130px',
+                                ':hover': {
+                                    backgroundColor: 'white',
+                                    color: 'black',
+                                    borderColor: 'black',
+                                },
+                                fontFamily: 'Cormorant Garamond',
+                            }}
+                            variant="extended"
+                        >
+                            <WhatsAppIcon sx={{ marginRight: 1 }} /> ¿Te
+                            asesoramos?
+                        </Fab>
+                    </HoverMotion>
+                </FloatButtonContainer>
             </MainContainer>
         </LayoutNavFooter>
     )

@@ -7,9 +7,13 @@ import CardTallerOrBlog from '@/components/CardTallerOrBlog'
 import { MainContainer, Title, Subtitle, Container } from './styles'
 import CircularIndeterminate from '@/components/Loader'
 import AnimatedView from '@/animations/AnimatedContainer'
+import { Divider, Fab } from '@mui/material'
+import { FloatButtonContainer } from '../styles'
+import HoverMotion from '@/animations/hover'
+import WhatsAppIcon from '@mui/icons-material/WhatsApp'
 
 const Blog: FC = () => {
-    const { fetchBlogs, blogs, isLoading } = useLogicBlog()
+    const { fetchBlogs, blogs, isLoading, contactWhatsApp } = useLogicBlog()
 
     useEffect(() => {
         fetchBlogs()
@@ -17,14 +21,24 @@ const Blog: FC = () => {
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
-            document.title = 'Blog'
+            document.title = 'Farmacia Sta. Bárbara - Blog'
         }
     }, [])
 
     return (
         <LayoutNavFooter>
             <MainContainer>
-                <Title>BLOG</Title>
+                <Title>
+                    BLOG
+                    <Divider
+                        sx={{
+                            width: '30%',
+                            height: '3px',
+                            backgroundColor: 'black',
+                            marginTop: '3rem',
+                        }}
+                    />
+                </Title>
                 <Subtitle>Consejos farmacéuticos</Subtitle>
                 <Container>
                     {isLoading && (
@@ -49,6 +63,32 @@ const Blog: FC = () => {
                         </AnimatedView>
                     ))}
                 </Container>
+                <FloatButtonContainer>
+                    <HoverMotion>
+                        <Fab
+                            onClick={contactWhatsApp}
+                            sx={{
+                                color: 'white',
+                                backgroundColor: 'black',
+
+                                backgroundRepeat: 'no-repeat',
+                                borderColor: 'black',
+                                width: '100%',
+                                borderRadius: '130px',
+                                ':hover': {
+                                    backgroundColor: 'white',
+                                    color: 'black',
+                                    borderColor: 'black',
+                                },
+                                fontFamily: 'Cormorant Garamond',
+                            }}
+                            variant="extended"
+                        >
+                            <WhatsAppIcon sx={{ marginRight: 1 }} /> ¿Te
+                            asesoramos?
+                        </Fab>
+                    </HoverMotion>
+                </FloatButtonContainer>
             </MainContainer>
         </LayoutNavFooter>
     )

@@ -94,7 +94,9 @@ const CardTallerOrBlog: FC<Props> = ({ mode, blog, taller }) => (
                                     fontFamily: 'Cormorant Garamond',
                                 }}
                             >
-                                Más información
+                                {mode === 'blog'
+                                    ? 'Leer más'
+                                    : 'Reservar plaza'}
                             </p>
                         </Button>
                     </Link>

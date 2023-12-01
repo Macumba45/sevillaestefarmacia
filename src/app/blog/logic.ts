@@ -13,10 +13,18 @@ export const useLogicBlog = () => {
         setIsLoading(false)
         return blogs
     }
+    const contactWhatsApp = () => {
+        const phoneNumber = '+34682734237'
+
+        const whatsappURL = `https://wa.me/${phoneNumber}`
+
+        window.open(whatsappURL)
+    }
 
     return {
         fetchBlogs,
         blogs,
         isLoading,
+        contactWhatsApp,
     }
 }

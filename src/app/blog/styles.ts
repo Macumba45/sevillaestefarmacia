@@ -33,37 +33,34 @@ export const Title = styled.h1<{
     widthtitledesktop?: string
 }>`
     font-size: 2rem;
-    margin-top: 8rem;
     margin-bottom: 1rem;
+    margin-top: 10rem;
     color: black;
     text-align: left;
     padding-left: 2rem;
-    line-height: 2.5rem;
-    font-weight: 500;
+    font-weight: 400;
     width: ${props => props.widthtitle};
     @media screen and (min-width: 899px) {
         width: ${props => props.widthtitledesktop};
-        font-size: 2.5rem;
+        font-size: 3rem;
         line-height: 3rem;
         margin-left: 2rem;
     }
 `
 
 export const Subtitle = styled.h2`
-    margin-left: 2rem;
-    padding: 0.5rem 3.5rem;
+    padding: 0.5rem 1rem;
     border-radius: 30px;
     font-size: 1.5rem;
-    width: 220px;
-    text-align: center;
-    color: white;
-    background-color: black;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    line-height: 2rem;
+    width: 250px;
+    margin: 1rem 1rem;
+    color: black;
     @media screen and (min-width: 899px) {
-        font-size: 1.5rem;
+        font-size: 2rem;
         line-height: 2rem;
-        margin-left: 4rem;
+        padding: 0.5rem 3rem;
+        width: 100%;
+        max-width: 320px;
+        margin: 1rem 1rem;
     }
 `

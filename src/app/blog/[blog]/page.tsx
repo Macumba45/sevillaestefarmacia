@@ -1,11 +1,13 @@
 'use client'
 
-import { FC, memo, useEffect } from 'react'
+import React, { FC, memo, useEffect } from 'react'
 import { useLogicBlogDetail } from './logic'
-import React from 'react'
-import { Button } from '@mui/material'
+import { Divider, Fab } from '@mui/material'
 import HoverMotion from '@/animations/hover'
 import LayoutNavFooter from '@/layout/layout'
+import WhatsAppIcon from '@mui/icons-material/WhatsApp'
+import CircularIndeterminate from '@/components/Loader'
+import { FloatButtonContainer } from '@/app/styles'
 import { MainContainer, Title, Subtitle } from '../styles'
 import {
     PictureContainer,
@@ -13,9 +15,7 @@ import {
     TitleDetails,
     SubtitleDetails,
     ParrafoServices,
-    ButtonContainerServices,
 } from './styles'
-import CircularIndeterminate from '@/components/Loader'
 
 interface Props {
     params: {
@@ -53,7 +53,17 @@ const Page: FC<Props> = ({ params }) => {
     return (
         <LayoutNavFooter>
             <MainContainer>
-                <Title>BLOG</Title>
+                <Title>
+                    BLOG
+                    <Divider
+                        sx={{
+                            width: '30%',
+                            height: '3px',
+                            backgroundColor: 'black',
+                            marginTop: '3rem',
+                        }}
+                    />
+                </Title>
                 <Subtitle>Consejos farmacéuticos</Subtitle>
                 {isLoading ? (
                     <div
@@ -83,31 +93,34 @@ const Page: FC<Props> = ({ params }) => {
                                 blogDetails?.descripcion as string
                             )}
                         </ParrafoServices>
-                        <HoverMotion>
-                            <ButtonContainerServices>
-                                <Button
-                                    onClick={contactWhatsApp}
-                                    variant="outlined"
-                                    sx={{
-                                        color: 'white',
-                                        borderColor: 'black',
-                                        width: '300px',
-                                        borderRadius: '130px',
-                                        backgroundColor: 'black',
-                                        ':hover': {
-                                            backgroundColor: 'white',
-                                            color: 'black',
-                                            borderColor: 'black',
-                                        },
-                                        fontFamily: 'Cormorant Garamond',
-                                    }}
-                                >
-                                    Reservar plaza
-                                </Button>
-                            </ButtonContainerServices>
-                        </HoverMotion>
                     </>
                 )}
+                <FloatButtonContainer>
+                    <HoverMotion>
+                        <Fab
+                            onClick={contactWhatsApp}
+                            sx={{
+                                color: 'white',
+                                backgroundColor: 'black',
+
+                                backgroundRepeat: 'no-repeat',
+                                borderColor: 'black',
+                                width: '100%',
+                                borderRadius: '130px',
+                                ':hover': {
+                                    backgroundColor: 'white',
+                                    color: 'black',
+                                    borderColor: 'black',
+                                },
+                                fontFamily: 'Cormorant Garamond',
+                            }}
+                            variant="extended"
+                        >
+                            <WhatsAppIcon sx={{ marginRight: 1 }} /> ¿Te
+                            asesoramos?
+                        </Fab>
+                    </HoverMotion>
+                </FloatButtonContainer>
             </MainContainer>
         </LayoutNavFooter>
     )

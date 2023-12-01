@@ -44,7 +44,6 @@ export const TitleServices = styled.h1<{
         font-size: 3rem;
         line-height: 3rem;
         margin-left: 2rem;
-        margin-bottom: 2rem;
     }
 `
 
@@ -55,7 +54,6 @@ export const SubtitleServices = styled.h2`
     width: 250px;
     margin: 1rem 1rem;
     color: black;
-    line-height: 2rem;
     @media screen and (min-width: 899px) {
         font-size: 2rem;
         line-height: 2rem;

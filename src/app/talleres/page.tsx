@@ -6,7 +6,7 @@ import { useLogicTaller } from './logic'
 import LayoutNavFooter from '@/layout/layout'
 import CircularIndeterminate from '@/components/Loader'
 import AnimatedView from '@/animations/AnimatedContainer'
-import { Fab } from '@mui/material'
+import { Divider, Fab } from '@mui/material'
 import HoverMotion from '@/animations/hover'
 import WhatsAppIcon from '@mui/icons-material/WhatsApp'
 import {
@@ -34,14 +34,24 @@ const Talleres: FC = () => {
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
-            document.title = 'Talleres'
+            document.title = 'Farmacia Sta. Bárbara - Talleres'
         }
     }, [])
 
     return (
         <LayoutNavFooter>
             <MainContainer>
-                <Title>TALLERES</Title>
+                <Title>
+                    TALLERES
+                    <Divider
+                        sx={{
+                            width: '30%',
+                            height: '3px',
+                            backgroundColor: 'black',
+                            marginTop: '3rem',
+                        }}
+                    />
+                </Title>
                 <Subtitle>¡No faltes!</Subtitle>
                 <Container>
                     {isLoading && (

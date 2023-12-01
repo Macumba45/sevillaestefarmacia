@@ -20,8 +20,6 @@ import LayoutNavFooter from '@/layout/layout'
 import {
     ButtonContainerServices,
     Container,
-    DividerContainer,
-    DividerHr,
     FloatButtonContainer,
     FloatButtonLoginContainer,
     LoadingContainer,
