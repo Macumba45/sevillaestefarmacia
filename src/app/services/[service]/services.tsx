@@ -5,7 +5,7 @@ import { UserContext } from '@/context/UserContext'
 import WhatsAppIcon from '@mui/icons-material/WhatsApp'
 import { getAuthenticatedToken } from '../../../../storage/storage'
 import { useLogicPageServicesDetail } from './logic'
-import { Button, Fab } from '@mui/material'
+import { Button, Divider, Fab } from '@mui/material'
 import FloatLoginButton from '@/components/FloatLoginButton'
 import CircularIndeterminate from '@/components/Loader'
 import Dermo from '@/components/DescriptionServices/dermo'
@@ -20,6 +20,8 @@ import LayoutNavFooter from '@/layout/layout'
 import {
     ButtonContainerServices,
     Container,
+    DividerContainer,
+    DividerHr,
     FloatButtonContainer,
     FloatButtonLoginContainer,
     LoadingContainer,
@@ -165,7 +167,16 @@ const Page: FC<Props> = ({ params }) => {
                     }
                 >
                     {serviceData?.title}
+                    <Divider
+                        sx={{
+                            width: '80%',
+                            height: '3px',
+                            backgroundColor: 'black',
+                            marginTop: '3rem',
+                        }}
+                    />
                 </TitleServices>
+
                 <SubtitleServices>{serviceData?.subtitle}</SubtitleServices>
                 <div
                     style={{

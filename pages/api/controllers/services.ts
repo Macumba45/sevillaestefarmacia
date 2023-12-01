@@ -112,7 +112,8 @@ export const updateService = async (
         date: string
         hours: (string | { id: string; hour: string })[]
     }>, // Fechas en formato DD/MM/YYYY
-    price: string
+    price: string,
+    priceId: string
 ): Promise<Services | null> => {
     // Obtén el servicio existente
     const existingService = await prisma.services.findUnique({
@@ -229,6 +230,7 @@ export const updateService = async (
             subtitle: subtitle,
             descripcion: descripcion,
             price: price,
+            priceId: priceId,
         },
     })
 

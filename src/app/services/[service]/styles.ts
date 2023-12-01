@@ -44,6 +44,7 @@ export const TitleServices = styled.h1<{
         font-size: 3rem;
         line-height: 3rem;
         margin-left: 2rem;
+        margin-bottom: 2rem;
     }
 `
 
@@ -52,10 +53,8 @@ export const SubtitleServices = styled.h2`
     border-radius: 30px;
     font-size: 1.5rem;
     width: 250px;
-    text-align: center;
-    margin: 3rem auto;
-    color: white;
-    background-color: black;
+    margin: 1rem 1rem;
+    color: black;
     line-height: 2rem;
     @media screen and (min-width: 899px) {
         font-size: 2rem;
@@ -63,7 +62,7 @@ export const SubtitleServices = styled.h2`
         padding: 0.5rem 3rem;
         width: 100%;
         max-width: 320px;
-        margin: 3rem 4rem;
+        margin: 1rem 1rem;
     }
 `
 
@@ -142,4 +141,18 @@ export const Picture = styled.img`
     @media screen and (min-width: 899px) {
         display: flex;
     }
+`
+
+export const DividerContainer = styled.div`
+    display: flex;
+    justify-content: flex-end;
+`
+
+export const DividerHr = styled.hr`
+    width: 320px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 5px solid black;
+    background-color: #ccc;
 `

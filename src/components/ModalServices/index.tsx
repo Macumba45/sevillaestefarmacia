@@ -45,6 +45,9 @@ const ServiceFormModal: FC<Props> = ({
     const [title, setTitle] = useState('Titulo de prueba')
     const [subtitle, setSubtitle] = useState('Subtitulo de prueba')
     const [price, setPrice] = useState('100')
+    const [priceId, setPriceId] = useState(
+        'price_1O4.......*Pilla el ID en Stripe*'
+    )
     const [selectedDays, setSelectedDays] = useState<
         { date: DateObject; hours: string[] }[]
     >([])
@@ -69,6 +72,9 @@ const ServiceFormModal: FC<Props> = ({
     }
     const handlePriceChange = (event: any) => {
         setPrice(event.target.value)
+    }
+    const handlePriceIdChange = (event: any) => {
+        setPriceId(event.target.value)
     }
 
     function parseDateString(dateString: string): Date {
@@ -133,6 +139,7 @@ const ServiceFormModal: FC<Props> = ({
             title,
             subtitle,
             price,
+            priceId,
             descripcion,
             dates: selectedDays.map(day => ({
                 date: day.date.format('DD/MM/YYYY'),
@@ -167,6 +174,7 @@ const ServiceFormModal: FC<Props> = ({
             setTitle(serviceData.title)
             setPrice(serviceData.price)
             setSubtitle(serviceData.subtitle)
+            setPriceId(serviceData.priceId as string)
 
             // Manejar la carga de las fechas y horas aquí
             const serviceDates = isEditing ? serviceData?.dates || [] : []
@@ -257,6 +265,15 @@ const ServiceFormModal: FC<Props> = ({
                         fullWidth
                         value={price}
                         onChange={handlePriceChange}
+                    />
+                    <TextField
+                        margin="dense"
+                        name="priceId"
+                        label="Precio ID de Stripe"
+                        type="string"
+                        fullWidth
+                        value={priceId}
+                        onChange={handlePriceIdChange}
                     />
                 </div>
                 <div
