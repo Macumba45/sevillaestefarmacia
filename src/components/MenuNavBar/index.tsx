@@ -1,6 +1,6 @@
 'use client'
 
-import { FC, memo, useState } from 'react'
+import { FC, memo, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { Props } from './types'
@@ -36,6 +36,23 @@ const ResponsiveAppBar: FC<Props> = ({ user }) => {
     const router = useRouter()
     const [isDrawerOpen, setIsDrawerOpen] = useState(false)
     const [showSubmenu, setShowSubmenu] = useState(false)
+    const submenuRef = useRef<HTMLDivElement>(null)
+    // Cierra el submenu cuando se hace clic fuera de él
+    useEffect(() => {
+        const handleClickOutside = (event: any) => {
+            if (
+                submenuRef.current &&
+                !submenuRef.current.contains(event.target)
+            ) {
+                setShowSubmenu(false)
+            }
+        }
+
+        document.addEventListener('mousedown', handleClickOutside)
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside)
+        }
+    }, [])
 
     const handleButtonClick = () => {
         if (user?.role === 'admin') {
@@ -166,6 +183,7 @@ const ResponsiveAppBar: FC<Props> = ({ user }) => {
                                         {showSubmenu &&
                                             page.name === 'Servicios' && (
                                                 <div
+                                                    ref={submenuRef}
                                                     style={{
                                                         position: 'absolute', // Para que esté fuera del flujo normal
                                                         top: '65px', // Puedes ajustar esto según tu diseño
