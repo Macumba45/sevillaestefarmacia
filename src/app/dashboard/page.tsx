@@ -615,17 +615,33 @@ const Dashboard: FC<Props> = () => {
                                 />
                             </LoadingContainer>
                         ) : (
-                            <ContainerPedidos>
-                                {paymentsNoDate.map((item: any, index) => (
-                                    <CardDashboardPedidos
-                                        key={index}
-                                        payments={item}
-                                        onEdit={() =>
-                                            openEditModalDateAndHour(item)
-                                        }
-                                    />
-                                ))}
-                            </ContainerPedidos>
+                            <>
+                                {paymentsNoDate.length === 0 && (
+                                    <Typography
+                                        variant="h6"
+                                        sx={{
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            marginBottom: '20px',
+                                            textAlign: 'center',
+                                        }}
+                                    >
+                                        No hay pedidos
+                                    </Typography>
+                                )}
+                                <ContainerPedidos>
+                                    {paymentsNoDate.map((item: any, index) => (
+                                        <CardDashboardPedidos
+                                            key={index}
+                                            payments={item}
+                                            onEdit={() =>
+                                                openEditModalDateAndHour(item)
+                                            }
+                                        />
+                                    ))}
+                                </ContainerPedidos>
+                            </>
                         ))}
                 </div>
             </Box>

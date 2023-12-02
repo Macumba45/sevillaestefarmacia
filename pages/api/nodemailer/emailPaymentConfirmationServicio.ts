@@ -43,7 +43,7 @@ export default async function handler(
         const mailOptions = {
             from: 'info@sevillaestefarmacia.com',
             to: email + ',' + 'info@sevillaestefarmacia.com',
-            subject: 'Gracias por tu compra en Farmacia Sta.Bárbara',
+            subject: `Gracias por elegirnos - ${userName}`,
             html: `
             <!doctype html>
             <html lang="en">
@@ -59,7 +59,7 @@ export default async function handler(
                     <title>Confirmación de Pago</title>
                 </head>
             
-                <body style="padding: 20px">
+                <body style="margin: 0px; padding: 10px">
                     <div
                         class="container"
                         style="
@@ -92,13 +92,13 @@ export default async function handler(
                             class="message"
                             style="
                                 text-align: center;
-                                margin-top: 20px;
-                                font-size: 25px;
+                                font-size: 20px;
                                 color: black;
                                 font-family: Cormorant Garamond;
+                                margin: 10px;
                             "
                         >
-                            <p>Gracias por elegirnos!</p>
+                            <p>¡Gracias por elegirnos!</p>
                             <p>
                                 Esperamos que tu experiencia con nosotros sea
                                 extraordinaria.
@@ -245,7 +245,6 @@ export default async function handler(
                     </div>
                 </body>
             </html>
-            
             
                 `,
         }

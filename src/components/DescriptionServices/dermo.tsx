@@ -1,5 +1,5 @@
 import { FC, memo } from 'react'
-import { Container, ParrafoServices, Title } from './styles'
+import { Container, ParrafoServices, SpanBold, Title } from './styles'
 
 interface Props {
     price: string
@@ -9,63 +9,40 @@ const Dermo: FC<Props> = ({ price }) => {
     return (
         <>
             <Container>
+                <Title>Servicio de análisis facial y capilar.</Title>
+                <ParrafoServices>
+                    Conocer el estado de tu piel, crear nuevas rutinas de
+                    cuidados faciales y/o capilares y resolver dudas. Esa es
+                    nuestra misión, sacarle el máximo partido a tu salud facial
+                    y capilar.
+                </ParrafoServices>
+                <ParrafoServices>
+                    Busca tu momento para empezar con tu `skin care´y empieza a
+                    cuidarte. Nuestra farmacia cuenta con un gabinete privado y
+                    tranquilo donde te realizaremos una breve entrevista para
+                    conocer tus hábitos de cuidados además de medicación si
+                    estás tomando,tan importante en muchísimas ocasiones del
+                    estado de tu piel y/o problemas de caída capilar. Además,
+                    utilizando tecnología de los equipos Courage+Khazaka,
+                    conseguiremos ofrecerte una rutina mucho más específica. Las
+                    profesionales sanitarias Celia Guerrero en análisis facial y
+                    Ana Lobo en análisis capilar, estarán para ofrecerte uno de
+                    los servicios más demandados de nuestra farmacia.
+                </ParrafoServices>
+                <ParrafoServices>
+                    Para poder disfrutar del servicio, simplemente tienes que
+                    registrarte, reservar tu cita y abonar el importe. Nos
+                    pondremos en contacto contigo y te recordaremos la cita los
+                    días previos. ¡Ah! Una vez generada la reserva, dejaremos un
+                    bono preparado para ti, para utilizarlo el día de tu cita, y
+                    así puedas canjearlo en la compra de tus productos
+                    recomendados en la rutina ‘skin care’.
+                </ParrafoServices>
                 <Title>
-                    ¿Te gustaría conocer más sobre tu piel o tu salud capilar?
+                    *El coste del servicio es de {price}€. El bono descuento por
+                    valor de 20 euros no es transferible a otra persona y se
+                    canjea el mismo día de la cita.
                 </Title>
-                <ParrafoServices>
-                    El servicio de dermoanálisis de Farmacia Sta Bárbara
-                    (Sevilla Este) está dirigido por las profesionales
-                    sanitarias Ana Lobo y Celia Guerrero, y nace con el objetivo
-                    de proporcionar a sus pacientes el más alto grado de
-                    satisfacción en la salud y en el cuidado de tu piel y
-                    cabello.
-                </ParrafoServices>
-                <ParrafoServices>
-                    Para lograrlo, disponemos de los conocimientos en constante
-                    evolución, la experiencia y la cualificación necesaria para
-                    analizar y valorar de forma personalizada todas las
-                    afecciones y alteraciones de tu piel.
-                </ParrafoServices>
-                <ParrafoServices>
-                    Profesionales expertos en medicamentos. Farmacéuticos por
-                    vocación y profesión, cosechamos con nuestros conocimientos
-                    la mejora de la salud basándonos en la utilización
-                    medicamentos como tratamiento y prevención en la localidad
-                    de Sevilla desde 1960.
-                </ParrafoServices>
-                <Title>Si tu piel está sana, tu piel lucirá bella.</Title>
-                <Title>¿Cómo lo hacemos?</Title>
-                <ParrafoServices>
-                    Las consultas se desarrollan en nuestro tranquilo y
-                    agradable gabinete, además contamos con un equipo de
-                    dermoanálisis y diversos materiales para valorar mejor los
-                    resultados obtenidos y poder realizar una recomendación de
-                    una manera individualizada.
-                </ParrafoServices>
-                <Title>¿Con qué marcas trabajamos?</Title>
-                <ParrafoServices>
-                    En Farmacia Sta. Bárbara trabajamos con las mejores marcas
-                    en dermocosmética para el cuidado de la piel. Disponemos una
-                    amplia variedad de productos para ofrecerte el que mejor se
-                    ajuste a tus necesidades y presupuesto.
-                </ParrafoServices>
-                <ParrafoServices>
-                    Entre ellas se encuentran: Caudalie, Gema Herrerias,
-                    Bioderma, Eucerin...
-                </ParrafoServices>
-                <ParrafoServices>
-                    Además, con la tarjeta ‘CLUB’, conseguirás un 3% de
-                    descuento acumulable en tus compras en parafarmacia.
-                </ParrafoServices>
-                <Title>¿Cuál es el coste del servicio? ¿Cómo pido cita?</Title>
-                <ParrafoServices>
-                    Puedes pedir tu cita directamente en nuestra farmacia de
-                    manera presencial, llamando al 682 73 42 37 o desde nuestra
-                    web previo pago seleccionando día y hora de la cita.
-                </ParrafoServices>
-                <ParrafoServices>
-                    El coste del servicio es de {price}€.
-                </ParrafoServices>
             </Container>
         </>
     )

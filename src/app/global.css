@@ -3,10 +3,14 @@
 @font-face {
     font-family: 'Cormorant Garamond';
     font-display: swap;
-    /* src: url(../fonts/cormorand/CormorantGaramond-Bold.ttf) format('truetype');
-    src: url(../fonts/cormorand/CormorantGaramond-Medium.ttf) format('truetype');
-    src: url(../fonts/cormorand/CormorantGaramond-Regular.ttf) format('truetype'); */
     src: url(../fonts/cormorand/CormorantGaramond-Light.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'Cormorant Garamond';
+    font-weight: 700; /* Bold */
+    font-display: swap;
+    src: url(../fonts/cormorand/CormorantGaramond-Bold.ttf) format('truetype');
 }
 
 @font-face {

@@ -18,13 +18,11 @@ export const Title = styled.h1<{
     withtitledesktop?: string
 }>`
     font-size: 1.4rem;
-    width: ${props => props.withtitlemobile};
     margin-bottom: 1rem;
     color: black;
     line-height: 2rem;
     margin-left: 2rem;
     margin-right: 2rem;
-    font-weight: 700;
     margin-top: 1.5rem;
     @media screen and (min-width: 899px) {
         width: ${props => props.withtitledesktop};
@@ -41,7 +39,6 @@ export const ParrafoServices = styled.p`
     color: black;
     text-align: left;
     line-height: 2rem;
-    font-weight: lighter;
     margin: 1rem 1rem;
     margin-left: 2rem;
     @media screen and (min-width: 899px) {
@@ -65,7 +62,6 @@ export const TitleServices = styled.h1<{
     text-align: left;
     padding-left: 2rem;
     line-height: 2.5rem;
-    font-weight: 500;
     width: ${props => props.widthtitle};
     @media screen and (min-width: 899px) {
         width: ${props => props.widthtitledesktop};
@@ -92,4 +88,7 @@ export const SubtitleServices = styled.h2`
 
         width: 300px;
     }
+`
+export const SpanBold = styled.span`
+    font-weight: 700;
 `
