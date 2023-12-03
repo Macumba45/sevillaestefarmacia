@@ -219,7 +219,6 @@ export default async function handler(
                             </p>
                             <a
                                 style="
-                                    display: inline-block;
                                     font-family: Cormorant Garamond;
                                     background-color: black;
                                     border: 1px solid white;
@@ -232,15 +231,14 @@ export default async function handler(
                                     font-size: 1rem;
                                     text-decoration: none;
                                     text-align: center;
-                                    line-height: 40px;
+                                    padding: 10px 20px;
                                 "
                                 href="tel:682734237"
+                                href="callto:682734237"
+                                >Llámanos</a
                             >
-                                Llámanos
-                            </a>
                             <a
                                 style="
-                                    display: inline-block;
                                     font-family: Cormorant Garamond;
                                     background-color: black;
                                     border: 1px solid white;
@@ -253,11 +251,11 @@ export default async function handler(
                                     font-size: 1rem;
                                     text-decoration: none;
                                     text-align: center;
-                                    line-height: 40px;
+                                    padding: 10px 20px;
                                 "
                                 href="mailto:hola@sevillaestefarmacia.com"
-                                >Envíanos un correo
-                            </a>
+                                >Envíanos un correo</a
+                            >
                         </div>
                         <div class="footer" style="text-align: center; margin-top: 3rem">
                             <a href="https://www.instagram.com/sevillaestefarmacia/?hl=es">
@@ -292,9 +290,7 @@ export default async function handler(
                         </div>
                     </div>
                 </body>
-            </html>
-            
-
+            </html>            
             
                 `,
         }
