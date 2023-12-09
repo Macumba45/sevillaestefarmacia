@@ -119,6 +119,11 @@ const Dashboard: FC<Props> = () => {
     } = useLogicDashboard()
 
     const itemsTop = [
+        // {
+        //     text: 'Dashboard',
+        //     icon: <DashboardIcon />,
+        //     route: 'dashboard',
+        // },
         {
             text: 'Servicios',
             icon: <MedicalServicesIcon />,
@@ -329,11 +334,11 @@ const Dashboard: FC<Props> = () => {
                 <Toolbar />
 
                 <div>
-                    {/* {route === 'dashboard' && (
+                    {route === 'dashboard' && (
                         <Typography paragraph>
                             Contenido del Dashboard
                         </Typography>
-                    )} */}
+                    )}
                     {route === 'servicios' && (
                         <>
                             {isLoading ? (
@@ -393,85 +398,73 @@ const Dashboard: FC<Props> = () => {
                                 </LoadingContainer>
                             ) : (
                                 <>
-                                    {datesPaymentsComing.length === 0 &&
-                                    datesPaymentsPassed.length === 0 ? (
-                                        <Typography
-                                            variant="h6"
-                                            sx={{
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'center',
-                                                marginBottom: '20px',
-                                                textAlign: 'center',
-                                            }}
-                                        >
-                                            No hay citas reservadas
-                                        </Typography>
+                                    <Typography
+                                        variant="h6"
+                                        sx={{
+                                            marginBottom: '20px',
+                                        }}
+                                    >
+                                        PRÓXIMAS CITAS
+                                    </Typography>
+                                    {datesPaymentsComing.length > 0 ? (
+                                        <CitasContainerActivas>
+                                            {datesPaymentsComing.map(
+                                                (item: any, index) => (
+                                                    <CardDashboardCitas
+                                                        key={index}
+                                                        payments={item}
+                                                        onEdit={() =>
+                                                            openEditModalDateAndHour(
+                                                                item
+                                                            )
+                                                        }
+                                                    />
+                                                )
+                                            )}
+                                        </CitasContainerActivas>
                                     ) : (
                                         <>
-                                            <Typography
-                                                variant="h6"
-                                                sx={{
-                                                    marginBottom: '20px',
-                                                }}
-                                            >
-                                                PRÓXIMAS CITAS
+                                            <Typography>
+                                                No hay citas
                                             </Typography>
-                                            {datesPaymentsComing.length > 0 && (
-                                                <CitasContainerActivas>
-                                                    {datesPaymentsComing.map(
-                                                        (item: any, index) => (
-                                                            <CardDashboardCitas
-                                                                key={index}
-                                                                payments={item}
-                                                                onEdit={() =>
-                                                                    openEditModalDateAndHour(
-                                                                        item
-                                                                    )
-                                                                }
-                                                            />
-                                                        )
-                                                    )}
-                                                </CitasContainerActivas>
+                                        </>
+                                    )}
+                                    <Divider
+                                        sx={{
+                                            mt: 5,
+                                            mb: 5,
+                                        }}
+                                    />
+                                    <Typography
+                                        variant="h6"
+                                        sx={{
+                                            marginBottom: '20px',
+                                        }}
+                                    >
+                                        CITAS PASADAS
+                                    </Typography>
+                                    {datesPaymentsPassed.length > 0 ? (
+                                        <CitasContainerPasadas>
+                                            {datesPaymentsPassed.map(
+                                                (item: any, index) => (
+                                                    <CardDashboardCitas
+                                                        key={index}
+                                                        payments={item}
+                                                        onEdit={() =>
+                                                            openEditModalDateAndHour(
+                                                                item
+                                                            )
+                                                        }
+                                                        disabled={true}
+                                                    />
+                                                )
                                             )}
-                                            <Divider
-                                                sx={{
-                                                    mt: 5,
-                                                    mb: 5,
-                                                }}
-                                            />
-                                            <Typography
-                                                variant="h6"
-                                                sx={{
-                                                    marginBottom: '20px',
-                                                }}
-                                            >
-                                                CITAS PASADAS
+                                        </CitasContainerPasadas>
+                                    ) : (
+                                        <>
+                                            <Typography>
+                                                No hay citas
                                             </Typography>
-                                            {datesPaymentsPassed.length > 0 ? (
-                                                <CitasContainerPasadas>
-                                                    {datesPaymentsPassed.map(
-                                                        (item: any, index) => (
-                                                            <CardDashboardCitas
-                                                                key={index}
-                                                                payments={item}
-                                                                onEdit={() =>
-                                                                    openEditModalDateAndHour(
-                                                                        item
-                                                                    )
-                                                                }
-                                                                disabled={true}
-                                                            />
-                                                        )
-                                                    )}
-                                                </CitasContainerPasadas>
-                                            ) : (
-                                                <>
-                                                    <Typography>
-                                                        No hay citas
-                                                    </Typography>
-                                                </>
-                                            )}
                                         </>
                                     )}
                                 </>
