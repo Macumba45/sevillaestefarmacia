@@ -14,7 +14,6 @@ import CssBaseline from '@mui/material/CssBaseline'
 import Divider from '@mui/material/Divider'
 import Drawer from '@mui/material/Drawer'
 import IconButton from '@mui/material/IconButton'
-import DashboardIcon from '@mui/icons-material/Dashboard'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import MedicalServicesIcon from '@mui/icons-material/MedicalServices'
 import HubIcon from '@mui/icons-material/Hub'
@@ -40,6 +39,7 @@ import CardDashboardTalleres from '@/components/CardDashboardTalleres'
 import CardDashboardblogs from '@/components/CardDashboardBlogs'
 import CreateBlogModal from '@/components/ModalBlog'
 import CardDashboardCitas from '@/components/CardDashboardCitas'
+// import DashboardIcon from '@mui/icons-material/Dashboard'
 import {
     CardBlogsContainer,
     CardServicesContainer,
