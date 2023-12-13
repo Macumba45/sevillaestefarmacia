@@ -41,7 +41,7 @@ export const useLogicPageServicesDetail = () => {
             message =
                 'Hola Farmacia Santa Bárbara, me gustaría solicitar presupuesto para realizar una fórmula magistral'
         }
-        const whatsappURL = `https://wa.me/${phoneNumber}${phoneNumber}&text=${encodeURIComponent(
+        const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
             message
         )}`
 

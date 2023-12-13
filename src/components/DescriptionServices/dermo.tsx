@@ -9,7 +9,6 @@ const Dermo: FC<Props> = ({ price }) => {
     return (
         <>
             <Container>
-                <Title>Servicio de análisis facial y capilar.</Title>
                 <ParrafoServices>
                     Conocer el estado de tu piel, crear nuevas rutinas de
                     cuidados faciales y/o capilares y resolver dudas. Esa es
