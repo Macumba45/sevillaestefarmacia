@@ -4,6 +4,7 @@ import './global.css'
 import StyledComponentsRegistryAntd from '@/lib/AntdRegistry'
 import StyledComponentsRegistry from '@/lib/StyledComponentsRegistry'
 import { UserProvider } from '@/context/UserContext'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -32,6 +33,7 @@ const RootLayout = ({ children }: React.PropsWithChildren) => (
         </head>
 
         <body>
+            <SpeedInsights />
             <StyledComponentsRegistryAntd>
                 <StyledComponentsRegistry>
                     <UserProvider>{children}</UserProvider>
