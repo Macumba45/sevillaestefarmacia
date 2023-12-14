@@ -33,10 +33,12 @@ const RootLayout = ({ children }: React.PropsWithChildren) => (
         </head>
 
         <body>
-            <SpeedInsights />
             <StyledComponentsRegistryAntd>
                 <StyledComponentsRegistry>
-                    <UserProvider>{children}</UserProvider>
+                    <UserProvider>
+                        <SpeedInsights />
+                        {children}
+                    </UserProvider>
                 </StyledComponentsRegistry>
             </StyledComponentsRegistryAntd>
         </body>
