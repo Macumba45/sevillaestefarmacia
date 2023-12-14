@@ -23,6 +23,7 @@ import {
     ContainerParrafosAndServices,
     SubtitleServices,
     FloatButtonContainer,
+    SpanBold,
 } from './styles'
 
 const Conocenos: FC = () => {
@@ -120,26 +121,74 @@ const Conocenos: FC = () => {
                         <ContainerParrafosAndServices>
                             <ContainerParrafos>
                                 <ParrafoServices>
-                                    Profesionales expertos en medicamentos.
+                                    <SpanBold>
+                                        Nuestro equipo. Las personas adecuadas
+                                        para este proyecto.
+                                    </SpanBold>
                                 </ParrafoServices>
                                 <ParrafoServices>
-                                    Farmacéuticos por vocación y profesión,
-                                    cosechamos con nuestros conocimientos la
-                                    mejora de la salud basándonos en la
-                                    utilización medicamentos como tratamiento y
-                                    prevención en la localidad de Sevilla desde
-                                    1960.
+                                    Desde hace más de dos décadas, las personas
+                                    que forman parte de la farmacia Sta Bárbara,
+                                    trabajan en el sector farmacéutico con
+                                    especial desempeño en el cuidado y
+                                    prevención de la salud de todos los
+                                    pacientes.
                                 </ParrafoServices>
                                 <ParrafoServices>
-                                    Nos encontramos en:
-                                    <br />
-                                    Calle Periodista Juan Tribuna, 8 (Local 2)
-                                    41019 Sevilla.
+                                    Han sido años de aprendizaje, de adquisición
+                                    de conocimientos que día tras día hemos
+                                    estado cultivando y que nos ha permitido
+                                    estar en todo momento aportando confianza y
+                                    excelencia a todos nuestros pacientes.
                                 </ParrafoServices>
                                 <ParrafoServices>
-                                    Horario: <br /> ·Lunes a viernes de 9:30h a
-                                    21:30h <br /> ·Sábado de 9:30h a 14:.00h{' '}
-                                    <br /> ·Domingo de 10:00h a 14:00h
+                                    Al mismo tiempo, hemos tenido la oportunidad
+                                    de rodearnos de proveedores con largos años
+                                    de trayectoria y experiencia generando un
+                                    compromiso estrecho para no desabastecer las
+                                    necesidades de todos los pacientes que
+                                    solicitan nuestros productos o servicios.
+                                </ParrafoServices>
+                                <ParrafoServices>
+                                    Así pues, en el año 2017 pusimos en marcha
+                                    nuestro primer proyecto Farmacia Sta.
+                                    Bárbara. Abrimos nuestras puertas el día 4
+                                    de diciembre del 2017 y desde entonces no
+                                    hemos parado de trabajar por ofrecer un
+                                    servicio exquisito y una amplia cartera de
+                                    servicios en constante evolución para
+                                    adaptarnos a tus necesidades.
+                                </ParrafoServices>
+                                <ParrafoServices>
+                                    Hoy, contamos con 6 servicios activos en
+                                    constante renovación y nos sentimos
+                                    orgullosos del trabajo realizado. Por
+                                    supuesto, nuestro objetivo es seguir
+                                    aprendiendo y esforzarnos por seguir
+                                    ofreciendo un trato y un servicio
+                                    excepcional.
+                                </ParrafoServices>
+                                <ParrafoServices>
+                                    <SpanBold>
+                                        Nuestro principal objetivo es
+                                        facilitarte las herramientas necesarias
+                                        para ofrecer y obtener una vida llena de
+                                        salud, optimismo y bienestar a través de
+                                        la atención farmacéutica.{' '}
+                                    </SpanBold>
+                                </ParrafoServices>
+                                <ParrafoServices>
+                                    <SpanBold>
+                                        Farmacia Sta. Bárbara es tu hogar.
+                                    </SpanBold>
+                                </ParrafoServices>
+                                <ParrafoServices>
+                                    <SpanBold>
+                                        Horario: <br /> ·Lunes a viernes de
+                                        9:30h a 21:30h <br /> ·Sábado de 9:30h a
+                                        14:.00h <br /> ·Domingo de 10:00h a
+                                        14:00h
+                                    </SpanBold>
                                 </ParrafoServices>
                             </ContainerParrafos>
                             <ContainerServices>

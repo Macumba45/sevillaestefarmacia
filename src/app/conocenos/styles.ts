@@ -157,3 +157,6 @@ export const FloatButtonContainer = styled.div`
     right: 1rem;
     z-index: 9999;
 `
+export const SpanBold = styled.span`
+    font-weight: 700;
+`

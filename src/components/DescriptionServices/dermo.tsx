@@ -11,9 +11,12 @@ const Dermo: FC<Props> = ({ price }) => {
             <Container>
                 <ParrafoServices>
                     Conocer el estado de tu piel, crear nuevas rutinas de
-                    cuidados faciales y/o capilares y resolver dudas. Esa es
-                    nuestra misión, sacarle el máximo partido a tu salud facial
-                    y capilar.
+                    cuidados faciales y/o capilares y resolver dudas.{' '}
+                    <SpanBold>
+                        {' '}
+                        Esa es nuestra misión, sacarle el máximo partido a tu
+                        salud facial y capilar.
+                    </SpanBold>
                 </ParrafoServices>
                 <ParrafoServices>
                     Busca tu momento para empezar con tu `skin care´y empieza a
@@ -21,12 +24,21 @@ const Dermo: FC<Props> = ({ price }) => {
                     tranquilo donde te realizaremos una breve entrevista para
                     conocer tus hábitos de cuidados además de medicación si
                     estás tomando,tan importante en muchísimas ocasiones del
-                    estado de tu piel y/o problemas de caída capilar. Además,
-                    utilizando tecnología de los equipos Courage+Khazaka,
+                    estado de tu piel y/o problemas de caída capilar.
+                </ParrafoServices>
+                <ParrafoServices>
+                    Además,
+                    <SpanBold>
+                        utilizando tecnología de los equipos Courage+Khazaka,
+                    </SpanBold>
                     conseguiremos ofrecerte una rutina mucho más específica. Las
-                    profesionales sanitarias Celia Guerrero en análisis facial y
-                    Ana Lobo en análisis capilar, estarán para ofrecerte uno de
-                    los servicios más demandados de nuestra farmacia.
+                    profesionales sanitarias
+                    <SpanBold>
+                        Celia Guerrero en análisis facial y Ana Lobo en análisis
+                        capilar,
+                    </SpanBold>
+                    estarán para ofrecerte uno de los servicios más demandados
+                    de nuestra farmacia.
                 </ParrafoServices>
                 <ParrafoServices>
                     Para poder disfrutar del servicio, simplemente tienes que
@@ -37,11 +49,11 @@ const Dermo: FC<Props> = ({ price }) => {
                     así puedas canjearlo en la compra de tus productos
                     recomendados en la rutina ‘skin care’.
                 </ParrafoServices>
-                <Title>
+                <ParrafoServices>
                     *El coste del servicio es de {price}€. El bono descuento por
                     valor de 20 euros no es transferible a otra persona y se
                     canjea el mismo día de la cita.
-                </Title>
+                </ParrafoServices>
             </Container>
         </>
     )

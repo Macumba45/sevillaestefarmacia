@@ -1,5 +1,5 @@
 import { FC, memo } from 'react'
-import { Container, ParrafoServices, Title } from './styles'
+import { Container, ParrafoServices, SpanBold, Title } from './styles'
 
 interface Props {
     price: string
@@ -9,37 +9,36 @@ const Mascota: FC<Props> = ({ price }) => {
     return (
         <Container>
             <ParrafoServices>
-                En Farmacia Sta. Bárbara (Sevilla Este) Disponemos de productos
-                veterinarios para tus mascotas, perros, gatos, y animales como
-                caballos, cerdos, aves, vacas, etc.
+                Disponemos de productos veterinarios para tus mascotas, perros,
+                gatos, y animales como caballos, cerdos, aves, vacas, etc.
             </ParrafoServices>
             <ParrafoServices>
-                Suministramos todo tipo de medicamentos con un amplio stock y
-                bajo encargo.
+                <SpanBold>
+                    Suministramos todo tipo de medicamentos con un amplio stock
+                    y bajo encargo.
+                </SpanBold>
             </ParrafoServices>
             <ParrafoServices>
-                También realizamos formulaciones magistrales de medicación
-                veterinaria en nuestro laboratorio de formulación magistral.
+                También{' '}
+                <SpanBold>
+                    realizamos formulaciones magistrales de medicación
+                    veterinaria{' '}
+                </SpanBold>
+                en nuestro laboratorio de formulación magistral.
             </ParrafoServices>
             <ParrafoServices>
                 Contacta con nosotros si tienes alguna duda sobre la medicación
                 que estés suministrándole a tu mascota o animal de granja.
             </ParrafoServices>
             <ParrafoServices>
-                Consultas, encargos o pedidos, no dudes en escribirnos a través
-                del chat directo de la farmacia.
+                <SpanBold>¿Quieres hacer un encargo?</SpanBold>
             </ParrafoServices>
-            <Title>¿Tienes dudas?</Title>
-            <ParrafoServices>
-                Contacta con nosotros si tienes alguna pregunta sobre la
-                medicación que estés suministrándole a tu mascota o animal de
-                granja.
-            </ParrafoServices>
-            <Title>¿Quieres hacer un encargo?</Title>
             <ParrafoServices>
                 Si necesitas hacer un encargo o pedido para ayudar a tu mascota,
                 no dudes en escribirnos a través del chat directo de la farmacia
-                haciendo click en ‘Contacta’.
+                haciendo click más abajo en “¿Te asesoramos?”. Sandra Mora,
+                técnico en veterinaria y farmacia estará disponible para
+                ayudarte en todo lo relacionado con tu mascota.
             </ParrafoServices>
         </Container>
     )

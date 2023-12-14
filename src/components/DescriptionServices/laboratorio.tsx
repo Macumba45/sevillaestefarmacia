@@ -1,5 +1,5 @@
 import { FC, memo } from 'react'
-import { Container, ParrafoServices, Title } from './styles'
+import { Container, ParrafoServices, SpanBold, Title } from './styles'
 
 interface Props {
     price: string
@@ -25,29 +25,23 @@ const Laboratorio: FC<Props> = ({ price }) => {
                 disposición para cualquier duda que tengas con tu prescripción
                 del médico y/o para cualquier encargo de formulación.
             </ParrafoServices>
-            <Title>
-                ¿Cuál es el coste y tiempos del servicio? ¿Cómo subo la receta?
-            </Title>
             <ParrafoServices>
-                Es importante dejar subida la receta a realizar donde podrás
-                incluir además comentarios adicionales. Nos pondremos en
-                contacto contigo una vez recibamos el pago e información de la
-                formula para concretar el coste final y plazos de entrega.
+                <SpanBold>
+                    ¿Cómo solicito presupuesto? ¿Cuáles son los plazos de
+                    entrega?
+                </SpanBold>
             </ParrafoServices>
             <ParrafoServices>
-                El precio de la reserva del servicio es de {price}€.
+                Más abajo encontrarás un botón “Solicitar presupuesto” para
+                mandarnos la receta del médico y así poder calcularte el
+                presupuesto del medicamento. Además del precio te diremos para
+                cuando estaría disponible. Una vez aceptado el presupuesto y los
+                plazos de entrega te mandaremos un enlace para que puedas
+                realizar el pago del importe.
             </ParrafoServices>
             <ParrafoServices>
-                **El coste final de la formula y los tiempos de entrega
-                dependerá de la formula a preparar.
-            </ParrafoServices>
-            <ParrafoServices>
-                **En caso de disconformidad procederemos a la devolución del
-                coste de la reserva sin compromiso y al momento.
-            </ParrafoServices>
-            <ParrafoServices>
-                Si te surgen preguntas puedes ponerte en contacto con nosotros a
-                través de nuestro chat directo o llamando al 682 73 42 37.
+                *Las fórmulas magistrales y preparados oficinales no admiten
+                devolución una vez iniciada la producción del medicamento.
             </ParrafoServices>
         </Container>
     )

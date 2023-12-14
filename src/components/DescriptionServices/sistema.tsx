@@ -1,5 +1,5 @@
 import { FC, memo } from 'react'
-import { Container, ParrafoServices, Title } from './styles'
+import { Container, ParrafoServices, SpanBold, Title } from './styles'
 
 interface Props {
     price: string
@@ -9,151 +9,67 @@ const Sistema: FC<Props> = ({ price }) => {
     return (
         <Container>
             <ParrafoServices>
-                El Sistema Personalizado de Dosificación es un servicio que
-                tenemos disponible en Farmacia Sta. Bárbara (Sevilla Este) para
-                ayudar especialmente a nuestros familiares mayores que son
-                polimedicados o pacientes que tienen dificultad para seguir su
-                medicación.
+                Este servicio está claramente orientado a ayudar especialmente a
+                nuestros familiares mayores que son polimedicados o pacientes
+                que tienen dificultad para seguir su medicación.{' '}
+                <SpanBold>
+                    {' '}
+                    Contamos con un robot automático para la fabricación de los
+                    blísteres semanales asegurándonos de una mayor calidad,
+                    eficacia y seguridad
+                </SpanBold>{' '}
+                en el proceso de manipulación de la medicación.
             </ParrafoServices>
             <ParrafoServices>
-                Seguramente tengas en la familia o personas cercanas que se
-                quejan de &apos;tomo muchas pastillas y me hago un lío...&apos;.
-                Si es tu caso, te animamos a que sigas leyendo.
+                {' '}
+                <SpanBold>¿Para quién está indicado?</SpanBold>{' '}
             </ParrafoServices>
-            <Title>¿Qué ventajas tiene este servicio?</Title>
-            <div
-                style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                }}
-            >
-                <ParrafoServices
-                    style={{
-                        marginBottom: '16px',
-                        marginTop: '16px',
-                    }}
-                >
-                    - Mejora el control del paciente.
-                </ParrafoServices>
-                <ParrafoServices
-                    style={{
-                        marginBottom: '16px',
-                        marginTop: '16px',
-                    }}
-                >
-                    - Facilita el cumplimiento del tratamiento.
-                </ParrafoServices>
-                <ParrafoServices
-                    style={{
-                        marginBottom: '16px',
-                        marginTop: '16px',
-                    }}
-                >
-                    - Reduce los errores en la toma de medicamentos.
-                </ParrafoServices>
-                <ParrafoServices
-                    style={{
-                        marginBottom: '16px',
-                        marginTop: '16px',
-                    }}
-                >
-                    -Evita problemas de manipulación y conservación.
-                </ParrafoServices>
-                <ParrafoServices
-                    style={{
-                        marginBottom: '16px',
-                        marginTop: '16px',
-                    }}
-                >
-                    - Evita los problemas de confusión e intoxicación
-                    involuntaria.
-                </ParrafoServices>
-            </div>
-            <Title>¿ Para quién está indicado?</Title>
-            <div
-                style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                }}
-            >
-                <ParrafoServices
-                    style={{
-                        marginBottom: '16px',
-                        marginTop: '16px',
-                    }}
-                >
-                    - Pacientes con pautas de medicación complejas.
-                </ParrafoServices>
-                <ParrafoServices
-                    style={{
-                        marginBottom: '16px',
-                        marginTop: '16px',
-                    }}
-                >
-                    - Personas mayores polimedicadas que necesitan asesoramiento
-                    y/o viven solas.
-                </ParrafoServices>
-                <ParrafoServices
-                    style={{
-                        marginBottom: '16px',
-                        marginTop: '16px',
-                    }}
-                >
-                    - Pacientes en residencias de mayores.
-                </ParrafoServices>
-                <ParrafoServices
-                    style={{
-                        marginBottom: '16px',
-                        marginTop: '16px',
-                    }}
-                >
-                    - Pacientes que dependen de uno o varios cuidadores.
-                </ParrafoServices>
-            </div>
-            <Title>¿Qué encontrarás en este servicio?</Title>
-            <div
-                style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                }}
-            >
-                <ParrafoServices
-                    style={{
-                        marginBottom: '16px',
-                        marginTop: '16px',
-                    }}
-                >
-                    - Organización de la medicación en pastilleros desechables
-                    semanales (los pastilleros son de usar y tirar, no da lugar
-                    a equivocación, nos aseguramos que las dosis sean tomadas en
-                    el momento idóneo y de la forma correcta)
-                </ParrafoServices>
-                <ParrafoServices
-                    style={{
-                        marginBottom: '16px',
-                        marginTop: '16px',
-                    }}
-                >
-                    - Seguimiento de la medicación y comunicación con su
-                    médico/a de cabecera ante posibles cambios relacionados con
-                    su medicación.
-                </ParrafoServices>
-                <ParrafoServices
-                    style={{
-                        marginBottom: '16px',
-                        marginTop: '16px',
-                    }}
-                >
-                    - Realización del servicio bajo control farmacéutico y
-                    estrictos protocolos de seguridad.
-                </ParrafoServices>
-            </div>
-            <Title>¿Cuál es el coste del servicio?</Title>
+            <ParrafoServices>
+                - Pacientes con pautas de medicación complejas que necesitan
+                asesoramiento y/o viven solas.
+                <br /> - Pacientes en residencias de mayores o que dependen de
+                uno o varios cuidadores.
+            </ParrafoServices>
+
+            <ParrafoServices>
+                {' '}
+                <SpanBold>¿Qué ventajas tiene este servicio?</SpanBold>{' '}
+            </ParrafoServices>
+            <ParrafoServices>
+                - Facilita el cumplimiento del tratamiento y reduce los errores
+                en la toma de la medicación. <br /> - Evita problemas de
+                manipulación y conservación, confusión e intoxicación
+                involuntaria.
+            </ParrafoServices>
+            <ParrafoServices>
+                <SpanBold>¿Qué encontrarás en este servicio?</SpanBold>
+            </ParrafoServices>
+            <ParrafoServices>
+                - Organización de la medicación en{' '}
+                <SpanBold>pastilleros desechables</SpanBold>
+                semanales (los pastilleros son de usar y tirar, no da lugar a
+                equivocación, nos aseguramos que las dosis sean tomadas en el
+                momento idóneo y de la forma correcta) <br />
+                <br /> - <SpanBold>Seguimiento de la medicación </SpanBold> y
+                comunicación con su médico/a de cabecera ante posibles cambios
+                relacionados con su medicación. <br />
+                <br /> - Realización del servicio bajo
+                <SpanBold>
+                    {' '}
+                    control farmacéutico y estrictos protocolos de seguridad.
+                </SpanBold>
+            </ParrafoServices>
+            <ParrafoServices>
+                {' '}
+                <SpanBold>¿Cuál es el coste del servicio?</SpanBold>
+            </ParrafoServices>
             <ParrafoServices>
                 El precio del servicio de SPD consiste en: una entrevista
                 personalizada + pack de 4 pastilleros a {price}€.
             </ParrafoServices>
-            <Title>¿Necesitas más información?</Title>
+            <ParrafoServices>
+                ¿<SpanBold>Necesitas más información?</SpanBold>
+            </ParrafoServices>
             <ParrafoServices>
                 Puedes ponerte en contacto con Ana Lobo, farmacéutica adjunta
                 responsable del servicio, llamando al 682 73 42 37 o a través

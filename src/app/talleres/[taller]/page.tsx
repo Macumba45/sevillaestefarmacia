@@ -142,8 +142,8 @@ const Page: FC<Props> = ({ params }) => {
                             }}
                             variant="extended"
                         >
-                            <WhatsAppIcon sx={{ marginRight: 1 }} /> ¿Te
-                            asesoramos?
+                            <WhatsAppIcon sx={{ marginRight: 1 }} />
+                            ¿Te asesoramos?
                         </Fab>
                     </HoverMotion>
                 </FloatButtonContainer>

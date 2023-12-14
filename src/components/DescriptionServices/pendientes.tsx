@@ -1,5 +1,5 @@
 import { FC, memo } from 'react'
-import { Container, ParrafoServices, Title } from './styles'
+import { Container, ParrafoServices, SpanBold, Title } from './styles'
 
 interface Props {
     price: string
@@ -19,22 +19,33 @@ const Pendientes: FC<Props> = ({ price }) => {
                 encapsulado y totalmente esterilizado por lo que la perforación
                 será completamente inocua y aséptica.
             </ParrafoServices>
-            <Title>
-                Hay una gran variedad de pendientes para poder elegir a tu
-                gusto.
-            </Title>
-            <Title>¿Cuál es el coste del servicio? ¿Cómo pido cita?</Title>
-            <Title></Title>
+
             <ParrafoServices>
-                El servicio de perforación de oreja es completamente gratuito.
-                Solo tendrás que elegir entre los dos tipos de materiales de
-                pendientes que tenemos disponibles.
+                {' '}
+                <SpanBold>
+                    ¿Cuál es el coste del servicio? ¿Cómo pido cita?
+                </SpanBold>
             </ParrafoServices>
-            <Title>¿Tienes dudas?</Title>
             <ParrafoServices>
-                Puedes pedir cita o preguntarnos cualquier duda directamente en
-                nuestra farmacia de manera presencial, llamando al 682 73 42 37
-                o a través del chat directo con la farmacia.
+                El coste del servicio de perforación de orejas y la pareja de
+                pendientes es de {price} euros (el modelo lo puedes elegir una
+                vez estés en la farmacia). Es necesario pedir cita para ponerle
+                pendientes a los bebés, nos gusta tomarnos nuestro tiempo y
+                hacer este momento algo especial. Sin prisas.
+            </ParrafoServices>
+            <ParrafoServices>
+                <SpanBold>
+                    {' '}
+                    Hay una gran variedad de pendientes para poder elegir a tu
+                    gusto.
+                </SpanBold>
+            </ParrafoServices>
+            <ParrafoServices>
+                *Pendientes para adultos (mayor de 18 años) no es necesario
+                solicitar cita previa ni realizar el pago previo. Si eres menor
+                de 18 años tendrás que venir acompañado de tu padre/madre/tutor
+                o con un formulario de autorización que te daremos en la
+                farmacia
             </ParrafoServices>
         </Container>
     )
