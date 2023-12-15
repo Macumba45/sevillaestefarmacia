@@ -1,15 +1,10 @@
 import { FC, memo } from 'react'
-import { EditOutlined, CloseOutlined } from '@ant-design/icons'
+import { CloseOutlined } from '@ant-design/icons'
 import { Card, Button } from 'antd'
 import { Props } from './types'
 import { Typography } from '@mui/material'
 
 const { Meta } = Card
-
-const styleIconButtons = {
-    fontSize: '20px',
-    marginRight: '10px',
-}
 
 const hourStyle = {
     borderRadius: '5px',

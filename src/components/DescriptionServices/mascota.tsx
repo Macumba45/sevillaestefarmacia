@@ -1,5 +1,5 @@
 import { FC, memo } from 'react'
-import { Container, ParrafoServices, SpanBold, Title } from './styles'
+import { Container, ParrafoServices, SpanBold } from './styles'
 
 interface Props {
     price: string
