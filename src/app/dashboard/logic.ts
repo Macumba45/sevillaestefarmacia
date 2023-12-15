@@ -5,6 +5,7 @@ import { Blogs, Payment, Services, Talleres, User } from '../../../types/types'
 import { deleteDateById } from '@/services/dates'
 import { createBlog, deleteBlog, getBlogs, updateBlog } from '@/services/blogs'
 import { UserContext } from '@/context/UserContext'
+import { deleteHourById } from '@/services/hours'
 import {
     createService,
     getServices,
@@ -57,6 +58,7 @@ export const useLogicDashboard = () => {
     const [blogToDelete, setBlogToDelete] = useState('')
     const [blogData, setBlogData] = useState<Blogs | undefined>()
     const [serviceDetails, setServiceDetails] = useState<Services>()
+    const [openDeleteHour, setOpenDeleteHour] = useState(false)
 
     const datesPaymentsComing = allPayments?.filter((payment: any) => {
         if (!payment.date) {
@@ -315,6 +317,55 @@ export const useLogicDashboard = () => {
         setOpenDeleteModal(true)
     }
 
+    const handleDeleteHourId = (serviceId: string, hourId: string) => {
+        setOpenDeleteHour(true)
+
+        setServices(services => {
+            // Encuentra el servicio correcto
+            const serviceIndex = services!.findIndex(
+                service => service.id === serviceId
+            )
+            if (serviceIndex === -1) {
+                console.error(
+                    `No se encontró el servicio con el id ${serviceId}`
+                )
+                return services
+            }
+
+            // Crea una copia del servicio para no mutar el estado directamente
+            const service = { ...services![serviceIndex] }
+
+            // Encuentra y elimina la hora correcta
+            service.dates!.forEach(date => {
+                const hourIndex = date.hours.findIndex(
+                    hour => hour.id === hourId
+                )
+                if (hourIndex !== -1) {
+                    date.hours.splice(hourIndex, 1)
+                }
+            })
+
+            confirmateDeleteHour(hourId)
+
+            // Reemplaza el servicio en el array y devuelve el nuevo estado
+            return [
+                ...services!.slice(0, serviceIndex),
+                service,
+                ...services!.slice(serviceIndex + 1),
+            ]
+        })
+
+        console.log('id: ', hourId)
+    }
+    const handleCloseModalHour = () => {
+        setOpenDeleteHour(false)
+    }
+
+    const confirmateDeleteHour = async (hourId: string) => {
+        await deleteHourById(hourId)
+        setOpenDeleteHour(false)
+    }
+
     const closeModalDelete = () => {
         // Cierra el modal sin realizar la eliminación
         setOpenDeleteModal(false)
@@ -429,6 +480,7 @@ export const useLogicDashboard = () => {
         handleConfirmDeleteBlog,
         handleConfirmDeleteTaller,
         handleDeleteClick,
+        handleDeleteHourId,
         handleDeleteClickBlog,
         handleDeleteClickTaller,
         handleDrawerToggle,
@@ -476,5 +528,8 @@ export const useLogicDashboard = () => {
         updateTallerById,
         user,
         userLoaded,
+        openDeleteHour,
+        handleCloseModalHour,
+        confirmateDeleteHour,
     }
 }

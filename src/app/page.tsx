@@ -42,7 +42,7 @@ const Home: FC = () => {
                 <AnimatedView>
                     <ContainerConocenos>
                         <ImgConocenos
-                            rel="preload"
+                            rel="prefetch"
                             src="https://res.cloudinary.com/dinasxwdf/image/upload/v1699541517/farmacia/kjct7lmkzhts60xnyzhj.webp"
                             alt="Farmacia Sta Bárbara -  Sevilla Este"
                         />

@@ -44,3 +44,23 @@ export const fetchHourById = async (id: string) => {
         console.log(error)
     }
 }
+
+export const deleteHourById = async (id: string) => {
+    console.log('id', id)
+    try {
+        const response = await fetch('/api/hours/deleteHourById', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({ id }),
+        })
+        if (response.ok) {
+            const data = await response.json()
+            return data
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}

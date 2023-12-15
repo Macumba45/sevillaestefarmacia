@@ -39,6 +39,7 @@ import CardDashboardTalleres from '@/components/CardDashboardTalleres'
 import CardDashboardblogs from '@/components/CardDashboardBlogs'
 import CreateBlogModal from '@/components/ModalBlog'
 import CardDashboardCitas from '@/components/CardDashboardCitas'
+import SyncLockIcon from '@mui/icons-material/SyncLock'
 // import DashboardIcon from '@mui/icons-material/Dashboard'
 import {
     CardBlogsContainer,
@@ -51,6 +52,7 @@ import {
     LoadingContainer,
 } from './styles'
 import CardDashboardPedidos from '@/components/CardDashboardPedidos'
+import CardDeleteHours from '@/components/CardDeleteHours'
 
 const drawerWidth = 240
 
@@ -77,6 +79,7 @@ const Dashboard: FC<Props> = () => {
         handleConfirmDeleteBlog,
         handleConfirmDeleteTaller,
         handleDeleteClick,
+        handleDeleteHourId,
         handleDeleteClickBlog,
         handleDeleteClickTaller,
         handleDrawerToggle,
@@ -116,6 +119,9 @@ const Dashboard: FC<Props> = () => {
         titlePage,
         user,
         userLoaded,
+        openDeleteHour,
+        handleCloseModalHour,
+        confirmateDeleteHour,
     } = useLogicDashboard()
 
     const itemsTop = [
@@ -133,6 +139,11 @@ const Dashboard: FC<Props> = () => {
             text: 'Próximas citas',
             icon: <DateRangeIcon />,
             route: 'citas',
+        },
+        {
+            text: 'Eliminar Horas',
+            icon: <SyncLockIcon />,
+            route: 'eliminar-horas',
         },
         {
             text: 'Talleres',
@@ -223,6 +234,8 @@ const Dashboard: FC<Props> = () => {
             fetchBlogs()
         } else if (route === 'pedidos') {
             getAllPayments()
+        } else if (route === 'eliminar-horas') {
+            getServiceData()
         }
     }, [route])
 
@@ -487,6 +500,29 @@ const Dashboard: FC<Props> = () => {
                                 isEditing={true}
                             />
                         </CitasContainer>
+                    )}
+                    {route === 'eliminar-horas' && (
+                        <>
+                            {isLoading ? (
+                                <LoadingContainer>
+                                    <LinearIndeterminate
+                                        label="Cargando datos en el sistema..."
+                                        width={320}
+                                    />
+                                </LoadingContainer>
+                            ) : (
+                                <CardServicesContainer>
+                                    {services &&
+                                        services?.map(item => (
+                                            <CardDeleteHours
+                                                service={item}
+                                                key={item.id}
+                                                onDelete={handleDeleteHourId}
+                                            />
+                                        ))}
+                                </CardServicesContainer>
+                            )}
+                        </>
                     )}
                     {route === 'clientes' && (
                         <>
