@@ -19,23 +19,23 @@ const Dermo: FC<Props> = ({ price }) => {
                     </SpanBold>
                 </ParrafoServices>
                 <ParrafoServices>
-                    Busca tu momento para empezar con tu `skin care´y empieza a
+                    Busca tu momento para empezar con tu ‘skin care’ y empieza a
                     cuidarte. Nuestra farmacia cuenta con un gabinete privado y
                     tranquilo donde te realizaremos una breve entrevista para
                     conocer tus hábitos de cuidados además de medicación si
-                    estás tomando,tan importante en muchísimas ocasiones del
+                    estás tomando, tan importante en muchísimas ocasiones del
                     estado de tu piel y/o problemas de caída capilar.
                 </ParrafoServices>
                 <ParrafoServices>
-                    Además,
+                    Además,{' '}
                     <SpanBold>
-                        utilizando tecnología de los equipos Courage+Khazaka,
+                        utilizando tecnología de los equipos Courage + Khazaka,{' '}
                     </SpanBold>
                     conseguiremos ofrecerte una rutina mucho más específica. Las
-                    profesionales sanitarias
+                    profesionales sanitarias{' '}
                     <SpanBold>
                         Celia Guerrero en análisis facial y Ana Lobo en análisis
-                        capilar,
+                        capilar,{' '}
                     </SpanBold>
                     estarán para ofrecerte uno de los servicios más demandados
                     de nuestra farmacia.

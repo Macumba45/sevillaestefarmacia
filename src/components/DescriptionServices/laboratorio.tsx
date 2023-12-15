@@ -9,9 +9,9 @@ const Laboratorio: FC<Props> = ({ price }) => {
     return (
         <Container>
             <ParrafoServices>
-                En Farmacia Sta. Bárbara (Sevilla Este) somos especialistas en
-                formulación magistral creando fórmulas y preparados oficiales
-                con más de 30 años de experiencia.
+                En Farmacia Sta. Bárbara somos especialistas en formulación
+                magistral creando fórmulas y preparados oficiales con más de 30
+                años de experiencia.
             </ParrafoServices>
             <ParrafoServices>
                 Disponemos de laboratorio propio integrado en nuestra farmacia
@@ -20,7 +20,7 @@ const Laboratorio: FC<Props> = ({ price }) => {
                 veterinario.
             </ParrafoServices>
             <ParrafoServices>
-                Rosario Acuña García,farmacéutica adjunta,formulista y
+                Rosario Acuña García, farmacéutica adjunta, formulista y
                 responsable de este servicio farmacéutico, estará a tu
                 disposición para cualquier duda que tengas con tu prescripción
                 del médico y/o para cualquier encargo de formulación.

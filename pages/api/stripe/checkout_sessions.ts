@@ -12,7 +12,6 @@ export default async function handler(
             const serviceId = req.body.serviceId
             const userName = req.body.userName
             const priceService = req.body.priceService
-            console.log(priceId, paymentId, serviceId, userName, priceService)
             // Create Checkout Sessions from body params.
             const session = await stripe.checkout.sessions.create({
                 line_items: [

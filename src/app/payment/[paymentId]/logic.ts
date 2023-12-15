@@ -27,7 +27,6 @@ export const useLogicPayment = () => {
 
     const getChargeList = async (paymentId: string) => {
         const charList = await fetchChargeListStripe(paymentId)
-        console.log(charList)
         setPaymentIdMetadata(charList.paymentId)
         setServiceIdMetadata(charList.serviceId)
         setUserNameMetaData(charList.userName)

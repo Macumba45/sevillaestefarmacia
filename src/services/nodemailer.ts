@@ -6,7 +6,6 @@ export const emailConfirmationPaymentCitas = async (
     priceService: string,
     titleService: string
 ) => {
-    console.log(email, date, hour, userName, priceService)
     try {
         const headers = {
             'Content-Type': 'application/json',
