@@ -119,8 +119,12 @@ const ServiceFormModal: FC<Props> = ({
 
     const generateAvailableHours = () => {
         const hours: string[] = []
-        for (let hour = 9; hour < 21; hour++) {
+        for (let hour = 9; hour <= 21; hour++) {
             for (let minute = 0; minute < 60; minute += 30) {
+                // Si la hora es 21, solo queremos agregar los minutos 00
+                if (hour === 21 && minute === 30) {
+                    continue
+                }
                 hours.push(
                     `${String(hour).padStart(2, '0')}:${String(minute).padStart(
                         2,
