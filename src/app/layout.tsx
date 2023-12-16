@@ -1,13 +1,13 @@
 import React from 'react'
+import Head from 'next/head'
 import './reset.css'
 import './global.css'
 import StyledComponentsRegistryAntd from '@/lib/AntdRegistry'
 import StyledComponentsRegistry from '@/lib/StyledComponentsRegistry'
 import { UserProvider } from '@/context/UserContext'
 import { SpeedInsights } from '@vercel/speed-insights/next'
-import { Metadata } from 'next'
 
-export const metadata: Metadata = {
+export const metadata = {
     title: 'Farmacia Sta Bárbara -  Sevilla Este',
     description: 'Ven a visitarnos a nuestra farmacia en Sevilla Este',
     applicationName: 'Farmacia Sta Bárbara -  Sevilla Este',
@@ -20,29 +20,36 @@ export const metadata: Metadata = {
         title: 'Farmacia Sta Bárbara -  Sevilla Este',
         description: 'Ven a visitarnos a nuestra farmacia en Sevilla Este',
     },
-    classification: 'Farmacia Sta Bárbara -  Sevilla Este',
 }
 
 const RootLayout = ({ children }: React.PropsWithChildren) => (
-    <html lang="en">
-        <head>
-            {/* <link
-                rel="stylesheet"
-                href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Roboto+Condensed:wght@300;400;700&display=swap"
-            /> */}
-        </head>
-
-        <body>
-            <StyledComponentsRegistryAntd>
-                <StyledComponentsRegistry>
-                    <UserProvider>
-                        <SpeedInsights />
-                        {children}
-                    </UserProvider>
-                </StyledComponentsRegistry>
-            </StyledComponentsRegistryAntd>
-        </body>
-    </html>
+    <>
+        <Head>
+            <title>{metadata.title}</title>
+            <meta name="description" content={metadata.description} />
+            <meta name="keywords" content={metadata.keywords} />
+            <meta property="og:type" content={metadata.openGraph.type} />
+            <meta property="og:locale" content={metadata.openGraph.locale} />
+            <meta property="og:url" content={metadata.openGraph.url} />
+            <meta property="og:title" content={metadata.openGraph.title} />
+            <meta
+                property="og:description"
+                content={metadata.openGraph.description}
+            />
+        </Head>
+        <html lang="es">
+            <body>
+                <StyledComponentsRegistryAntd>
+                    <StyledComponentsRegistry>
+                        <UserProvider>
+                            <SpeedInsights />
+                            {children}
+                        </UserProvider>
+                    </StyledComponentsRegistry>
+                </StyledComponentsRegistryAntd>
+            </body>
+        </html>
+    </>
 )
 
 export default RootLayout
