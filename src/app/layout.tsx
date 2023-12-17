@@ -30,7 +30,7 @@ export const metadata = {
     openGraph: {
         type: 'website',
         locale: 'es_ES',
-        url: 'https://sevillaestefarmacia.com/',
+        url: 'https://www.sevillaestefarmacia.com',
         title: 'Farmacia Sta Bárbara -  Sevilla Este',
         description: 'Ven a visitarnos a nuestra farmacia en Sevilla Este',
     },
@@ -38,7 +38,7 @@ export const metadata = {
 
 const RootLayout = ({ children }: React.PropsWithChildren) => (
     <>
-        <Head>
+        {/* <Head>
             <title>{metadata.title}</title>
             <meta name="description" content={metadata.description} />
             <meta name="keywords" content={metadata.keywords} />
@@ -50,7 +50,7 @@ const RootLayout = ({ children }: React.PropsWithChildren) => (
                 property="og:description"
                 content={metadata.openGraph.description}
             />
-        </Head>
+        </Head> */}
         <html lang="es">
             <body>
                 <StyledComponentsRegistryAntd>
