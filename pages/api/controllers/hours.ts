@@ -76,3 +76,12 @@ const eliminarHoraPasada = async (horaId: string) => {
         },
     })
 }
+
+export const deleteHourById = async (id: string) => {
+    const deletedHour = await prisma.hours.delete({
+                where: {
+                    id: id as string,
+                },
+            })
+    return deletedHour
+}
