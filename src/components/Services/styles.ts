@@ -44,7 +44,7 @@ export const ButtonContainerServices = styled.div`
     margin-top: 3rem;
 `
 
-export const TitleServices = styled.h1<{
+export const TitleServices = styled.h2<{
     widthtitle?: string
     widthtitledesktop?: string
 }>`

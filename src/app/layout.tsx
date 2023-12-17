@@ -9,6 +9,20 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 
 export const metadata = {
     title: 'Farmacia Sta Bárbara -  Sevilla Este',
+    icons: {
+        icon: [
+            {
+                media: '(prefers-color-scheme: light)',
+                url: '/images/darkIcon.png',
+                href: '/images/darkIcon.png',
+            },
+            {
+                media: '(prefers-color-scheme: dark)',
+                url: '/images/iconlight.png',
+                href: '/images/iconlight.png',
+            },
+        ],
+    },
     description: 'Ven a visitarnos a nuestra farmacia en Sevilla Este',
     applicationName: 'Farmacia Sta Bárbara -  Sevilla Este',
     keywords:
