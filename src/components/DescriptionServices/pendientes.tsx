@@ -45,7 +45,7 @@ const Pendientes: FC<Props> = ({ price }) => {
                 solicitar cita previa ni realizar el pago previo. Si eres menor
                 de 18 años tendrás que venir acompañado de tu padre/madre/tutor
                 o con un formulario de autorización que te daremos en la
-                farmacia
+                farmacia.
             </ParrafoServices>
         </Container>
     )

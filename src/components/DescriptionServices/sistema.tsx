@@ -46,10 +46,10 @@ const Sistema: FC<Props> = ({ price }) => {
             </ParrafoServices>
             <ParrafoServices>
                 - Organización de la medicación en{' '}
-                <SpanBold>pastilleros desechables</SpanBold>
-                semanales (los pastilleros son de usar y tirar, no da lugar a
-                equivocación, nos aseguramos que las dosis sean tomadas en el
-                momento idóneo y de la forma correcta) <br />
+                <SpanBold>pastilleros desechables</SpanBold> semanales (los
+                pastilleros son de usar y tirar, no da lugar a equivocación, nos
+                aseguramos que las dosis sean tomadas en el momento idóneo y de
+                la forma correcta) <br />
                 <br /> - <SpanBold>Seguimiento de la medicación </SpanBold> y
                 comunicación con su médico/a de cabecera ante posibles cambios
                 relacionados con su medicación. <br />

@@ -1,5 +1,5 @@
 import { FC, memo } from 'react'
-import { Container, ParrafoServices, Title } from './styles'
+import { Container, ParrafoServices, SpanBold, Title } from './styles'
 
 interface Props {
     price: string
@@ -9,44 +9,59 @@ const Nutricion: FC<Props> = ({ price }) => {
     return (
         <Container>
             <ParrafoServices>
-                Elena Sánchez Ortiz responsable del Servicio de Nutrición
-                Clínica y Deportiva en Farmacia Sta. Bárbara (Sevilla Este),
-                define una filosofía de nutrición en dos conceptos:
+                Nos centraremos en la reeducación alimentaria a través de una
+                alimentación equilibrada basada en la dieta mediterránea.
             </ParrafoServices>
             <ParrafoServices>
-                El sufrimiento y sacrificio terminará con la reeducación en
-                nuestra alimentación.
+                De esta forma abordaremos la situación de cada paciente
+                atendiendo a sus necesidades, ya sean la pérdida de peso, la
+                ganancia de musculatura o llevar una alimentación saludable para
+                la prevención de enfermedades y patologías.
             </ParrafoServices>
             <ParrafoServices>
-                Aprenderás nuevas y sencillas recetas. Podrás conocer nuevos
-                alimentos e introducirlos en tu alimentación, y por supuesto te
-                ayudaremos a planificarte la semana.
+                Cada persona es única de modo que el asesoramiento nutricional
+                es <SpanBold>totalmente personalizado y adaptado.</SpanBold>
             </ParrafoServices>
-            <Title>¡No tener tiempo no es excusa para no cuidarte!</Title>
             <ParrafoServices>
-                Nuestro propósito no es llegar lo antes posible, sino darte las
-                herramientas para llegar al objetivo dando siempre prioridad a
-                tu salud. Disfrutarás del camino con unos hábitos sencillos que
-                perdurarán en ti como rutina diaria y forma de vida.
+                <SpanBold>¿Cómo lo hacemos?</SpanBold>
             </ParrafoServices>
-            <Title>¿Dónde tienen lugar las consultas?</Title>
             <ParrafoServices>
-                Puedes elegir modalidad presencial en nuestra farmacia o formato
-                online para recibir el asesoramiento desde donde quieras.
+                Elena Sanchez, nutricionista responsable del servicio en
+                farmacia Sta. Bárbara, inicia el proceso con una primera
+                consulta presencial donde se valorará y se tendrá en cuenta:
             </ParrafoServices>
-            <Title>¿Cuál es el coste del servicio? ¿Cómo pido cita?</Title>
             <ParrafoServices>
-                Puedes pedir tu cita directamente en nuestra farmacia de manera
-                presencial, llamando al 682 73 42 37 o desde nuestra web previo
-                pago seleccionando día y hora de la cita.
+                - Patologías que presentes y/o medicación que estés tomando.
+                <br />
+                - Objetivos del paciente.
+                <br />- Medición de parámetros corporales con{' '}
+                <SpanBold>báscula de bioimpedancia.</SpanBold>
             </ParrafoServices>
-            <Title>
-                El precio de la primera consulta es: {price}€ <br />Y la
-                consulta de seguimiento (quincenal): 15€
-            </Title>
             <ParrafoServices>
-                *Las consultas de seguimiento se abonarán directamente en la
-                farmacia.
+                El proceso continúa con revisiones semanales o quincenales según
+                necesidades de cada paciente, enfocadas a alcanzar mayor
+                adherencia e implicación para así lograr el objetivo.
+            </ParrafoServices>
+            <ParrafoServices>
+                Los planes de asesoramiento se enviarán a través de correo
+                electrónico o a través de Whatsapp, según preferencias.
+            </ParrafoServices>
+            <ParrafoServices>
+                <SpanBold>
+                    {' '}
+                    Las consultas pueden ser presenciales y/u online.
+                </SpanBold>
+            </ParrafoServices>
+            <ParrafoServices>
+                <SpanBold>Primera consulta </SpanBold> 30 - 40 minutos{' '}
+                <SpanBold>{price} euros.</SpanBold>
+                <br />
+                <SpanBold>Consultas de seguimiento</SpanBold> 15 - 20 minutos{' '}
+                <SpanBold>15 euros</SpanBold>
+            </ParrafoServices>
+            <ParrafoServices>
+                *Para las consultas de seguimiento el abono de la cita se
+                realizará en la farmacia.
             </ParrafoServices>
         </Container>
     )
