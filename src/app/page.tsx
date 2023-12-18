@@ -9,7 +9,6 @@ import AnimatedView from '../animations/AnimatedContainer'
 import { Button, Fab } from '@mui/material'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import WhatsAppIcon from '@mui/icons-material/WhatsApp'
-import CookieBanner from '@/components/Cookies'
 import {
     ButtonContainerConocenos,
     ContainerConocenos,
