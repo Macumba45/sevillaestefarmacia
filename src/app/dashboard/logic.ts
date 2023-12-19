@@ -355,7 +355,6 @@ export const useLogicDashboard = () => {
             ]
         })
 
-        console.log('id: ', hourId)
     }
     const handleCloseModalHour = () => {
         setOpenDeleteHour(false)

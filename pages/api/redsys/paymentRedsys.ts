@@ -8,7 +8,6 @@ import {
 import Decimal from 'decimal.js'
 import type { Currency } from 'redsys-easy'
 import { NextApiRequest, NextApiResponse } from 'next'
-import { renderToString } from 'react-dom/server'
 
 export default async function handler(
     req: NextApiRequest,

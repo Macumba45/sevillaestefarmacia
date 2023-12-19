@@ -46,7 +46,6 @@ export const fetchHourById = async (id: string) => {
 }
 
 export const deleteHourById = async (id: string) => {
-    console.log('id', id)
     try {
         const response = await fetch('/api/hours/deleteHourById', {
             method: 'DELETE',

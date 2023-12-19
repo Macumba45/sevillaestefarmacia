@@ -19,9 +19,7 @@ const hourStyle = {
 }
 
 const CardDeleteHours: FC<Props> = ({ service, onEdit, onDelete }) => {
-    console.log(service.dates)
     const [filteredDates, setFilteredDates] = useState(service.dates)
-    console.log(filteredDates)
 
     useEffect(() => {
         const now = new Date()
