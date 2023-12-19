@@ -400,6 +400,12 @@ const ResponsiveAppBar: FC<Props> = ({ user }) => {
                                                             sx={{
                                                                 backgroundColor:
                                                                     'black',
+                                                                display: 'flex',
+                                                                flexDirection:
+                                                                    'column',
+                                                                alignItems:
+                                                                    'flex-start',
+                                                                padding: 1,
                                                             }}
                                                         >
                                                             {page.subpages?.map(
@@ -413,9 +419,6 @@ const ResponsiveAppBar: FC<Props> = ({ user }) => {
                                                                                 'Cormorant Garamond',
                                                                             display:
                                                                                 'flex',
-                                                                            justifyContent:
-                                                                                'flex-end',
-                                                                            minWidth: 0,
                                                                         }}
                                                                         key={
                                                                             subpageIndex

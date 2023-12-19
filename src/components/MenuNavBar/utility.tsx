@@ -86,7 +86,7 @@ export const pagesMobile = [
                 route: '/services/clo0e0mn50003xy040gwqse36',
             },
             {
-                name: 'Organiza medicación',
+                name: ' Organiza medicación',
                 route: '/services/clo0e17d30004xy04cjklg2px',
             },
             {
