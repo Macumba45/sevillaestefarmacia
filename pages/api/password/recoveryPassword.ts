@@ -50,11 +50,10 @@ async function forgotPassword(req: NextApiRequest, res: NextApiResponse) {
             to: email,
             subject: 'Solicitud de cambio de contraseña',
             html: `
-            <h2>Por favor, haz click en el enlace para cambiar la contraseña de tu cuenta en Farmacia Sta.Bárbara </h2>
-            <a>${process.env.CLIENT_URL}/auth/login/resetPassword/${token}</a>
-            `,
+                <h2>Por favor, haz click en el enlace para cambiar la contraseña de tu cuenta en Farmacia Sta.Bárbara </h2>
+                <a href="${process.env.CLIENT_URL}/auth/login/resetPassword/${token}">Haz click aquí para cambiar tu contraseña</a>
+    `,
         }
-
         await updateResetPasswordToken(email, token)
 
         // Enviar el correo electrónico

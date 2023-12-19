@@ -354,7 +354,6 @@ export const useLogicDashboard = () => {
                 ...services!.slice(serviceIndex + 1),
             ]
         })
-
     }
     const handleCloseModalHour = () => {
         setOpenDeleteHour(false)
