@@ -127,62 +127,67 @@ const Perfil: FC = () => {
                             No tienes compras
                         </Typography>
                     ) : (
-                        user.payments?.map((item, index) => (
-                            <>
-                                <ListItem
-                                    key={index}
-                                    sx={{
-                                        marginTop: 0,
-                                        backgroundColor: '#fff',
-                                        borderRadius: '10px',
-                                        boxShadow:
-                                            '0px 0px 10px 0px rgba(221, 221, 221, 0.75)',
-                                        margin: '0.5rem',
-                                        width: '90%',
-                                        '&:hover': {
-                                            transform: 'scale(1.05)',
-                                            transition: 'transform 0.3s',
-                                        },
-                                    }}
-                                >
-                                    <Divider
-                                        orientation="horizontal"
-                                        flexItem
-                                    />
+                        user.payments
+                            ?.filter(item => item.payed === true)
+                            ?.map((item, index) => (
+                                <>
+                                    <ListItem
+                                        key={index}
+                                        sx={{
+                                            marginTop: 0,
+                                            backgroundColor: '#fff',
+                                            borderRadius: '10px',
+                                            boxShadow:
+                                                '0px 0px 10px 0px rgba(221, 221, 221, 0.75)',
+                                            margin: '0.5rem',
+                                            width: '90%',
+                                            '&:hover': {
+                                                transform: 'scale(1.05)',
+                                                transition: 'transform 0.3s',
+                                            },
+                                        }}
+                                    >
+                                        <Divider
+                                            orientation="horizontal"
+                                            flexItem
+                                        />
 
-                                    <ListItemAvatar>
-                                        <Avatar
-                                            sx={{
-                                                backgroundColor: '#000000',
+                                        <ListItemAvatar>
+                                            <Avatar
+                                                sx={{
+                                                    backgroundColor: '#000000',
+                                                }}
+                                            >
+                                                <ShoppingBagIcon />
+                                            </Avatar>
+                                        </ListItemAvatar>
+                                        <ListItemText
+                                            primaryTypographyProps={{
+                                                color: 'black',
+                                                fontWeight: 200,
+                                                fontFamily:
+                                                    'Cormorant Garamond',
                                             }}
-                                        >
-                                            <ShoppingBagIcon />
-                                        </Avatar>
-                                    </ListItemAvatar>
-                                    <ListItemText
-                                        primaryTypographyProps={{
-                                            color: 'black',
-                                            fontWeight: 200,
-                                            fontFamily: 'Cormorant Garamond',
-                                        }}
-                                        secondaryTypographyProps={{
-                                            fontWeight: 600,
-                                            fontFamily: 'Cormorant Garamond',
-                                            fontSize: '1rem',
-                                        }}
-                                        primary={item.title as any}
-                                        secondary={
-                                            item.title === titleSpd
-                                                ? 'Pago confirmado'
-                                                : `${formatDateString(
-                                                      item.date &&
-                                                          (item.date[0] as any)
-                                                  )} a las ${item.hour}h`
-                                        }
-                                    />
-                                </ListItem>
-                            </>
-                        ))
+                                            secondaryTypographyProps={{
+                                                fontWeight: 600,
+                                                fontFamily:
+                                                    'Cormorant Garamond',
+                                                fontSize: '1rem',
+                                            }}
+                                            primary={item.title as any}
+                                            secondary={
+                                                item.title === titleSpd
+                                                    ? 'Pago confirmado'
+                                                    : `${formatDateString(
+                                                          item.date &&
+                                                              (item
+                                                                  .date[0] as any)
+                                                      )} a las ${item.hour}h`
+                                            }
+                                        />
+                                    </ListItem>
+                                </>
+                            ))
                     )}
                 </BuyItemsContainer>
             </MainContainer>
