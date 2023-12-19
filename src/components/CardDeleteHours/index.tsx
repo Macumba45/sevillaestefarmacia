@@ -1,4 +1,4 @@
-import { FC, memo } from 'react'
+import { FC, memo, useEffect, useState } from 'react'
 import { CloseOutlined } from '@ant-design/icons'
 import { Card, Button } from 'antd'
 import { Props } from './types'
@@ -19,8 +19,27 @@ const hourStyle = {
 }
 
 const CardDeleteHours: FC<Props> = ({ service, onEdit, onDelete }) => {
+    console.log(service.dates)
+    const [filteredDates, setFilteredDates] = useState(service.dates)
+    console.log(filteredDates)
+
+    useEffect(() => {
+        const now = new Date()
+        now.setHours(0, 0, 0, 0)
+
+        const updatedDates = service.dates!.filter(dateObj => {
+            const [day, month, year] = dateObj.date!.split('/')
+            const date = new Date(`${month}/${day}/${year}`)
+            date.setHours(0, 0, 0, 0)
+
+            return date >= now
+        })
+
+        setFilteredDates(updatedDates)
+    }, [service.dates])
+
     // Si el servicio no tiene fechas, no renderizar el componente
-    if (service.dates!.length === 0) {
+    if (filteredDates!.length === 0) {
         return null
     }
     return (
@@ -55,7 +74,7 @@ const CardDeleteHours: FC<Props> = ({ service, onEdit, onDelete }) => {
                 title={service.title}
                 description={
                     <div>
-                        {service.dates!.map((dateObj, index) => (
+                        {filteredDates!.map((dateObj, index) => (
                             <div
                                 style={{
                                     display: 'flex',

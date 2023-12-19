@@ -202,7 +202,9 @@ const ServiceFormModal: FC<Props> = ({
                     }
                 })
                 .filter(dateObject => {
-                    return dateObject.date.toDate() >= new Date()
+                    const today = new Date()
+                    today.setHours(0, 0, 0, 0) // Establece la hora a las 00:00:00
+                    return dateObject.date.toDate() >= today
                 })
 
             const hours = formattedDates.map(date => date.hours)
