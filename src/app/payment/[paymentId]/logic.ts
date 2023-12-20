@@ -14,10 +14,8 @@ export const useLogicPayment = () => {
     const [hour, setHour] = useState<string>('')
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [titleService, setTitleService] = useState<string>('')
-    const [paymentDataId, setPaymentDataId] = useState<string>('')
     const [serviceId, setServiceId] = useState<string>('')
     const [priceService, setPriceService] = useState<string>('')
-    const [userName, setUserName] = useState<string>('')
     const router = useRouter()
 
     const paymentSuccess = async (paymentId: string) => {
@@ -27,14 +25,10 @@ export const useLogicPayment = () => {
 
     const getPyamentById = async (paymentId: string) => {
         const paymentData = await fetchPaymentById(paymentId)
-        setPaymentDataId(paymentData.id)
         setServiceId(paymentData.serviceId)
-        if (paymentDataId && paymentDataId === 'clo0e17d30004xy04cjklg2px') {
+        if (serviceId && serviceId === 'clo0e17d30004xy04cjklg2px') {
             return ''
-        } else if (
-            paymentDataId &&
-            paymentDataId !== 'clo0e17d30004xy04cjklg2px'
-        ) {
+        } else if (serviceId && serviceId !== 'clo0e17d30004xy04cjklg2px') {
             const dateById = await fetchDateById(paymentData.dateId)
             const hourById = await fetchHourById(paymentData.hourId)
             setFecha(dateById.dates)
@@ -45,7 +39,7 @@ export const useLogicPayment = () => {
 
     const getPaymentData = async (paymentId: string) => {
         const hourId = await getPaymentById(paymentId)
-        if (paymentDataId && paymentDataId === 'clo0e17d30004xy04cjklg2px') {
+        if (serviceId && serviceId === 'clo0e17d30004xy04cjklg2px') {
             await getServiceDetails(serviceId)
             return null
         }
@@ -62,6 +56,7 @@ export const useLogicPayment = () => {
     const getServiceTitle = async (serviceId: string) => {
         const data = await getServiceDetails(serviceId)
         setTitleService(data.title)
+        setPriceService(data.price)
         return data
     }
 
@@ -79,9 +74,7 @@ export const useLogicPayment = () => {
         setIsLoading,
         getServiceTitle,
         titleService,
-        paymentDataId,
         serviceId,
         priceService,
-        userName,
     }
 }

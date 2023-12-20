@@ -32,8 +32,9 @@ export default async function handler(
                 DS_MERCHANT_TERMINAL: '1',
             } as const
 
-            const endpoint = `http://localhost:3000/payment/${paymentId}`
-            const ednpointCancel = 'http://localhost:3000/payment/canceled'
+            const endpoint = `https://www.sevillaestefarmacia.com/payment/${paymentId}`
+            const ednpointCancel =
+                'https://www.sevillaestefarmacia.com/payment/canceled'
 
             const successRedirectPath = '/success'
             const errorRedirectPath = '/error'

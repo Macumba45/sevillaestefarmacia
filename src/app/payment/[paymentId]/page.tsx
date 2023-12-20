@@ -30,32 +30,24 @@ const PaymentSuccessComponent: FC<Props> = ({ params }) => {
         titleService,
         getServiceTitle,
         serviceId,
-        paymentDataId,
-        userName,
         priceService,
     } = useLogicPayment()
     const [isPaymentProcessed, setIsPaymentProcessed] = useState(false)
 
     useEffect(() => {
         setIsLoading(true)
-
+        getPyamentById(params.paymentId)
         // Verificar si es el servicio especial sin fecha ni hora
         if (serviceId && serviceId === 'clo0e17d30004xy04cjklg2px') {
             setIsPaymentProcessed(true)
             getServiceTitle(serviceId)
-        } else if (serviceId && serviceId !== 'clo0e17d30004xy04cjklg2px') {
-            getPyamentById(params.paymentId)
-            getServiceTitle(serviceId)
-        }
-    }, [serviceId])
-
-    useEffect(() => {
-        if (paymentDataId.includes(params.paymentId)) {
             paymentSuccess(params.paymentId)
+        } else if (serviceId && serviceId !== 'clo0e17d30004xy04cjklg2px') {
             setIsPaymentProcessed(true)
-            getPaymentData(params.paymentId)
+            getServiceTitle(serviceId)
+            paymentSuccess(params.paymentId)
         }
-    }, [params, paymentDataId])
+    }, [serviceId, params])
 
     useEffect(() => {
         if (isPaymentProcessed && user?.email) {
@@ -69,7 +61,7 @@ const PaymentSuccessComponent: FC<Props> = ({ params }) => {
                     user?.email as string,
                     titleService,
                     priceService,
-                    userName
+                    user.name as string
                 )
                 setIsLoading(false)
             } else if (fecha && hour) {
@@ -78,7 +70,7 @@ const PaymentSuccessComponent: FC<Props> = ({ params }) => {
                     user?.email as string,
                     fecha,
                     hour,
-                    userName,
+                    user.name as string,
                     priceService,
                     titleService
                 )
