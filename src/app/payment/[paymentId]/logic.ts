@@ -10,14 +10,14 @@ import { getServiceDetails } from '@/services/service'
 
 export const useLogicPayment = () => {
     const { user } = useContext(UserContext)
-    const [paymentIdMetadata, setPaymentIdMetadata] = useState<string[]>([])
-    const [serviceIdMetadata, setServiceIdMetadata] = useState<string>('')
-    const [userNameMetaData, setUserNameMetaData] = useState<string>('')
-    const [priceServiceMetaData, setPriceServiceMetaData] = useState<string>('')
     const [fecha, setFecha] = useState<string>('')
     const [hour, setHour] = useState<string>('')
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [titleService, setTitleService] = useState<string>('')
+    const [paymentDataId, setPaymentDataId] = useState<string>('')
+    const [serviceId, setServiceId] = useState<string>('')
+    const [priceService, setPriceService] = useState<string>('')
+    const [userName, setUserName] = useState<string>('')
     const router = useRouter()
 
     const paymentSuccess = async (paymentId: string) => {
@@ -25,34 +25,15 @@ export const useLogicPayment = () => {
         return payment
     }
 
-    const getChargeList = async (paymentId: string) => {
-        const charList = await fetchChargeListStripe(paymentId)
-        setPaymentIdMetadata(charList.paymentId)
-        setServiceIdMetadata(charList.serviceId)
-        setUserNameMetaData(charList.userName)
-        setPriceServiceMetaData(charList.priceService)
-
-        // Verificar si es el servicio especial sin fecha ni hora
-        if (
-            serviceIdMetadata &&
-            serviceIdMetadata === 'clo0e17d30004xy04cjklg2px'
-        ) {
-            return null
-        }
-
-        return
-    }
-
     const getPyamentById = async (paymentId: string) => {
         const paymentData = await fetchPaymentById(paymentId)
-        if (
-            serviceIdMetadata &&
-            serviceIdMetadata === 'clo0e17d30004xy04cjklg2px'
-        ) {
+        setPaymentDataId(paymentData.id)
+        setServiceId(paymentData.serviceId)
+        if (paymentDataId && paymentDataId === 'clo0e17d30004xy04cjklg2px') {
             return ''
         } else if (
-            serviceIdMetadata &&
-            serviceIdMetadata !== 'clo0e17d30004xy04cjklg2px'
+            paymentDataId &&
+            paymentDataId !== 'clo0e17d30004xy04cjklg2px'
         ) {
             const dateById = await fetchDateById(paymentData.dateId)
             const hourById = await fetchHourById(paymentData.hourId)
@@ -64,11 +45,8 @@ export const useLogicPayment = () => {
 
     const getPaymentData = async (paymentId: string) => {
         const hourId = await getPaymentById(paymentId)
-        if (
-            serviceIdMetadata &&
-            serviceIdMetadata === 'clo0e17d30004xy04cjklg2px'
-        ) {
-            await getServiceDetails(serviceIdMetadata)
+        if (paymentDataId && paymentDataId === 'clo0e17d30004xy04cjklg2px') {
+            await getServiceDetails(serviceId)
             return null
         }
 
@@ -92,19 +70,18 @@ export const useLogicPayment = () => {
         paymentSuccess,
         router,
         getPaymentData,
-        getChargeList,
-        paymentIdMetadata,
         getPyamentById,
         fecha,
         hour,
         isLoading,
         user,
         emailConfirmationPaymentCitas,
-        serviceIdMetadata,
         setIsLoading,
         getServiceTitle,
         titleService,
-        userNameMetaData,
-        priceServiceMetaData,
+        paymentDataId,
+        serviceId,
+        priceService,
+        userName,
     }
 }

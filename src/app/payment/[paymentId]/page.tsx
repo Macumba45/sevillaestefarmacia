@@ -19,8 +19,6 @@ const PaymentSuccessComponent: FC<Props> = ({ params }) => {
     const {
         paymentSuccess,
         getPaymentData,
-        getChargeList,
-        paymentIdMetadata,
         getPyamentById,
         fecha,
         hour,
@@ -28,58 +26,50 @@ const PaymentSuccessComponent: FC<Props> = ({ params }) => {
         router,
         user,
         emailConfirmationPaymentCitas,
-        serviceIdMetadata,
         setIsLoading,
         titleService,
         getServiceTitle,
-        userNameMetaData,
-        priceServiceMetaData,
+        serviceId,
+        paymentDataId,
+        userName,
+        priceService,
     } = useLogicPayment()
     const [isPaymentProcessed, setIsPaymentProcessed] = useState(false)
 
     useEffect(() => {
         setIsLoading(true)
-        getChargeList(params.paymentId)
-    }, [params])
 
-    useEffect(() => {
         // Verificar si es el servicio especial sin fecha ni hora
-        if (
-            serviceIdMetadata &&
-            serviceIdMetadata === 'clo0e17d30004xy04cjklg2px'
-        ) {
+        if (serviceId && serviceId === 'clo0e17d30004xy04cjklg2px') {
             setIsPaymentProcessed(true)
-            getServiceTitle(serviceIdMetadata)
-        } else if (
-            serviceIdMetadata &&
-            serviceIdMetadata !== 'clo0e17d30004xy04cjklg2px'
-        ) {
+            getServiceTitle(serviceId)
+        } else if (serviceId && serviceId !== 'clo0e17d30004xy04cjklg2px') {
             getPyamentById(params.paymentId)
-            getServiceTitle(serviceIdMetadata)
+            getServiceTitle(serviceId)
         }
-    }, [serviceIdMetadata])
+    }, [serviceId])
 
     useEffect(() => {
-        if (paymentIdMetadata.includes(params.paymentId)) {
+        if (paymentDataId.includes(params.paymentId)) {
             paymentSuccess(params.paymentId)
             setIsPaymentProcessed(true)
             getPaymentData(params.paymentId)
         }
-    }, [params, paymentIdMetadata])
+    }, [params, paymentDataId])
 
     useEffect(() => {
         if (isPaymentProcessed && user?.email) {
             if (
-                serviceIdMetadata &&
+                serviceId &&
                 titleService &&
-                serviceIdMetadata === 'clo0e17d30004xy04cjklg2px'
+                serviceId === 'clo0e17d30004xy04cjklg2px'
             ) {
                 // Este es el servicio especial, envía el correo sin datos de fecha y hora
                 emailConfirmationPaymentService(
                     user?.email as string,
                     titleService,
-                    priceServiceMetaData,
-                    userNameMetaData
+                    priceService,
+                    userName
                 )
                 setIsLoading(false)
             } else if (fecha && hour) {
@@ -88,23 +78,14 @@ const PaymentSuccessComponent: FC<Props> = ({ params }) => {
                     user?.email as string,
                     fecha,
                     hour,
-                    userNameMetaData,
-                    priceServiceMetaData,
+                    userName,
+                    priceService,
                     titleService
                 )
                 setIsLoading(false)
             }
         }
-    }, [
-        isPaymentProcessed,
-        user?.email,
-        serviceIdMetadata,
-        fecha,
-        hour,
-        titleService,
-        userNameMetaData,
-        priceServiceMetaData,
-    ])
+    }, [isPaymentProcessed, user?.email, serviceId, fecha, hour, titleService])
 
     if (isLoading)
         return (
@@ -166,8 +147,7 @@ const PaymentSuccessComponent: FC<Props> = ({ params }) => {
                         textAlign: 'center',
                     }}
                 >
-                    {serviceIdMetadata &&
-                    serviceIdMetadata === 'clo0e17d30004xy04cjklg2px' ? (
+                    {serviceId && serviceId === 'clo0e17d30004xy04cjklg2px' ? (
                         <p>Tu compra ha sido completada con éxito</p>
                     ) : (
                         <>
@@ -188,8 +168,7 @@ const PaymentSuccessComponent: FC<Props> = ({ params }) => {
                         fontWeight: 300,
                     }}
                 >
-                    {serviceIdMetadata &&
-                    serviceIdMetadata === 'clo0e17d30004xy04cjklg2px' ? (
+                    {serviceId && serviceId === 'clo0e17d30004xy04cjklg2px' ? (
                         <p>
                             Por favor, presenta el email de confirmación de
                             compra en el mostrador
