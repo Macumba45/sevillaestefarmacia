@@ -45,6 +45,7 @@ const PaymentSuccessComponent: FC<Props> = ({ params }) => {
         } else if (serviceId && serviceId !== 'clo0e17d30004xy04cjklg2px') {
             setIsPaymentProcessed(true)
             getServiceTitle(serviceId)
+            getPaymentData(params.paymentId)
             paymentSuccess(params.paymentId)
         }
     }, [serviceId, params])
