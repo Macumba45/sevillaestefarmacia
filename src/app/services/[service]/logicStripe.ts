@@ -62,34 +62,15 @@ export const useLogicPageServicesDetail = () => {
                 dateId,
                 hourId
             )
-            // const sessionData = await stripePayment(
-            //     1,
-            //     priceId,
-            //     payment.id,
-            //     serviceId,
-            //     userName,
-            //     priceService
-            // )
-            // router.push(sessionData.url)
-
-            await fetch('/api/redsys/paymentRedsys', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    priceId: priceId,
-                    paymentId: payment.id,
-                    serviceId: serviceId,
-                    userName: userName,
-                    priceService: priceService,
-                }),
-            })
-                .then(response => response.text())
-                .then(html => {
-                    document.body.innerHTML = html
-                })
-                .catch(error => console.error(error))
+            const sessionData = await stripePayment(
+                1,
+                priceId,
+                payment.id,
+                serviceId,
+                userName,
+                priceService
+            )
+            router.push(sessionData.url)
         } catch (error) {
             console.error('Error al crear la sesión de pago: ', error)
         }

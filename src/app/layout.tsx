@@ -6,6 +6,7 @@ import StyledComponentsRegistryAntd from '@/lib/AntdRegistry'
 import StyledComponentsRegistry from '@/lib/StyledComponentsRegistry'
 import { UserProvider } from '@/context/UserContext'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import Script from 'next/script'
 
 export const metadata = {
     title: 'Farmacia Sta Bárbara -  Sevilla Este',
@@ -38,19 +39,19 @@ export const metadata = {
 
 const RootLayout = ({ children }: React.PropsWithChildren) => (
     <>
-        {/* <Head>
-            <title>{metadata.title}</title>
-            <meta name="description" content={metadata.description} />
-            <meta name="keywords" content={metadata.keywords} />
-            <meta property="og:type" content={metadata.openGraph.type} />
-            <meta property="og:locale" content={metadata.openGraph.locale} />
-            <meta property="og:url" content={metadata.openGraph.url} />
-            <meta property="og:title" content={metadata.openGraph.title} />
-            <meta
-                property="og:description"
-                content={metadata.openGraph.description}
-            />
-        </Head> */}
+        <Head>
+            <Script
+                id="gtag"
+                dangerouslySetInnerHTML={{
+                    __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-6KW0X4B236');
+            `,
+                }}
+            ></Script>
+        </Head>
         <html lang="es">
             <body>
                 <StyledComponentsRegistryAntd>

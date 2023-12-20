@@ -33,6 +33,7 @@ export default async function handler(
             } as const
 
             const endpoint = `http://localhost:3000/payment/${paymentId}`
+            const ednpointCancel = 'http://localhost:3000/payment/canceled'
 
             const successRedirectPath = '/success'
             const errorRedirectPath = '/error'
@@ -58,28 +59,53 @@ export default async function handler(
                 // amount in smallest currency unit(cents)
                 DS_MERCHANT_AMOUNT: redsysAmount,
                 DS_MERCHANT_CURRENCY: redsysCurrency,
-                DS_MERCHANT_MERCHANTNAME: 'MI COMERCIO',
+                DS_MERCHANT_MERCHANTNAME:
+                    'Farmacia Sta. Bárbara - Sevilla este',
                 DS_MERCHANT_MERCHANTURL: `${endpoint}${notificationPath}`,
                 DS_MERCHANT_URLOK: `${endpoint}`,
-                DS_MERCHANT_URLKO: `${endpoint}${errorRedirectPath}`,
+                DS_MERCHANT_URLKO: `${ednpointCancel}`,
             })
 
             const html = [
                 '<!DOCTYPE html>',
                 '<html>',
+                '<head>',
+                '<style>',
+                'body {',
+                '  display: flex;',
+                '  justify-content: center;',
+                '  align-items: center;',
+                '  height: 100vh;',
+                '  margin: 0;',
+                '  background-color: #f4f4f4;',
+                '  font-family: Arial, sans-serif;',
+                '}',
+                '#paymentForm {',
+                '  display: flex;',
+                '  flex-direction: column;',
+                '}',
+                'input[type="submit"] {',
+                '  background-color: #4CAF50;',
+                '  color: white;',
+                '  padding: 14px 20px;',
+                '  margin: 8px 0;',
+                '  border: none;',
+                '  border-radius: 4px;',
+                '  cursor: pointer;',
+                '}',
+                'input[type="submit"]:hover {',
+                '  background-color: #45a049;',
+                '}',
+                '</style>',
+                '</head>',
                 '<body>',
-                `<p>Payment for order ${orderId}, ${priceService} ${currency}</p>`,
+                // `<p>Pago por la orden ${orderId}, ${priceService} ${currency}</p>`,
                 `<form id="paymentForm" action="${form.url}" method="post" target="_blank">`,
                 `  <input type="hidden" id="Ds_SignatureVersion" name="Ds_SignatureVersion" value="${form.body.Ds_SignatureVersion}" />`,
                 `  <input type="hidden" id="Ds_MerchantParameters" name="Ds_MerchantParameters" value="${form.body.Ds_MerchantParameters}" />`,
                 `  <input type="hidden" id="Ds_Signature" name="Ds_Signature" value="${form.body.Ds_Signature}"/>`,
-                '  <input type="submit" value="Pay with credit card" />',
+                '  <input type="submit" value="Pagar con tarjeta de crédito" />',
                 '</form>',
-                '<script>',
-                '  window.onload = function() {',
-                '    document.getElementById("paymentForm").submit();',
-                '  };',
-                '</script>',
                 '</body>',
                 '</html>',
             ].join('\n')
