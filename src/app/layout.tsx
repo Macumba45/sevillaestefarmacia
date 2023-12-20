@@ -39,7 +39,7 @@ export const metadata = {
 
 const RootLayout = ({ children }: React.PropsWithChildren) => (
     <>
-        <Head>
+        <head>
             <Script
                 id="gtag"
                 dangerouslySetInnerHTML={{
@@ -51,7 +51,7 @@ const RootLayout = ({ children }: React.PropsWithChildren) => (
             `,
                 }}
             ></Script>
-        </Head>
+        </head>
         <html lang="es">
             <body>
                 <StyledComponentsRegistryAntd>
