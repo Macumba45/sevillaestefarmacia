@@ -91,10 +91,6 @@ export const useLogicPageServicesDetail = () => {
                     const form = document.getElementById(
                         'paymentForm'
                     ) as HTMLFormElement
-                    if (form) {
-                        form.submit()
-                        window.location.href = `/services/${serviceId}`
-                    }
                 })
                 .catch(error => console.error(error))
         } catch (error) {
