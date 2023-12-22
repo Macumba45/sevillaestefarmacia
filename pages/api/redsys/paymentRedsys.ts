@@ -8,6 +8,8 @@ import {
 import Decimal from 'decimal.js'
 import type { Currency } from 'redsys-easy'
 import { NextApiRequest, NextApiResponse } from 'next'
+import dotenv from 'dotenv'
+dotenv.config()
 
 export default async function handler(
     req: NextApiRequest,
@@ -23,25 +25,22 @@ export default async function handler(
 
             const { createRedirectForm } = createRedsysAPI({
                 urls: SANDBOX_URLS,
-                secretKey: 'sq7HjrUOBfKmC576ILgskD5srU870gJ7',
+                secretKey: process.env.secretKey as string,
             })
 
             const merchantInfo = {
-                DS_MERCHANT_MERCHANTCODE: '999008881',
-                DS_MERCHANT_TERMINAL: '1',
+                DS_MERCHANT_MERCHANTCODE: '353608151',
+                DS_MERCHANT_TERMINAL: '001',
             } as const
 
             const endpoint = `https://www.sevillaestefarmacia.com/payment/${paymentId}`
             const ednpointCancel =
                 'https://www.sevillaestefarmacia.com/payment/canceled'
 
-            const successRedirectPath = '/success'
-            const errorRedirectPath = '/error'
             const notificationPath = '/api/notification'
 
             const currency = 'EUR' as Currency
-
-            const orderId = paymentId
+            const orderId = randomTransactionId()
             const currencyInfo = CURRENCIES[currency]
 
             // Convert 49.99€ -> 4999
@@ -65,6 +64,7 @@ export default async function handler(
                 DS_MERCHANT_URLOK: `${endpoint}`,
                 DS_MERCHANT_URLKO: `${ednpointCancel}`,
             })
+            console.log(form.url)
 
             const html = [
                 '<!DOCTYPE html>',
@@ -116,7 +116,7 @@ export default async function handler(
                 ' <img src="/images/darkIcon.png" alt="Descripción de la imagen">',
                 ' <h1 id="farmacia">Farmacia Sta.Bárbara</h1>',
                 '</div>',
-                `<form id="paymentForm" action="${form.url}" method="post">`,
+                `<form id="paymentForm" action="https://sis.redsys.es/sis/realizarPago" method="post">`,
                 `  <input type="hidden" id="Ds_SignatureVersion" name="Ds_SignatureVersion" value="${form.body.Ds_SignatureVersion}" />`,
                 `  <input type="hidden" id="Ds_MerchantParameters" name="Ds_MerchantParameters" value="${form.body.Ds_MerchantParameters}" />`,
                 `  <input type="hidden" id="Ds_Signature" name="Ds_Signature" value="${form.body.Ds_Signature}"/>`,

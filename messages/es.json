@@ -1,0 +1,74 @@
+{
+    "Index": {
+        "HomeHeaderTitle": "Bienvenido a FishGram",
+        "homeSubHeaderTitle": "¡Dale caña al carrete!",
+        "homeSubHeaderTitle2": "creada para pescadores",
+        "login": "Iniciar sesión",
+        "register": "Registrarse",
+        "guest": "Continuar como invitado",
+        "errorLogin": "Usuario o contraseña inválidos",
+        "noAccount": "¿No tienes una cuenta? Regístrate",
+        "password": "Contraseña",
+        "nameRegister": "Nickname",
+        "createAccount": "Crear cuenta",
+        "alreadyAccount": "¿Ya tienes una cuenta? Inicia sesión"
+    },
+    "login": {
+        "noAccount": "¿No tienes una cuenta? Regístrate",
+        "password": "Contraseña",
+        "nameRegister": "Nickname",
+        "createAccount": "Crear cuenta",
+        "alreadyAccount": "¿Ya tienes una cuenta? Inicia sesión",
+        "login": "Iniciar sesión",
+        "register": "Registrarse",
+        "errorLogin": "Usuario o contraseña inválidos",
+        "lopd": "Acepto términos y condiciones",
+        "readPdf": "Leer condiciones"
+    },
+    "LocaleSwitcher": {
+        "label": "Idiomma",
+        "en": "Inglés",
+        "es": "Español"
+    },
+    "maps": {
+        "buttonPlaces": "Buscar por esta zona",
+        "buttonPlacesShort": "Buscar",
+        "login": "Iniciar sesión",
+        "monthlyMarkers": "Marcadores mensuales",
+        "new": "Nuevo",
+        "addMarker": "Añadir marcador",
+        "cancelMarker": "Cancelar marcador"
+    },
+    "menu": {
+        "logintoProfile": "Debes de iniciar sesión",
+        "logintoProfile2": "para ver tu perfil",
+        "profile": "Mi perfil",
+        "wheater": "Meteorología",
+        "contact": "Contacto/Ayuda",
+        "logout": "Cerrar sesión"
+    },
+    "modalAddMarker": {
+        "createMarker": "Crear marcador",
+        "address": "Introduce la Dirección/Lugar:",
+        "place": "Tipo de lugar:",
+        "spot": "Spot de Pesca",
+        "store": "Tienda de Pesca",
+        "cebos": "Cebos 24H",
+        "pictures": "Fotos de Capturas",
+        "algas": "Algas (Se borra después de 24H)",
+        "description": "Descripción del lugar:",
+        "uploadPicture": "Subir fotos:",
+        "confirm": "Confirmar",
+        "cancel": "Cancelar",
+        "required": " Por favor, completa todos los campos requeridos antes de crear el marcador.",
+        "success": "Marcador creado con exitosamente"
+    },
+    "FilterComponent": {
+        "all": "Todos",
+        "spots": "Spots",
+        "stores": "Tiendas de Pesca",
+        "cebos": " Cebos 24H",
+        "pictures": "Fotos de Capturas",
+        "likes": " Mis Likes"
+    }
+}

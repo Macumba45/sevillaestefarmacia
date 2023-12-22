@@ -62,16 +62,6 @@ export const useLogicPageServicesDetail = () => {
                 dateId,
                 hourId
             )
-            // const sessionData = await stripePayment(
-            //     1,
-            //     priceId,
-            //     payment.id,
-            //     serviceId,
-            //     userName,
-            //     priceService
-            // )
-            // router.push(sessionData.url)
-
             await fetch('/api/redsys/paymentRedsys', {
                 method: 'POST',
                 headers: {
