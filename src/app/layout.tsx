@@ -40,7 +40,12 @@ export const metadata = {
 const RootLayout = ({ children }: React.PropsWithChildren) => (
     <>
         <head>
-            <Script
+            <script
+                async
+                src="https://www.googletagmanager.com/gtag/js?id=G-6KW0X4B236"
+            ></script>
+
+            <script
                 id="gtag"
                 dangerouslySetInnerHTML={{
                     __html: `
@@ -50,7 +55,7 @@ const RootLayout = ({ children }: React.PropsWithChildren) => (
                 gtag('config', 'G-6KW0X4B236');
             `,
                 }}
-            ></Script>
+            ></script>
         </head>
         <html lang="es">
             <body>
