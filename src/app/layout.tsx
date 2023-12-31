@@ -1,12 +1,10 @@
 import React from 'react'
-import Head from 'next/head'
 import './reset.css'
 import './global.css'
 import StyledComponentsRegistryAntd from '@/lib/AntdRegistry'
 import StyledComponentsRegistry from '@/lib/StyledComponentsRegistry'
 import { UserProvider } from '@/context/UserContext'
 import { SpeedInsights } from '@vercel/speed-insights/next'
-import Script from 'next/script'
 
 export const metadata = {
     title: 'Farmacia Sta Bárbara -  Sevilla Este',
@@ -44,7 +42,6 @@ const RootLayout = ({ children }: React.PropsWithChildren) => (
                 async
                 src="https://www.googletagmanager.com/gtag/js?id=G-6KW0X4B236"
             ></script>
-
             <script
                 id="gtag"
                 dangerouslySetInnerHTML={{

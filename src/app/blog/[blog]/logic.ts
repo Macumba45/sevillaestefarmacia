@@ -14,12 +14,20 @@ export const useLogicBlogDetail = () => {
     }
 
     const contactWhatsApp = () => {
-        let message = `Hola, me gustaría saber más sobre el taller ${blogDetails?.title}`
         const phoneNumber = '+34682734237'
+        let whatsappURL = ''
 
-        const whatsappURL = `https://wa.me/${phoneNumber}&text=${encodeURIComponent(
-            message
-        )}`
+        if (
+            /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+                navigator.userAgent
+            )
+        ) {
+            // Es un dispositivo móvil
+            whatsappURL = `https://api.whatsapp.com/send?phone=${phoneNumber}`
+        } else {
+            // Es un escritorio
+            whatsappURL = `https://web.whatsapp.com/send?phone=${phoneNumber}`
+        }
 
         window.open(whatsappURL)
     }

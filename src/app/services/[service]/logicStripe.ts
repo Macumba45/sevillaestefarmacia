@@ -33,17 +33,20 @@ export const useLogicPageServicesDetail = () => {
     }
 
     const contactWhatsApp = () => {
-        let message = ''
         const phoneNumber = '+34682734237'
-        if (serviceData?.id === 'clo0e1q180006xy04pu96nyml') {
-            message = `Hola Farmacia Santa Bárbara, me gustaría solicitar información sobre el servicio ${serviceData?.title}`
-        } else if (serviceData?.id === 'clo0e0mn50003xy040gwqse36') {
-            message =
-                'Hola Farmacia Santa Bárbara, me gustaría solicitar presupuesto para realizar una fórmula magistral'
+        let whatsappURL = ''
+
+        if (
+            /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+                navigator.userAgent
+            )
+        ) {
+            // Es un dispositivo móvil
+            whatsappURL = `https://api.whatsapp.com/send?phone=${phoneNumber}`
+        } else {
+            // Es un escritorio
+            whatsappURL = `https://web.whatsapp.com/send?phone=${phoneNumber}`
         }
-        const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
-            message
-        )}`
 
         window.open(whatsappURL)
     }

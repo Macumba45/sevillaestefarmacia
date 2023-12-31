@@ -75,10 +75,22 @@ const Conocenos: FC = () => {
     const handleServiceClick = (route: string) => {
         window.location.href = route
     }
+
     const contactWhatsApp = () => {
         const phoneNumber = '+34682734237'
+        let whatsappURL = ''
 
-        const whatsappURL = `https://wa.me/${phoneNumber}`
+        if (
+            /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+                navigator.userAgent
+            )
+        ) {
+            // Es un dispositivo móvil
+            whatsappURL = `https://api.whatsapp.com/send?phone=${phoneNumber}`
+        } else {
+            // Es un escritorio
+            whatsappURL = `https://web.whatsapp.com/send?phone=${phoneNumber}`
+        }
 
         window.open(whatsappURL)
     }
