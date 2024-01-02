@@ -2,11 +2,7 @@ import { prisma } from '../../../src/lib/client'
 import { Talleres } from '../../../types/types'
 
 export const getTalleres = async (): Promise<Talleres[]> => {
-    const prismaTalleres = await prisma.talleres.findMany({
-        orderBy: {
-            createdAt: 'desc',
-        },
-    })
+    const prismaTalleres = await prisma.talleres.findMany()
 
     if (!prismaTalleres) {
         return []

@@ -24,93 +24,107 @@ const route = (mode: ModalMode, id: string) => {
 }
 
 const CardTallerOrBlog: FC<Props> = ({ mode, blog, taller }) => (
-    <div
+    <Link
         style={{
-            margin: '1.5rem',
-            display: 'flex',
-            justifyContent: 'center',
+            textDecoration: 'none',
         }}
+        href={route(
+            mode,
+            mode === 'blog' ? (blog?.id as string) : (taller?.id as string)
+        )}
     >
-        <Card
-            hoverable
+        <div
             style={{
-                width: 320,
+                margin: '1.5rem',
+                display: 'flex',
+                justifyContent: 'center',
             }}
-            cover={
-                <img
-                    alt={mode === 'blog' ? blog?.title : taller?.title}
-                    src={
-                        mode === 'blog' ? blog?.urlPicture : taller?.urlPicture
-                    }
-                    style={{
-                        objectFit: 'cover',
-                        height: '250px',
-                        width: '100%',
-                    }}
-                    // Asegúrate de usar el título correspondiente según el modo.
-                />
-            }
         >
-            <Meta
-                title={
-                    <div
-                        style={{
-                            whiteSpace: 'normal', // Permite que el texto se expanda a múltiples líneas
-                            overflow: 'hidden', // Oculta el contenido que no cabe
-                            textOverflow: 'ellipsis', // Agrega puntos suspensivos cuando el texto se recorta
-                            fontFamily: 'Roboto',
-                        }}
-                    >
-                        {mode === 'blog' ? blog?.title : taller?.title}
-                    </div>
-                }
-                description={
-                    mode === 'blog' ? blog?.subtitle : taller?.subtitle
-                }
-            />
-            <div
+            <Card
+                hoverable
                 style={{
-                    display: 'flex',
-                    justifyContent: 'center',
+                    width: 320,
                 }}
-            >
-                <HoverMotion>
-                    <Link
-                        href={route(
-                            mode,
+                cover={
+                    <img
+                        alt={mode === 'blog' ? blog?.title : taller?.title}
+                        src={
                             mode === 'blog'
-                                ? (blog?.id as string)
-                                : (taller?.id as string)
-                        )}
-                    >
-                        <Button
-                            size="small"
+                                ? blog?.urlPicture
+                                : taller?.urlPicture
+                        }
+                        style={{
+                            objectFit: 'cover',
+                            height: '250px',
+                            width: '100%',
+                        }}
+                        // Asegúrate de usar el título correspondiente según el modo.
+                    />
+                }
+            >
+                <Meta
+                    title={
+                        <div
                             style={{
-                                marginTop: '2rem',
-                                backgroundColor: 'transparent',
-                                color: 'black',
-                                boxShadow: 'none',
+                                whiteSpace: 'normal', // Permite que el texto se expanda a múltiples líneas
+                                overflow: 'hidden', // Oculta el contenido que no cabe
+                                textOverflow: 'ellipsis', // Agrega puntos suspensivos cuando el texto se recorta
+                                fontFamily: 'Roboto',
                             }}
-                            variant="text"
                         >
-                            <p
+                            {mode === 'blog' ? blog?.title : taller?.title}
+                        </div>
+                    }
+                    description={
+                        mode === 'blog'
+                            ? 'Fecha:' + ' ' + blog?.subtitle
+                            : 'Fecha:' + ' ' + taller?.subtitle
+                    }
+                />
+                <div
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                    }}
+                >
+                    <HoverMotion>
+                        <Link
+                            href={route(
+                                mode,
+                                mode === 'blog'
+                                    ? (blog?.id as string)
+                                    : (taller?.id as string)
+                            )}
+                        >
+                            <Button
+                                size="small"
                                 style={{
-                                    textAlign: 'left',
-                                    textDecoration: 'underline',
-                                    fontSize: '0.8rem',
-                                    fontFamily: 'Cormorant Garamond',
+                                    marginTop: '2rem',
+                                    backgroundColor: 'transparent',
+                                    color: 'black',
+                                    boxShadow: 'none',
                                 }}
+                                variant="text"
                             >
-                                {mode === 'blog'
-                                    ? 'Leer más'
-                                    : 'Reservar plaza'}
-                            </p>
-                        </Button>
-                    </Link>
-                </HoverMotion>
-            </div>
-        </Card>
-    </div>
+                                <p
+                                    style={{
+                                        textAlign: 'left',
+                                        textDecoration: 'underline',
+                                        fontSize: '0.8rem',
+                                        fontFamily: 'Cormorant Garamond',
+                                    }}
+                                >
+                                    {mode === 'blog'
+                                        ? 'Leer más'
+                                        : 'Reservar plaza'}
+                                </p>
+                            </Button>
+                        </Link>
+                    </HoverMotion>
+                </div>
+            </Card>
+        </div>
+    </Link>
 )
 
 export default CardTallerOrBlog

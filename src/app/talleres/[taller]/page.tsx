@@ -90,7 +90,9 @@ const Page: FC<Props> = ({ params }) => {
                             />
                         </PictureContainer>
                         <TitleDetails>{taller?.title}</TitleDetails>
-                        <SubtitleDetails>{taller?.subtitle}</SubtitleDetails>
+                        <SubtitleDetails>
+                            Fecha: {taller?.subtitle}
+                        </SubtitleDetails>
                         <ParrafoServices>
                             {formatTextWithLineBreaks(
                                 taller?.descripcion as string
