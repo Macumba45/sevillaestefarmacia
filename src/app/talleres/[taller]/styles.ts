@@ -76,7 +76,7 @@ export const PictureContainer = styled.div`
 export const Picture = styled.img`
     width: 100%;
     object-fit: cover;
-    height: 100px;
+    height: 200px;
     margin-left: 2rem;
     margin-right: 2rem;
     border-radius: 10px;
@@ -84,7 +84,7 @@ export const Picture = styled.img`
         width: 100%;
         margin-left: 4rem;
         margin-right: 4rem;
-        height: 200px;
+        height: 300px;
     }
 `
 
