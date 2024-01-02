@@ -33,13 +33,20 @@ const CardTallerOrBlog: FC<Props> = ({ mode, blog, taller }) => (
     >
         <Card
             hoverable
-            style={{ width: 320 }}
+            style={{
+                width: 320,
+            }}
             cover={
                 <img
                     alt={mode === 'blog' ? blog?.title : taller?.title}
                     src={
                         mode === 'blog' ? blog?.urlPicture : taller?.urlPicture
                     }
+                    style={{
+                        objectFit: 'cover',
+                        height: '250px',
+                        width: '100%',
+                    }}
                     // Asegúrate de usar el título correspondiente según el modo.
                 />
             }
