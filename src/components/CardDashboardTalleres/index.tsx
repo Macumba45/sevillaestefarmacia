@@ -51,6 +51,7 @@ const CardDashboardTalleres: FC<Props> = ({ talleres, onEdit, onDelete }) => {
                     display: 'flex',
                     justifyContent: 'center',
                     fontFamily: 'Roboto',
+                    height: '100px',
                 }}
                 title={talleres!.title}
                 description={
