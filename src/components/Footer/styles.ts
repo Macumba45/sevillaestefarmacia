@@ -58,6 +58,7 @@ export const PolicyLinks = styled.a`
     text-align: center;
     margin: 0.5rem;
     cursor: pointer;
+    text-decoration: none;
 `
 
 export const ContainerLogos = styled.div`

@@ -59,9 +59,27 @@ const Footer: FC = () => {
                 />
             </LogosSocialMedia>
             <PolicyLinksContainer>
-                <PolicyLinks>Términos y Condiciones</PolicyLinks>
-                <PolicyLinks>Política de Privacidad</PolicyLinks>
-                <PolicyLinks>Aviso Legal</PolicyLinks>
+                <PolicyLinks
+                    href="/pdf/cookies.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Política de Cookies
+                </PolicyLinks>
+                <PolicyLinks
+                    href="/pdf/privacidad.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Política de Privacidad
+                </PolicyLinks>
+                <PolicyLinks
+                    href="/pdf/legal.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Aviso Legal
+                </PolicyLinks>
             </PolicyLinksContainer>
             <ContainerLogos>
                 <PicturesLogos
