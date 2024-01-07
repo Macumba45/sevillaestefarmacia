@@ -84,7 +84,7 @@ export const Picture = styled.img`
         width: 100%;
         margin-left: 4rem;
         margin-right: 4rem;
-        height: 200px;
+        height: 400px;
     }
 `
 

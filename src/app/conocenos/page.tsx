@@ -194,7 +194,8 @@ const Conocenos: FC = () => {
                                 <SpanBold>
                                     Horario: <br /> ·Lunes a viernes de 9:30h a
                                     21:30h <br /> ·Sábado de 9:30h a 14:.00h{' '}
-                                    <br /> ·Domingo de 10:00h a 14:00h
+                                    <br /> ·Domingo y festivos de 9:30h a
+                                    14:.00h
                                 </SpanBold>
                             </ParrafoServices>
                         </ContainerParrafos>

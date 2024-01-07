@@ -77,7 +77,7 @@ const CardTallerOrBlog: FC<Props> = ({ mode, blog, taller }) => (
                     }
                     description={
                         mode === 'blog'
-                            ? 'Fecha:' + ' ' + blog?.subtitle
+                            ? blog?.subtitle
                             : 'Fecha:' + ' ' + taller?.subtitle
                     }
                 />

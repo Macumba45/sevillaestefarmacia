@@ -4,7 +4,7 @@ import { Blogs } from '../../../types/types'
 export const getBlogs = async (): Promise<Blogs[]> => {
     const blogs = await prisma.blogs.findMany({
         orderBy: {
-            createdAt: 'asc',
+            createdAt: 'desc',
         },
     })
 

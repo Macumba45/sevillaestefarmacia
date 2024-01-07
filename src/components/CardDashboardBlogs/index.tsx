@@ -62,7 +62,7 @@ const CardDashboardblogs: FC<Props> = ({ blogs, onEdit, onDelete }) => {
                             fontFamily: 'Roboto',
                         }}
                     >
-                        Fecha: {blogs!.subtitle}
+                        {blogs!.subtitle}
                     </span>
                 }
             />
