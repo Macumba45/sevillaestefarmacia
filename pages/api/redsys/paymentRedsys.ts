@@ -64,7 +64,6 @@ export default async function handler(
                 DS_MERCHANT_URLOK: `${endpoint}`,
                 DS_MERCHANT_URLKO: `${ednpointCancel}`,
             })
-            console.log(form.url)
 
             const html = [
                 '<!DOCTYPE html>',

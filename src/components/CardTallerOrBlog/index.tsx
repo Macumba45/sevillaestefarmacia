@@ -98,10 +98,18 @@ const CardTallerOrBlog: FC<Props> = ({ mode, blog, taller }) => (
                         >
                             <Button
                                 size="small"
+                                disabled={taller?.subtitle
+                                    .trim()
+                                    .toUpperCase()
+                                    .includes('FINALIZADO')}
                                 style={{
                                     marginTop: '2rem',
-                                    backgroundColor: 'transparent',
-                                    color: 'black',
+                                    color: taller?.subtitle
+                                        .trim()
+                                        .toUpperCase()
+                                        .includes('FINALIZADO')
+                                        ? '#d2d2d2'
+                                        : 'black',
                                     boxShadow: 'none',
                                 }}
                                 variant="text"
@@ -116,6 +124,11 @@ const CardTallerOrBlog: FC<Props> = ({ mode, blog, taller }) => (
                                 >
                                     {mode === 'blog'
                                         ? 'Leer más'
+                                        : taller?.subtitle
+                                              .trim()
+                                              .toUpperCase()
+                                              .includes('FINALIZADO')
+                                        ? 'Finalizado'
                                         : 'Reservar plaza'}
                                 </p>
                             </Button>

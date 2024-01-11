@@ -55,6 +55,11 @@ const Page: FC<Props> = ({ params }) => {
     }),
         [document.title]
 
+    const finalizado = taller?.subtitle
+        .trim()
+        .toUpperCase()
+        .includes('FINALIZADO')
+
     return (
         <LayoutNavFooter>
             <MainContainer>
@@ -103,12 +108,15 @@ const Page: FC<Props> = ({ params }) => {
                                 <Button
                                     onClick={contactWhatsApp}
                                     variant="outlined"
+                                    disabled={finalizado}
                                     sx={{
                                         color: 'white',
                                         borderColor: 'black',
                                         width: '300px',
                                         borderRadius: '130px',
-                                        backgroundColor: 'black',
+                                        backgroundColor: finalizado
+                                            ? 'gray'
+                                            : 'black',
                                         ':hover': {
                                             backgroundColor: 'white',
                                             color: 'black',
@@ -117,7 +125,9 @@ const Page: FC<Props> = ({ params }) => {
                                         fontFamily: 'Cormorant Garamond',
                                     }}
                                 >
-                                    Reservar plaza
+                                    {finalizado
+                                        ? 'Taller finalizado'
+                                        : 'Reservar'}
                                 </Button>
                             </ButtonContainerServices>
                         </HoverMotion>
