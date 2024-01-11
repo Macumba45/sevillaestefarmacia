@@ -4,7 +4,6 @@ import { Blogs, Talleres } from '../../../types/types'
 import HoverMotion from '../../animations/hover'
 import Link from 'next/link'
 import { Button } from '@mui/material'
-
 const { Meta } = Card
 
 type ModalMode = 'taller' | 'blog'
