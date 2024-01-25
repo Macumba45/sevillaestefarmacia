@@ -50,6 +50,7 @@ const ModalOrderTime: FC<Props> = ({
     const [isLoadingPayments, setIsLoadingPayments] = useState(false)
 
     const now = new Date()
+    now.setUTCHours(23, 59, 59, 999)
     const currentHour = now.getHours()
     const currentMinutes = now.getMinutes()
 
@@ -95,7 +96,9 @@ const ModalOrderTime: FC<Props> = ({
                 const day = parseInt(parts[0], 10)
                 const month = parseInt(parts[1], 10) - 1
                 const year = parseInt(parts[2], 10)
-                const dateObject = new Date(year, month, day)
+                const dateObject = new Date(
+                    Date.UTC(year, month, day, 23, 59, 59, 999)
+                )
 
                 return dateObject >= now
             }
