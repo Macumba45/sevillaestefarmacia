@@ -3,7 +3,7 @@ import { CloseOutlined } from '@ant-design/icons'
 import { Card, Button } from 'antd'
 import { Props } from './types'
 import { Typography } from '@mui/material'
-
+import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd'
 const { Meta } = Card
 
 const hourStyle = {
@@ -14,12 +14,13 @@ const hourStyle = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    width: '120px',
+    width: '150px',
     marginBottom: '30px',
 }
 
 const CardDeleteHours: FC<Props> = ({ service, onEdit, onDelete }) => {
     const [filteredDates, setFilteredDates] = useState(service.dates)
+    const [bookedHours, setBookedHours] = useState<string[]>([])
 
     useEffect(() => {
         const now = new Date()
@@ -78,6 +79,8 @@ const CardDeleteHours: FC<Props> = ({ service, onEdit, onDelete }) => {
                                     display: 'flex',
                                     flexWrap: 'wrap',
                                     marginBottom: '10px',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
                                 }}
                                 key={index}
                             >
@@ -98,26 +101,77 @@ const CardDeleteHours: FC<Props> = ({ service, onEdit, onDelete }) => {
                                             padding: '15px',
                                             width: '100%',
                                             marginBottom: '30px',
+                                            marginTop: '10px',
                                         }}
                                     >
                                         Fecha: {dateObj.date}
                                     </Typography>
                                 </div>
                                 {dateObj.hours.map((hour, index) => (
-                                    <div key={index} style={hourStyle}>
-                                        <span>{hour.hour} </span>
-                                        <Button
-                                            style={{ marginLeft: '10px' }}
-                                            disabled={hour.isBooked}
-                                            type="primary"
-                                            icon={<CloseOutlined />}
-                                            onClick={() =>
-                                                onDelete(
-                                                    service.id as string,
-                                                    hour.id as string
-                                                )
-                                            }
-                                        />
+                                    <div
+                                        key={index}
+                                        style={{
+                                            borderRadius: '5px',
+                                            boxShadow:
+                                                '0px 0px 5px 0px rgba(197, 197, 197, 0.75)',
+                                            padding: '10px',
+                                            margin: '10px',
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                            width: '150px',
+                                            marginBottom: '30px',
+                                            flexDirection: 'column',
+                                        }}
+                                    >
+                                        <span
+                                            style={{
+                                                fontWeight: '900',
+                                                marginBottom: '10px',
+                                            }}
+                                        >
+                                            {hour.hour}
+                                        </span>
+                                        <div
+                                            style={{
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                            }}
+                                        >
+                                            <Button
+                                                style={{ marginLeft: '10px' }}
+                                                disabled={hour.isBooked}
+                                                type="primary"
+                                                icon={<CloseOutlined />}
+                                                onClick={() =>
+                                                    onDelete(
+                                                        service.id as string,
+                                                        hour.id as string
+                                                    )
+                                                }
+                                            />
+                                            <Button
+                                                style={{ marginLeft: '10px' }}
+                                                disabled={
+                                                    hour.isBooked ||
+                                                    bookedHours.includes(
+                                                        hour.id as string
+                                                    )
+                                                }
+                                                type="primary"
+                                                icon={<BookmarkAddIcon />}
+                                                onClick={() => {
+                                                    onEdit(hour.id as string)
+                                                    setBookedHours(
+                                                        prevState => [
+                                                            ...prevState,
+                                                            hour.id as string,
+                                                        ]
+                                                    )
+                                                }}
+                                            />
+                                        </div>
                                     </div>
                                 ))}
                             </div>

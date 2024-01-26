@@ -135,13 +135,12 @@ const ModalOrderTime: FC<Props> = ({
             if (selectedService) {
                 return selectedService.hours.map(hour => {
                     // Verifica si hay un pago con payed: true para esta hora
-                    const isBooked = payments.some(
-                        (payment: Payment) =>
-                            payment.hourId === hour.id && payment.payed
-                    )
+                    // const isBooked = payments.some(
+                    //     (payment: Payment) =>
+                    //         payment.hourId === hour.id && payment.payed
+                    // )
                     return {
                         ...hour,
-                        isBooked,
                     }
                 })
             }
@@ -273,10 +272,7 @@ const ModalOrderTime: FC<Props> = ({
                                     '& fieldset': {
                                         borderColor: 'black', // Cambia el color del borde del fieldset
                                     },
-                                    '& legend': {
-                                        color: 'black', // Cambia el color del texto de la leyenda
-                                        fontSize: 14,
-                                    },
+
                                     '& .MuiOutlinedInput-notchedOutline': {
                                         borderColor: 'black',
                                     },
@@ -314,10 +310,7 @@ const ModalOrderTime: FC<Props> = ({
                                     '& fieldset': {
                                         borderColor: 'black', // Cambia el color del borde del fieldset
                                     },
-                                    '& legend': {
-                                        color: 'black', // Cambia el color del texto de la leyenda
-                                        fontSize: 20,
-                                    },
+
                                     '& .MuiOutlinedInput-notchedOutline': {
                                         borderColor: 'black',
                                     },
@@ -326,7 +319,7 @@ const ModalOrderTime: FC<Props> = ({
                                             borderColor: 'black',
                                         },
                                 }}
-                                label="Elija una hora"
+                                label="Selecciona una Hora"
                                 value={selectedHour?.hour || ''}
                                 onChange={(event: SelectChangeEvent) => {
                                     // Filtra la hora correspondiente a event.target.value en la fecha seleccionada

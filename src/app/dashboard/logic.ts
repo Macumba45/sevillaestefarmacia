@@ -6,6 +6,7 @@ import { deleteDateById } from '@/services/dates'
 import { createBlog, deleteBlog, getBlogs, updateBlog } from '@/services/blogs'
 import { UserContext } from '@/context/UserContext'
 import { deleteHourById } from '@/services/hours'
+import { fetchIsBookedHour } from '@/services/hours'
 import {
     createService,
     getServices,
@@ -317,6 +318,10 @@ export const useLogicDashboard = () => {
         setOpenDeleteModal(true)
     }
 
+    const handleBookHour = async (hourId: string) => {
+        await fetchIsBookedHour(hourId)
+    }
+
     const handleDeleteHourId = (serviceId: string, hourId: string) => {
         setOpenDeleteHour(true)
 
@@ -529,5 +534,6 @@ export const useLogicDashboard = () => {
         openDeleteHour,
         handleCloseModalHour,
         confirmateDeleteHour,
+        handleBookHour,
     }
 }

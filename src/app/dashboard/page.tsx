@@ -122,6 +122,7 @@ const Dashboard: FC<Props> = () => {
         openDeleteHour,
         handleCloseModalHour,
         confirmateDeleteHour,
+        handleBookHour,
     } = useLogicDashboard()
 
     const itemsTop = [
@@ -141,7 +142,7 @@ const Dashboard: FC<Props> = () => {
             route: 'citas',
         },
         {
-            text: 'Eliminar Horas',
+            text: 'Gestión de Horas',
             icon: <SyncLockIcon />,
             route: 'eliminar-horas',
         },
@@ -518,6 +519,7 @@ const Dashboard: FC<Props> = () => {
                                                 service={item}
                                                 key={item.id}
                                                 onDelete={handleDeleteHourId}
+                                                onEdit={handleBookHour}
                                             />
                                         ))}
                                 </CardServicesContainer>
