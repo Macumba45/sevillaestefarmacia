@@ -140,7 +140,13 @@ const CardDeleteHours: FC<Props> = ({ service, onEdit, onDelete }) => {
                                             }}
                                         >
                                             <Button
-                                                style={{ marginLeft: '10px' }}
+                                                style={{
+                                                    marginLeft: '10px',
+                                                    backgroundColor:
+                                                        hour.isBooked
+                                                            ? 'transparent'
+                                                            : 'red',
+                                                }}
                                                 disabled={hour.isBooked}
                                                 type="primary"
                                                 icon={<CloseOutlined />}
