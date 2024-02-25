@@ -46,12 +46,6 @@ const Home: FC = () => {
         window.open(whatsappURL)
     }
 
-    useEffect(() => {
-        if (navigator.userAgent.includes('Instagram')) {
-            window.location.href = 'https://www.sevillaestefarmacia.com/'
-        }
-    }, [])
-
     return (
         <div>
             <LayoutNavFooter>
