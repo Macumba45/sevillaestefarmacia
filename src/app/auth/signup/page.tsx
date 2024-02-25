@@ -25,6 +25,10 @@ import {
     Snackbar,
     Stack,
 } from '@mui/material'
+import InputAdornment from '@mui/material/InputAdornment'
+import IconButton from '@mui/material/IconButton'
+import Visibility from '@mui/icons-material/Visibility'
+import VisibilityOff from '@mui/icons-material/VisibilityOff'
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme()
@@ -38,7 +42,17 @@ const SignUp: FC = () => {
     const [snackbarOpen, setSnackbarOpen] = useState(false)
     const [successSnackbarOpen, setSuccessSnackbarOpen] = useState(false)
     const [showDateInput, setShowDateInput] = useState(false)
+    const [showPassword, setShowPassword] = useState(false)
 
+    const handleClickShowPassword = () => {
+        setShowPassword(!showPassword)
+    }
+
+    const handleMouseDownPassword = (
+        event: React.MouseEvent<HTMLButtonElement>
+    ) => {
+        event.preventDefault()
+    }
     const handleSnackbarClose = (event?: any, reason?: string) => {
         if (reason === 'clickaway') {
             return
@@ -254,13 +268,37 @@ const SignUp: FC = () => {
                                 </Grid>
                                 <Grid item xs={12}>
                                     <TextField
+                                        margin="normal"
                                         required
                                         fullWidth
                                         name="password"
                                         label="Contraseña"
-                                        type="password"
+                                        type={
+                                            showPassword ? 'text' : 'password'
+                                        }
                                         id="password"
                                         sx={stylesTypography}
+                                        InputProps={{
+                                            endAdornment: (
+                                                <InputAdornment position="end">
+                                                    <IconButton
+                                                        aria-label="toggle password visibility"
+                                                        onClick={
+                                                            handleClickShowPassword
+                                                        }
+                                                        onMouseDown={
+                                                            handleMouseDownPassword
+                                                        }
+                                                    >
+                                                        {showPassword ? (
+                                                            <Visibility />
+                                                        ) : (
+                                                            <VisibilityOff />
+                                                        )}
+                                                    </IconButton>
+                                                </InputAdornment>
+                                            ),
+                                        }}
                                         InputLabelProps={{
                                             style: {
                                                 color: 'black',

@@ -16,12 +16,17 @@ import Container from '@mui/material/Container'
 import Stack from '@mui/material/Stack'
 import LoadingButton from '@mui/lab/LoadingButton'
 import { UserContext } from '@/context/UserContext'
+import InputAdornment from '@mui/material/InputAdornment'
+import IconButton from '@mui/material/IconButton'
+import Visibility from '@mui/icons-material/Visibility'
+import VisibilityOff from '@mui/icons-material/VisibilityOff'
 
 const Login: FC = () => {
     const { getUserInfo } = useContext(UserContext)
     const router = useRouter()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
+    const [showPassword, setShowPassword] = useState(false)
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
@@ -45,6 +50,16 @@ const Login: FC = () => {
                 getUserInfo()
             }
         }
+    }
+
+    const handleClickShowPassword = () => {
+        setShowPassword(!showPassword)
+    }
+
+    const handleMouseDownPassword = (
+        event: React.MouseEvent<HTMLButtonElement>
+    ) => {
+        event.preventDefault()
     }
 
     useEffect(() => {
@@ -115,9 +130,28 @@ const Login: FC = () => {
                             fullWidth
                             name="password"
                             label="Contraseña"
-                            type="password"
+                            type={showPassword ? 'text' : 'password'}
                             id="password"
                             sx={stylesTypography}
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            aria-label="toggle password visibility"
+                                            onClick={handleClickShowPassword}
+                                            onMouseDown={
+                                                handleMouseDownPassword
+                                            }
+                                        >
+                                            {showPassword ? (
+                                                <Visibility />
+                                            ) : (
+                                                <VisibilityOff />
+                                            )}
+                                        </IconButton>
+                                    </InputAdornment>
+                                ),
+                            }}
                             InputLabelProps={{
                                 style: {
                                     color: 'black',
