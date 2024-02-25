@@ -216,7 +216,7 @@ const ResponsiveAppBar: FC<Props> = ({ user }) => {
 
                                                                         marginTop: 1,
                                                                         textAlign:
-                                                                            'left',
+                                                                            'center',
                                                                     }}
                                                                     key={
                                                                         subpageIndex
@@ -348,13 +348,14 @@ const ResponsiveAppBar: FC<Props> = ({ user }) => {
                                     PaperProps={{
                                         sx: {
                                             backgroundColor: 'black',
+                                            width: '300px',
                                         },
                                     }}
                                     sx={{ zIndex: 9999999 }}
                                 >
                                     <div
                                         style={{
-                                            width: '220px', // Establece el ancho que desees para el panel lateral
+                                            width: '250px', // Establece el ancho que desees para el panel lateral
                                             padding: '20px',
                                             display: 'flex',
                                             flexDirection: 'column',
@@ -405,7 +406,7 @@ const ResponsiveAppBar: FC<Props> = ({ user }) => {
                                                                     'column',
                                                                 alignItems:
                                                                     'flex-start',
-                                                                padding: 1,
+                                                                paddingLeft: 0.5,
                                                             }}
                                                         >
                                                             {page.subpages?.map(
