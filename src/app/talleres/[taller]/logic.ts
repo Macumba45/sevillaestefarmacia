@@ -19,10 +19,12 @@ export const useLogicTallerDetail = () => {
     const contactWhatsApp = () => {
         const phoneNumber = '+34682734237'
         let whatsappURL = ''
-        whatsappURL = `https://wa.me/${phoneNumber}`
-        // if (navigator.userAgent.includes('Instagram')) {
-        //     whatsappURL = `https://wa.me/${phoneNumber}`
-        // }
+        // whatsappURL = `https://wa.me/${phoneNumber}`
+        if (navigator.userAgent.includes('Instagram')) {
+            whatsappURL = `https://wa.me/${phoneNumber}`
+        } else {
+            whatsappURL = `https://api.whatsapp.com/send?phone=${phoneNumber}`
+        }
 
         window.open(whatsappURL)
     }
