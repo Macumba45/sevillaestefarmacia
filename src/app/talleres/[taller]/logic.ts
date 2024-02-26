@@ -19,20 +19,10 @@ export const useLogicTallerDetail = () => {
     const contactWhatsApp = () => {
         const phoneNumber = '+34682734237'
         let whatsappURL = ''
-        if (navigator.userAgent.includes('Instagram')) {
-            whatsappURL = `https://wa.me/${phoneNumber}`
-        }
-        if (
-            /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-                navigator.userAgent
-            )
-        ) {
-            // Es un dispositivo móvil
-            whatsappURL = `https://api.whatsapp.com/send?phone=${phoneNumber}`
-        } else {
-            // Es un escritorio
-            whatsappURL = `https://web.whatsapp.com/send?phone=${phoneNumber}`
-        }
+        whatsappURL = `https://wa.me/${phoneNumber}`
+        // if (navigator.userAgent.includes('Instagram')) {
+        //     whatsappURL = `https://wa.me/${phoneNumber}`
+        // }
 
         window.open(whatsappURL)
     }
