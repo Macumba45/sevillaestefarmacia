@@ -19,7 +19,9 @@ export const useLogicTallerDetail = () => {
     const contactWhatsApp = () => {
         const phoneNumber = '+34682734237'
         let whatsappURL = ''
-
+        if (navigator.userAgent.includes('Instagram')) {
+            whatsappURL = `https://wa.me/${phoneNumber}`
+        }
         if (
             /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
                 navigator.userAgent
@@ -34,6 +36,7 @@ export const useLogicTallerDetail = () => {
 
         window.open(whatsappURL)
     }
+
     return {
         getTallerDetailsData,
         taller,
