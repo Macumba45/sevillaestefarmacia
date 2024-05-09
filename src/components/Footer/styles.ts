@@ -3,12 +3,12 @@ import styled from 'styled-components'
 export const Container = styled.div`
     background-color: black;
     width: 100%;
-    height: 700px;
+    height: 1000px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     @media screen and (min-width: 899px) {
-        height: 450px;
+        height: 600px;
     }
 `
 
