@@ -84,27 +84,27 @@ const Footer: FC = () => {
             <ContainerLogos>
                 <PicturesLogos
                     alt="Junta de Andalucía"
-                    style={{ width: '100px' }}
+                    style={{ width: '150px' }}
                     rel="preload"
                     loading="lazy"
                     src={junta.src}
                 />
                 <PicturesLogos
-                    style={{ width: '120px' }}
+                    style={{ width: '150px' }}
                     alt="Bandera de españa"
                     rel="preload"
                     loading="lazy"
                     src={españa.src}
                 />
                 <PicturesLogos
-                    style={{ width: '120px' }}
+                    style={{ width: '150px' }}
                     alt="Recuperacion UE"
                     rel="preload"
                     loading="lazy"
                     src={recuperacion.src}
                 />
                 <PicturesLogos
-                    style={{ width: '340px' }}
+                    style={{ width: '360px' }}
                     alt="Union Europea"
                     rel="preload"
                     loading="lazy"
