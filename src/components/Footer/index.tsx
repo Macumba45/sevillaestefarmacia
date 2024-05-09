@@ -13,9 +13,9 @@ import {
     PolicyLinksContainer,
 } from './styles'
 import junta from '../../assets/LOGOSUBVENCION/andalucia.png'
-import españa from '../../assets/LOGOSUBVENCION/españa.png'
-import recuperacion from '../../assets/LOGOSUBVENCION/recuperacion.png'
-import unionEuropea from '../../assets/LOGOSUBVENCION/europa.png'
+import españa from '../../assets/LOGOSUBVENCION/financiado.png'
+import recuperacion from '../../assets/LOGOSUBVENCION/autonomo.svg'
+import unionEuropea from '../../assets/LOGOSUBVENCION/digitial.png'
 import InstagramIcon from '@mui/icons-material/Instagram'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
 
@@ -84,24 +84,27 @@ const Footer: FC = () => {
             <ContainerLogos>
                 <PicturesLogos
                     alt="Junta de Andalucía"
-                    style={{ width: '250px' }}
+                    style={{ width: '100px' }}
                     rel="preload"
                     loading="lazy"
                     src={junta.src}
                 />
                 <PicturesLogos
+                    style={{ width: '120px' }}
                     alt="Bandera de españa"
                     rel="preload"
                     loading="lazy"
                     src={españa.src}
                 />
                 <PicturesLogos
+                    style={{ width: '120px' }}
                     alt="Recuperacion UE"
                     rel="preload"
                     loading="lazy"
                     src={recuperacion.src}
                 />
                 <PicturesLogos
+                    style={{ width: '340px' }}
                     alt="Union Europea"
                     rel="preload"
                     loading="lazy"
