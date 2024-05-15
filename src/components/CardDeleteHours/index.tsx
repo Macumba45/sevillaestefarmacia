@@ -6,18 +6,6 @@ import { Typography } from '@mui/material'
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd'
 const { Meta } = Card
 
-const hourStyle = {
-    borderRadius: '5px',
-    boxShadow: '0px 0px 5px 0px rgba(197, 197, 197, 0.75)',
-    padding: '10px',
-    margin: '10px',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '150px',
-    marginBottom: '30px',
-}
-
 const CardDeleteHours: FC<Props> = ({ service, onEdit, onDelete }) => {
     const [filteredDates, setFilteredDates] = useState(service.dates)
     const [bookedHours, setBookedHours] = useState<string[]>([])

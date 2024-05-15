@@ -129,11 +129,8 @@ const Footer: FC = () => {
             </ContainerSubvencion>
 
             <CopyRight>Copyright © 2023 Farmacia Sta. Bárbara</CopyRight>
-            <DesignedBy
-                target="_blank"
-                href="https://gonzalolobocv.vercel.app/"
-            >
-                Developed by Macumba45
+            <DesignedBy target="_blank" href="https://portalcreativo.es/">
+                Portal Creativo S.L
             </DesignedBy>
         </Container>
     )
