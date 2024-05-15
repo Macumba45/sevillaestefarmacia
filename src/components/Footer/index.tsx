@@ -3,6 +3,7 @@ import {
     ConocenosText,
     Container,
     ContainerLogos,
+    ContainerSubvencion,
     CopyRight,
     DesignedBy,
     EmailFooter,
@@ -11,6 +12,7 @@ import {
     PicturesLogos,
     PolicyLinks,
     PolicyLinksContainer,
+    TextSubvencion,
 } from './styles'
 import junta from '../../assets/LOGOSUBVENCION/andalucia.png'
 import españa from '../../assets/LOGOSUBVENCION/financiado.png'
@@ -111,6 +113,21 @@ const Footer: FC = () => {
                     src={unionEuropea.src}
                 />
             </ContainerLogos>
+            <ContainerSubvencion>
+                <TextSubvencion>
+                    FARMACIA STA. BÁRBARA (Sevilla Este), ha sido beneficiaria
+                    de una subvención concedida por la Consejería de Empleo,
+                    Empresa y Trabajo Autónomo de la Junta de Andalucía,
+                    Dirección General de Comercio, destinada a actualizar e
+                    impulsar el sector comercial en Andalucía mediante la
+                    implementación de nuevas tecnologías, dentro del Programa de
+                    modernización del comercio: Fondo Tecnológico, en el marco
+                    del Plan de Recuperación, Transformación y Resiliencia -
+                    financiado por la Unión Europea - NextGenerationEU, en su
+                    convocatoria para el año 2022.
+                </TextSubvencion>
+            </ContainerSubvencion>
+
             <CopyRight>Copyright © 2023 Farmacia Sta. Bárbara</CopyRight>
             <DesignedBy
                 target="_blank"

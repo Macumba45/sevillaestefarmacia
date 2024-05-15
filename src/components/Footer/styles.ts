@@ -3,12 +3,12 @@ import styled from 'styled-components'
 export const Container = styled.div`
     background-color: black;
     width: 100%;
-    height: 1000px;
+    height: 1500px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     @media screen and (min-width: 899px) {
-        height: 600px;
+        height: 700px;
     }
 `
 
@@ -89,6 +89,20 @@ export const CopyRight = styled.p`
     color: white;
     text-align: center;
     margin-bottom: 2rem;
+`
+
+export const TextSubvencion = styled.p`
+    color: white;
+    text-align: center;
+    margin-bottom: 2rem;
+`
+export const ContainerSubvencion = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    margin: 0 auto;
+    line-height: 2;
 `
 
 export const DesignedBy = styled.a`
