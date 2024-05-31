@@ -5,9 +5,10 @@ import StyledComponentsRegistryAntd from '@/lib/AntdRegistry'
 import StyledComponentsRegistry from '@/lib/StyledComponentsRegistry'
 import { UserProvider } from '@/context/UserContext'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import Script from 'next/script'
 
 export const metadata = {
-    title: 'Farmacia Sta Bárbara -  Sevilla Este',
+    title: 'Farmacia Sta Bárbara - Sevilla Este',
     icons: {
         icon: [
             {
@@ -23,14 +24,14 @@ export const metadata = {
         ],
     },
     description: 'Ven a visitarnos a nuestra farmacia en Sevilla Este',
-    applicationName: 'Farmacia Sta Bárbara -  Sevilla Este',
+    applicationName: 'Farmacia Sta Bárbara - Sevilla Este',
     keywords:
         'Farmacia, Sevilla Este, Sta Bárbara, Sevilla, Este, Farmacia Sta Bárbara, Farmacia Sevilla Este, Farmacia Sta Bárbara Sevilla Este',
     openGraph: {
         type: 'website',
         locale: 'es_ES',
         url: 'https://www.sevillaestefarmacia.com',
-        title: 'Farmacia Sta Bárbara -  Sevilla Este',
+        title: 'Farmacia Sta Bárbara - Sevilla Este',
         description: 'Ven a visitarnos a nuestra farmacia en Sevilla Este',
     },
 }
@@ -38,21 +39,30 @@ export const metadata = {
 const RootLayout = ({ children }: React.PropsWithChildren) => (
     <>
         <head>
-            <script
+            <Script
                 async
                 src="https://www.googletagmanager.com/gtag/js?id=G-6KW0X4B236"
-            ></script>
-            <script
-                id="gtag"
+            ></Script>
+            <Script
+                id="gtag-init"
                 dangerouslySetInnerHTML={{
                     __html: `
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', 'G-6KW0X4B236');
+                
+                (function() {
+                    gtag('consent', 'default', {
+                        'ad_storage': 'denied',
+                        'analytics_storage': 'denied'
+                    });
+
+                    gtag('js', new Date());
+
+                    gtag('config', 'G-6KW0X4B236');
+                })();
             `,
                 }}
-            ></script>
+            ></Script>
         </head>
         <html lang="es">
             <body>
