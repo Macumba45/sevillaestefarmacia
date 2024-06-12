@@ -36,9 +36,9 @@ const Mascota: FC<Props> = ({ price }) => {
             <ParrafoServices>
                 Si necesitas hacer un encargo o pedido para ayudar a tu mascota,
                 no dudes en escribirnos a través del chat directo de la farmacia
-                haciendo click más abajo en “¿Te asesoramos?”. Sandra Mora,
-                técnico en veterinaria y farmacia estará disponible para
-                ayudarte en todo lo relacionado con tu mascota.
+                haciendo click más abajo en “Contáctanos”. Sandra Mora, técnico
+                en veterinaria y farmacia estará disponible para ayudarte en
+                todo lo relacionado con tu mascota.
             </ParrafoServices>
         </Container>
     )
