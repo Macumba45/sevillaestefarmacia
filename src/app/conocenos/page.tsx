@@ -202,9 +202,9 @@ const Conocenos: FC = () => {
                             <ParrafoServices>
                                 <SpanBold>
                                     Horario: <br /> ·Lunes a viernes de 9:00h a
-                                    21.30h (ininterrumpido) <br /> ·Sábado de
-                                    9:30h a 14:.00h <br /> ·Domingo y festivos
-                                    de 9:30h a 14:.00h
+                                    21.30h (ininterrumpido) <br /> ·Sábados de
+                                    9:30h a 14:.00h <br /> ·Domingos: Cerrado
+                                    (meses julio y agosto)
                                 </SpanBold>
                             </ParrafoServices>
                         </ContainerParrafos>
