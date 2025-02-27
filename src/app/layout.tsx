@@ -37,46 +37,60 @@ export const metadata = {
 }
 
 const RootLayout = ({ children }: React.PropsWithChildren) => (
-    <>
-        <head>
+    <html lang="es">
+        <body>
+            {/* Scripts de Cookiebot */}
+            <Script
+                id="Cookiebot"
+                src="https://consent.cookiebot.com/uc.js"
+                data-cbid="474b9dbc-ff07-442b-ad04-7a48bc7b6750"
+                data-blockingmode="auto"
+                strategy="afterInteractive"
+            />
+            <Script
+                id="CookieDeclaration"
+                src="https://consent.cookiebot.com/474b9dbc-ff07-442b-ad04-7a48bc7b6750/cd.js"
+                strategy="afterInteractive"
+            />
+
+            {/* Scripts de Google Analytics */}
             <Script
                 async
                 src="https://www.googletagmanager.com/gtag/js?id=G-6KW0X4B236"
-            ></Script>
+                strategy="afterInteractive"
+            />
             <Script
                 id="gtag-init"
+                strategy="afterInteractive"
                 dangerouslySetInnerHTML={{
                     __html: `
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                
-                (function() {
-                    gtag('consent', 'default', {
-                        'ad_storage': 'denied',
-                        'analytics_storage': 'denied'
-                    });
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    
+                    (function() {
+                        gtag('consent', 'default', {
+                            'ad_storage': 'denied',
+                            'analytics_storage': 'denied'
+                        });
 
-                    gtag('js', new Date());
+                        gtag('js', new Date());
 
-                    gtag('config', 'G-6KW0X4B236');
-                })();
-            `,
+                        gtag('config', 'G-6KW0X4B236');
+                    })();
+                `
                 }}
-            ></Script>
-        </head>
-        <html lang="es">
-            <body>
-                <StyledComponentsRegistryAntd>
-                    <StyledComponentsRegistry>
-                        <UserProvider>
-                            <SpeedInsights />
-                            {children}
-                        </UserProvider>
-                    </StyledComponentsRegistry>
-                </StyledComponentsRegistryAntd>
-            </body>
-        </html>
-    </>
+            />
+
+            <StyledComponentsRegistryAntd>
+                <StyledComponentsRegistry>
+                    <UserProvider>
+                        <SpeedInsights />
+                        {children}
+                    </UserProvider>
+                </StyledComponentsRegistry>
+            </StyledComponentsRegistryAntd>
+        </body>
+    </html>
 )
 
 export default RootLayout

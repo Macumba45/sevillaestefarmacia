@@ -54,7 +54,7 @@ export const eliminarHorasPasadas = async () => {
         },
     })
 
-    const fechasPasadasConHoras = allDates.filter(fecha => {
+    const fechasPasadasConHoras = allDates.filter((fecha:any) => {
         const fechaDate = convertDateStringToDateObject(fecha.dates)
         return fechaDate <= today
     })
