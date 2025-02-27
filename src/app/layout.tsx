@@ -47,11 +47,11 @@ const RootLayout = ({ children }: React.PropsWithChildren) => (
                 data-blockingmode="auto"
                 strategy="afterInteractive"
             />
-            <Script
+            {/* <Script
                 id="CookieDeclaration"
                 src="https://consent.cookiebot.com/474b9dbc-ff07-442b-ad04-7a48bc7b6750/cd.js"
                 strategy="afterInteractive"
-            />
+            /> */}
 
             {/* Scripts de Google Analytics */}
             <Script
