@@ -277,7 +277,7 @@ export default async function handler(
                                 <a href="https://www.instagram.com/sevillaestefarmacia/?hl=es">
                                     <img
                                         style="width: 30px; margin: 0 10px"
-                                        src="https://i.postimg.cc/fRnsg16w/icons8-instagram-100-1.png"
+                                        src="https://www.sevillaestefarmacia.com/images/icons8-instagram-100.png"
                                         alt="Instagram"
                                     />
                                 </a>
@@ -286,7 +286,7 @@ export default async function handler(
                                 >
                                     <img
                                         style="width: 30px; margin: 0 10px"
-                                        src="https://i.postimg.cc/hGKBKTD6/icons8-marker-100-1.png"
+                                        src="https://www.sevillaestefarmacia.com/images/icons8-marker-100.png"
                                         alt="Marcador"
                                     />
                                 </a>
@@ -530,7 +530,7 @@ export default async function handler(
                                 <a href="https://www.instagram.com/sevillaestefarmacia/?hl=es">
                                     <img
                                         style="width: 30px; margin: 0 10px"
-                                        src="https://i.postimg.cc/fRnsg16w/icons8-instagram-100-1.png"
+                                        src="https://www.sevillaestefarmacia.com/images/icons8-instagram-100.png"
                                         alt="Instagram"
                                     />
                                 </a>
@@ -539,7 +539,7 @@ export default async function handler(
                                 >
                                     <img
                                         style="width: 30px; margin: 0 10px"
-                                        src="https://i.postimg.cc/hGKBKTD6/icons8-marker-100-1.png"
+                                        src="https://www.sevillaestefarmacia.com/images/icons8-marker-100.png"
                                         alt="Marcador"
                                     />
                                 </a>
