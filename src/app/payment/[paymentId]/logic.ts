@@ -1,5 +1,5 @@
 import { fetchPaymentById, stripePaymentTrue } from '@/services/payments'
-import { fetchChargeListStripe, getPaymentById } from '@/services/stripe'
+import { getPaymentById } from '@/services/stripe'
 import { useRouter } from 'next/navigation'
 import { useContext, useState } from 'react'
 import { fetchDateById } from '@/services/dates'
