@@ -23,7 +23,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn'
 
 const Footer: FC = () => {
     const callNumber = () => {
-        window.open('tel:682734237')
+        window.open('tel:682296561')
     }
     return (
         <Container>
@@ -31,7 +31,7 @@ const Footer: FC = () => {
             <EmailFooter href="mailto:hola@sevillaestefarmacia.com">
                 hola@sevillaestefarmacia.com
             </EmailFooter>
-            <PhoneNumer onClick={callNumber}>682 734 237</PhoneNumer>
+            <PhoneNumer onClick={callNumber}>682 296 561</PhoneNumer>
             <LogosSocialMedia>
                 <InstagramIcon
                     onClick={() =>

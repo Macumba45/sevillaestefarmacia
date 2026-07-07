@@ -45,4 +45,7 @@ __tests__/
 jest.config.js
 jest.config.ts
 context.ts
-```
+```.opencode/
+graphify-out/
+graphify-out/cache/
+AGENTS.md
