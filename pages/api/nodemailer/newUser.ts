@@ -134,7 +134,7 @@ export const sendEmailNewUser = async (email: string, userName: string) => {
                                     color: white;
                                     font-family: Cormorant Garamond;
                                 "
-                                href="tel:682734237"
+                                href="tel:682296561"
                                 >Llámanos</a
                             >
                         </button>

@@ -281,8 +281,8 @@ export const makePaymentTrue = async (paymentId: string): Promise<void> => {
                                     text-align: center;
                                     padding: 10px 20px;
                                 "
-                                href="tel:682734237"
-                                href="callto:682734237"
+                                href="tel:682296561"
+                                href="callto:682296561"
                                 >Llámanos</a
                             >
                             <a
@@ -546,8 +546,8 @@ export const makePaymentTrue = async (paymentId: string): Promise<void> => {
                                     text-align: center;
                                     padding: 10px 20px;
                                 "
-                                href="tel:682734237"
-                                href="callto:682734237"
+                                href="tel:682296561"
+                                href="callto:682296561"
                                 >Llámanos</a
                             >
                             <a

@@ -15,7 +15,7 @@ export const useLogicBlog = () => {
     }
 
     const contactWhatsApp = () => {
-        // const phoneNumber = '+34682734237'
+        // const phoneNumber = '+34682296561'
         // let whatsappURL = ''
 
         // if (
@@ -32,7 +32,7 @@ export const useLogicBlog = () => {
 
         // window.open(whatsappURL)
 
-        const phoneNumber = '+34682734237'
+        const phoneNumber = '+34682296561'
         let whatsappURL = ''
         whatsappURL = `https://wa.me/${phoneNumber}`
         // if (navigator.userAgent.includes('Instagram')) {
