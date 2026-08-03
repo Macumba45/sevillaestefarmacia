@@ -95,6 +95,9 @@ importers:
       cloudinary:
         specifier: 1.41.0
         version: 1.41.0
+      decimal.js:
+        specifier: ^10.6.0
+        version: 10.6.0
       dotenv:
         specifier: 16.3.1
         version: 16.3.1

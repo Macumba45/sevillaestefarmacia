@@ -40,6 +40,7 @@
         "autoprefixer": "10.4.15",
         "bcrypt": "5.1.1",
         "cloudinary": "1.41.0",
+        "decimal.js": "^10.6.0",
         "dotenv": "16.3.1",
         "eslint": "8.50.0",
         "eslint-plugin-react": "7.33.2",
