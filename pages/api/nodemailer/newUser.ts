@@ -1,5 +1,31 @@
 import nodemailer from 'nodemailer'
+import fs from 'fs'
+import path from 'path'
 require('dotenv').config()
+
+const IMAGES: Record<string, string> = {
+    logo: 'logo.png',
+    instagram: 'icons8-instagram-100.png',
+    marcador: 'icons8-marker-100.png',
+}
+
+const fileOf = (cid: string) =>
+    path.join(process.cwd(), 'public', 'images', IMAGES[cid])
+
+// imagen embebida en el propio correo; si el archivo no esta en el filesystem
+// (p.ej. public/ no incluido en el bundle de Vercel) cae a la URL absoluta
+const src = (cid: string) =>
+    fs.existsSync(fileOf(cid))
+        ? `cid:${cid}`
+        : `https://www.sevillaestefarmacia.com/images/${IMAGES[cid]}`
+
+const attachments = Object.keys(IMAGES)
+    .filter((cid) => fs.existsSync(fileOf(cid)))
+    .map((cid) => ({
+        filename: IMAGES[cid],
+        content: fs.readFileSync(fileOf(cid)),
+        cid,
+    }))
 
 export const sendEmailNewUser = async (email: string, userName: string) => {
     // Configurar el transporte de nodemailer
@@ -76,7 +102,7 @@ export const sendEmailNewUser = async (email: string, userName: string) => {
                     >
                         <img
                             style="object-fit: cover; width: 200px; margin: 0 auto"
-                            src="https://www.sevillaestefarmacia.com/images/logo.png"
+                            src="${src('logo')}"
                             alt="Farmacia Santa Bárbara"
                         />
                     </div>
@@ -174,7 +200,7 @@ export const sendEmailNewUser = async (email: string, userName: string) => {
                         <a href="https://www.instagram.com/sevillaestefarmacia/?hl=es">
                             <img
                                 style="width: 30px; margin: 0 10px"
-                                src="https://www.sevillaestefarmacia.com/images/icons8-instagram-100.png"
+                                src="${src('instagram')}"
                                 alt="Instagram"
                             />
                         </a>
@@ -183,7 +209,7 @@ export const sendEmailNewUser = async (email: string, userName: string) => {
                         >
                             <img
                                 style="width: 30px; margin: 0 10px"
-                                src="https://www.sevillaestefarmacia.com/images/icons8-marker-100.png"
+                                src="${src('marcador')}"
                                 alt="Marcador"
                             />
                         </a>
@@ -211,6 +237,7 @@ export const sendEmailNewUser = async (email: string, userName: string) => {
         
         
             `,
+        attachments,
     }
 
     // Enviar el correo electrónico
