@@ -84,7 +84,7 @@ export default async function handler(
                         >
                             <img
                                 style="object-fit: cover; width: 200px; margin: 0 auto"
-                                src="https://i.postimg.cc/Wbq8HpKC/logo.png"
+                                src="https://www.sevillaestefarmacia.com/images/logo.png"
                                 alt="Farmacia Santa Bárbara"
                             />
                         </div>
@@ -174,14 +174,14 @@ export default async function handler(
                             >
                                 <img
                                     style="width: 30px; height: 30px"
-                                    src="https://i.postimg.cc/5NF1gfK7/icons8-calendar-100.png"
+                                    src="https://www.sevillaestefarmacia.com/images/icons8-calendar-100.png"
                                 />
                                 <p style="font-size: 20px; color: black">${date}</p>
                             </div>
                             <div style="align-items: center; text-align: center">
                                 <img
                                     style="width: 30px; height: 30px"
-                                    src="https://i.postimg.cc/DwrhVBT1/icons8-time-100-1.png"
+                                    src="https://www.sevillaestefarmacia.com/images/icons8-time-100.png"
                                 />
                                 <p
                                     style="
@@ -259,7 +259,7 @@ export default async function handler(
                             <a href="https://www.instagram.com/sevillaestefarmacia/?hl=es">
                                 <img
                                     style="width: 30px; margin: 0 10px"
-                                    src="https://i.postimg.cc/fRnsg16w/icons8-instagram-100-1.png"
+                                    src="https://www.sevillaestefarmacia.com/images/icons8-instagram-100.png"
                                     alt="Instagram"
                                 />
                             </a>
@@ -268,7 +268,7 @@ export default async function handler(
                             >
                                 <img
                                     style="width: 30px; margin: 0 10px"
-                                    src="https://i.postimg.cc/hGKBKTD6/icons8-marker-100-1.png"
+                                    src="https://www.sevillaestefarmacia.com/images/icons8-marker-100.png"
                                     alt="Marcador"
                                 />
                             </a>
