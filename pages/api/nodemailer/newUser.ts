@@ -33,7 +33,8 @@ export const sendEmailNewUser = async (email: string, userName: string) => {
 
     // Configurar el contenido del correo electrónico
     const mailOptions = {
-        from: 'hola@sevillaestefarmacia.com',
+        from: 'info@sevillaestefarmacia.com',
+        replyTo: 'hola@sevillaestefarmacia.com',
         to: email,
         subject: `Bienvenido a Farmacia Sta. Bárbara - ${userName}`,
         html: `
