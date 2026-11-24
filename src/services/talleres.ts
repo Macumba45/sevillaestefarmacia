@@ -2,7 +2,6 @@ import { notification } from 'antd'
 import { getAuthenticatedToken } from '../../storage/storage'
 import { Talleres } from '../../types/types'
 
-const token = getAuthenticatedToken()
 
 const notificationSuccess = (serviceName: string) => {
     notification.success({
@@ -39,18 +38,19 @@ export const createTaller = async (
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${getAuthenticatedToken()}`,
             },
             body: JSON.stringify(taller),
         })
         if (response.ok) {
             const data = await response.json()
+            notificationSuccess(taller.title)
             return data
         }
+        notification.error({ message: 'No se pudo guardar el cambio' })
     } catch (error) {
         console.log(error)
-    } finally {
-        notificationSuccess(taller.title)
+        notification.error({ message: 'No se pudo guardar el cambio' })
     }
 }
 
@@ -62,18 +62,19 @@ export const deleteTaller = async (
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${getAuthenticatedToken()}`,
             },
             body: JSON.stringify({ id }),
         })
         if (response.ok) {
             const data = await response.json()
+            notificationSuccess(id)
             return data
         }
+        notification.error({ message: 'No se pudo guardar el cambio' })
     } catch (error) {
         console.log(error)
-    } finally {
-        notificationSuccess(id)
+        notification.error({ message: 'No se pudo guardar el cambio' })
     }
 }
 
@@ -85,18 +86,19 @@ export const updateTaller = async (
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${getAuthenticatedToken()}`,
             },
             body: JSON.stringify(taller),
         })
         if (response.ok) {
             const data = await response.json()
+            notificationSuccess(taller.title)
             return data
         }
+        notification.error({ message: 'No se pudo guardar el cambio' })
     } catch (error) {
         console.log(error)
-    } finally {
-        notificationSuccess(taller.title)
+        notification.error({ message: 'No se pudo guardar el cambio' })
     }
 }
 

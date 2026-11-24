@@ -1,3 +1,4 @@
+import { JWT_SECRET } from '../../../src/lib/auth'
 import { NextApiRequest, NextApiResponse } from 'next'
 import jwt, { JwtPayload } from 'jsonwebtoken'
 import { findUserById } from '../controllers/user'
@@ -16,10 +17,7 @@ export default async function handler(
                 })
                 return
             }
-            const decodedToken = jwt.verify(
-                token as string,
-                'token'
-            ) as JwtPayload // Decodificar el token y especificar el tipo como JwtPayload
+            const decodedToken = jwt.verify(token as string, JWT_SECRET) as JwtPayload // Decodificar el token y especificar el tipo como JwtPayload
             const userId = decodedToken.userId // Obtener el ID del usuario desde el token decodificado
             const user = await findUserById(userId)
             const payments = await getPaymentsByUserId(user!.id as string)

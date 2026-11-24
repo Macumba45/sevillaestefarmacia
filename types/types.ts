@@ -31,6 +31,7 @@ export type Services = {
 
 export type Payment = {
     id: string
+    userId?: string
     user?: User
     date?: Dates
     hour?: Hour

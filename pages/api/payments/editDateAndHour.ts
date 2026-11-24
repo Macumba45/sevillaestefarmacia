@@ -1,3 +1,4 @@
+import { requireAdmin } from '../../../src/lib/auth'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { editDateAndHour, getPaymentById } from '../controllers/payments'
 import { markHourAsFree } from '../controllers/hours'
@@ -6,6 +7,7 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
+    if (!(await requireAdmin(req, res))) return
     if (req.method === 'PUT') {
         try {
             const paymentId = req.body.paymentId

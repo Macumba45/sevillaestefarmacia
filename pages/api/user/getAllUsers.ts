@@ -1,3 +1,4 @@
+import { requireAdmin } from '../../../src/lib/auth'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { findAllUsers } from '../controllers/user'
 
@@ -5,6 +6,7 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
+    if (!(await requireAdmin(req, res))) return
     if (req.method === 'GET') {
         try {
             const users = await findAllUsers()

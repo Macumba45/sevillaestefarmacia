@@ -1,3 +1,4 @@
+import { requireAdmin } from '../../../src/lib/auth'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { updateBlog } from '../controllers/blogs'
 import { Blogs } from '../../../types/types'
@@ -6,6 +7,7 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse<Blogs | { message: string }>
 ) {
+    if (!(await requireAdmin(req, res))) return
     if (req.method !== 'PUT') {
         res.status(405).json({ message: 'Método no permitido' })
         return

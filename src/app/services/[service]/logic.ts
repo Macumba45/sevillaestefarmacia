@@ -5,6 +5,8 @@ import { stripePaymentInProgress } from '@/services/payments'
 import { useRouter } from 'next/navigation'
 import { Services } from '../../../../types/types'
 import { UserContext } from '../../../context/UserContext'
+import { notification } from 'antd'
+import { getAuthenticatedToken } from '../../../../storage/storage'
 
 export const useLogicPageServicesDetail = () => {
     const { user } = useContext(UserContext)
@@ -61,42 +63,31 @@ export const useLogicPageServicesDetail = () => {
     }
 
     const handleReservarCita = async () => {
+        setIsLoading(true)
         try {
-            setIsLoading(true)
-            const userName = user?.name as string
-            const priceService = serviceData?.price as string
-            const userId = user?.id as string
-            const serviceId = serviceData?.id as string
-            const priceId = serviceData?.priceId as string
             const payment = await stripePaymentInProgress(
-                userId,
-                serviceId,
+                user?.id as string,
+                serviceData?.id as string,
                 dateId,
                 hourId
             )
-            await fetch('/api/redsys/paymentRedsys', {
+            if (!payment?.id) throw new Error('No se pudo crear el pago')
+            const response = await fetch('/api/redsys/paymentRedsys', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    Authorization: `Bearer ${getAuthenticatedToken()}`,
                 },
-                body: JSON.stringify({
-                    priceId: priceId,
-                    paymentId: payment.id,
-                    serviceId: serviceId,
-                    userName: userName,
-                    priceService: priceService,
-                }),
+                body: JSON.stringify({ paymentId: payment.id }),
             })
-                .then(response => response.text())
-                .then(html => {
-                    document.body.innerHTML = html
-                    const form = document.getElementById(
-                        'paymentForm'
-                    ) as HTMLFormElement
-                })
-                .catch(error => console.error(error))
+            if (!response.ok) throw new Error('No se pudo iniciar el pago')
+            document.body.innerHTML = await response.text()
         } catch (error) {
             console.error('Error al crear la sesión de pago: ', error)
+            notification.error({
+                message: 'No se pudo iniciar el pago. Inténtalo de nuevo.',
+            })
+            setIsLoading(false)
         }
     }
 

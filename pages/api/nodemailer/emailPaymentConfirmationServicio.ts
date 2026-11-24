@@ -1,3 +1,4 @@
+import { requireAdmin } from '../../../src/lib/auth'
 import { NextApiRequest, NextApiResponse } from 'next'
 import nodemailer from 'nodemailer'
 require('dotenv').config()
@@ -6,6 +7,7 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
+    if (!(await requireAdmin(req, res))) return
     try {
         const { email, titleService, priceService, userName } = req.body
 

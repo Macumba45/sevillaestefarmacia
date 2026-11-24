@@ -1,3 +1,4 @@
+import { requireUser } from '../../../src/lib/auth'
 import { NextApiRequest, NextApiResponse } from 'next'
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 
@@ -5,6 +6,8 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
+    const authUser = await requireUser(req, res)
+    if (!authUser) return
     if (req.method === 'POST') {
         try {
             const priceId = req.body.priceId

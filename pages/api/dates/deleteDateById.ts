@@ -1,3 +1,4 @@
+import { requireAdmin } from '../../../src/lib/auth'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { deteleDateId } from '../controllers/dates'
 
@@ -5,6 +6,7 @@ export default async function deleteDateById(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
+    if (!(await requireAdmin(req, res))) return
     if (req.method === 'DELETE') {
         const { id } = req.body
         if (typeof id !== 'string') {

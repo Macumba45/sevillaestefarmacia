@@ -1,3 +1,4 @@
+import { requireAdmin } from '../../../src/lib/auth'
 import { prisma } from '@/lib/client'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { deleteHourById } from '../controllers/hours'
@@ -6,6 +7,7 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
+    if (!(await requireAdmin(req, res))) return
     if (req.method === 'DELETE') {
         const { id } = req.body
 

@@ -1,3 +1,4 @@
+import { requireAdmin } from '../../../src/lib/auth'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { markHourAsBooked } from '../controllers/hours'
 
@@ -5,6 +6,7 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
+    if (!(await requireAdmin(req, res))) return
     if (req.method === 'POST') {
         try {
             // Recupera el ID o identificador único de la hora que el usuario seleccionó

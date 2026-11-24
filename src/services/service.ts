@@ -2,7 +2,6 @@ import { notification } from 'antd'
 import { getAuthenticatedToken } from '../../storage/storage'
 import { Services } from '../../types/types'
 
-const token = getAuthenticatedToken()
 
 const notificationSuccess = (serviceName: string) => {
     notification.success({
@@ -18,7 +17,7 @@ export const getServices = async (): Promise<Services[] | undefined> => {
     try {
         const headers = {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${getAuthenticatedToken()}`,
         }
         const response = await fetch('/api/services/getService', {
             method: 'GET',
@@ -41,7 +40,7 @@ export const createService = async (
     try {
         const headers = {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${getAuthenticatedToken()}`,
         }
         const response = await fetch('/api/services/postService', {
             method: 'POST',
@@ -50,14 +49,15 @@ export const createService = async (
         })
         if (response.ok) {
             const data: Services = await response.json()
+            notificationSuccess(service.title)
             return data
         } else {
             console.error('Error al crear el servicio')
+            notification.error({ message: 'No se pudo guardar el cambio' })
         }
     } catch (error) {
         console.error('Error al enviar el objeto:', error)
-    } finally {
-        notificationSuccess(service.title)
+        notification.error({ message: 'No se pudo guardar el cambio' })
     }
 }
 
@@ -67,7 +67,7 @@ export const updateService = async (
     try {
         const headers = {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${getAuthenticatedToken()}`,
         }
         const response = await fetch('/api/services/updateService', {
             method: 'PUT',
@@ -76,14 +76,15 @@ export const updateService = async (
         })
         if (response.ok) {
             const data: Services = await response.json()
+            notificationSuccess(service.title)
             return data
         } else {
             console.error('Error al actualizar el servicio')
+            notification.error({ message: 'No se pudo guardar el cambio' })
         }
     } catch (error) {
         console.error('Error al enviar el objeto:', error)
-    } finally {
-        notificationSuccess(service.title)
+        notification.error({ message: 'No se pudo guardar el cambio' })
     }
 }
 
@@ -93,7 +94,7 @@ export const deleteService = async (
     try {
         const headers = {
             'Content-Type': 'application.json',
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${getAuthenticatedToken()}`,
         }
         const response = await fetch(
             `/api/services/deleteService?id=${serviceId}`,
@@ -119,7 +120,7 @@ export const getServiceDetails = async (id: string) => {
         const token = getAuthenticatedToken()
         const headers = {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`, // Agregar el token al header 'Authorization'
+            Authorization: `Bearer ${getAuthenticatedToken()}`, // Agregar el token al header 'Authorization'
         }
         const response = await fetch(`/api/services/serviceDetails?id=${id}`, {
             method: 'GET',

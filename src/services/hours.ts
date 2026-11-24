@@ -1,12 +1,11 @@
 import { getAuthenticatedToken } from '../../storage/storage'
 
-const token = getAuthenticatedToken()
 
 export const fetchIsBookedHour = async (selectedHourId: string) => {
     try {
         const headers = {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${getAuthenticatedToken()}`,
         }
         const response = await fetch('/api/hours/isBooked', {
             method: 'POST',
@@ -32,7 +31,7 @@ export const fetchHourById = async (id: string) => {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${getAuthenticatedToken()}`,
                 },
             }
         )
@@ -51,7 +50,7 @@ export const deleteHourById = async (id: string) => {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${getAuthenticatedToken()}`,
             },
             body: JSON.stringify({ id }),
         })

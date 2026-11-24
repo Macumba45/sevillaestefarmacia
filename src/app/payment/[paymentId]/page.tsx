@@ -1,13 +1,12 @@
 'use client'
 
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC } from 'react'
 import { Box, Button } from '@mui/material'
 import { useLogicPayment } from './logic'
 import LayoutNavFooter from '@/layout/layout'
 import { Typography } from '@mui/material'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import CircularIndeterminate from '@/components/Loader'
-import { emailConfirmationPaymentService } from '@/services/nodemailer'
 
 interface Props {
     params: {
@@ -16,69 +15,9 @@ interface Props {
 }
 
 const PaymentSuccessComponent: FC<Props> = ({ params }) => {
-    const {
-        paymentSuccess,
-        getPaymentData,
-        getPyamentById,
-        fecha,
-        hour,
-        isLoading,
-        user,
-        emailConfirmationPaymentCitas,
-        setIsLoading,
-        titleService,
-        getServiceTitle,
-        serviceId,
-        priceService,
-    } = useLogicPayment()
-    
-    const [isPaymentProcessed, setIsPaymentProcessed] = useState(false)
-
-    useEffect(() => {
-        setIsLoading(true)
-        getPyamentById(params.paymentId)
-        // Verificar si es el servicio especial sin fecha ni hora
-        if (serviceId && serviceId === 'clo0e17d30004xy04cjklg2px') {
-            setIsPaymentProcessed(true)
-            getServiceTitle(serviceId)
-            paymentSuccess(params.paymentId)
-        } else if (serviceId && serviceId !== 'clo0e17d30004xy04cjklg2px') {
-            setIsPaymentProcessed(true)
-            getServiceTitle(serviceId)
-            getPaymentData(params.paymentId)
-            paymentSuccess(params.paymentId)
-        }
-    }, [serviceId, params])
-
-    useEffect(() => {
-        if (isPaymentProcessed && user?.email) {
-            if (
-                serviceId &&
-                titleService &&
-                serviceId === 'clo0e17d30004xy04cjklg2px'
-            ) {
-                // Este es el servicio especial, envía el correo sin datos de fecha y hora
-                emailConfirmationPaymentService(
-                    user?.email as string,
-                    titleService,
-                    priceService,
-                    user.name as string
-                )
-                setIsLoading(false)
-            } else if (fecha && hour) {
-                // Si no es el servicio especial y hay datos de fecha y hora, envía el correo con los datos
-                emailConfirmationPaymentCitas(
-                    user?.email as string,
-                    fecha,
-                    hour,
-                    user.name as string,
-                    priceService,
-                    titleService
-                )
-                setIsLoading(false)
-            }
-        }
-    }, [isPaymentProcessed, user?.email, serviceId, fecha, hour, titleService])
+    const { isLoading, payed, serviceId, fecha, hour } = useLogicPayment(
+        params.paymentId
+    )
 
     if (isLoading)
         return (
@@ -93,6 +32,25 @@ const PaymentSuccessComponent: FC<Props> = ({ params }) => {
                 >
                     <CircularIndeterminate />
                 </div>
+            </LayoutNavFooter>
+        )
+
+    if (!payed)
+        return (
+            <LayoutNavFooter>
+                <Box
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    height="100vh"
+                    textAlign="center"
+                    padding="2rem"
+                >
+                    <Typography variant="h5">
+                        Tu pago está pendiente de confirmar por el banco. Te
+                        llegará un email de confirmación en cuanto se complete.
+                    </Typography>
+                </Box>
             </LayoutNavFooter>
         )
 

@@ -1,7 +1,6 @@
 import { getAuthenticatedToken } from '../../storage/storage'
 import { Talleres } from '../../types/types'
 
-const token = getAuthenticatedToken()
 
 export const deleteDateById = async (
     id: string
@@ -11,7 +10,7 @@ export const deleteDateById = async (
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${getAuthenticatedToken()}`,
             },
             body: JSON.stringify({ id }),
         })
@@ -32,7 +31,7 @@ export const fetchDateById = async (id: string) => {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${getAuthenticatedToken()}`,
                 },
             }
         )

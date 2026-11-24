@@ -1,6 +1,5 @@
 import { getAuthenticatedToken } from '../../storage/storage'
 
-const token = getAuthenticatedToken()
 
 export const stripePayment = async (
     amount: number,
@@ -15,6 +14,7 @@ export const stripePayment = async (
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                Authorization: `Bearer ${getAuthenticatedToken()}`,
             },
             body: JSON.stringify({
                 amount,
@@ -42,7 +42,7 @@ export const getPaymentById = async (paymentId: string) => {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${getAuthenticatedToken()}`,
                 },
             }
         )
@@ -61,7 +61,7 @@ export const fetchChargeListStripe = async (paymentId: string) => {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${getAuthenticatedToken()}`,
             },
         })
         if (response.ok) {

@@ -1,13 +1,15 @@
+import { requireUser } from '../../../src/lib/auth'
 import {
     createRedsysAPI,
     TRANSACTION_TYPES,
     randomTransactionId,
-    SANDBOX_URLS,
+    PRODUCTION_URLS,
     CURRENCIES,
 } from 'redsys-easy'
 import Decimal from 'decimal.js'
 import type { Currency } from 'redsys-easy'
 import { NextApiRequest, NextApiResponse } from 'next'
+import { prisma } from '../../../src/lib/client'
 import dotenv from 'dotenv'
 dotenv.config()
 
@@ -15,16 +17,24 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
+    const authUser = await requireUser(req, res)
+    if (!authUser) return
     if (req.method === 'POST') {
         try {
-            const priceId = req.body.priceId
-            const paymentId = req.body.paymentId
-            const serviceId = req.body.serviceId
-            const userName = req.body.userName
-            const priceService = req.body.priceService
+            const paymentId = req.body.paymentId as string
+            // El precio sale de la BD, nunca del navegador
+            const payment = await prisma.payments.findUnique({
+                where: { id: paymentId },
+                include: { service: true },
+            })
+            if (!payment || payment.userId !== authUser.id || payment.payed) {
+                res.status(400).json({ message: 'Pago no válido' })
+                return
+            }
+            const priceService = payment.service.price
 
             const { createRedirectForm } = createRedsysAPI({
-                urls: SANDBOX_URLS,
+                urls: PRODUCTION_URLS,
                 secretKey: process.env.secretKey as string,
             })
 
@@ -37,8 +47,7 @@ export default async function handler(
             const ednpointCancel =
                 'https://www.sevillaestefarmacia.com/payment/canceled'
 
-            const notificationPath = '/api/notification'
-
+            
             const currency = 'EUR' as Currency
             const orderId = randomTransactionId()
             const currencyInfo = CURRENCIES[currency]
@@ -60,7 +69,9 @@ export default async function handler(
                 DS_MERCHANT_CURRENCY: redsysCurrency,
                 DS_MERCHANT_MERCHANTNAME:
                     'Farmacia Sta. Bárbara - Sevilla este',
-                DS_MERCHANT_MERCHANTURL: `${endpoint}${notificationPath}`,
+                DS_MERCHANT_MERCHANTURL:
+                    'https://www.sevillaestefarmacia.com/api/redsys/notification',
+                DS_MERCHANT_MERCHANTDATA: paymentId,
                 DS_MERCHANT_URLOK: `${endpoint}`,
                 DS_MERCHANT_URLKO: `${ednpointCancel}`,
             })
@@ -115,7 +126,7 @@ export default async function handler(
                 ' <img src="/images/darkIcon.png" alt="Descripción de la imagen">',
                 ' <h1 id="farmacia">Farmacia Sta.Bárbara</h1>',
                 '</div>',
-                `<form id="paymentForm" action="https://sis.redsys.es/sis/realizarPago" method="post">`,
+                `<form id="paymentForm" action="${form.url}" method="post">`,
                 `  <input type="hidden" id="Ds_SignatureVersion" name="Ds_SignatureVersion" value="${form.body.Ds_SignatureVersion}" />`,
                 `  <input type="hidden" id="Ds_MerchantParameters" name="Ds_MerchantParameters" value="${form.body.Ds_MerchantParameters}" />`,
                 `  <input type="hidden" id="Ds_Signature" name="Ds_Signature" value="${form.body.Ds_Signature}"/>`,

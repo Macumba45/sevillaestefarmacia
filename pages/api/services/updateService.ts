@@ -1,12 +1,12 @@
+import { requireAdmin } from '../../../src/lib/auth'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { updateService } from '../controllers/services'
-import jwt, { JwtPayload } from 'jsonwebtoken'
-import { findUserById } from '../controllers/user'
 
 export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
+    if (!(await requireAdmin(req, res))) return
     if (req.method === 'PUT') {
         const transformedDates = req.body.dates.map((dateObj: any) => ({
             date: dateObj.date,
@@ -16,22 +16,7 @@ export default async function handler(
             }),
         }))
 
-        try {
-            const token = req.headers.authorization?.split(' ')[1]
-            const decodedToken = jwt.verify(
-                token as string,
-                'token'
-            ) as JwtPayload
-            const userId = decodedToken.userId
-            const user = await findUserById(userId)
-
-            if (!token && user?.role === 'user') {
-                res.status(401).json({
-                    message: 'No eres el admin del dashboard',
-                })
-                return
-            }
-            const {
+        try {            const {
                 id,
                 urlVideo,
                 urlPicture,

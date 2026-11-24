@@ -1,7 +1,6 @@
 import { notification } from 'antd'
 import { getAuthenticatedToken } from '../../storage/storage'
 
-const token = getAuthenticatedToken()
 
 const notificationSuccess = () => {
     notification.success({
@@ -24,7 +23,7 @@ export const stripePaymentInProgress = async (
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${getAuthenticatedToken()}`,
             },
             body: JSON.stringify({ userId, serviceId, dateId, hourId }),
         })
@@ -37,22 +36,14 @@ export const stripePaymentInProgress = async (
     }
 }
 
-export const stripePaymentTrue = async (paymentId: string) => {
+// Reenvía al servidor los parámetros firmados que Redsys añade a la URL de éxito
+export const confirmRedsysPayment = async (signed: Record<string, string>) => {
     try {
-        const response = await fetch('/api/payments/paymentSuccess', {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify({ paymentId }),
+        await fetch('/api/redsys/notification', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(signed),
         })
-        if (response.ok) {
-            const data = await response.json()
-            return data
-        } else if (response.status === 500) {
-            window.location.href = '/'
-        }
     } catch (error) {
         console.log(error)
     }
@@ -62,7 +53,7 @@ export const fetchPaymentsData = async () => {
     try {
         const headers = {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${getAuthenticatedToken()}`,
         }
         const response = await fetch('/api/payments/getPayments', {
             method: 'GET',
@@ -87,18 +78,19 @@ export const editDateAndHourFromPayments = async (
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${getAuthenticatedToken()}`,
             },
             body: JSON.stringify({ paymentId, dateId, hourId }),
         })
         if (response.ok) {
             const data = await response.json()
+            notificationSuccess()
             return data
         }
+        notification.error({ message: 'No se pudo guardar el cambio' })
     } catch (error) {
         console.log(error)
-    } finally {
-        notificationSuccess()
+        notification.error({ message: 'No se pudo guardar el cambio' })
     }
 }
 
@@ -110,7 +102,7 @@ export const fetchPaymentById = async (paymentId: string) => {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${getAuthenticatedToken()}`,
                 },
             }
         )

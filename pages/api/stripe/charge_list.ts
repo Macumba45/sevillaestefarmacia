@@ -1,3 +1,4 @@
+import { requireAdmin } from '../../../src/lib/auth'
 import { NextApiRequest, NextApiResponse } from 'next'
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
@@ -6,6 +7,7 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
+    if (!(await requireAdmin(req, res))) return
     try {
         const token = req.headers.authorization?.split(' ')[1]
         if (!token) {

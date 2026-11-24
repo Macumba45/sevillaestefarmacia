@@ -93,15 +93,14 @@ export const makePaymentTrue = async (paymentId: string): Promise<void> => {
         throw new Error('Payment not found')
     }
 
-    // Actualizar el pago a completado
-    await prisma.payments.update({
-        where: {
-            id: paymentId,
-        },
-        data: {
-            payed: true,
-        },
+    // Marcar como pagado solo una vez (idempotente: Redsys puede notificar varias veces)
+    const { count } = await prisma.payments.updateMany({
+        where: { id: paymentId, payed: false },
+        data: { payed: true },
     })
+    if (count === 0) return
+
+    if (payment.hourId) await markHourAsBooked(payment.hourId)
 
     // Configurar el transportador de nodemailer
     const transporter = nodemailer.createTransport({

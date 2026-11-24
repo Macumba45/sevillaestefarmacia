@@ -1,3 +1,4 @@
+import { requireAdmin } from '../../../src/lib/auth'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { deleteTaller } from '../controllers/talleres'
 import { Talleres } from '../../../types/types'
@@ -6,6 +7,7 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse<Talleres | { message: string }>
 ) {
+    if (!(await requireAdmin(req, res))) return
     if (req.method !== 'DELETE') {
         res.status(405).json({ message: 'Método no permitido' })
         return

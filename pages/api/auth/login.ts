@@ -1,7 +1,7 @@
+import { signToken } from '../../../src/lib/auth'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { findUserEmail } from '../controllers/user'
 import bcrypt from 'bcrypt'
-import jwt from 'jsonwebtoken'
 import { SuccessResponse } from '../../../types/types'
 
 export default async function handler(
@@ -35,7 +35,7 @@ export default async function handler(
         }
 
         // Autenticación exitosa
-        const token = jwt.sign({ email: user.email, userId: user.id }, 'token')
+        const token = signToken({ email: user.email, userId: user.id })
         delete user.password
 
         const response: SuccessResponse = {

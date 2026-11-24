@@ -1,80 +1,41 @@
-import { fetchPaymentById, stripePaymentTrue } from '@/services/payments'
-import { getPaymentById } from '@/services/stripe'
-import { useRouter } from 'next/navigation'
-import { useContext, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { confirmRedsysPayment, fetchPaymentById } from '@/services/payments'
 import { fetchDateById } from '@/services/dates'
-import { fetchHourById, fetchIsBookedHour } from '@/services/hours'
-import { emailConfirmationPaymentCitas } from '@/services/nodemailer'
-import { UserContext } from '@/context/UserContext'
-import { getServiceDetails } from '@/services/service'
+import { fetchHourById } from '@/services/hours'
 
-export const useLogicPayment = () => {
-    const { user } = useContext(UserContext)
-    const [fecha, setFecha] = useState<string>('')
-    const [hour, setHour] = useState<string>('')
-    const [isLoading, setIsLoading] = useState<boolean>(false)
-    const [titleService, setTitleService] = useState<string>('')
-    const [serviceId, setServiceId] = useState<string>('')
-    const [priceService, setPriceService] = useState<string>('')
-    const router = useRouter()
+const SIGNED_PARAMS = ['Ds_SignatureVersion', 'Ds_MerchantParameters', 'Ds_Signature']
 
-    const paymentSuccess = async (paymentId: string) => {
-        const payment = await stripePaymentTrue(paymentId)
-        return payment
-    }
+// Solo lectura: el pago lo marca el servidor tras verificar la firma de Redsys
+export const useLogicPayment = (paymentId: string) => {
+    const [isLoading, setIsLoading] = useState(true)
+    const [payed, setPayed] = useState(false)
+    const [serviceId, setServiceId] = useState('')
+    const [fecha, setFecha] = useState('')
+    const [hour, setHour] = useState('')
 
-    const getPyamentById = async (paymentId: string) => {
-        const paymentData = await fetchPaymentById(paymentId)
-        setServiceId(paymentData.serviceId)
-        if (serviceId && serviceId === 'clo0e17d30004xy04cjklg2px') {
-            return ''
-        } else if (serviceId && serviceId !== 'clo0e17d30004xy04cjklg2px') {
-            const dateById = await fetchDateById(paymentData.dateId)
-            const hourById = await fetchHourById(paymentData.hourId)
-            setFecha(dateById.dates)
-            setHour(hourById.hour)
+    useEffect(() => {
+        const load = async () => {
+            const query = new URLSearchParams(window.location.search)
+            if (query.get('Ds_Signature')) {
+                await confirmRedsysPayment(
+                    Object.fromEntries(
+                        SIGNED_PARAMS.map(k => [k, query.get(k) ?? ''])
+                    )
+                )
+            }
+            const payment = await fetchPaymentById(paymentId)
+            if (payment) {
+                setPayed(payment.payed)
+                setServiceId(payment.serviceId)
+                if (payment.dateId)
+                    setFecha((await fetchDateById(payment.dateId))?.dates ?? '')
+                if (payment.hourId)
+                    setHour((await fetchHourById(payment.hourId))?.hour ?? '')
+            }
+            setIsLoading(false)
         }
-        return
-    }
+        load()
+    }, [paymentId])
 
-    const getPaymentData = async (paymentId: string) => {
-        const hourId = await getPaymentById(paymentId)
-        if (serviceId && serviceId === 'clo0e17d30004xy04cjklg2px') {
-            await getServiceDetails(serviceId)
-            return null
-        }
-
-        await isBookedHour(hourId as string)
-        return
-    }
-
-    const isBookedHour = async (selectedHourId: string) => {
-        const hourBooked = await fetchIsBookedHour(selectedHourId)
-        return hourBooked
-    }
-
-    const getServiceTitle = async (serviceId: string) => {
-        const data = await getServiceDetails(serviceId)
-        setTitleService(data.title)
-        setPriceService(data.price)
-        return data
-    }
-
-    return {
-        isBookedHour,
-        paymentSuccess,
-        router,
-        getPaymentData,
-        getPyamentById,
-        fecha,
-        hour,
-        isLoading,
-        user,
-        emailConfirmationPaymentCitas,
-        setIsLoading,
-        getServiceTitle,
-        titleService,
-        serviceId,
-        priceService,
-    }
+    return { isLoading, payed, serviceId, fecha, hour }
 }

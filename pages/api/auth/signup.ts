@@ -1,7 +1,7 @@
+import { signToken } from '../../../src/lib/auth'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { createUser, findUserEmail } from '../controllers/user'
 import { User } from '../../../types/types'
-import jwt from 'jsonwebtoken'
 import { sendEmailNewUser } from '../nodemailer/newUser'
 
 // import { sendEmailNewUser } from '../nodeMailer/newUser'
@@ -37,7 +37,7 @@ const handleSubmitSignUp = async (
         // Guarda el usuario en la base de datos con la contraseña cifrada
         const user = await createUser(email, hashedPassword, name, phone)
         const userId = user?.id // Obtén el ID del usuario recién creado
-        const token = jwt.sign({ userId }, 'token') // Incluye el ID del usuario en el token
+        const token = signToken({ userId }) // Incluye el ID del usuario en el token
         try {
             await sendEmailNewUser(email, name)
         } catch (emailError) {
