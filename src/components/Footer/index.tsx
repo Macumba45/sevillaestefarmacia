@@ -1,5 +1,6 @@
 import { FC, memo } from 'react'
 import {
+    BannerSubvencion,
     ConocenosText,
     Container,
     ContainerLogos,
@@ -18,6 +19,7 @@ import junta from '../../assets/LOGOSUBVENCION/andalucia.png'
 import españa from '../../assets/LOGOSUBVENCION/financiado.png'
 import recuperacion from '../../assets/LOGOSUBVENCION/autonomo.svg'
 import unionEuropea from '../../assets/LOGOSUBVENCION/digitial.png'
+import empleaT from '../../assets/LOGOSUBVENCION/emplea-t.jpeg'
 import InstagramIcon from '@mui/icons-material/Instagram'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
 
@@ -125,6 +127,25 @@ const Footer: FC = () => {
                     del Plan de Recuperación, Transformación y Resiliencia -
                     financiado por la Unión Europea - NextGenerationEU, en su
                     convocatoria para el año 2022.
+                </TextSubvencion>
+            </ContainerSubvencion>
+            <BannerSubvencion
+                alt="Cofinanciado por la Unión Europea, Ministerio de Trabajo y Economía Social, Fondos Europeos y Junta de Andalucía"
+                loading="lazy"
+                src={empleaT.src}
+            />
+            <ContainerSubvencion>
+                <TextSubvencion>
+                    Farmacia Santa Bárbara C.B beneficiaria, ha recibido una
+                    subvención de la Consejería de Empleo, Empresa y Trabajo
+                    Autónomo de la Junta de Andalucía, financiada por la Unión
+                    Europea con cargo al Programa FSE+ Andalucía 2021-2027,
+                    enmarcada en el Programa Emplea-T, para la inserción laboral
+                    y el fomento de la contratación en el ámbito de la Comunidad
+                    Autónoma de Andalucía. Línea 2. Incentivo a la segunda o
+                    sucesivas contrataciones indefinidas ordinarias por parte de
+                    personas trabajadoras autónomas, y a cualquier contratación
+                    indefinida ordinaria por parte de pymes.
                 </TextSubvencion>
             </ContainerSubvencion>
 

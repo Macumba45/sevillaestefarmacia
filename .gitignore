@@ -49,3 +49,5 @@ context.ts
 graphify-out/
 graphify-out/cache/
 AGENTS.md
+.claude/
+CLAUDE.md
