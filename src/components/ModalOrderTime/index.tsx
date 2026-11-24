@@ -11,7 +11,6 @@ import Select, { SelectChangeEvent } from '@mui/material/Select'
 import { FC, useEffect, useState } from 'react'
 import { CircularProgress, InputLabel } from '@mui/material'
 import { Dates, Hour, Payment } from '../../../types/types'
-import { fetchPaymentsData } from '@/services/payments'
 import LoadingButton from '@mui/lab/LoadingButton'
 
 interface Props {
@@ -46,11 +45,9 @@ const ModalOrderTime: FC<Props> = ({
         id: '',
     })
     const [dateIdMap, setDateIdMap] = useState<{ [date: string]: string }>({})
-    const [payments, setPayments] = useState([])
     const [isLoadingPayments, setIsLoadingPayments] = useState(false)
 
     const now = new Date()
-    now.setUTCHours(23, 59, 59, 999)
     const currentHour = now.getHours()
     const currentMinutes = now.getMinutes()
 
@@ -196,13 +193,6 @@ const ModalOrderTime: FC<Props> = ({
         const newDate = event.target.value as string
         setSelectedDate({ date: newDate, id: dateIdMap[newDate] }) // Asumiendo que dateIdMap tiene el mapeo de IDs por fecha
         onDateIdChange(dateIdMap[newDate]) // Pasar la ID en lugar de la fecha
-        const loadPayments = async () => {
-            setIsLoadingPayments(true)
-            const paymentsData = await fetchPaymentsData()
-            setPayments(paymentsData)
-            setIsLoadingPayments(false)
-        }
-        loadPayments()
     }
 
     useEffect(() => {

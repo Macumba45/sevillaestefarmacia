@@ -77,7 +77,7 @@ export const useLogicDashboard = () => {
         return (
             payment.payed === true &&
             payment.dateId !== '' &&
-            paymentDate >= new Date()
+            paymentDate >= new Date(new Date().setHours(0, 0, 0, 0))
         )
     })
 
@@ -97,7 +97,7 @@ export const useLogicDashboard = () => {
         return (
             payment.payed === true &&
             payment.dateId !== '' &&
-            paymentDate < new Date()
+            paymentDate < new Date(new Date().setHours(0, 0, 0, 0))
         )
     })
     datesPaymentsPassed?.sort(comparePaymentsReverse)
@@ -323,6 +323,7 @@ export const useLogicDashboard = () => {
     }
 
     const handleDeleteHourId = (serviceId: string, hourId: string) => {
+        confirmateDeleteHour(hourId)
         setOpenDeleteHour(true)
 
         setServices(services => {
@@ -349,8 +350,6 @@ export const useLogicDashboard = () => {
                     date.hours.splice(hourIndex, 1)
                 }
             })
-
-            confirmateDeleteHour(hourId)
 
             // Reemplaza el servicio en el array y devuelve el nuevo estado
             return [
@@ -429,7 +428,7 @@ export const useLogicDashboard = () => {
         deteleBlogById(blogToDelete)
         // Después de la eliminación, cierra el modal
         const updatedBlogs = blogs!.filter(blogs => blogs.id !== blogToDelete)
-        setTalleres(updatedBlogs)
+        setBlogs(updatedBlogs)
         setOpenDeleteModal(false)
     }
 
